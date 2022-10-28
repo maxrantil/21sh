@@ -1,0 +1,210 @@
+https://www.youtube.com/watch?v=SToUyjAsaFk
+notes:
+
+
+
+Grammar:
+
+non-terminal symbols or
+grammar symbols:
+E (expression)
+T (term)
+F (factor)
+
+
+
+Terminal symbols or
+tokens or lexical symbols: Everything else
+eg.
+*, +, /, ID, Integers
+ID & Integers is also classes and can be many different things
+
+
+
+Variations on grammar notations
+E -> T + E
+E -> T - E
+E -> T
+...
+same as:
+E -> T+E | T-E | T
+T -> F*T | F/T | F
+F -> ID | Integer | (E) -F
+
+
+
+Tokens
+ID char{char}   (meaning: 0 or more)
+Integer digit{digit}
+
+
+
+Lexical Analysis or
+lexter or tokenizer
+Code: function scan_token() = scans the input and sets next_token to point to the newly scanned token
+Variable: next_token
+
+
+
+Parsing Algorithm:
+One funtion for each non-terminal grammar symbol:
+parse_E()
+parse_T()
+parse_F()
+Each will:
+1, Scan a bounch of tokens
+2, Return a ptr to the tree it builds
+
+Details:
+1, At any monent, next_token will contain the UNSCANNED thing from the input.
+2, Call scan_token() to advance.
+3, Return NULL if problems. (input is not grammarly correct)
+
+
+
+Main:
+Variables: next_token, result_tree
+Code:	scan_token()
+		result_tree = parse_e()
+		if (next_token != '\n' || next_token != '\0')
+			ERROR
+		.
+		.
+		.
+		printf(result_tree());				 (resultTree.print())
+		.
+		.
+		.
+		printf(result_tree, eval());		 (resultTree.eval())
+
+
+
+Parse F:
+F -> ID | Integer | (E) | -F
+
+Code:	if next_token is ID
+			return next_token				(return the object that represent the Identifyer)
+		else if next_token is Integer
+			return next_token				(return the object that represent the Integer)
+		else if next_toekn is "("
+			scan_token()
+			a = parse_e()
+			if  a== NULL
+				return NULL
+			if next_token is ")"
+				scan_token()
+				return a
+			else
+				return NULL
+		else if next_token is "-"
+			scan_token()
+			return new neg_node(parse_f())
+		else
+			return NULL
+
+Parse E:
+E -> T+E | T-E | E
+
+Code:	a = parse_t()
+		if next_token == "+"
+			scan_token()
+			b = parse_e()
+			c = new add_node (a, b)
+			return c
+		else if next_token == "-"
+			scan_token()
+			b = parse_e()
+			c = new sub_node (a, b)
+			return c
+		else
+			return a
+
+Wrong solution!
+Can be fixed by switching the grammar
+E -> E+T | E-T | T
+But not! This is an infinite recursion
+E -> E... (Problem grammar)
+another example of infinite recursion grammar
+A -> B
+B -> C
+C -> A
+
+The SOLUTION:
+E -> T{+|- T}
+
+Code:	a = parse_t()
+		while true
+			if next_token == "+"
+				scan_token()
+				b = parse_t()
+				a = new add_node (a, b)
+			else if next_token == "-"
+			.
+			.	similar		(Also checkor for ERRORS if NULL...)
+			.
+			else
+				return a
+		end While
+
+
+Parse T:
+same as E.
+
+
+
+Types of Language/Grammars
+LL
+LL(1) = One token look-ahead
+		top-down recursive descent
+		simple, fast algorith.
+		good error reporting.
+		easy for humans to parse.
+		good error recovery (Incorrect input can confuse Parser! Want to avoid a thousand messages!)
+LL(k)
+
+LR		Examples: C, C++, Java.
+LR(k)	Complex algorithms.		
+SLR		Harder for humans to parse.
+LALR	Error messages, Error Recovery (Can be tricky to implement!)
+
+Ambiguous Grammars
+Ambiguous Languages
+
+
+
+Parser Tools:
+Input: A grammar
+Output: Code for a parser
+Goal: Make writing a compiler easier (But parsing in definitely NOT the hard part!)
+
+Software rot is real!
+Use your own code instead.
+"LL" languages are superior to "LR"
+
+
+
+
+code notes
+for neglect (extra)
+t_neg	*create_negnode(int type, t_tree *arg)
+{
+	t_neg *node = (t_neg *)malloc(sizeof(t_neg));
+	if (node != NULL) 
+	{
+		node->type = type;
+		node->arg = arg;
+	}
+	return node;
+}
+
+void print_neg(t_neg *negnode)
+{
+	printf("(-");
+	print_neg((t_neg *)negnode->arg);
+	printf(")");
+}
+
+int eval_neg(t_neg *negnode)
+{
+	return (-eval_neg((t_neg *)negnode->arg));
+}

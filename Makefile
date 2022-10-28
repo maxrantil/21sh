@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/10/26 12:03:33 by mrantil          ###   ########.fr        #
+#    Updated: 2022/10/28 11:55:42 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,13 +90,14 @@ LIBS		= 	libft.a
 
 HEADERS		=	-I$(INCLUDES)/ -Ilibft/includes/
 
-ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n"
+ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✓$(RESET)" || (printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n" | printf "$(C_VISIBLE)" && exit 1)
 
 all: libft $(NAME)
 
 $(NAME): $(OBJECTS) $(O_PATHS)
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(LEAK_CHECK)
 	@printf "Compiled $(BOLD)$(GREEN)$(NAME)$(RESET)!\n\n"
+	@printf "$(C_VISIBLE)"
 
 $(OBJECTS):
 	@make -C $(LIBRARIES)
@@ -110,7 +111,6 @@ $(O_PATHS):	$(OBJECTS)/%.o:$(SOURCES)/%.c $(H_PATHS) Makefile
 	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@ $(LEAK_CHECK) $(ASSERT_OBJECT)
 	@make pbar
-	@printf "$(C_VISIBLE)"
 
 libft:
 	@make -C $(LIBRARIES)
