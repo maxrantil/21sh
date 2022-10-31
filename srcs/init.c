@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/12 15:53:58 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:11:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*change_shlvl(char *shlvl)
 static size_t	env_arrlen(char **arr)
 {
 	size_t	len;
-	size_t	i;
+	ssize_t	i;
 
 	len = 0;
 	i = -1;
@@ -61,10 +61,10 @@ static char	**hard_coded_env(char **env)
 	return (env);
 }
 
-static char	**get_env(char **env, size_t j, size_t i)
+static char	**get_env(char **env, size_t j, ssize_t i)
 {
 	extern char	**environ;
-	ssize_t		len;
+	size_t		len;
 
 	if (*environ)
 	{
@@ -91,11 +91,11 @@ void	init_msh(t_msh *msh)
 	ssize_t		i;
 	size_t		j;
 
-ft_putstr("\033[2J");
+	ft_putstr("\033[2J");
 	ft_putstr("\033[H");
 	ft_printf("\n{blu}******************************************\n");
 	ft_printf("\
-	\t{yel}M{gre}I{red}N{blu}I{mag}S{blu}H{red}E{gre}L{yel}L{cya}\n");
+	\t{yel}2{gre}1{red}s{blu}h\n");
 	ft_printf("{blu}******************************************{nor}\n\n");
 	msh->args = NULL;
 	msh->paths = NULL;

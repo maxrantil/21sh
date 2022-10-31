@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/24 15:33:19 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:32:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	free_mem(t_msh *msh, t_builtin **ht, ssize_t code)
 	}
 }
 
-int	find_matching_quote(char *str, char quote)
+size_t	find_matching_quote(char *str, char quote)
 {
-	int	i;
+	size_t	i;
 
 	i = 1;
 	while (str[i] && str[i] != quote)

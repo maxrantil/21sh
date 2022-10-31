@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:29:40 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/07 17:23:30 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:36:35 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	count_quotes(char *p)
 {
-	int		found;
+	size_t	found;
 	int		quote;
 
 	found = 1;

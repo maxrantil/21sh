@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/28 11:57:02 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:12:36 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	exec_args(t_msh *msh, t_builtin **ht)
 {
 	t_builtin	*tmp;
-	int			index;
+	size_t		index;
 
 	if (!msh->args[0])
 		return (1);

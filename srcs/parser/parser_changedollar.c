@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/17 10:13:16 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:27:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*save_begin(t_msh *msh, size_t i)
 	return (NULL);
 }
 
-static void	change_new_arg(t_msh *msh, char **new_arg, size_t i)
+static void	change_new_arg(t_msh *msh, char **new_arg, ssize_t i)
 {
 	char	*temp;
 
@@ -60,7 +60,7 @@ static char	*get_new_arg(t_msh *msh, char **dollars)
 	char	*key;
 	char	*new_arg;
 	char	*end_arg;
-	size_t	i;
+	ssize_t	i;
 	ssize_t	j;
 
 	new_arg = ft_strnew(0);
