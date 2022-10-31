@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define TREE 0
 #define MULT 1
@@ -33,44 +34,8 @@ t_tree *create_treenode(int	type, int value, t_tree *left, t_tree *right)
 	return node;
 }
 
-/* void print_tree(t_tree *tree)
-{
-	if (tree->type == INT)
-	{
-		printf("%d", tree->value - '0');
-		return ;
-	}
-	printf("(");
-	if (tree->type == MULT)
-	{
-		print_tree(tree->left);
-		printf(" * ");
-		print_tree(tree->right);	
-	}
-	else if (tree->type == DIV)
-	{
-		print_tree(tree->left);
-		printf(" / ");
-		print_tree(tree->right);	
-	}
-	else if (tree->type == ADD)
-	{
-		print_tree(tree->left);
-		printf(" + ");
-		print_tree(tree->right);	
-	}
-	else if (tree->type == SUB)
-	{
-		print_tree(tree->left);
-		printf(" - ");
-		print_tree(tree->right);	
-	}
-	printf(")");
-} */
-
 int	eval_tree(t_tree *tree)
 {
-		/* printf("LEFT: %p\n", tree->left); */
 	if (tree->type == INT)
 		return (tree->value - '0');
 	else if (tree->type == MULT)
@@ -91,7 +56,7 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
-int	scan_token(char **argv)
+int	scan_token(char **argv) //not much error handling
 {
 	char token;
 	int  ret;
@@ -100,7 +65,7 @@ int	scan_token(char **argv)
 		return (0);
 	ret = 0;
 	token = **argv;
-	if (strchr("+-*()", token))
+	if (strchr("+-*/()", token))
 	{
 		++(*argv);
 		ret = token;
@@ -182,7 +147,7 @@ t_tree *parse_t(int token, char **argv)
 	return (a);
 }
 
-// GRAMMAR F -> Integer
+// GRAMMAR F -> Integer //? | (E) ?
 t_tree *parse_f(int token, char **argv)
 {
 	if (ft_isdigit(token))
@@ -196,6 +161,41 @@ t_tree *parse_f(int token, char **argv)
 	}
 	else  
 		return (NULL);
+}
+
+void print_tree2(t_tree *tree)
+{
+	if (tree->type == INT)
+	{
+		printf("%d", tree->value - '0');
+		return ;
+	}
+	printf("(");
+	if (tree->type == MULT)
+	{
+		print_tree2(tree->left);
+		printf(" * ");
+		print_tree2(tree->right);	
+	}
+	else if (tree->type == DIV)
+	{
+		print_tree2(tree->left);
+		printf(" / ");
+		print_tree2(tree->right);	
+	}
+	else if (tree->type == ADD)
+	{
+		print_tree2(tree->left);
+		printf(" + ");
+		print_tree2(tree->right);	
+	}
+	else if (tree->type == SUB)
+	{
+		print_tree2(tree->left);
+		printf(" - ");
+		print_tree2(tree->right);	
+	}
+	printf(")");
 }
 
 void	printtree_rec(t_tree *root, int lvl)
@@ -240,7 +240,9 @@ int main(int argc, char **argv)
 	}
 	result_tree = parse_e(token, argv);
 	print_tree(result_tree);
-	printf("Result = %d\n", eval_tree(result_tree));
+	write(1, "\n", 1);
+	print_tree2(result_tree);
+	printf(" = %d\n", eval_tree(result_tree));
 	
 	return (0);
 }
