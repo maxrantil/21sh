@@ -100,7 +100,7 @@ void	ft_lstaddend(t_list **alst, t_list *new);
 void	ft_lstputstr(t_list **alst);
 int		ft_isspace(const char *str);
 char	*ft_strcdup(const char *s1, int c, int n);
-int		ft_strclen(char *str, int c);
+size_t	ft_strclen(char *str, int c);
 char	*ft_strupdate(char *s1, const char *s2);
 int		ft_imin(int a, int b);
 int		ft_imax(int a, int b);

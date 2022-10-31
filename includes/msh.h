@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/26 12:40:35 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:35:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	initialize_ht(t_builtin **ht);
 
 /* Parser */
 size_t	count_arguments(char *str);
-char	**get_arguments(char *str, int argc);
+char	**get_arguments(char *str, size_t argc);
 void	strip_quotes(char **args);
 void	change_variables(t_msh *msh);
 
@@ -79,6 +79,6 @@ void	loop_setenv(t_msh *msh, char *arg);
 void	print_error(char *arg, int i);
 char	*extract_key(char *key_value);
 void	free_mem(t_msh *msh, t_builtin **ht,ssize_t code);
-int		find_matching_quote(char *str, char quote);
+size_t	find_matching_quote(char *str, char quote);
 
 #endif

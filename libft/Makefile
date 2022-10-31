@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 20:09:11 by mrantil           #+#    #+#              #
-#    Updated: 2022/10/26 12:00:57 by mrantil          ###   ########.fr        #
+#    Updated: 2022/10/31 10:25:42 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ INC			=	$(addprefix $(INC_DIR), $(_INC))
 
 HEADERS		=	-I$(INC_DIR)
 
-ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(YELLOW)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n"
+ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(YELLOW)$(BOLD) ✔$(RESET)" || (printf "$@ $(RED)$(BOLD)✘$(RESET)\n" | @printf "$(C_VISIBLE)" && exit 1)
 
 all: $(NAME)
 
@@ -94,6 +94,7 @@ $(NAME): $(DIR_OBJS) $(OBJS)
 	@ranlib $(NAME)
 	@printf "Compiled $(BOLD)$(YELLOW)$(NAME)$(RESET)!\n\n"
 	@stty echo
+	@printf "$(C_VISIBLE)"
 
 $(DIR_OBJS):
 	@stty -echo
@@ -106,29 +107,24 @@ $(DIR_OBJS)%.o: $(DIR_LIBFT)%.c
 	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< $(ASSERT_OBJECT)
 	@make pbar_libft
-	@printf "$(C_VISIBLE)"
 	
 $(DIR_OBJS)%.o: $(DIR_PRINTF)%.c
 	@printf "$(C_INVISIBLE)"
 	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< $(ASSERT_OBJECT)
 	@make pbar_libft
-	@printf "$(C_VISIBLE)"
 	
 $(DIR_OBJS)%.o: $(DIR_VEC)%.c
 	@printf "$(C_INVISIBLE)"
 	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< $(ASSERT_OBJECT)
 	@make pbar_libft
-	@printf "$(C_VISIBLE)"
 
 clean:
-	@rm -rf $(DIR_OBJS)
-	@printf "$(NAME):	$(RED)$(DIR_OBJS) was deleted$(RESET)\n"
+	@if [ -d $(DIR_OBJS) ]; then rm -rf $(DIR_OBJS); printf "libft:		$(RED)$(DIR_OBJS) was deleted$(RESET)\n"; fi
 
 fclean:
-	@rm -f $(NAME)
-	@printf "$(NAME):	$(RED)binary was deleted$(RESET)\n"
+	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):	$(RED)library was deleted$(RESET)\n"; fi
 
 re: fclean all
 

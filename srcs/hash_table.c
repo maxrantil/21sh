@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:35:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/24 15:52:04 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:14:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 size_t hash_function(char *program)
 {
 	size_t	hash;
-	int 	c;
+	size_t 	c;
 
 	hash = 0;
-	while ((c = *program++))
+	while ((c = (size_t)*program++))
 		hash = c + (hash << 6) + (hash << 16) - hash;
 	return (hash % HASH_SIZE);
 }
@@ -32,7 +32,7 @@ size_t hash_function(char *program)
  */
 static char	*ht_insert(t_builtin **ht, t_builtin *p)
 {
-	int index;
+	size_t index;
 	
 	if (!p)
 		return (NULL);

@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/10/26 12:03:33 by mrantil          ###   ########.fr        #
+#    Updated: 2022/10/31 10:04:36 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,20 +36,26 @@ MOVE = \033[
 C_INVISIBLE = \033[?25l
 C_VISIBLE = \033[?25h
 
-TERMCAP		=	-lntermcap
-
 MAKEFLAGS	+= --no-print-directory
 
-NAME		=	minishell
+NAME		=	21sh
 CC			=	gcc
 CFLAGS 		= 	-Wall -Wextra
-CFLAGS		+= 	-Werror
-#CFLAGS		+=	-Wunreachable-code -Wtype-limits 
-#CFLAGS		+=	-Wpedantic
+CFLAGS		+=	-Wunreachable-code -Wtype-limits
+CFLAGS		+=	-Wpedantic -Wconversion
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
 #LEAK_CHECK	+=	-fsanitize=address
+
+UNAME		= $(shell uname)
+ifeq ($(UNAME), Darwin)
+TERMCAP		=	-lntermcap
+CFLAGS		+= 	-Werror
+endif
+ifeq ($(UNAME), Linux)
+LIBS		=	-lncurses
+endif
 
 SOURCES 	= 	srcs
 PARSER		= 	parser/
@@ -84,19 +90,19 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				update_env_var \
 				
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
-C_PATHS 	= 	$(addsuffix .c, $(addprefix $(SOURCES)/, $(FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
 LIBS		= 	libft.a
 
 HEADERS		=	-I$(INCLUDES)/ -Ilibft/includes/
 
-ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✔$(RESET)" || printf "$@ $(RED)$(BOLD)✘$(RESET)\n"
+ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✓$(RESET)" || (printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n" | printf "$(C_VISIBLE)" && exit 1)
 
 all: libft $(NAME)
 
 $(NAME): $(OBJECTS) $(O_PATHS)
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(LEAK_CHECK)
 	@printf "Compiled $(BOLD)$(GREEN)$(NAME)$(RESET)!\n\n"
+	@printf "$(C_VISIBLE)"
 
 $(OBJECTS):
 	@make -C $(LIBRARIES)
@@ -110,7 +116,6 @@ $(O_PATHS):	$(OBJECTS)/%.o:$(SOURCES)/%.c $(H_PATHS) Makefile
 	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@ $(LEAK_CHECK) $(ASSERT_OBJECT)
 	@make pbar
-	@printf "$(C_VISIBLE)"
 
 libft:
 	@make -C $(LIBRARIES)
@@ -118,18 +123,15 @@ libft:
 
 clean:
 	@make -C $(LIBRARIES) clean
-	@rm -rf $(OBJECTS)
-	@printf "$(NAME):	$(RED)$(OBJECTS) was deleted$(RESET)\n"
+	@if [ -d $(OBJECTS) ]; then rm -rf $(OBJECTS); printf "$(NAME):		$(RED)$(OBJECTS)/ was deleted$(RESET)\n"; fi
 
 fclean: clean
 	@make -C $(LIBRARIES) fclean
-	@rm -f $(LIBS)
-	@rm -f $(NAME)
-	@printf "$(NAME):	$(RED)binary was deleted$(RESET)\n"
-
+	@if [ -f $(LIBS) ]; then rm $(LIBS); fi
+	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)$(NAME) was deleted$(RESET)\n"; fi
+	
 re: fclean all
 
-	@printf "$(C_INVISIBLE)"
 pbar:
 	$(eval LOADED_COUNT = $(words $(shell find $(OBJECTS) -name '*.o')))
 	@printf "\r$(MOVE)76$(RIGHT)Files compiled [$(BOLD)$(GREEN)$(LOADED_COUNT)$(RESET) / $(BOLD)$(GREEN)$(SOURCE_COUNT)$(RESET)]\n"

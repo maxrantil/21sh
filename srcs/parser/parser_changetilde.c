@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/17 09:27:29 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:28:12 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static size_t	check_tilde(char *str)
 void	tilde(t_msh *msh, size_t i)
 {
 	char	*tilde;
-	int		status;
+	size_t	status;
 
 	status = check_tilde(msh->args[i]);
 	if (status)
