@@ -56,7 +56,7 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
-int	scan_token(char **next_token) //not much error handling
+int	scan_token(char **next_token)
 {
 	char token;
 	int  ret;
@@ -243,16 +243,5 @@ int main(int argc, char **argv)
 	write(1, "\n", 1);
 	print_tree2(result_tree);
 	printf(" = %d\n", eval_tree(result_tree));
-	
 	return (0);
 }
-// -(7 + 5) * 2
-//	    *
-//	   / \
-//	  -   2
-//	 / \
-//	7   5 
-	/* t_tree *root = create_multnode(MULT, NULL, NULL);
-	t_tree *neg = create_negnode(NEG, NULL);
-	t_tree *int5 = create_intnode(INT, 5);
-	t_tree *int2 = create_intnode(INT, 2); */
