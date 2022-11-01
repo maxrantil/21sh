@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/31 10:12:36 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/01 08:46:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ int	main(void)
 			ft_putstr_fd("minishell: could not read input\n", STDERR_FILENO);
 	}
 	free_mem(&msh, ht, 2);
-	return (0);
+	exit(0);
 }

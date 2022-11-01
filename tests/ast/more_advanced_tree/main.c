@@ -65,7 +65,7 @@ int	scan_token(char **next_token)
 		return (0);
 	ret = 0;
 	token = **next_token;
-	if (strchr("+-*/()", token))
+	if (strchr("+-*/", token))
 	{
 		++(*next_token);
 		ret = token;
