@@ -3,6 +3,18 @@
 #include <string.h>
 #include <unistd.h>
 
+static char	*ft_strchr(const char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	if (s[i] == c)
+		return (&((char *)s)[i]);
+	return (NULL);
+}
+
 static int	ft_isspace(const char *str) //take away
 {
 	if ((*str >= 9 && *str <= 13) || *str == 32)
@@ -17,134 +29,157 @@ static char	*skip_whitespaces(char *ptr) // take away
 	return (ptr);
 }
 
-size_t	ft_strcspn(const char *s1, const char *s2)
+static char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	char	*ss;
 
-	if (!s1 || !s2)
-		return (0);
+	if (!s)
+		return (NULL);
 	i = 0;
-	while (s1[i])
-	{
-		j = 0;
-		while (s2[j])
-		{
-			if (s1[i] == s2[j])
-				return (i);
-			j++;
-		}
-		i++;
-	}
-	return (i);
+	ss = (char *)malloc(sizeof(char) * len + 1);
+	if (!ss)
+		return (NULL);
+	while (len--)
+		ss[i++] = s[start++];
+	ss[i] = '\0';
+	return (ss);
 }
 
-char	*ft_strsep(char **str_ptr, const char *delim)
-{
-	char	*begin;
-	char	*end;
 
-	begin = *str_ptr;
-	if (begin == NULL)
-		return (NULL);
-	end = begin + ft_strcspn(begin, delim);
-	if (*end)
-	{
-		*end++ = '\0';
-		*str_ptr = end;
-	}
-	else
-		*str_ptr = NULL;
-	return (begin);
+int	peek(char **ps, char *es, char *toks)
+{
+	char *p;
+
+	p = *ps;
+	while (p < es && ft_isspace((const char *)p))
+		p++;
+	*ps = p;
+	return (*p && ft_strchr(toks, *p));
 }
 
 //make funtion greater_then()
-
-int	get_token(char **next_token)
+int	get_token(char **next_token, char **token, char **end_q)
 {
-	char	*token;
+	char	*p;
 	int		ret;
 	
-	token = *next_token;
-	token = skip_whitespaces(token);
-	if (*token == '\0')
+	p = *next_token;
+	p = skip_whitespaces(p);
+	if (*p == '\0')
 		return (0);
-	ret = *token;
-	while (*token)
+	if (token)
+		*token = p;
+	ret = *p;
+	while (*p)
 	{
-		if (strchr("<|&;", *token))
+		if (strchr("<|&;", *p))
 		{
-			token++;
+			p++;
 			break ;
 		}
-		else if (*token == '>')
+		else if (*p == '>')
 		{
-			token++;
-			if (*token == '>')
+			p++;
+			if (*p == '>')
 			{
 				ret = '#';
-				token++;
+				p++;
 			}
 			break ;
 		}
 		else
 		{
 			ret = 'a';
-			while (*token && !strchr(" \t\r\n\v", *token) && !strchr("<|&;>", *token))
-				token++;
+			while (*p && !ft_isspace(p) && !strchr("<|&;>", *p))
+				p++;
 			break ;
 		}
 	}
-	token = skip_whitespaces(token);
-	*next_token = token;
+	if (end_q)
+		*end_q = p;
+	p = skip_whitespaces(p);
+	*next_token = p;
 	return (ret);
 }
 
-char *gettoken(char **str)
+typedef struct s_node
+{
+	int				type;
+	char			*exec[15];
+	char			*symbol[15];
+	struct s_node	*left;
+	struct s_node	*right;
+}					t_node;
+
+t_node *parse_exec(char **str)
 {
 	char *token;
+	char *end_q;
+	size_t	t = 0;
+	t_node *node;
 
-	if (!str || !*str)
-		return (NULL);
-	
-	token = strdup(ft_strsep(str, "<|&;"));
-	return (token);
+	node = (t_node *)malloc(sizeof(t_node));
+	memset(node, 0, sizeof(t_node));
+	while (**str && !peek(str, *str + strlen(*str), "<|&>#;"))
+	{
+		int ret = get_token(str, &token, &end_q);
+		if (ret == 'a')
+		{
+			node->type = 1;
+			node->exec[t] = ft_strsub(token, 0, end_q - token);
+			t++;
+		}	
+	}
+	node->exec[t] = NULL;
+	return (node);
 }
+
+t_node *parse_symbol(t_node *root, char **str)
+{
+	char *token;
+	char *end_q;
+	size_t	y = 0;
+	t_node *node;
+
+	node = (t_node *)malloc(sizeof(t_node));
+	memset(node, 0, sizeof(t_node));
+
+	while (peek(str, *str + strlen(*str), "<|&>#;"))
+	{
+		int ret = get_token(str, &token, &end_q);
+		if (ret == '|' || ret == '&' || ret == ';' || ret == '#' || ret == '<' || ret == '>')
+		{
+			node->type = 2;
+			node->symbol[y] = ft_strsub(token, 0, end_q - token);
+
+
+			y++;
+		}	
+	}
+	node->symbol[y] = NULL;
+	return (node);
+}
+
 int main()
 {
+	char	*str = "ls -la -F | grep a.out";
+	t_node	*node;
 	
-	char str[] = "this is a pipe | and this is a < redirection";
-	char *str_dup = (char *)malloc(sizeof(char) * strlen(str) + 1);
-	if (!str_dup)
-		return (0);
-	strcpy(str_dup, str);
-	/* char **arr = (char **)malloc(sizeof(char *) * (5 + 1));
-	if (!arr)
-		return (0);
-	str_dup = str;
-	int x;
-	x = 0;
-	printf("str_dup = %s\n", str_dup);
-	while (str_dup)
+	node = parse_exec(&str);
+	for (int i = 0; node->exec[i]; i++)
 	{
-		printf("hello world\n");
-		arr[x] = strdup(ft_strsep(&str_dup, "<|&;"));
-		printf("arr: %s\n", arr[x]);
-		printf("str: %s\n", str_dup);
-		x++;
+		printf("arg[%d]: %s\n", i, node->exec[i]);
 	}
-	arr[x] = NULL;
-	x = 0;
-	while (arr[x])
+	node = parse_symbol(node, &str);
+	for (int i = 0; node->symbol[i]; i++)
 	{
-		printf("token: %s\n", arr[x]);
-		x++;
-	} */
-
-	printf("token: %s\n", gettoken(&str_dup));
-	printf("token: %s\n", gettoken(&str_dup));
+		printf("symbol: %s\n", node->symbol[i]);
+	}
+	node = parse_exec(&str);
+	for (int i = 0; node->exec[i]; i++)
+	{
+		printf("arg[%d]: %s\n", i, node->exec[i]);
+	}
 	return (0);
-	/* printf("[%c] %s\n", get_token(&str), str);
-	printf("[%c] %s\n", get_token(&str), str); */
-	/* printf("%s\n", str); */
 }
