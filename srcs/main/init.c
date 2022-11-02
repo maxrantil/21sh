@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/31 10:11:37 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:17:40 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,7 @@ static size_t	env_arrlen(char **arr)
 	len = 0;
 	i = -1;
 	while (arr[++i])
-	{
-		if (!ft_strncmp(arr[i], "OLDPWD=", 7))
-			continue ;
 		len++;
-	}
 	return (len);
 }
 
@@ -74,8 +70,6 @@ static char	**get_env(char **env, size_t j, ssize_t i)
 		{
 			if (!ft_strncmp(environ[i], "SHLVL=", 6))
 				env[j++] = change_shlvl(environ[i]);
-			else if (!ft_strncmp(environ[i], "OLDPWD=", 7))
-				continue ;
 			else
 				env[j++] = ft_strdup(environ[i]);
 		}
@@ -86,17 +80,17 @@ static char	**get_env(char **env, size_t j, ssize_t i)
 	return (env);
 }
 
-void	init_msh(t_msh *msh)
+void	init(t_msh *msh)
 {
 	ssize_t		i;
 	size_t		j;
 
 	ft_putstr("\033[2J");
 	ft_putstr("\033[H");
-	ft_printf("\n{blu}******************************************\n");
-	ft_printf("\
-	\t{yel}2{gre}1{red}s{blu}h\n");
-	ft_printf("{blu}******************************************{nor}\n\n");
+	ft_printf("\n{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**\n");
+	ft_printf("            {blu}- {yel}2{gre}1{red}s{blu}h {yel}-\n");
+	ft_printf("   {yel}made {blu}by {gre}rvourenl {red}and {yel}mrantil{blu}.");
+	ft_printf("\n{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{nor}\n\n");
 	msh->args = NULL;
 	msh->paths = NULL;
 	msh->cl = NULL;
@@ -105,5 +99,4 @@ void	init_msh(t_msh *msh)
 	i = -1;
 	msh->env = get_env(msh->env, j, i);
 	msh->temp_env = NULL;
-
 }

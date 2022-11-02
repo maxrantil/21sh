@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_table.c                                       :+:      :+:    :+:   */
+/*   initialize_ht.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:35:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/31 10:14:42 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:22:33 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
-
-/**
-**	It takes a string and returns an integer
-**	@return The hash value of the program name.
-*/
-size_t hash_function(char *program)
-{
-	size_t	hash;
-	size_t 	c;
-
-	hash = 0;
-	while ((c = (size_t)*program++))
-		hash = c + (hash << 6) + (hash << 16) - hash;
-	return (hash % HASH_SIZE);
-}
 
 /*
  * It takes a hash table and a pointer to a builtin, and inserts the builtin into the hash table

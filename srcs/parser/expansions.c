@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/07 19:16:13 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:30:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static size_t	find_variables(t_msh *msh, size_t i, size_t j)
 	return (0);
 }
 
-void	change_variables(t_msh *msh)
+void	expansions(t_msh *msh)
 {
 	size_t	i;
 	size_t	j;
