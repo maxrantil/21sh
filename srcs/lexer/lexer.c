@@ -7,6 +7,7 @@
 #define COUNT 10
 #define EXEC 1
 #define PIPE 2
+#define REDIR 3
 
 static char	*ft_strchr(const char *s, int c)
 {
@@ -63,6 +64,29 @@ int	peek(char **ptr_to_str, char *toks)
 	return (*p && ft_strchr(toks, *p));
 }
 
+static int token_loop(char **p, int ret)
+{
+	while (**p)
+	{
+		if (strchr("<|&;", **p) && (*p)++)
+			break ;
+		else if (**p == '>' && (*p)++)
+		{
+			if (**p == '>' && (*p)++)
+				ret = '#';
+			break ;
+		}
+		else
+		{
+			ret = 'a';
+			while (**p && !ft_isspace(*p) && !strchr("<|&;>", **p))
+				(*p)++;
+			break ;
+		}
+	}
+	return (ret);
+}
+
 int	get_token(char **ptr_to_str, char **token, char **end_q)
 {
 	char	*p;
@@ -75,24 +99,7 @@ int	get_token(char **ptr_to_str, char **token, char **end_q)
 	if (token)
 		*token = p;
 	ret = *p;
-	while (*p)
-	{
-		if (strchr("<|&;", *p) && p++)
-			break ;
-		else if (*p == '>' && p++)
-		{
-			if (*p == '>' && p++)
-				ret = '#';
-			break ;
-		}
-		else
-		{
-			ret = 'a';
-			while (*p && !ft_isspace(p) && !strchr("<|&;>", *p))
-				p++;
-			break ;
-		}
-	}
+	ret = token_loop(&p, ret);
 	if (end_q)
 		*end_q = p;
 	p = skip_whitespaces(p);
@@ -188,7 +195,7 @@ void run_cmd(t_node *node)
 		execvp(node->exec[0], node->exec);
 		write(1, "ERROR EXEC\n", 11);
 	}
-	else
+	else if (node_type == PIPE)
 	{
 		if (pipe(p) < 0)
 		{
@@ -216,6 +223,7 @@ void run_cmd(t_node *node)
 		wait(0);
 		wait(0);
 	}
+	else if (node->type == REDIR)
 	exit(0);
 }
 
