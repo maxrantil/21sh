@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:29:40 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/31 10:36:35 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:32:16 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	parser(t_msh *msh)
 		}
 		msh->args = get_arguments(msh->cl, count_arguments(msh->cl));
 		strip_quotes(msh->args);
-		change_variables(msh);
+		expansions(msh);
 		return (1);
 	}
 	return (-1);
