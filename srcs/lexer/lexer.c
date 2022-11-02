@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 
 #define COUNT 10
 #define EXEC 1
@@ -110,10 +111,15 @@ int	get_token(char **ptr_to_str, char **token, char **end_q)
 typedef struct s_node
 {
 	int				type;
-	char			*exec[100];
+	char			*arg[100];
 	struct s_node	*left;
 	struct s_node	*right;
 }					t_node;
+
+typedef struct s_root
+{
+	t_node	*root;
+}				t_root;
 
 t_node	*create_node(int type, t_node *left, t_node *right)
 {
@@ -143,11 +149,13 @@ t_node *parse_exec(char **str)
 		int ret = get_token(str, &token, &end_q);
 		if (ret == 'a')
 		{
-			node->exec[t] = ft_strsub(token, 0, end_q - token);
+			node->arg[t] = ft_strsub(token, 0, end_q - token);
 			t++;
-		}	
+		}
+		/* else if (ret == '>')
+			node = create_node(REDIR, NULL, node); */
 	}
-	node->exec[t] = NULL;
+	node->arg[t] = NULL;
 	return (node);
 }
 
@@ -174,15 +182,111 @@ t_node	*parse_line(char **ptr_to_str)
 	return (node);
 }
 
-t_node *parse_cmd(char *str)
-{
-	t_node	*node;
+void	exec_command(t_node *node);
+void	exec_pipe_node(t_node *node);
 
-	node = parse_line(&str);
-	return (node);
+int	fork_check(void)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		write(2, "error on fork\n", 14);
+		exit(1);
+	}
+	return (pid);
 }
 
-void run_cmd(t_node *node)
+void	exec_pipe_node(t_node *node)
+{
+	int	p[2];
+
+	if (pipe(p) < 0)
+	{
+		printf("pipe\n");
+		exit(1);
+	}
+	if (fork_check() == 0)
+	{
+		close(1);
+		dup(p[1]);
+		close(p[0]);
+		close(p[1]);
+		exec_command(node->left);
+	}
+	if (fork_check() == 0)
+	{
+		close(0);
+		dup(p[0]);
+		close(p[0]);
+		close(p[1]);
+		exec_command(node->right);
+	}
+	close(p[0]);
+	close(p[1]);
+	wait(0);
+	wait(0);
+	exit(3);
+}
+
+int	open_check(char *filename, int mode)
+{
+	int	file_fd;
+
+	file_fd = -1;
+	if (mode == 1)	// overwrite/create >
+	{
+		// file_fd = open(filename, O_RDWR | O_CREAT | O_TRUNC | O_CLOEXEC, 0644);
+		file_fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	}
+	else if (mode == 2)	// append/create >>
+	{
+		// file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND | O_CLOEXEC, 0644);
+		file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
+	}
+	if (file_fd == -1)
+	{
+		write(2, "error on open_mode\n", 19);
+		exit(10);
+	}
+	return (file_fd);
+}
+
+int	dup2_check(int file_fd)
+{
+	int	dup2_fd;
+
+	dup2_fd = dup2(file_fd, 1);
+	if (dup2_fd == -1)
+	{
+		write(2, "error on dup2_check\n", 20);
+		exit(11);
+	}
+	return (dup2_fd);
+}
+
+void	redirection_file(t_node *node)
+{
+	int file_fd;
+	int	dup2_fd;
+
+		// check if (!node->right), SEGFAULT?
+	file_fd = open_check(node->left->arg[0], 1);	//	1 == > , 2 == >>
+
+	// printf("STR: %s\n", node->right->arg[0]);
+	write(2, "STR: ", 5);
+	dup2_fd = dup2_check(file_fd);
+	if (fork_check() == 0)
+	{
+		exec_command(node->right);
+	}
+	wait(0);
+	close(file_fd);
+	exit(7);
+}
+
+void	exec_command(t_node *node)
 {
 	int p[2];
 
@@ -190,72 +294,47 @@ void run_cmd(t_node *node)
 		exit(1);
 	if (node->type == EXEC)
 	{
-		if (!node->exec[0])
+		if (!node->arg[0])
 			exit(1);
-		execvp(node->exec[0], node->exec);
+		execvp(node->arg[0], node->arg);
 		write(1, "ERROR EXEC\n", 11);
 	}
-	else if (node_type == PIPE)
-	{
-		if (pipe(p) < 0)
-		{
-			write(1, "pipe error\n", 11);
-			exit(1);
-		}	
-		if (fork() == 0)
-		{
-			close(1);
-			dup(p[1]);
-			close(p[0]);
-			close(p[1]);
-			run_cmd(node->left);
-		}
-		if (fork() == 0)
-		{
-			close(0);
-			dup(p[0]);
-			close(p[0]);
-			close(p[1]);
-			run_cmd(node->right);
-		}
-		close(p[0]);
-		close(p[1]);
-		wait(0);
-		wait(0);
-	}
-	else if (node->type == REDIR)
+	else if (node->type == PIPE)
+		exec_pipe_node(node);
+	/* else if (node->type == REDIR)
+		redirection_file(node); */
 	exit(0);
 }
 
-void	printtree_rec(t_node *root, int lvl)
+void	rec_print_tree(t_node *root, int lvl)
 {
 	if (root == NULL)
 		return ;
 	lvl += COUNT;
-	printtree_rec(root->right, lvl);
+	rec_print_tree(root->right, lvl);
 	printf("\n");
 	for (int i = COUNT; i < lvl; i++)
 		printf(" ");
 	if (root->type == EXEC)
-		printf("%s\n", root->exec[0]);
+		printf("%s\n", root->arg[0]);
 	else if (root->type == PIPE)
 		printf("|");
-	printtree_rec(root->left, lvl);
+	rec_print_tree(root->left, lvl);
 }
 
 void print_tree(t_node *root) 
 {
-	printtree_rec(root, 0);
+	rec_print_tree(root, 0);
 }
 
 int main()
 {
 	// char	*str = "ps aux | grep mrantil | grep -v grep | grep 8 | wc -l";
-	char	*str = "ls -la | grep a.out";
-	t_node	*node;
+	char	*str = "ls | grep a.out | wc -l";
+	t_node	*root;
 
-	node = parse_cmd(str);
-	print_tree(node);
-	run_cmd(node);
+	root = parse_line(&str);
+	print_tree(root);
+	exec_command(root);
 	exit(0);
 }
