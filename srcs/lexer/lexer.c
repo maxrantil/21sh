@@ -52,23 +52,23 @@ static char	*ft_strsub(char const *s, unsigned int start, size_t len)
 }
 
 
-int	peek(char **ps, char *toks)
+int	peek(char **ptr_to_str, char *toks)
 {
 	char *p;
 
-	p = *ps;
+	p = *ptr_to_str;
 	while (*p && ft_isspace((const char *)p))
 		p++;
-	*ps = p;
+	*ptr_to_str = p;
 	return (*p && ft_strchr(toks, *p));
 }
 
-int	get_token(char **s, char **token, char **end_q)
+int	get_token(char **ptr_to_str, char **token, char **end_q)
 {
 	char	*p;
 	int		ret;
 	
-	p = *s;
+	p = *ptr_to_str;
 	p = skip_whitespaces(p);
 	if (*p == '\0')
 		return (0);
@@ -96,7 +96,7 @@ int	get_token(char **s, char **token, char **end_q)
 	if (end_q)
 		*end_q = p;
 	p = skip_whitespaces(p);
-	*s = p;
+	*ptr_to_str = p;
 	return (ret);
 }
 
@@ -242,8 +242,10 @@ void print_tree(t_node *root)
 
 int main()
 {
-	char	*str = "ls -la -F | grep a.out";
-	t_node *node;
+	// char	*str = "ps aux | grep mrantil | grep -v grep | grep 8 | wc -l";
+	char	*str = "ls -la | grep a.out";
+	t_node	*node;
+
 	node = parse_cmd(str);
 	print_tree(node);
 	run_cmd(node);
