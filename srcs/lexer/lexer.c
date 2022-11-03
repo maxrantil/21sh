@@ -158,9 +158,7 @@ t_node *parse_exec(char **str)
 	char *end_q;
 	size_t	t = 0;
 	t_node *node;
-	// t_node *redir;
 
-	// redir = NULL;
 	node = create_node(EXEC, NULL, NULL, NULL);
 	node = parse_redirection(node, str);
 	while (**str && !peek(str, "|&;"))
@@ -171,8 +169,6 @@ t_node *parse_exec(char **str)
 		node = parse_redirection(node, str);
 	}
 	node->arg[t] = NULL;
-	// if (redir)
-		// return (redir);
 	return (node);
 }
 
@@ -213,7 +209,7 @@ void	exec_pipe_node(t_node *node)
 
 	if (pipe(p) < 0)
 	{
-		printf("pipe\n");
+		write(2, "error on pipe\n", 14);
 		exit(1);
 	}
 	if (fork_check() == 0)
@@ -236,7 +232,6 @@ void	exec_pipe_node(t_node *node)
 	close(p[1]);
 	wait(0);
 	wait(0);
-	exit(3);
 }
 
 int	open_check(char *filename, int mode)
@@ -279,10 +274,9 @@ void	redirection_file(t_node *node)
 	// dup2_fd = dup2_check(file_fd);
 	// if (fork_check() == 0)
 	// {
+		exec_command(node->command);
 		// exec_command(node->right);
 	// }
-	exec_command(node->command);
-
 	// wait(0);
 	// close(file_fd);
 	// exit(7);
@@ -296,6 +290,7 @@ void	exec_command(t_node *node)
 		exit(1);
 	if (node->type == EXEC)
 	{
+		printf("exec %s\n", node->arg[0]);
 		if (!node->arg[0])
 			exit(1);
 		execvp(node->arg[0], node->arg);
@@ -318,7 +313,14 @@ void	rec_print_tree(t_node *root, int lvl)
 	for (int i = COUNT; i < lvl; i++)
 		printf(" ");
 	if (root->type == EXEC)
-		printf("%s\n", root->arg[0]);
+	{
+		if (root->arg[2])
+			printf("%s - %s - ...\n", root->arg[0], root->arg[1]);
+		else if (root->arg[1])
+			printf("%s - %s\n", root->arg[0], root->arg[1]);
+		else
+			printf("%s\n", root->arg[0]);
+	}
 	else if (root->type == PIPE)
 		printf("|");
 	else if (root->type == REDIR)
@@ -337,7 +339,7 @@ void print_tree(t_node *root)
 int main()
 {
 	// char	*str = "ps aux | grep mrantil | grep -v grep | grep 8 | wc -l";
-	char	*str = "ls -la | grep a.out > test.txt";
+	char	*str = "echo hello | grep h > test.txt | cat";
 	t_node	*root;
 
 	root = parse_pipe(&str);
