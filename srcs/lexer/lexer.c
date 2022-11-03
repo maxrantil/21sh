@@ -154,21 +154,30 @@ t_node	*parse_redirection(t_node *node, char **str)
 
 t_node *parse_exec(char **str)
 {
-	char *token;
-	char *end_q;
-	size_t	t = 0;
-	t_node *node;
+	char	*token;
+	char	*end_q;
+	int		type;
+	size_t	argc;
+	t_node	*node;
 
 	node = create_node(EXEC, NULL, NULL, NULL);
 	node = parse_redirection(node, str);
+	argc = 0;
 	while (**str && !peek(str, "|&;"))
 	{
-		int ret = get_token(str, &token, &end_q);
-		if (ret == 'a')
-			node->arg[t++] = ft_strsub(token, 0, end_q - token);
+		type = get_token(str, &token, &end_q);
+		if (type == 'a')
+			node->arg[argc++] = ft_strsub(token, 0, end_q - token);
+		else if (type == 0)
+			break ;
+		else
+		{
+			printf("syntax error near unexpected token `%c'\n", type);
+			exit(1);
+		}
 		node = parse_redirection(node, str);
 	}
-	node->arg[t] = NULL;
+	node->arg[argc] = NULL;
 	return (node);
 }
 
@@ -251,46 +260,19 @@ int	open_check(char *filename, int mode)
 	return (file_fd);
 }
 
-int	dup2_check(int file_fd)
-{
-	int	dup2_fd;
-
-	dup2_fd = dup2(file_fd, 1);
-	if (dup2_fd == -1)
-	{
-		write(2, "error on dup2_check\n", 20);
-		exit(11);
-	}
-	return (dup2_fd);
-}
-
 void	redirection_file(t_node *node)
 {
-	int file_fd;
-	int	dup2_fd;
-
 	close(1);
-	file_fd = open_check(node->arg[0], 1);	//	1 == > , 2 == >>
-	// dup2_fd = dup2_check(file_fd);
-	// if (fork_check() == 0)
-	// {
-		exec_command(node->command);
-		// exec_command(node->right);
-	// }
-	// wait(0);
-	// close(file_fd);
-	// exit(7);
+	dup(open_check(node->arg[0], 1));	//	1 == > , 2 == >>
+	exec_command(node->command);
 }
 
 void	exec_command(t_node *node)
 {
-	int p[2];
-
 	if (!node)
 		exit(1);
 	if (node->type == EXEC)
 	{
-		printf("exec %s\n", node->arg[0]);
 		if (!node->arg[0])
 			exit(1);
 		execvp(node->arg[0], node->arg);
@@ -315,9 +297,9 @@ void	rec_print_tree(t_node *root, int lvl)
 	if (root->type == EXEC)
 	{
 		if (root->arg[2])
-			printf("%s - %s - ...\n", root->arg[0], root->arg[1]);
+			printf("%s %s ...\n", root->arg[0], root->arg[1]);
 		else if (root->arg[1])
-			printf("%s - %s\n", root->arg[0], root->arg[1]);
+			printf("%s %s\n", root->arg[0], root->arg[1]);
 		else
 			printf("%s\n", root->arg[0]);
 	}
@@ -325,8 +307,12 @@ void	rec_print_tree(t_node *root, int lvl)
 		printf("|");
 	else if (root->type == REDIR)
 	{
-		printf("%s", root->command->arg[0]);
-		printf(" > %s\n", root->arg[0]);
+		if (root->command->arg[2])
+			printf("%s %s ... > %s\n", root->command->arg[0], root->command->arg[1], root->arg[0]);
+		else if (root->command->arg[1])
+			printf("%s %s > %s\n", root->command->arg[0], root->command->arg[1], root->arg[0]);
+		else
+			printf(" %s > %s\n", root->command->arg[0], root->arg[0]);
 	}
 	rec_print_tree(root->left, lvl);
 }
