@@ -262,9 +262,13 @@ int	open_check(char *filename, int mode)
 
 void	redirection_file(t_node *node)
 {
+	// printf("%d node command\n", node->command->type);
+		exec_pipe_node(node->command);
 	close(1);
 	dup(open_check(node->arg[0], 1));	//	1 == > , 2 == >>
-	exec_command(node->command);
+	// if (node->command->type == PIPE)
+	// else
+		exec_command(node->command);
 }
 
 void	exec_command(t_node *node)
