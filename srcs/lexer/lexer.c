@@ -9,6 +9,8 @@
 #define EXEC 1
 #define PIPE 2
 #define REDIR 3
+#define AMP 4
+#define SEMI 5
 
 static char	*ft_strchr(const char *s, int c)
 {
@@ -152,7 +154,7 @@ t_node	*parse_redirection(t_node *node, char **str)
 	return (node);
 }
 
-t_node *parse_exec(char **str)
+t_node *parse_exec(char **ptr_to_str)
 {
 	char	*token;
 	char	*end_q;
@@ -161,11 +163,11 @@ t_node *parse_exec(char **str)
 	t_node	*node;
 
 	node = create_node(EXEC, NULL, NULL, NULL);
-	node = parse_redirection(node, str);
+	node = parse_redirection(node, ptr_to_str);
 	argc = 0;
-	while (**str && !peek(str, "|&;"))
+	while (**ptr_to_str && !peek(ptr_to_str, "|&;"))
 	{
-		type = get_token(str, &token, &end_q);
+		type = get_token(ptr_to_str, &token, &end_q);
 		if (type == 'a')
 			node->arg[argc++] = ft_strsub(token, 0, end_q - token);
 		else if (type == 0)
@@ -175,7 +177,7 @@ t_node *parse_exec(char **str)
 			printf("syntax error near unexpected token `%c'\n", type);
 			exit(1);
 		}
-		node = parse_redirection(node, str);
+		node = parse_redirection(node, ptr_to_str);
 	}
 	node->arg[argc] = NULL;
 	return (node);
@@ -185,18 +187,50 @@ t_node	*parse_pipe(char **ptr_to_str)
 {
 	char 	*token;
 	char 	*end_q;
+	int		type;
 	t_node	*node;
 
 	node = parse_exec(ptr_to_str);
 	if (peek(ptr_to_str, "|"))
 	{
-		get_token(ptr_to_str, &token, &end_q);
-		node = create_node(PIPE, NULL, node, parse_pipe(ptr_to_str));
+		type = get_token(ptr_to_str, &token, &end_q);
+		if (!peek(ptr_to_str, "|&;"))
+			node = create_node(PIPE, NULL, node, parse_pipe(ptr_to_str));
+		else
+		{
+			printf("syntax error near unexpected token `%c'\n", type);
+			exit(1);
+		}
 	}
 	return (node);
 }
 
-void	exec_command(t_node *node);
+t_node	*parse_line(char **ptr_to_str)
+{
+	char 	*token;
+	char 	*end_q;
+	t_node	*node;
+
+	node = parse_pipe(ptr_to_str);
+	if (peek(ptr_to_str, "&"))
+	{
+		get_token(ptr_to_str, &token, &end_q);
+		node = create_node(AMP, node, NULL, NULL);
+	}
+	else if (peek(ptr_to_str, ";"))
+	{
+		get_token(ptr_to_str, &token, &end_q);
+		node = create_node(SEMI, NULL, node, parse_line(ptr_to_str));
+	}
+	if (peek(ptr_to_str, ""))
+	{
+		printf("syntax error near unexpected token `newline'\n");
+		exit(1);
+	}
+	return (node);
+}
+
+void	exec_tree(t_node *node);
 void	exec_pipe_node(t_node *node);
 
 int	fork_check(void)
@@ -227,7 +261,7 @@ void	exec_pipe_node(t_node *node)
 		dup(p[1]);
 		close(p[0]);
 		close(p[1]);
-		exec_command(node->left);
+		exec_tree(node->left);
 	}
 	if (fork_check() == 0)
 	{
@@ -235,7 +269,7 @@ void	exec_pipe_node(t_node *node)
 		dup(p[0]);
 		close(p[0]);
 		close(p[1]);
-		exec_command(node->right);
+		exec_tree(node->right);
 	}
 	close(p[0]);
 	close(p[1]);
@@ -268,10 +302,10 @@ void	redirection_file(t_node *node)
 	dup(open_check(node->arg[0], 1));	//	1 == > , 2 == >>
 	// if (node->command->type == PIPE)
 	// else
-		exec_command(node->command);
+		exec_tree(node->command);
 }
 
-void	exec_command(t_node *node)
+void	exec_tree(t_node *node)
 {
 	if (!node)
 		exit(1);
@@ -332,9 +366,9 @@ int main()
 	char	*str = "echo hello | grep h > test.txt | cat";
 	t_node	*root;
 
-	root = parse_pipe(&str);
+	root = parse_line(&str);
 	print_tree(root);
 	write(1, "\n", 1);
-	exec_command(root);
+	exec_tree(root);
 	exit(0);
 }
