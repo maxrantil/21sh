@@ -97,7 +97,7 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(UTILS)get_env_value \
 				$(UTILS)print_error \
 				$(UTILS)update_env_underscore \
-				
+
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
 LIBS		= 	libft.a
@@ -140,8 +140,8 @@ clean:
 fclean: clean
 	@make -C $(LIBRARIES) fclean
 	@if [ -f $(LIBS) ]; then rm $(LIBS); fi
-	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)$(NAME) was deleted$(RESET)\n"; fi
-	
+	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)executable was deleted$(RESET)\n"; fi
+
 re: fclean all
 
 pbar:
