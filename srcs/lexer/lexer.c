@@ -66,7 +66,7 @@ int	peek(char **ptr_to_str, char *toks)
 	return (*p && ft_strchr(toks, *p));
 }
 
-static int token_loop(char **p, int ret)
+static int token_loop(char **p, int ret) //retname p to s
 {
 	while (**p)
 	{
@@ -91,10 +91,10 @@ static int token_loop(char **p, int ret)
 
 int	get_token(char **ptr_to_str, char **token, char **end_q)
 {
-	char	*p;
+	char	*p; //rename to scan
 	int		ret;
 
-	p = *ptr_to_str;
+	p = *ptr_to_str; //rename to inputptr
 	p = skip_whitespaces(p);
 	if (*p == '\0')
 		return (0);
@@ -320,6 +320,18 @@ void	exec_tree(t_node *node)
 		exec_pipe_node(node);
 	else if (node->type == REDIR)
 		redirection_file(node);
+	else if (node->type == AMP)
+	{
+		if (fork_check() == 0)
+			exec_tree(node->command);
+	}
+	else if (node->type == SEMI)
+	{
+		if (fork_check() == 0)
+			exec_tree(node->left);
+		wait(0);
+		exec_tree(node->right);
+	}
 	exit(0);
 }
 
@@ -363,7 +375,8 @@ void print_tree(t_node *root)
 int main()
 {
 	// char	*str = "ps aux | grep mrantil | grep -v grep | grep 8 | wc -l";
-	char	*str = "echo hello | grep h > test.txt | cat";
+	// char	*str = "echo hello | grep h > test.txt | cat";
+	char *str = "echo hello ; echo world";
 	t_node	*root;
 
 	root = parse_line(&str);
