@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/04 15:42:47 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/04 16:36:41 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,7 +128,7 @@ clean:
 fclean: clean
 	@make -C $(LIBRARIES) fclean
 	@if [ -f $(LIBS) ]; then rm $(LIBS); fi
-	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)$(NAME) was deleted$(RESET)\n"; fi
+	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)executable was deleted$(RESET)\n"; fi
 	
 re: fclean all
 
