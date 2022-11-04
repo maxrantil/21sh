@@ -7,7 +7,9 @@ int main()
 	// char *str = "echo hello | grep h > text.txt ; cat text.txt ; echo again";
 	// char *str = "echo try > to_me again";
 	// char *str = "echo hello ; echo world";
-	// char *str = "echo tjotjo > file | cat < file > file2"; // not working
+	// char *str = "echo tjotjo > file ; cat < file > file2";
+	// char *str = "cat < file | grep t > file2"; 
+	char *str = "echo $PWD ; cd .. ; echo $PWD";
 	t_node	*root;
 
 	root = parse_line(&str); //make a loop and check for str != NULL and if you encouunter redir in string break out and set it to new root here
