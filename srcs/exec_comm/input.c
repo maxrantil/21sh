@@ -24,8 +24,9 @@ int		fork_check(void);
 int		open_check(char *filename, int mode);
 int		open_read_check(char *filename);
 int		dup2_check(int file_fd);
+void	exec_pipe_node(t_node *node, char **env);
 
-void	input(char *filename, t_node *node)
+void	input_file_read(char *filename)
 {
 	char	buf[4096];
 	int		file_fd;
@@ -37,9 +38,11 @@ void	input(char *filename, t_node *node)
 	{
 		buf[ret] = '\0';
 		write(1, buf, ft_strlen(buf));
+		ft_strclr(buf);
 		ret = read(file_fd, buf, 4095);
 	}
 	close(file_fd);
+	exit(11);
 }
 
 int	open_read_check(char *filename)
@@ -58,24 +61,24 @@ int	open_read_check(char *filename)
 
 void	init_nodes(t_node *left, t_node *right, t_node *cent)
 {
-	char *arr[] = {"cat", "random.txt", NULL};
-
-	left->right = NULL;
-	left->left = NULL;
-	left->args = copy_double_array(arr);
-	left->command = "/bin/cat";
-	left->type = 1;
+	char *arr[] = {"cat", NULL};
 
 	right->right = NULL;
 	right->left = NULL;
-	right->args = NULL;
-	right->command = "testfile.txt";
-	right->type = 0;
+	right->args = copy_double_array(arr);
+	right->command = "/bin/cat";
+	right->type = 1;
+
+	left->right = NULL;
+	left->left = NULL;
+	left->args = NULL;
+	left->command = "testfile.txt";
+	left->type = 5;
 
 	cent->left = left;
 	cent->right = right;
 	cent->args = NULL;
-	cent->type = 4;	// 3 = >, 4 = >>
+	cent->type = 2;
 }
 /*			file
 	redir
@@ -148,9 +151,36 @@ void	redirection_file(t_node *node, char **env)
 	exit(7);
 }
 
+void	exec_pipe_node(t_node *node, char **env)
+{
+	int	p[2];
+
+	pipe(p);
+	if (fork_check() == 0)
+	{
+		close(1);
+		dup(p[1]);
+		close(p[0]);
+		close(p[1]);
+		exec_command(node->left, env);
+	}
+	if (fork_check() == 0)
+	{
+		close(0);
+		dup(p[0]);
+		close(p[0]);
+		close(p[1]);
+		exec_command(node->right, env);
+	}
+	close(p[0]);
+	close(p[1]);
+	wait(0);
+	wait(0);
+	exit(3);
+}
+
 void	exec_command(t_node *node, char **env)
 {
-
 	if (node == NULL)
 	{
 		exit(2);
@@ -166,13 +196,17 @@ void	exec_command(t_node *node, char **env)
 			exit(1);
 		}
 	}
-	// else if (node->type == 2)
-	// {
-	// 	exec_pipe_node(node, env);
-	// }
+	else if (node->type == 2)
+	{
+		exec_pipe_node(node, env);
+	}
 	else if (node->type == 3 || node->type == 4)
 	{
 		redirection_file(node, env);
+	}
+	else if (node->type == 5)
+	{
+		input_file_read(node->command);
 	}
 }
 
