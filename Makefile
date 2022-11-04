@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/04 11:29:14 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/04 14:16:05 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,20 +130,20 @@ $(O_PATHS):	$(OBJECTS)/%.o:$(SOURCES)/%.c $(H_PATHS) Makefile
 	@make pbar
 
 libft:
-	@make bclean
+# @make bclean
 	@make -C $(LIBRARIES)
 # @cp $(LIBRARIES)/$(LIBS) .
 
 clean:
 	@make -C $(LIBRARIES) clean
 	@if [ -d $(OBJECTS) ]; then rm -rf $(OBJECTS); printf "$(NAME):		$(RED)$(OBJECTS)/ was deleted$(RESET)\n"; fi
+	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)executable was deleted$(RESET)\n"; fi
 
 fclean: clean bclean
 	@make -C $(LIBRARIES) fclean
-	@if [ -f $(LIBS) ]; then rm $(LIBS); fi
+# @if [ -f $(LIBS) ]; then rm $(LIBS); fi
 	
-bclean: $(NAME)
-	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)$(NAME) was deleted$(RESET)\n"; fi
+#bclean: $(NAME)
 
 re: fclean all
 
