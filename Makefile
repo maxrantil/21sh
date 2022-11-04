@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/02 11:05:40 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/04 11:29:14 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,7 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
-LIBS		= 	libft.a
+LIBS		= 	libft/libft.a
 
 HEADERS		=	-I$(INCLUDES)/ -Ilibft/includes/
 
@@ -130,18 +130,21 @@ $(O_PATHS):	$(OBJECTS)/%.o:$(SOURCES)/%.c $(H_PATHS) Makefile
 	@make pbar
 
 libft:
+	@make bclean
 	@make -C $(LIBRARIES)
-	@cp $(LIBRARIES)/$(LIBS) .
+# @cp $(LIBRARIES)/$(LIBS) .
 
 clean:
 	@make -C $(LIBRARIES) clean
 	@if [ -d $(OBJECTS) ]; then rm -rf $(OBJECTS); printf "$(NAME):		$(RED)$(OBJECTS)/ was deleted$(RESET)\n"; fi
 
-fclean: clean
+fclean: clean bclean
 	@make -C $(LIBRARIES) fclean
 	@if [ -f $(LIBS) ]; then rm $(LIBS); fi
-	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)$(NAME) was deleted$(RESET)\n"; fi
 	
+bclean: $(NAME)
+	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)$(NAME) was deleted$(RESET)\n"; fi
+
 re: fclean all
 
 pbar:
