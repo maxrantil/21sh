@@ -8,9 +8,11 @@
 #define COUNT 10
 #define EXEC 1
 #define PIPE 2
-#define REDIR 3
-#define AMP 4
-#define SEMI 5
+#define REDIROVER 3 // >
+#define REDIRAPP 4 // >>
+#define REDIRIN 5 // <
+#define AMP 6
+#define SEMI 7
 
 static char	*ft_strchr(const char *s, int c)
 {
@@ -282,10 +284,11 @@ int	open_check(char *filename, int mode)
 	int	file_fd;
 
 	file_fd = -1;
-	if (mode == 1)
+	if (mode == REDIROVER) // >
 		file_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (mode == 2)
+	else if (mode == REDIRAPP) // >>
 		file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
+	else if (mode == REDIRIN) // <
 	if (file_fd == -1)
 	{
 		write(2, "error on open_mode\n", 19);
@@ -296,13 +299,9 @@ int	open_check(char *filename, int mode)
 
 void	redirection_file(t_node *node)
 {
-	// printf("%d node command\n", node->command->type);
-		exec_pipe_node(node->command);
 	close(1);
-	dup(open_check(node->arg[0], 1));	//	1 == > , 2 == >>
-	// if (node->command->type == PIPE)
-	// else
-		exec_tree(node->command);
+	dup(open_check(node->arg[0], node->type));	//	1 == > , 2 == >>
+	exec_tree(node->command);
 }
 
 void	exec_tree(t_node *node)
@@ -318,7 +317,7 @@ void	exec_tree(t_node *node)
 	}
 	else if (node->type == PIPE)
 		exec_pipe_node(node);
-	else if (node->type == REDIR)
+	else if (node->type == REDIRIN || node->type == REDIROVER || node->type == REDIRAPP)
 		redirection_file(node);
 	else if (node->type == AMP)
 	{
@@ -379,9 +378,9 @@ void print_tree(t_node *root)
 int main()
 {
 	// char	*str = "ps aux | grep mrantil | grep -v grep | grep 8 | wc -l";
-	// char	*str = "echo hello | grep h > test.txt | cat";
+	char	*str = "echo hello | grep h > test.txt";
 	// char *str = "echo hello | grep h > text.txt ; cat text.txt ; echo again";
-	char *str = "echo try > to_me again";
+	// char *str = "echo try > to_me again";
 	// char *str = "echo hello ; echo world";
 	t_node	*root;
 
