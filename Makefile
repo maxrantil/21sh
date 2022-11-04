@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/04 14:16:05 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/04 16:38:34 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(UTILS)get_env_value \
 				$(UTILS)print_error \
 				$(UTILS)update_env_underscore \
-				
+
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
 LIBS		= 	libft/libft.a
@@ -137,13 +137,11 @@ libft:
 clean:
 	@make -C $(LIBRARIES) clean
 	@if [ -d $(OBJECTS) ]; then rm -rf $(OBJECTS); printf "$(NAME):		$(RED)$(OBJECTS)/ was deleted$(RESET)\n"; fi
-	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)executable was deleted$(RESET)\n"; fi
 
-fclean: clean bclean
+fclean: clean
 	@make -C $(LIBRARIES) fclean
-# @if [ -f $(LIBS) ]; then rm $(LIBS); fi
-	
-#bclean: $(NAME)
+	@if [ -f $(LIBS) ]; then rm $(LIBS); fi
+	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)executable was deleted$(RESET)\n"; fi
 
 re: fclean all
 
