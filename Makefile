@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/04 16:38:34 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/07 16:29:09 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ LEAK_CHECK	=	-g
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
-TERMCAP		=	-lntermcap
+TERMCAP		=	-ltermcap
 CFLAGS		+= 	-Werror
 endif
 ifeq ($(UNAME), Linux)
@@ -106,9 +106,9 @@ HEADERS		=	-I$(INCLUDES)/ -Ilibft/includes/
 
 ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✓$(RESET)" || (printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n" | printf "$(C_VISIBLE)" && exit 1)
 
-all: libft $(NAME)
+all: libft $(NAME) 	
 
-$(NAME): $(OBJECTS) $(O_PATHS)
+$(NAME): libft/libft.a $(OBJECTS) $(O_PATHS)
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(LEAK_CHECK)
 	@printf "Compiled $(BOLD)$(GREEN)$(NAME)$(RESET)!\n\n"
 	@printf "$(C_VISIBLE)"
@@ -130,9 +130,8 @@ $(O_PATHS):	$(OBJECTS)/%.o:$(SOURCES)/%.c $(H_PATHS) Makefile
 	@make pbar
 
 libft:
-# @make bclean
 	@make -C $(LIBRARIES)
-# @cp $(LIBRARIES)/$(LIBS) .
+	@if [ "$(FOO)" = "" ]; then $(MAKE) FOO=bar; fi
 
 clean:
 	@make -C $(LIBRARIES) clean
