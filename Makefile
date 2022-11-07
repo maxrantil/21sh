@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/02 11:05:40 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/04 16:36:41 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,15 +100,15 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
-LIBS		= 	libft.a
+LIBS		= 	libft/libft.a
 
 HEADERS		=	-I$(INCLUDES)/ -Ilibft/includes/
 
 ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✓$(RESET)" || (printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n" | printf "$(C_VISIBLE)" && exit 1)
 
-all: libft $(NAME)
+all: libft $(NAME) 	
 
-$(NAME): $(OBJECTS) $(O_PATHS)
+$(NAME): libft/libft.a $(OBJECTS) $(O_PATHS)
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(LEAK_CHECK)
 	@printf "Compiled $(BOLD)$(GREEN)$(NAME)$(RESET)!\n\n"
 	@printf "$(C_VISIBLE)"
@@ -131,7 +131,7 @@ $(O_PATHS):	$(OBJECTS)/%.o:$(SOURCES)/%.c $(H_PATHS) Makefile
 
 libft:
 	@make -C $(LIBRARIES)
-	@cp $(LIBRARIES)/$(LIBS) .
+	@if [ "$(FOO)" = "" ]; then $(MAKE) FOO=bar; fi
 
 clean:
 	@make -C $(LIBRARIES) clean
