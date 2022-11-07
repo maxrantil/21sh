@@ -44,7 +44,7 @@ void	rec_print_tree(t_node *root, int lvl);
 void	print_tree(t_node *root);
 int		open_read_check(char *filename);
 void	input_file_read(char *filename);
-int		dup2_check(int file_fd);
+int		dup2_check(int file_fd, int old_fd);
 
 //LIBFT
 char	*ft_strchr(const char *s, int c);
@@ -53,6 +53,7 @@ char	*skip_whitespaces(char *ptr);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 void	ft_strclr(char *s);
 size_t	ft_strlen(const char *s);
-
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 
 #endif

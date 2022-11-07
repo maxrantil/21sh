@@ -1,10 +1,10 @@
 #include "temp.h"
 
-int	dup2_check(int file_fd)
+int	dup2_check(int file_fd, int old_fd)
 {
 	int	dup2_fd;
 
-	dup2_fd = dup2(file_fd, 1);
+	dup2_fd = dup2(file_fd, old_fd);
 	if (dup2_fd == -1)
 	{
 		write(2, "error on dup2_check\n", 20);
@@ -114,7 +114,7 @@ void	redirection_file(t_node *node)
 
 		// check if (!node->right), SEGFAULT?
 	file_fd = open_check(node->arg[0], node->type);	//	1 == > , 2 == >>
-	dup2_fd = dup2_check(file_fd);
+	dup2_fd = dup2_check(file_fd, 1);
 	if (fork_check() == 0)
 	{
 		exec_tree(node->left);

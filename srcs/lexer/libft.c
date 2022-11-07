@@ -66,3 +66,39 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+int	ft_atoi(const char *str)
+{
+	unsigned long int	res;
+	long int			minus;
+
+	res = 0;
+	minus = 1;
+	while (ft_isspace(str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			minus = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		res = res * 10 + *str - 48;
+		if (res > 9223372036854775807)
+		{
+			if (minus < 0)
+				return (0);
+			return (-1);
+		}
+		str++;
+	}
+	return (res * minus);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
