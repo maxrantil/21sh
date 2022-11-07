@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/01 08:46:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:06:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(void)
 	t_builtin	*ht[HASH_SIZE];
 	int			status;
 
-	init_msh(&msh);
+	init(&msh);
 	initialize_ht(ht);
 	status = 1;
 	while (status)
@@ -48,7 +48,7 @@ int	main(void)
 			if (status > 0)
 			{
 				status = exec_args(&msh, ht);
-				msh.env = update_env_var(&msh);
+				msh.env = update_env_underscore(&msh);
 			}
 			free_mem(&msh, ht, 1);
 		}

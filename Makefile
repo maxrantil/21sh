@@ -59,7 +59,10 @@ endif
 
 SOURCES 	= 	srcs
 PARSER		= 	parser/
+HASH_TABLE	=	hash_table/
 BUILTIN		= 	builtin/
+MAIN		= 	main/
+UTILS		= 	utils/
 OBJECTS 	= 	objs
 INCLUDES	= 	includes
 LIBRARIES 	= 	libft
@@ -73,22 +76,28 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(BUILTIN)builtin_unsetenv \
 				$(BUILTIN)builtin_setenv \
 				$(BUILTIN)builtins_env_exit \
-				init \
-				main \
-				msh_launch \
-				hash_table \
-				$(PARSER)parser_changedollar \
-				$(PARSER)parser_changetilde \
-				$(PARSER)parser_changevar \
-				$(PARSER)parser_count_arguments \
-				$(PARSER)parser_get_arguments \
-				$(PARSER)parser_strip_quotes \
+				$(BUILTIN)extract_key \
+				$(BUILTIN)set_env_var \
+				$(BUILTIN)unset_env_var \
+				$(BUILTIN)update_pwd \
+				$(MAIN)free_mem \
+				$(MAIN)init \
+				$(MAIN)main \
+				$(HASH_TABLE)hash_function \
+				$(HASH_TABLE)initialize_ht \
+				$(PARSER)get_dollar \
+				$(PARSER)tilde \
+				$(PARSER)expansions \
+				$(PARSER)count_arguments \
+				$(PARSER)get_arguments \
+				$(PARSER)strip_quotes \
 				$(PARSER)parser \
-				tools_env_var \
-				tools_error \
-				tools \
-				update_env_var \
-				
+				$(PARSER)find_matching_quote \
+				$(UTILS)msh_launch \
+				$(UTILS)get_env_value \
+				$(UTILS)print_error \
+				$(UTILS)update_env_underscore \
+
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
 LIBS		= 	libft/libft.a
@@ -108,6 +117,9 @@ $(OBJECTS):
 	@make -C $(LIBRARIES)
 	@mkdir -p $(OBJECTS)/$(PARSER)
 	@mkdir -p $(OBJECTS)/$(BUILTIN)
+	@mkdir -p $(OBJECTS)/$(HASH_TABLE)
+	@mkdir -p $(OBJECTS)/$(MAIN)
+	@mkdir -p $(OBJECTS)/$(UTILS)
 	@printf "$(GREEN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(GREEN)$(OBJECTS) directory was created.$(RESET)\n\n\n"
 
@@ -129,7 +141,7 @@ fclean: clean
 	@make -C $(LIBRARIES) fclean
 	@if [ -f $(LIBS) ]; then rm $(LIBS); fi
 	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):		$(RED)executable was deleted$(RESET)\n"; fi
-	
+
 re: fclean all
 
 pbar:

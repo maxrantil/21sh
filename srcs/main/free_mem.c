@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   tools copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/31 10:32:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:48:19 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
-
-char	*extract_key(char *key_value)
-{
-	char	*key;
-	size_t	i;
-
-	i = 0;
-	key = ft_strnew(ft_strlen(key_value));
-	if (ft_strchr(key_value, '='))
-	{
-		while (key_value[i] != '=')
-			i++;
-		ft_strncpy(key, key_value, i);
-	}
-	else
-		ft_strcpy(key, key_value);
-	key = ft_strupdate(key, "=");
-	return (key);
-}
 
 static void	free_table(t_builtin **ht)
 {
@@ -76,14 +57,4 @@ void	free_mem(t_msh *msh, t_builtin **ht, ssize_t code)
 			ft_arrfree((void ***)&msh->env, ft_arrlen((void **)msh->env));
 		free_table(ht);
 	}
-}
-
-size_t	find_matching_quote(char *str, char quote)
-{
-	size_t	i;
-
-	i = 1;
-	while (str[i] && str[i] != quote)
-		i++;
-	return (i);
 }
