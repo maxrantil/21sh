@@ -2,6 +2,15 @@
 void	ft_free_doublearray(char ***array);
 void	ft_strdel(char **as);
 
+void	free_args(char **args)
+{
+	int	i;
+
+	i = -1;
+	while (args[++i])
+		free(args[i]);
+}
+
 /*	recursively free tree nodes, start from root */
 void	free_tree(t_node *node)
 {
@@ -12,20 +21,10 @@ void	free_tree(t_node *node)
 	node->left = NULL;
 	node->right = NULL;
 	node->type = 0;
-	ft_free_doublearray(&(node->arg));
-	ft_strdel(node->command);
-	free(*node);
+	free_args(node->arg);
+	free(node);
 	node = NULL;
 }
-
-// typedef struct s_node
-// {
-// 	int				type;
-// 	char			*arg[100];
-// 	struct s_node	*command;
-// 	struct s_node	*left;
-// 	struct s_node	*right;
-// }				t_node;
 
 void	ft_strdel(char **as)
 {

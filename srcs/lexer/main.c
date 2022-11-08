@@ -1,4 +1,6 @@
 #include "temp.h"
+int	check_valid_fd(int fd);
+void	free_tree(t_node *node);
 
 // one backslag take it away, two backslshes keep one. last newline is always changes to \0
 char *lexer(char *str)
@@ -53,6 +55,11 @@ void	open_redirect_stream(char *filename, int old_fd)
 	if (check_filename_fd(filename))
 	{
 		fd = ft_atoi(filename);
+		if (fd != 1 && fd != 2)
+		{
+			write(2, "Syntax error with redirection\n", 30);
+			exit(2);
+		}
 	}
 	// else if ()	// check whether > or >>
 	// {
@@ -64,14 +71,42 @@ void	open_redirect_stream(char *filename, int old_fd)
 		fd = open_check(filename, REDIROVER);
 		// 2 > filename
 	}
-	dup2_check2(fd, old_fd);
+	printf("fd = %d\n", fd);
+	if (check_valid_fd(fd))
+		dup2_check2(fd, old_fd);
+	else
+		write(2, "Bad file descriptor\n", 20);
+}
+
+/* 	check if fd is open (return true)
+	or closed (return 0, bad file descriptor message?) */
+int	check_valid_fd(int fd)
+{
+	if (isatty(fd))
+		return (1);
+	return (0);
+}
+
+void	test(void)
+{
+	if (isatty(1))
+		write(1, "yes\n", 4);
+	else
+		write(2, "no\n", 3);
+	close(1);
+	if (isatty(1))
+		write(1, "yes\n", 4);
+	else
+		write(2, "no\n", 3);
+	exit(1);
 }
 
 int main()
 {
+	// test();
 	// char	*str = "ps aux | grep mrantil | grep -v grep | grep 8 | wc -l";
 	// char	*str = "cat < 2.txt | grep t > 1.txt";
-	// char *str = "cat file | grepp ssd ";
+	char *str = "cat file | grep ssd ";
 	// char *str = "echo hello | grep h > text.txt ; cat text.txt ; echo again";
 	// char *str = "echo try > to_me again";
 	// char *str = "echo hello ; echo world";
@@ -86,7 +121,7 @@ int main()
 	// char *str = "echo \nhello\nagain\n";
 	// char *str = "echo hello\again'\n"; // echo helloagain\0
 	// one backslag take it away, two backslshes keep one. last newline is always changes to \0
-	char *str = "ls file non_exist";
+	// char *str = "ls -l file";
 	t_node	*root;
 	// str = lexer(str);
 	// printf("%s\n", str);
@@ -97,9 +132,10 @@ int main()
 	if (fork_check() == 0)
 	{
 		// open_redirect_stream("/dev//null", 2);
-		open_redirect_stream("err_file", 2);
+		// open_redirect_stream("err_file", 2);
 		exec_tree(root);
 	}
-	wait(0);
-	exit(0);
+	free_tree(root);
+	return (0);
+	// exit(0);
 }
