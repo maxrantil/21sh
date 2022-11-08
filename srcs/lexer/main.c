@@ -52,14 +52,14 @@ void	open_redirect_stream(char *filename, int old_fd)
 {
 	int	fd;
 
+	if (old_fd != 1 && fd != 2)
+	{
+		write(2, "Syntax error with redirection\n", 30);
+		exit(2);
+	}
 	if (check_filename_fd(filename))
 	{
 		fd = ft_atoi(filename);
-		if (fd != 1 && fd != 2)
-		{
-			write(2, "Syntax error with redirection\n", 30);
-			exit(2);
-		}
 	}
 	// else if ()	// check whether > or >>
 	// {
@@ -71,11 +71,7 @@ void	open_redirect_stream(char *filename, int old_fd)
 		fd = open_check(filename, REDIROVER);
 		// 2 > filename
 	}
-	printf("fd = %d\n", fd);
-	if (check_valid_fd(fd))
-		dup2_check2(fd, old_fd);
-	else
-		write(2, "Bad file descriptor\n", 20);
+	dup2_check2(fd, old_fd);
 }
 
 /* 	check if fd is open (return true)
