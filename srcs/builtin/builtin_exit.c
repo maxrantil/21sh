@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_setenv.c                                   :+:      :+:    :+:   */
+/*   builtins_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/09 15:46:32 by mrantil          ###   ########.fr       */
+/*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/09 15:35:30 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int	msh_setenv(t_msh *msh)
+int	msh_exit(t_msh *msh)
 {
-	size_t	i;
-
-	i = 1;
-	while (msh->args[i])
-	{
-		if (strchr(msh->args[i], '=') \
-		&& (ft_isalpha(msh->args[i][0]) || msh->args[i][0] == '_'))
-			loop_setenv(msh, msh->args[i]);
-		else
-			print_error(msh->args[i], 6);
-		i++;
-	}
+	if (*msh->args)
+		return (0);
 	return (1);
 }

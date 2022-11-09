@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/07 16:29:09 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/09 15:47:14 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,10 +73,12 @@ H_FILES 	= 	msh
 
 FILES 		= 	$(BUILTIN)builtin_cd \
 				$(BUILTIN)builtin_echo \
+				$(BUILTIN)builtin_env \
+				$(BUILTIN)builtin_exit \
 				$(BUILTIN)builtin_unsetenv \
 				$(BUILTIN)builtin_setenv \
-				$(BUILTIN)builtins_env_exit \
 				$(BUILTIN)extract_key \
+				$(BUILTIN)loop_setenv \
 				$(BUILTIN)set_env_var \
 				$(BUILTIN)unset_env_var \
 				$(BUILTIN)update_pwd \

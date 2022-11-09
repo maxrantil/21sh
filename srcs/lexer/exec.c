@@ -132,6 +132,7 @@ void	exec_tree(t_node *node)
 	{
 		if (!node->arg[0])
 			exit(1);
+		//expansion
 		execvp(node->arg[0], node->arg);
 		write(1, "ERROR EXEC\n", 11);
 	}
