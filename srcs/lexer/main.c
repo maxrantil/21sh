@@ -1,6 +1,10 @@
 #include "temp.h"
 int	check_valid_fd(int fd);
 void	free_tree(t_node *node);
+void	write_to_temp(t_node *root);
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
+int	count_output_lines(int fd);
 
 // one backslag take it away, two backslshes keep one. last newline is always changes to \0
 char *lexer(char *str)
@@ -97,12 +101,36 @@ void	test(void)
 	exit(1);
 }
 
+void	free_args(char **args)
+{
+	int	i;
+
+	i = -1;
+	while (args[++i])
+		free(args[i]);
+}
+
+/*	recursively free tree nodes, start from root */
+void	free_tree(t_node *node)
+{
+	if (node->left)
+		free_tree(node->left);
+	if (node->right)
+		free_tree(node->right);
+	node->left = NULL;
+	node->right = NULL;
+	node->type = 0;
+	free_args(node->arg);
+	free(node);
+	node = NULL;
+}
+
 int main()
 {
 	// test();
 	// char	*str = "ps aux | grep mrantil | grep -v grep | grep 8 | wc -l";
 	// char	*str = "cat < 2.txt | grep t > 1.txt";
-	char *str = "cat file | grep ssd ";
+	char *str = "cat exec.c | grep int";
 	// char *str = "echo hello | grep h > text.txt ; cat text.txt ; echo again";
 	// char *str = "echo try > to_me again";
 	// char *str = "echo hello ; echo world";
@@ -125,12 +153,18 @@ int main()
 
 	// print_tree(root);
 	// write(1, "\n", 1);
+
 	if (fork_check() == 0)
 	{
-		// open_redirect_stream("/dev//null", 2);
-		// open_redirect_stream("err_file", 2);
+		write_to_temp(root);
+		exit(0);
+	// 	// open_redirect_stream("/dev//null", 2);
+	// 	// open_redirect_stream("err_file", 2);
 		exec_tree(root);
 	}
+	int fd = open_read_check(".temp_gnl");
+	int lines = count_output_lines(fd);
+	printf("lines = %d\n", lines);
 	free_tree(root);
 	return (0);
 	// exit(0);
