@@ -43,15 +43,15 @@ static char	**set_tempenv(t_msh *msh, size_t len)
 		temp_env[i - 1] = NULL;
 	}
 	return (temp_env);
-}	
+}
 
 static int	env_heart(t_msh *msh, size_t arglen)
 {
 	size_t	i;
 
 	i = 0;
-	while (msh->args[++i] && ft_strchr(msh->args[i], '='))	//make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_'
-		loop_setenv(msh, msh->args[i]);
+	while (msh->args[++i] && ft_strchr(msh->args[i], '='))	//make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_' or key=NULL
+		loop_setenv(msh, msh->args[i], 1);
 	msh->temp_env = set_tempenv(msh, i - 1);
 	if (i < arglen)
 	{

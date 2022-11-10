@@ -99,4 +99,5 @@ void	init(t_msh *msh)
 	i = -1;
 	msh->env = get_env(msh->env, j, i);
 	msh->temp_env = NULL;
+	vec_new(&msh->v_temp, 0, MAX_NAME);
 }

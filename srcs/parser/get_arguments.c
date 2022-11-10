@@ -12,9 +12,9 @@
 
 #include "msh.h"
 
-static int	find_argument_len(char *str)
+static ssize_t	find_argument_len(char *str)
 {
-	int	i;
+	ssize_t	i;
 
 	i = 0;
 	while (str[i] && !(ft_isspace(&str[i])))

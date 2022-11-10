@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+# include "vec.h"
 # include <dirent.h>
 # include <sys/stat.h>
 # if __linux__
@@ -29,6 +30,7 @@
 
 typedef struct s_msh
 {
+	t_vec	v_temp;
 	char	**args;
 	char	**env;
 	char	**temp_env;
@@ -61,7 +63,7 @@ size_t	count_arguments(char *str);
 char	**get_arguments(char *str, size_t argc);
 void	strip_quotes(char **args);
 void	expansions(t_msh *msh);
-size_t	find_matching_quote(char *str, char quote);
+ssize_t	find_matching_quote(char *str, char quote);
 
 /* Main */
 void	init(t_msh *msh);
@@ -75,7 +77,7 @@ char	**set_env_var(char **env, char *key, char *value);
 char	**unset_env_var(char **env, char *key);
 void	get_dollar(t_msh *msh, char *dollar, size_t i);
 void	tilde(t_msh *msh, size_t i);
-void	loop_setenv(t_msh *msh, char *arg);
+void	loop_setenv(t_msh *msh, char *arg, int flag_temp);
 
 /* Utils */
 int		msh_launch(t_msh *msh);

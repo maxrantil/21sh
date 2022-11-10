@@ -12,9 +12,9 @@
 
 #include "msh.h"
 
-size_t	find_matching_quote(char *str, char quote)
+ssize_t	find_matching_quote(char *str, char quote)
 {
-	size_t	i;
+	ssize_t	i;
 
 	i = 1;
 	while (str[i] && str[i] != quote)
