@@ -25,9 +25,10 @@ int main()
 	// char *str = "echo hello | grep h > text.txt ; cat text.txt ; echo again";
 	// char *str = "echo try > to_me again";
 	// char *str = "echo hello ; echo world";
+	// char *str = "mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi";
 	// char *str = "echo tjotjo > file ; cat < file > file2";
 	// char *str = "cat < file | grep t > file2"; 
-	char *str = "echo $PWD ; cd .. ; echo $PWD";
+	// char *str = "echo $PWD ; cd .. ; echo $PWD";
 	// char *str = "echo hello\n"; //echo hello\0 
 	// char *str = "echo \'hello\n"; //echo 'hello\0 
 	// char *str = "echo \\hello\n"; //echo \hello\0

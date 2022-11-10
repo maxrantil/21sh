@@ -35,16 +35,35 @@ static void	free_table(t_builtin **ht)
 	}
 }
 
+static void temp_handler(t_msh *msh)
+{
+	size_t	i;
+
+	msh_unsetenv(msh);
+	ft_arrfree((void ***)&msh->temp_env, \
+	ft_arrlen((void **)msh->temp_env));
+	if (msh->v_temp.len)
+	{
+		i = 0;
+		while (i < msh->v_temp.len)
+		{
+			char *tmp = (char *)vec_get(&msh->v_temp, i);
+			char *key = extract_key(tmp);
+			msh->env = set_env_var(msh->env, key, \
+			ft_strchr(tmp, '=') + 1);
+			i++;
+			ft_strdel(&key);
+		}
+		msh->v_temp.len = 0;
+	}
+}
+
 void	free_mem(t_msh *msh, t_builtin **ht, ssize_t code)
 {
 	if (code == 1)
 	{
 		if (msh->temp_env)
-		{
-			msh_unsetenv(msh);
-			ft_arrfree((void ***)&msh->temp_env, \
-			ft_arrlen((void **)msh->temp_env));
-		}
+			temp_handler(msh);
 		if (msh->args)
 			ft_arrfree((void ***)&msh->args, ft_arrlen((void **)msh->args));
 		if (msh->paths)
@@ -56,5 +75,6 @@ void	free_mem(t_msh *msh, t_builtin **ht, ssize_t code)
 		if (msh->env)
 			ft_arrfree((void ***)&msh->env, ft_arrlen((void **)msh->env));
 		free_table(ht);
+		vec_free(&msh->v_temp);
 	}
 }

@@ -15,26 +15,26 @@
 void	strip_quotes(char **args)
 {
 	ssize_t	i;
-	size_t	quote1;
-	size_t	quote2;
-	size_t	len;
+	ssize_t	quote1;
+	ssize_t	quote2;
+	ssize_t	len;
 
 	while (*args)
 	{
 		i = -1;
-		len = ft_strlen(*args);
+		len = (ssize_t)ft_strlen(*args);
 		while ((*args)[++i])
 		{
 			if ((*args)[i] == '\'' || (*args)[i] == '"')
 			{
-				quote1 = (size_t)i;
+				quote1 = i;
 				quote2 = find_matching_quote(&(*args)[i], (*args)[i]);
 				quote2 += quote1;
 				ft_memmove((void *)&(*args)[i], \
-				(void *)&(*args)[i + 1], len - quote1);
+				(void *)&(*args)[i + 1], (size_t)len - (size_t)quote1);
 				ft_memmove((void *)&(*args)[quote2 - 1], \
-				(void *)&(*args)[quote2], len - quote2);
-				i = (ssize_t)quote2 - 2;
+				(void *)&(*args)[quote2], (size_t)len - (size_t)quote2);
+				i = quote2 - 2;
 			}
 		}
 		args++;
