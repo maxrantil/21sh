@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:46:37 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:18:45 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "get_next_line.h"
 # include "vec.h"
 # include "keyboard.h"
+# include "parser.h"
 # include <dirent.h>
 # include <sys/stat.h>
 

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 14:09:09 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 15:01:52 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int ft_getent(void)
 	return (status);
 }
 
-static int	exec_args(t_msh *msh, t_builtin **ht)
+/* static int	exec_args(t_msh *msh, t_builtin **ht)
 {
 	t_builtin	*tmp;
 	size_t		index;
@@ -91,13 +91,14 @@ static int	exec_args(t_msh *msh, t_builtin **ht)
 		tmp = tmp->next;
 	}
 	return (msh_launch(msh));
-}
+} */
 
 int	main(void)
 {
 	struct termios	orig_termios;
 	t_msh			msh;
 	t_term			t;
+	t_node			*root;
 	t_builtin		*ht[HASH_SIZE];
 	int				status;
 
@@ -107,21 +108,30 @@ int	main(void)
 	init(&msh);
 	initialize_ht(ht);
 	status = 1;
-	while (status)
+	while (21)
 	{
 
 		msh.cl = ft_input_cycle(&t);
 		if (!msh.cl)
 			break ;
-		status = parser(&msh);
+		/* status = parser(&msh);
 		if (status > 0)
 		{
 			status = exec_args(&msh, ht);
 			msh.env = update_env_underscore(&msh);
-		}
-		free_mem(&msh, ht, 1);
+		} */
+		root = parse_line(&msh.cl); //make a loop and check for str != NULL and if you encouunter redir in string break out and set it to new root here
+		write(1, "\n-------------------------- TREE PRINT --------------------------\n", 66);
+		print_tree(root);
+		write(1, "\n-------------------------- TREE PRINT --------------------------\n", 66);
+		write(1, "\nRETURN:\n", 9);
+		if (fork_check() == 0)
+			exec_tree(root);
+		wait(0);
+		write(1, "\n", 1);
+		/* free_mem(&msh, ht, 1); */
 	}
-	free_mem(&msh, ht, 2);
+	/* free_mem(&msh, ht, 2); */
 	ft_history_write_to_file(&t);
 	ft_disable_raw_mode(orig_termios);
 	exit(0);

@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/14 13:45:33 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/14 14:43:11 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CFLAGS		+=	-Wpedantic -Wconversion
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-#LEAK_CHECK	+=	-fsanitize=address
+# LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -64,6 +64,7 @@ BUILTIN		= 	builtin/
 MAIN		= 	main/
 UTILS		= 	utils/
 KEYBOARD	= 	keyboard/
+LEXER		= 	lexer/
 OBJECTS 	= 	objs
 INCLUDES	= 	includes
 LIBRARIES 	= 	libft
@@ -135,6 +136,11 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(KEYBOARD)ft_shift_nl_addr \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
+				$(LEXER)exec \
+				$(LEXER)lexer \
+				$(LEXER)parse_funcs \
+				$(LEXER)peek_gettok \
+				$(LEXER)printtree \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
@@ -159,6 +165,7 @@ $(OBJECTS):
 	@mkdir -p $(OBJECTS)/$(MAIN)
 	@mkdir -p $(OBJECTS)/$(UTILS)
 	@mkdir -p $(OBJECTS)/$(KEYBOARD)
+	@mkdir -p $(OBJECTS)/$(LEXER)
 	@printf "$(GREEN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(GREEN)$(OBJECTS) directory was created.$(RESET)\n\n\n"
 

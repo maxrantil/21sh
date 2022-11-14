@@ -1,4 +1,4 @@
-#include "temp.h"
+#include "parser.h"
 
 int	peek(char **ptr_to_str, char *toks)
 {
@@ -9,6 +9,13 @@ int	peek(char **ptr_to_str, char *toks)
 		p++;
 	*ptr_to_str = p;
 	return (*p && ft_strchr(toks, *p));
+}
+
+static char	*skip_whitespaces(char *ptr)
+{
+	while (ft_isspace((const char *)ptr) && *ptr)
+		ptr++;
+	return (ptr);
 }
 
 static int token_loop(char **p, int ret) //retname p to s

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:39:35 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:51:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,13 @@ int	ft_get_linenbr(void)
 	}
 	len = 0;
 	i = -1;
-	while (buf[i++] != ';')
+	/* while(buf[++i])
+	{
+		write(1, "b"
+		ft_printf("%c", buf[i]);
+	} */
+	i = -1;
+	while (buf[i++] && buf[i] != ';')
 	{
 		if (ft_isdigit(buf[i]))
 			buf[len++] = buf[i];

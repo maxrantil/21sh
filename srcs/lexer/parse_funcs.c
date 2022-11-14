@@ -1,4 +1,4 @@
-#include "temp.h"
+#include "parser.h"
 
 t_node	*create_node(int type, t_node *sub_cmd, t_node *left, t_node *right)
 {
@@ -33,7 +33,7 @@ t_node	*parse_redirection(t_node *node, char **str)
 				node = create_node(REDIROVER, NULL, node, NULL);
 			else
 				node = create_node(REDIRIN, NULL, node, NULL);
-			node->arg[0] = ft_strsub(token, 0, end_q - token);
+			node->arg[0] = ft_strsub(token, 0, (size_t)(end_q - token));
 		}
 	}
 	return (node);
@@ -54,7 +54,7 @@ t_node *parse_exec(char **ptr_to_str)
 	{
 		type = get_token(ptr_to_str, &token, &end_q);
 		if (type == 'a')
-			node->arg[argc++] = ft_strsub(token, 0, end_q - token);
+			node->arg[argc++] = ft_strsub(token, 0, (size_t)(end_q - token));
 		else if (type == 0)
 			break ;
 		else

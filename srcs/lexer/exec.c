@@ -1,4 +1,4 @@
-#include "temp.h"
+#include "parser.h"
 
 int	dup2_check(int file_fd)
 {
@@ -17,7 +17,7 @@ void	input_file_read(char *filename)
 {
 	char	buf[4096];
 	int		file_fd;
-	int		ret;
+	ssize_t	ret;
 
 	file_fd = open_read_check(filename);
 	ret = read(file_fd, buf, 4095);
@@ -121,7 +121,6 @@ void	redirection_file(t_node *node)
 	}
 	wait(0);
 	close(file_fd);
-	exit(7);
 }
 
 void	exec_tree(t_node *node)
