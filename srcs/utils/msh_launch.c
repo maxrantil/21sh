@@ -6,11 +6,11 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 10:52:53 by mrantil           #+#    #+#             */
-/*   Updated: 2022/10/24 15:29:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "ft_21sh.h"
 
 static size_t	count_colon(char *str)
 {

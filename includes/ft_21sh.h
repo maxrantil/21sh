@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh.h                                              :+:      :+:    :+:   */
+/*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/02 11:06:04 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:46:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_H
-# define MSH_H
+#ifndef FT_21SH_H
+# define FT_21SH_H
 
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include "vec.h"
+# include "keyboard.h"
 # include <dirent.h>
 # include <sys/stat.h>
+
 # if __linux__
 # include <sys/types.h>
 # include <sys/wait.h>

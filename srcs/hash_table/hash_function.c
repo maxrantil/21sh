@@ -6,11 +6,11 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:19:48 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/02 10:20:18 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "ft_21sh.h"
 
 /**
 **	It takes a string and returns an integer

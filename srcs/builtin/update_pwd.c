@@ -6,11 +6,11 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:28:00 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/02 10:56:17 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "ft_21sh.h"
 
 static char	**change_pwd(char **env, char *cwd, char *key)
 {

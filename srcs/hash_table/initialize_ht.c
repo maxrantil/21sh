@@ -6,11 +6,11 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:35:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/02 10:22:33 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "ft_21sh.h"
 
 /*
  * It takes a hash table and a pointer to a builtin, and inserts the builtin into the hash table
@@ -18,7 +18,7 @@
 static char	*ht_insert(t_builtin **ht, t_builtin *p)
 {
 	size_t index;
-	
+
 	if (!p)
 		return (NULL);
 	index = hash_function(p->program);
@@ -46,7 +46,7 @@ static void	init_ht(t_builtin **ht)
 	while (i < HASH_SIZE)
 		ht[i++] = NULL;
 }
-	
+
 void initialize_ht(t_builtin **ht)
 {
 	init_ht(ht);

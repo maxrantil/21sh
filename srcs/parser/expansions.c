@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_changevar.c                                 :+:      :+:    :+:   */
+/*   expansions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/02 10:30:09 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "ft_21sh.h"
 
 static size_t	find_variables(t_msh *msh, size_t i, size_t j)
 {

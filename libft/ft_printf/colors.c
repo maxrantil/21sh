@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/07/13 09:28:55 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	write_colors(t_ftprintf *data)
 			data->fmt += 5;
 			return ;
 		}
-		while (data->fmt[1] != COLORS[i])
+		while (data->fmt[1] != PF_COLORS[i])
 			i++;
 		colorcode[5] = i + '0';
 		(void)(write(1, colorcode, 7) + 1);

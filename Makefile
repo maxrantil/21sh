@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/09 15:47:14 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/14 13:45:33 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ TERMCAP		=	-ltermcap
 CFLAGS		+= 	-Werror
 endif
 ifeq ($(UNAME), Linux)
-LIBS		=	-lncurses
+TERMCAP		=	-lncurses
 endif
 
 SOURCES 	= 	srcs
@@ -63,13 +63,14 @@ HASH_TABLE	=	hash_table/
 BUILTIN		= 	builtin/
 MAIN		= 	main/
 UTILS		= 	utils/
+KEYBOARD	= 	keyboard/
 OBJECTS 	= 	objs
 INCLUDES	= 	includes
 LIBRARIES 	= 	libft
 
 SOURCE_COUNT = $(words $(FILES))
 
-H_FILES 	= 	msh
+H_FILES 	= 	ft_21sh
 
 FILES 		= 	$(BUILTIN)builtin_cd \
 				$(BUILTIN)builtin_echo \
@@ -99,6 +100,41 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(UTILS)get_env_value \
 				$(UTILS)print_error \
 				$(UTILS)update_env_underscore \
+				$(KEYBOARD)ft_add_nl_last_row \
+				$(KEYBOARD)ft_add_nl_mid_row \
+				$(KEYBOARD)ft_arrow_input \
+				$(KEYBOARD)ft_backspace \
+				$(KEYBOARD)ft_create_prompt_line \
+				$(KEYBOARD)ft_delete \
+				$(KEYBOARD)ft_deletion_shift \
+				$(KEYBOARD)ft_display_row \
+				$(KEYBOARD)ft_esc_parse \
+				$(KEYBOARD)ft_get_input \
+				$(KEYBOARD)ft_get_prompt_len \
+				$(KEYBOARD)ft_history_get \
+				$(KEYBOARD)ft_history_trigger \
+				$(KEYBOARD)ft_history_write_to_file \
+				$(KEYBOARD)ft_history \
+				$(KEYBOARD)ft_init_signals \
+				$(KEYBOARD)ft_init \
+				$(KEYBOARD)ft_input_cycle \
+				$(KEYBOARD)ft_insertion \
+				$(KEYBOARD)ft_is_prompt_line \
+				$(KEYBOARD)ft_line_mv \
+				$(KEYBOARD)ft_opt_mv \
+				$(KEYBOARD)ft_print_trail \
+				$(KEYBOARD)ft_getline_nbr \
+				$(KEYBOARD)ft_putc \
+				$(KEYBOARD)ft_quote_decrement \
+				$(KEYBOARD)ft_quote_handling \
+				$(KEYBOARD)ft_remove_nl_addr \
+				$(KEYBOARD)ft_reset_nl_addr \
+				$(KEYBOARD)ft_row_lowest_line \
+				$(KEYBOARD)ft_run_capability \
+				$(KEYBOARD)ft_setcursor \
+				$(KEYBOARD)ft_shift_nl_addr \
+				$(KEYBOARD)ft_window_size \
+				$(KEYBOARD)ft_word_mv \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
@@ -108,10 +144,10 @@ HEADERS		=	-I$(INCLUDES)/ -Ilibft/includes/
 
 ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✓$(RESET)" || (printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n" | printf "$(C_VISIBLE)" && exit 1)
 
-all: libft $(NAME) 	
+all: libft $(NAME)
 
 $(NAME): libft/libft.a $(OBJECTS) $(O_PATHS)
-	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(LEAK_CHECK)
+	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(TERMCAP) $(LEAK_CHECK)
 	@printf "Compiled $(BOLD)$(GREEN)$(NAME)$(RESET)!\n\n"
 	@printf "$(C_VISIBLE)"
 
@@ -122,6 +158,7 @@ $(OBJECTS):
 	@mkdir -p $(OBJECTS)/$(HASH_TABLE)
 	@mkdir -p $(OBJECTS)/$(MAIN)
 	@mkdir -p $(OBJECTS)/$(UTILS)
+	@mkdir -p $(OBJECTS)/$(KEYBOARD)
 	@printf "$(GREEN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(GREEN)$(OBJECTS) directory was created.$(RESET)\n\n\n"
 
