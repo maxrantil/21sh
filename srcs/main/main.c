@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:49:29 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:09:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,17 @@ int	main(void)
 	status = 1;
 	while (status)
 	{
-		// ft_printf("{yel}${gre}>{nor} ");
+
 		msh.cl = ft_input_cycle(&t);
-		if (msh.cl)
+		if (!msh.cl)
+			break ;
+		status = parser(&msh);
+		if (status > 0)
 		{
-			status = parser(&msh);
-			if (status > 0)
-			{
-				status = exec_args(&msh, ht);
-				msh.env = update_env_underscore(&msh);
-			}
-			free_mem(&msh, ht, 1);
+			status = exec_args(&msh, ht);
+			msh.env = update_env_underscore(&msh);
 		}
+		free_mem(&msh, ht, 1);
 	}
 	free_mem(&msh, ht, 2);
 	ft_history_write_to_file(&t);

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:54:12 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:09:18 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ static void ft_restart_cycle(t_term *t)
 
 char	*ft_input_cycle(t_term *t)
 {
-	ft_add_nl_last_row(t, 0);
+	/* ft_printf("{yel}${gre}>{nor} "); */
 	write(1, PROMPT, (size_t)t->prompt_len);
+	ft_add_nl_last_row(t, 0);
 	while (t->ch != -1)
 	{
 		t->ch = ft_get_input();
@@ -63,16 +64,23 @@ char	*ft_input_cycle(t_term *t)
 			if (t->index < t->bytes)
 				ft_delete(t);
 			if (!t->bytes)
-				break ;
+				return (NULL);
 		}
 		else if (t->ch == CTRL_C)
+		{
+			write(1, "\n", 1);
 			ft_restart_cycle(t);
+			write(1, PROMPT, (size_t)t->prompt_len);
+		}
 		else if (t->ch == BACKSPACE && t->index)
 			ft_backspace(t);
 		if (t->ch == ESCAPE)
 			ft_esc_parse(t);
 		if (t->ch == -1)
+		{
 			ft_putstr_fd("error, ft_get_input()\n", STDERR_FILENO);
+			return (NULL);
+		}
 	}
 	return (NULL);
 }
