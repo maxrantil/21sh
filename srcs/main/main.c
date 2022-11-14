@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 16:27:19 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:52:03 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	main(void)
 	init(&msh);
 	initialize_ht(ht);
 	ft_printf("{yel}${gre}>{nor} ");
-	while (21)
+	int status = 1;
+	while (status)
 	{
 		t = *ft_input_cycle(&t);
 		if (!t.bytes)
@@ -99,7 +100,7 @@ int	main(void)
 		line = ft_strdup(t.inp);
 		root = parse_line(&line);
 		print_tree(root);
-		exec_tree(root, ht);
+		status = exec_tree(root, &msh, ht);
 		free_tree(root);
 		write(1, "\n", 1);
 		ft_printf("{yel}${gre}>{nor} ");

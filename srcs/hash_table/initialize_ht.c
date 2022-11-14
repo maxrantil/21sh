@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:35:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:31:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*ht_insert(t_builtin **ht, t_builtin *p)
 	return (ht[index]->program);
 }
 
-static void	init_ht_struct(t_builtin **ht, char *str, int (*f)(t_msh *msh))
+static void	init_ht_struct(t_builtin **ht, char *str, int (*f)(t_node *node, t_msh *msh))
 {
 	t_builtin	*new;
 

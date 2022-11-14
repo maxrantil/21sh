@@ -6,15 +6,18 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:46:16 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-int	msh_exit(t_msh *msh)
+int	msh_exit(t_node *node, t_msh *msh)
 {
-	if (*msh->args)
-		return (0);
+	if (!msh->cl)
+	{
+		if (*node->arg)
+			return (0);
+	}
 	return (1);
 }

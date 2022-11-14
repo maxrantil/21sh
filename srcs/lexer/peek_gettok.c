@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "ft_21sh.h"
 
 int	peek(char **ptr_to_str, char *toks)
 {

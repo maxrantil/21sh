@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:58:59 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static int	loop_for_unsetenv(t_msh *msh, char *arg)
 	return (1);
 }
 
-int	msh_unsetenv(t_msh *msh)
+int	msh_unsetenv(t_node *node, t_msh *msh)
 {
 	size_t	i;
 
 	i = 1;
-	while (msh->args[i])
-		loop_for_unsetenv(msh, msh->args[i++]);
+	while (node->arg[i])
+		loop_for_unsetenv(msh, node->arg[i++]);
 	i = 0;
 	if (msh->temp_env)
 		while (msh->temp_env[i])

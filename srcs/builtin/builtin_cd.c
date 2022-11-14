@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:16:41 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:01:03 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,24 @@ static void	exec_home(char **env)
 	ft_strdel(&home);
 }
 
-int	msh_cd(t_msh *msh)
+int	msh_cd(t_node *node, t_msh *msh)
 {
 	char	cwd[MAX_PATHLEN];
 
 	getcwd(cwd, sizeof(cwd));
-	if (ft_arrlen((void **)msh->args) <= 2)
+	if (ft_arrlen((void **)node->arg) <= 2)
 	{
-		if (!msh->args[1])
+		if (!node->arg[1])
 			exec_home(msh->env);
-		else if (!ft_strcmp(msh->args[1], "-"))
+		else if (!ft_strcmp(node->arg[1], "-"))
 			exec_dash(msh->env);
-		else if (!ft_strcmp(msh->args[1], "~"))
-			exec_tilde(msh->args[1]);
+		else if (!ft_strcmp(node->arg[1], "~"))
+			exec_tilde(node->arg[1]);
 		else
 		{
-			if (chdir(msh->args[1]) != 0)
+			if (chdir(node->arg[1]) != 0)
 			{
-				print_error(msh->args[1], 5);
+				print_error(node->arg[1], 5);
 				return (1);
 			}
 		}

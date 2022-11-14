@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "ft_21sh.h"
 
 int	dup2_check(int file_fd)
 {
@@ -74,7 +74,7 @@ void	exec_pipe_node(t_node *node)
 		dup(p[1]);
 		close(p[0]);
 		close(p[1]);
-		exec_tree(node->left, NULL);
+		exec_tree(node->left, NULL, NULL);
 	}
 	if (fork_check() == 0)
 	{
@@ -82,7 +82,7 @@ void	exec_pipe_node(t_node *node)
 		dup(p[0]);
 		close(p[0]);
 		close(p[1]);
-		exec_tree(node->right, NULL);
+		exec_tree(node->right, NULL, NULL);
 	}
 	close(p[0]);
 	close(p[1]);
@@ -117,13 +117,13 @@ void	redirection_file(t_node *node)
 	dup2_fd = dup2_check(file_fd);
 	if (fork_check() == 0)
 	{
-		exec_tree(node->left, NULL);
+		exec_tree(node->left, NULL, NULL);
 	}
 	wait(0);
 	close(file_fd);
 }
 
-static int	exec_args(t_node *node, t_builtin **ht)
+static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 {
 	t_builtin	*tmp;
 	size_t		index;
@@ -135,13 +135,13 @@ static int	exec_args(t_node *node, t_builtin **ht)
 	while (tmp)
 	{
 		if (ft_strcmp(node->arg[0], tmp->program) == 0)
-			return (tmp->function(node));
+			return (tmp->function(node, msh));
 		tmp = tmp->next;
 	}
-	return (msh_launch(node));
+	return (msh_launch(node, msh));
 }
 
-void	exec_tree(t_node *node, t_builtin **ht)
+int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 {
 	if (!node)
 		exit(1);
@@ -150,9 +150,10 @@ void	exec_tree(t_node *node, t_builtin **ht)
 		if (!node->arg[0])
 			exit(1);
 		//expansion
-		exec_args(node, ht);
-		/* execvp(node->arg[0], node->arg);
-		write(1, "ERROR EXEC\n", 11); */
+		// (void)ht;
+		// (void)msh;
+		// execv(node->arg[0], node->arg);
+		return (exec_args(node, msh, ht));
 	}
 	else if (node->type == PIPE)
 		exec_pipe_node(node);
@@ -163,14 +164,14 @@ void	exec_tree(t_node *node, t_builtin **ht)
 	else if (node->type == AMP)
 	{
 		if (fork_check() == 0)
-			exec_tree(node->left, NULL);
+			exec_tree(node->left, NULL, NULL);
 	}
 	else if (node->type == SEMI)
 	{
 		if (fork_check() == 0)
-			exec_tree(node->left, NULL);
+			exec_tree(node->left, NULL, NULL);
 		wait(0);
-		exec_tree(node->right, NULL);
+		exec_tree(node->right, NULL, NULL);
 	}
-	exit(0);
+	return (1);
 }

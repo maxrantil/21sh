@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 10:52:53 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:25:06 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char	*verify_arg(t_msh *msh)
 	return (msh->args[0]);
 }
 
-int	msh_launch(t_msh *msh)
+int	msh_launch(t_node *node, t_msh *msh)
 {
 	pid_t	pid;
 	int		status;
@@ -89,17 +89,17 @@ int	msh_launch(t_msh *msh)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (msh->args[0][0] == '.')
-			execve(msh->args[0], msh->args, msh->env);
+		if (node->arg[0][0] == '.')
+			execve(node->arg[0], node->arg, msh->env);
 		if (check_paths(msh))
 		{
-			ptr = msh->args[0];
-			msh->args[0] = verify_arg(msh);
-			if (ft_strcmp(msh->args[0], ptr))
-				execve(msh->args[0], msh->args, msh->env);
+			ptr = node->arg[0];
+			node->arg[0] = verify_arg(msh);
+			if (ft_strcmp(node->arg[0], ptr))
+				execve(node->arg[0], node->arg, msh->env);
 		}
-		print_error(msh->args[0], 4);
-		free_mem(msh, NULL, 1);
+		print_error(node->arg[0], 4);
+		/* free_mem(msh, NULL, 1); */
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)

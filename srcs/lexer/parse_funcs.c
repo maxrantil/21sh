@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "ft_21sh.h"
 
 t_node	*create_node(int type, t_node *sub_cmd, t_node *left, t_node *right)
 {

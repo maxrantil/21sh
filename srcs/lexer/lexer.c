@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "ft_21sh.h"
 
 // one backslag take it away, two backslshes keep one. last newline is always changes to \0
 char *lexer(char *str)
