@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 16:21:07 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 16:21:08 by mrantil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
 # include "ft_21sh.h"
+# include "keyboard.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -26,14 +39,15 @@ typedef struct s_node
 	struct s_node	*right;
 }					t_node;
 
+void	free_tree(t_node *node);
 int		peek(char **ptr_to_str, char *toks);
 int		get_token(char **ptr_to_str, char **token, char **end_q);
 t_node	*create_node(int type, t_node *sub_cmd, t_node *left, t_node *right);
 t_node	*parse_redirection(t_node *node, char **str);
-t_node *parse_exec(char **ptr_to_str);
+t_node	*parse_exec(char **ptr_to_str);
 t_node	*parse_pipe(char **ptr_to_str);
 t_node	*parse_line(char **ptr_to_str);
-void	exec_tree(t_node *node);
+void	exec_tree(t_node *node, t_builtin **ht);
 void	exec_pipe_node(t_node *node);
 int		fork_check(void);
 void	exec_pipe_node(t_node *node);

@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/14 14:43:11 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/14 15:18:11 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,6 +130,7 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(KEYBOARD)ft_quote_handling \
 				$(KEYBOARD)ft_remove_nl_addr \
 				$(KEYBOARD)ft_reset_nl_addr \
+				$(KEYBOARD)ft_restart_cycle \
 				$(KEYBOARD)ft_row_lowest_line \
 				$(KEYBOARD)ft_run_capability \
 				$(KEYBOARD)ft_setcursor \
@@ -141,6 +142,7 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(LEXER)parse_funcs \
 				$(LEXER)peek_gettok \
 				$(LEXER)printtree \
+				$(LEXER)free_tree \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))

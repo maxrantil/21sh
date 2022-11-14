@@ -74,7 +74,7 @@ void	exec_pipe_node(t_node *node)
 		dup(p[1]);
 		close(p[0]);
 		close(p[1]);
-		exec_tree(node->left);
+		exec_tree(node->left, NULL);
 	}
 	if (fork_check() == 0)
 	{
@@ -82,7 +82,7 @@ void	exec_pipe_node(t_node *node)
 		dup(p[0]);
 		close(p[0]);
 		close(p[1]);
-		exec_tree(node->right);
+		exec_tree(node->right, NULL);
 	}
 	close(p[0]);
 	close(p[1]);
@@ -117,13 +117,31 @@ void	redirection_file(t_node *node)
 	dup2_fd = dup2_check(file_fd);
 	if (fork_check() == 0)
 	{
-		exec_tree(node->left);
+		exec_tree(node->left, NULL);
 	}
 	wait(0);
 	close(file_fd);
 }
 
-void	exec_tree(t_node *node)
+static int	exec_args(t_node *node, t_builtin **ht)
+{
+	t_builtin	*tmp;
+	size_t		index;
+
+	if (!node->arg[0])
+		return (1);
+	index = hash_function(node->arg[0]);
+	tmp = ht[index];
+	while (tmp)
+	{
+		if (ft_strcmp(node->arg[0], tmp->program) == 0)
+			return (tmp->function(node));
+		tmp = tmp->next;
+	}
+	return (msh_launch(node));
+}
+
+void	exec_tree(t_node *node, t_builtin **ht)
 {
 	if (!node)
 		exit(1);
@@ -132,8 +150,9 @@ void	exec_tree(t_node *node)
 		if (!node->arg[0])
 			exit(1);
 		//expansion
-		execvp(node->arg[0], node->arg);
-		write(1, "ERROR EXEC\n", 11);
+		exec_args(node, ht);
+		/* execvp(node->arg[0], node->arg);
+		write(1, "ERROR EXEC\n", 11); */
 	}
 	else if (node->type == PIPE)
 		exec_pipe_node(node);
@@ -144,14 +163,14 @@ void	exec_tree(t_node *node)
 	else if (node->type == AMP)
 	{
 		if (fork_check() == 0)
-			exec_tree(node->left);
+			exec_tree(node->left, NULL);
 	}
 	else if (node->type == SEMI)
 	{
 		if (fork_check() == 0)
-			exec_tree(node->left);
+			exec_tree(node->left, NULL);
 		wait(0);
-		exec_tree(node->right);
+		exec_tree(node->right, NULL);
 	}
 	exit(0);
 }

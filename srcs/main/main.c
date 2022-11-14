@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 15:01:52 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:27:19 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,6 @@ static int ft_getent(void)
 	return (status);
 }
 
-/* static int	exec_args(t_msh *msh, t_builtin **ht)
-{
-	t_builtin	*tmp;
-	size_t		index;
-
-	if (!msh->args[0])
-		return (1);
-	index = hash_function(msh->args[0]);
-	tmp = ht[index];
-	while (tmp)
-	{
-		if (ft_strcmp(msh->args[0], tmp->program) == 0)
-			return (tmp->function(msh));
-		tmp = tmp->next;
-	}
-	return (msh_launch(msh));
-} */
-
 int	main(void)
 {
 	struct termios	orig_termios;
@@ -100,35 +82,28 @@ int	main(void)
 	t_term			t;
 	t_node			*root;
 	t_builtin		*ht[HASH_SIZE];
-	int				status;
+	char			*line;
 
 	ft_getent();
 	orig_termios = ft_init_raw();
 	ft_init(&t);
 	init(&msh);
 	initialize_ht(ht);
-	status = 1;
+	ft_printf("{yel}${gre}>{nor} ");
 	while (21)
 	{
-
-		msh.cl = ft_input_cycle(&t);
-		if (!msh.cl)
+		t = *ft_input_cycle(&t);
+		if (!t.bytes)
 			break ;
-		/* status = parser(&msh);
-		if (status > 0)
-		{
-			status = exec_args(&msh, ht);
-			msh.env = update_env_underscore(&msh);
-		} */
-		root = parse_line(&msh.cl); //make a loop and check for str != NULL and if you encouunter redir in string break out and set it to new root here
-		write(1, "\n-------------------------- TREE PRINT --------------------------\n", 66);
+		/* msh.env = update_env_underscore(&msh); */
+		line = ft_strdup(t.inp);
+		root = parse_line(&line);
 		print_tree(root);
-		write(1, "\n-------------------------- TREE PRINT --------------------------\n", 66);
-		write(1, "\nRETURN:\n", 9);
-		if (fork_check() == 0)
-			exec_tree(root);
-		wait(0);
+		exec_tree(root, ht);
+		free_tree(root);
 		write(1, "\n", 1);
+		ft_printf("{yel}${gre}>{nor} ");
+		ft_restart_cycle(&t);
 		/* free_mem(&msh, ht, 1); */
 	}
 	/* free_mem(&msh, ht, 2); */
