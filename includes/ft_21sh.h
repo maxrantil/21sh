@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 14:32:20 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:40:56 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 # include "keyboard.h"
 # include <dirent.h>
 # include <sys/stat.h>
-
-/* from lexer */
-# include <stdio.h>
-# include <stdlib.h>
 
 # if __linux__
 # include <sys/types.h>
@@ -106,7 +102,7 @@ char	*lexer(char *str);
 
 /* Main */
 void	free_mem(t_msh *msh, t_builtin **ht,ssize_t code);
-void	init(t_msh *msh);
+void	init(t_msh *msh, t_term *t, t_builtin **ht);
 void	tree_free(t_node *node);
 
 /* Parser */

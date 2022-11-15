@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:35:11 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,20 @@ static char	**get_env(char **env, size_t j, ssize_t i)
 	return (env);
 }
 
-void	init(t_msh *msh)
+void	init(t_msh *msh, t_term *t, t_builtin **ht)
 {
 	ssize_t		i;
 	size_t		j;
 
+	ft_init_term(t);
+	hash_init(ht);
 	ft_putstr("\033[2J");
 	ft_putstr("\033[H");
 	ft_printf("\n{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**\n");
 	ft_printf("            {blu}- {yel}2{gre}1{red}s{blu}h {yel}-\n");
 	ft_printf("   {yel}made {blu}by {gre}rvourenl {red}and {yel}mrantil{blu}.");
 	ft_printf("\n{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{nor}\n\n");
+	ft_printf("{yel}${gre}>{nor} ");
 	msh->args = NULL;
 	msh->paths = NULL;
 	msh->cl = NULL;

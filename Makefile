@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/15 14:33:12 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/15 16:23:36 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CFLAGS		+=	-Wpedantic -Wconversion
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-# LEAK_CHECK	+=	-fsanitize=address
+LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -73,7 +73,8 @@ LIBRARIES 	= 	libft
 
 SOURCE_COUNT = $(words $(FILES))
 
-H_FILES 	= 	ft_21sh
+H_FILES 	= 	ft_21sh \
+				keyboard
 
 FILES 		=	$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
@@ -114,10 +115,11 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(KEYBOARD)ft_history_write_to_file \
 				$(KEYBOARD)ft_history \
 				$(KEYBOARD)ft_init_signals \
-				$(KEYBOARD)ft_init \
+				$(KEYBOARD)ft_init_term \
 				$(KEYBOARD)ft_input_cycle \
 				$(KEYBOARD)ft_insertion \
 				$(KEYBOARD)ft_is_prompt_line \
+				$(KEYBOARD)ft_len_lowest_line \
 				$(KEYBOARD)ft_line_mv \
 				$(KEYBOARD)ft_opt_mv \
 				$(KEYBOARD)ft_print_trail \

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 07:56:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:19:48 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,6 @@ static void	ft_shift_insert(t_term *t)
 		t->inp[bytes_cpy] = t->inp[bytes_cpy] ^ t->inp[bytes_cpy + 1];
 		bytes_cpy--;
 	}
-}
-
-ssize_t	ft_len_lowest_line(t_term *t, ssize_t row)
-{
-	ssize_t	len;
-
-	if (t->nl_addr[row + 1])
-		len = t->nl_addr[row + 1] - t->nl_addr[row];
-	else
-		len = &t->inp[t->bytes] - t->nl_addr[row];
-	if (ft_is_prompt_line(t, row))
-	{
-		if (!row)
-			len += t->prompt_len;
-		else
-			len += t->m_prompt_len;
-	}
-	return (len);
 }
 
 static void	ft_scroll_down(void)

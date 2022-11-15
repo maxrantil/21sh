@@ -6,14 +6,17 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/14 15:22:50 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:53:27 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYBOARD_H
 # define KEYBOARD_H
 
-# include "ft_21sh.h"
+# include "libft.h"
+# include "get_next_line.h"
+# include "ft_printf.h"
+# include "vec.h"
 # include <termcap.h> //control if all these are needed
 # include <term.h> //same same
 # include <curses.h> //same same
@@ -68,7 +71,7 @@ typedef struct s_term
 	ssize_t	total_row_cpy;
 }			t_term;
 
-void	ft_init(t_term *t);
+void	ft_init_term(t_term *t);
 t_term	*ft_input_cycle(t_term *t);
 void	ft_restart_cycle(t_term *t);
 int		ft_putc(int c);

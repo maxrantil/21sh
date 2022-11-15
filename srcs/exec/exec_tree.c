@@ -20,13 +20,16 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 
 int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 {
+	int ret;
+
+	ret  = 1;
 	if (!node)
 		exit(1);
 	if (node->type == EXEC)
 	{
 		if (!node->arg[0])
 			exit(1);
-		return (exec_args(node, msh, ht));
+		ret = exec_args(node, msh, ht);
 	}
 	else if (node->type == PIPE)
 		exec_pipe_node(node);
@@ -46,5 +49,6 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 		wait(0);
 		exec_tree(node->right, NULL, NULL);
 	}
-	return (1);
+	// exit(0);
+	return (ret);
 }

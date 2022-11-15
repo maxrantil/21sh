@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_restart_cycle.c                                 :+:      :+:    :+:   */
+/*   ft_len_lowest_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 15:17:07 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/15 16:17:14 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/15 16:17:24 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-void	ft_restart_cycle(t_term *t)
+ssize_t	ft_len_lowest_line(t_term *t, ssize_t row)
 {
-	ft_putchar('\n');
-	ft_printf("{yel}${gre}>{nor} ");
-	// ft_memset(t->inp, '\0', BUFFSIZE);
-	ft_strclr(t->inp);
-	t->quote = 0;
-	t->q_qty = 0;
-	t->bytes = 0;
-	t->index = 0;
-	t->c_col = t->prompt_len;
-	t->start_row = ft_get_linenbr();
-	t->total_row = 0;
-	t->c_row = t->total_row;
-	ft_add_nl_last_row(t, 0);
-	ft_setcursor(t->c_col, t->c_row + t->start_row);
+	ssize_t	len;
+
+	if (t->nl_addr[row + 1])
+		len = t->nl_addr[row + 1] - t->nl_addr[row];
+	else
+		len = &t->inp[t->bytes] - t->nl_addr[row];
+	if (ft_is_prompt_line(t, row))
+	{
+		if (!row)
+			len += t->prompt_len;
+		else
+			len += t->m_prompt_len;
+	}
+	return (len);
 }
