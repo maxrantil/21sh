@@ -67,7 +67,7 @@ static int	env_heart(t_node *node, t_msh *msh, size_t arglen)
 		y = -1;
 		while (temp_args[++y])
 			node->arg[y] = ft_strdup(temp_args[y]);
-		msh_launch(node, msh);
+		exec_21sh(node, msh);
 		return (1);
 	}
 	return (0);

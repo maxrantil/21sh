@@ -61,7 +61,7 @@ int	msh_cd(t_node *node, t_msh *msh)
 		{
 			if (chdir(node->arg[1]) != 0)
 			{
-				print_error(node->arg[1], 5);
+				error_print(node->arg[1], 5);
 				return (1);
 			}
 		}

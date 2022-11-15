@@ -23,7 +23,7 @@ int	msh_setenv(t_node *node, t_msh *msh)
 		&& (ft_isalpha(node->arg[i][0]) || node->arg[i][0] == '_'))
 			setenv_loop(msh, node->arg[i], 0);
 		else
-			print_error(node->arg[i], 6);
+			error_print(node->arg[i], 6);
 		i++;
 	}
 	return (1);

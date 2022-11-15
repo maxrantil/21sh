@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_launch.c                                       :+:      :+:    :+:   */
+/*   exec_21sh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 10:52:53 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:25:06 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:24:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char	*verify_arg(t_node *node, t_msh *msh)
 	return (node->arg[0]);
 }
 
-int	msh_launch(t_node *node, t_msh *msh)
+int	exec_21sh(t_node *node, t_msh *msh)
 {
 	pid_t	pid;
 	int		status;
@@ -98,7 +98,7 @@ int	msh_launch(t_node *node, t_msh *msh)
 			if (ft_strcmp(node->arg[0], ptr))
 				execve(node->arg[0], node->arg, msh->env);
 		}
-		print_error(node->arg[0], 4);
+		error_print(node->arg[0], 4);
 		free_mem(msh, NULL, 1);
 		exit(EXIT_FAILURE);
 	}

@@ -15,7 +15,7 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 			return (tmp->function(node, msh));
 		tmp = tmp->next;
 	}
-	return (msh_launch(node, msh));
+	return (exec_21sh(node, msh));
 }
 
 int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)

@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/15 14:15:52 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/15 14:33:12 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,14 +58,15 @@ TERMCAP		=	-lncurses
 endif
 
 SOURCES 	= 	srcs
-PARSER		= 	parser/
-HASH_TABLE	=	hash_table/
 BUILTIN		= 	builtin/
-MAIN		= 	main/
-UTILS		= 	utils/
+ERROR		= 	error/
+EXEC		= 	exec/
+HASH_TABLE	=	hash_table/
 KEYBOARD	= 	keyboard/
 LEXER		= 	lexer/
-EXEC		= 	exec/
+MAIN		= 	main/
+PARSER		= 	parser/
+UTILS		= 	utils/
 OBJECTS 	= 	objs
 INCLUDES	= 	includes
 LIBRARIES 	= 	libft
@@ -87,7 +88,9 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(BUILTIN)setenv_loop \
 				$(BUILTIN)setenv_var \
 				$(BUILTIN)unsetenv_var \
+				$(ERROR)error_print \
 				$(EXEC)dup2_check \
+				$(EXEC)exec_21sh \
 				$(EXEC)exec_pipe_node \
 				$(EXEC)exec_tree \
 				$(EXEC)fork_check \
@@ -144,8 +147,6 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(PARSER)peek \
 				$(PARSER)token_get \
 				$(UTILS)tree_print \
-				$(UTILS)msh_launch \
-				$(UTILS)print_error \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
@@ -164,14 +165,15 @@ $(NAME): libft/libft.a $(OBJECTS) $(O_PATHS)
 
 $(OBJECTS):
 	@make -C $(LIBRARIES)
-	@mkdir -p $(OBJECTS)/$(PARSER)
 	@mkdir -p $(OBJECTS)/$(BUILTIN)
+	@mkdir -p $(OBJECTS)/$(ERROR)
+	@mkdir -p $(OBJECTS)/$(EXEC)
 	@mkdir -p $(OBJECTS)/$(HASH_TABLE)
-	@mkdir -p $(OBJECTS)/$(MAIN)
-	@mkdir -p $(OBJECTS)/$(UTILS)
 	@mkdir -p $(OBJECTS)/$(KEYBOARD)
 	@mkdir -p $(OBJECTS)/$(LEXER)
-	@mkdir -p $(OBJECTS)/$(EXEC)
+	@mkdir -p $(OBJECTS)/$(MAIN)
+	@mkdir -p $(OBJECTS)/$(PARSER)
+	@mkdir -p $(OBJECTS)/$(UTILS)
 	@printf "$(GREEN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(GREEN)$(OBJECTS) directory was created.$(RESET)\n\n\n"
 

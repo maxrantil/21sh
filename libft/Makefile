@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 20:09:11 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/15 14:18:24 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/15 14:27:41 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,7 @@ $(DIR_OBJS)%.o: $(DIR_VEC)%.c
 	@make pbar_libft
 
 clean:
-	@if [ -d $(DIR_OBJS) ]; then rm -rf $(DIR_OBJS); printf "libft: 	        $(RED)$(DIR_OBJS) was deleted$(RESET)\n"; fi
+	@if [ -d $(DIR_OBJS) ]; then rm -rf $(DIR_OBJS); printf "libft:		$(RED)$(DIR_OBJS) was deleted$(RESET)\n"; fi
 
 fclean:
 	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):	$(RED)library was deleted$(RESET)\n"; fi
