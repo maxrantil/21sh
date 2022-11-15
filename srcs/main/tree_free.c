@@ -6,7 +6,7 @@ static void	free_args(char **args)
 
 	i = -1;
 	while (args[++i])
-		free(args[i]);
+		ft_strdel(&args[i]);
 }
 
 /*	recursively free tree nodes, start from root */

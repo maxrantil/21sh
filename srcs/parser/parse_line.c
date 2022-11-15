@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:03:10 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 14:05:26 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 18:11:24 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_node	*parse_line(char **ptr_to_str)
 	}
 	if (peek(ptr_to_str, ""))
 	{
-		printf("syntax error near unexpected token `newline'\n");
+		ft_printf("syntax error near unexpected token `newline'\n");
 		exit(1);
 	}
 	return (node);

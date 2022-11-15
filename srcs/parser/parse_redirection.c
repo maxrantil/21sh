@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 14:05:26 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 18:19:33 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_node	*parse_redirection(t_node *node, char **str)
 		type = token_get(str, &token, 0);
 		if (token_get(str, &token, &end_q) != 'a')
 		{
-			printf("syntax error near unexpected token `redirect'\n");
-			exit(1);
+			ft_printf("\nsyntax error near unexpected token `%c'\n", *token);//make better error handling for `echo hello >`
+			return (NULL);
 		}
 		//if here: token == file name
 		if (type == '>' || type == '<')

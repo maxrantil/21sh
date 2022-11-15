@@ -7,23 +7,23 @@ static char	*skip_whitespaces(char *ptr)
 	return (ptr);
 }
 
-static int token_loop(char **p, int ret) //retname p to s
+static int token_loop(char **scan, int ret) //retname scan to s
 {
-	while (**p)
+	while (**scan)
 	{
-		if (strchr("<|&;", **p) && (*p)++)
+		if (strchr("<|&;", **scan) && (*scan)++)
 			break ;
-		else if (**p == '>' && (*p)++)
+		else if (**scan == '>' && (*scan)++)
 		{
-			if (**p == '>' && (*p)++)
+			if (**scan == '>' && (*scan)++)
 				ret = '#';
 			break ;
 		}
 		else
 		{
 			ret = 'a';
-			while (**p && !ft_isspace(*p) && !strchr("<|&;>", **p))
-				(*p)++;
+			while (**scan && !ft_isspace(*scan) && !strchr("<|&;>", **scan))
+				(*scan)++;
 			break ;
 		}
 	}
@@ -32,20 +32,20 @@ static int token_loop(char **p, int ret) //retname p to s
 
 int	token_get(char **ptr_to_str, char **token, char **end_q)
 {
-	char	*p; //rename to scan
+	char	*scan; //rename to scan
 	int		ret;
 
-	p = *ptr_to_str; //rename to inputptr
-	p = skip_whitespaces(p);
-	if (*p == '\0')
+	scan = *ptr_to_str; //rename to inputptr
+	scan = skip_whitespaces(scan);
+	if (*scan == '\0')
 		return (0);
 	if (token)
-		*token = p;
-	ret = *p;
-	ret = token_loop(&p, ret);
+		*token = scan;
+	ret = *scan;
+	ret = token_loop(&scan, ret);
 	if (end_q)
-		*end_q = p;
-	p = skip_whitespaces(p);
-	*ptr_to_str = p;
+		*end_q = scan;
+	scan = skip_whitespaces(scan);
+	*ptr_to_str = scan;
 	return (ret);
 }

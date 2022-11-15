@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 16:04:42 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 18:08:04 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,16 @@ int	main(void)
 		// line = lexer(line);
 		// ft_printf("Number of arguments: %d\n", count_arguments(t.inp));
 
-		ft_printf("line: %s\n", line);
+		// ft_printf("line: %s\n", line);
 		if (line)
 		{
 			root = parse_line(&line);
-			tree_print(root);
-			status = exec_tree(root, &msh, ht);
-			tree_free(root);
+			if (root)
+			{
+				tree_print(root);
+				status = exec_tree(root, &msh, ht);
+				tree_free(root);
+			}
 		}
 		ft_restart_cycle(&t);
 		free_mem(&msh, ht, 1);
