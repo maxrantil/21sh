@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 15:50:10 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:13:14 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_end_cycle(t_term *t)
 {
-	ft_putchar('\n');
+	
 	vec_push(&t->v_history, t->inp);
 	if (!ft_strcmp(t->inp, "history"))
 		ft_history(t);
@@ -25,8 +25,6 @@ static void	ft_end_cycle(t_term *t)
 
 t_term	*ft_input_cycle(t_term *t)
 {
-	/* ft_printf("{yel}${gre}>{nor} "); */
-	/* write(1, PROMPT, (size_t)t->prompt_len); */
 	ft_add_nl_last_row(t, 0);
 	while (t->ch != -1)
 	{
@@ -50,9 +48,10 @@ t_term	*ft_input_cycle(t_term *t)
 		}
 		else if (t->ch == CTRL_C)
 		{
-			write(1, "\n", 1);
+			return (t);
+			/* write(1, "\n", 1);
 			ft_restart_cycle(t);
-			write(1, PROMPT, (size_t)t->prompt_len);
+			write(1, PROMPT, (size_t)t->prompt_len); */
 		}
 		else if (t->ch == BACKSPACE && t->index)
 			ft_backspace(t);

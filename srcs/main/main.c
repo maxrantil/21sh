@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 14:36:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:04:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,26 @@ int	main(void)
 
 	ft_getent();
 	orig_termios = ft_init_raw();
-	ft_init(&t);
-	init(&msh);
-	hash_init(ht);
-	ft_printf("{yel}${gre}>{nor} ");
+	init(&msh, &t, ht);
 	int status = 1;
 	while (status)
 	{
-		t = *ft_input_cycle(&t);
-		/* if (!t.bytes)
-			break ; */
+		if (!ft_input_cycle(&t))
+			break ;
 		/* msh.env = env_underscore(&msh); */
-		line = ft_strdup(t.inp);
+		if (t.bytes)
+			line = ft_strdup(t.inp);
 		// line = lexer(line);
 		// ft_printf("Number of arguments: %d\n", count_arguments(t.inp));
-		root = parse_line(&line);
-		tree_print(root);
-		status = exec_tree(root, &msh, ht);
-		tree_free(root);
-		write(1, "\n", 1);
-		ft_printf("{yel}${gre}>{nor} ");
+
+		ft_printf("line: %s\n", line);
+		if (line)
+		{
+			root = parse_line(&line);
+			tree_print(root);
+			status = exec_tree(root, &msh, ht);
+			tree_free(root);
+		}
 		ft_restart_cycle(&t);
 		free_mem(&msh, ht, 1);
 	}
