@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   ft_setcursor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/10/20 13:43:20 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "keyboard.h"
 
-void	write_colors(t_ftprintf *data)
+/**
+ * It sets the cursor to the given column and row
+ * 
+ * @param col The column number to move the cursor to.
+ * @param row the row number of the cursor
+ */
+void	ft_setcursor(ssize_t col, ssize_t row)
 {
-	int		i;
-	char	colorcode[8];
+	char	*cm;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
-	{
-		if (data->fmt[1] == 'n')
-		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
-		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
-	}
+	cm = tgetstr("cm", NULL);
+	tputs(tgoto(cm, (int)col, (int)row), 1, ft_putc);
 }

@@ -21,7 +21,7 @@ typedef struct s_tree
 t_tree *create_tree(char *op, int value)
 {
 	t_tree *node = (t_tree *)malloc(sizeof(t_tree));
-	if (node != NULL) 
+	if (node != NULL)
 	{
 		node->op = op;
 		node->value = value;
@@ -47,7 +47,7 @@ void	printtree_rec(t_tree *root, int lvl)
 	printtree_rec(root->left, lvl);
 }
 
-void print_tree(t_tree *root) {
+void tree_print(t_tree *root) {
 	printtree_rec(root, 0);
 }
 
@@ -77,7 +77,7 @@ int main()
 	root_tree->right = mult_tree;
 	mult_tree->left = two_tree;
 	mult_tree->right = three_tree;
-	print_tree(root_tree);
+	tree_print(root_tree);
 	printf("\n\nResult: %d\n", count_tree(root_tree));
 
 	free(root_tree);

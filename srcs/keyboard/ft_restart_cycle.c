@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   ft_restart_cycle.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 15:55:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "keyboard.h"
 
-void	write_colors(t_ftprintf *data)
+void ft_restart_cycle(t_term *t)
 {
-	int		i;
-	char	colorcode[8];
-
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
-	{
-		if (data->fmt[1] == 'n')
-		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
-		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
-	}
+	ft_memset(t->inp, '\0', BUFFSIZE);
+	t->quote = 0;
+	t->q_qty = 0;
+	t->bytes = 0;
+	t->index = 0;
+	t->c_col = t->prompt_len;
+	t->start_row = ft_get_linenbr();
+	t->total_row = 0;
+	t->c_row = t->total_row;
+	ft_add_nl_last_row(t, 0);
+	ft_setcursor(t->c_col, t->c_row + t->start_row);
 }

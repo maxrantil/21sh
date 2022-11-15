@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   find_matching_quote.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_21sh.h"
 
-void	write_colors(t_ftprintf *data)
+ssize_t	find_matching_quote(char *str, char quote)
 {
-	int		i;
-	char	colorcode[8];
+	ssize_t	i;
 
 	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
-	{
-		if (data->fmt[1] == 'n')
-		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
-		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
-	}
+	while (str[i] && str[i] != quote)
+		i++;
+	return (i);
 }

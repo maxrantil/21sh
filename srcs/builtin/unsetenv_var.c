@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   unsetenv_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/09/20 17:37:30 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_21sh.h"
 
-void	write_colors(t_ftprintf *data)
+char	**unsetenv_var(char **env, char *key)
 {
-	int		i;
-	char	colorcode[8];
+	char	**new_env;
+	size_t	count;
+	size_t	i;
+	size_t	j;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
+	count = ft_arrlen((void **)env);
+	new_env = (char **)ft_memalloc(sizeof(char *) * count);
+	i = 0;
+	j = 0;
+	while (i < count)
 	{
-		if (data->fmt[1] == 'n')
-		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
-		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
+		if (ft_strncmp(env[i], key, ft_strlen(key)))
+			new_env[j++] = ft_strdup(env[i]);
+		i++;
 	}
+	new_env[j] = NULL;
+	ft_arrfree((void ***)&env, count);
+	return (new_env);
 }

@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   env_getvalue.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/09/20 17:37:30 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_21sh.h"
 
-void	write_colors(t_ftprintf *data)
+char	*env_getvalue(char **env, char *var)
 {
-	int		i;
-	char	colorcode[8];
+	char	*ret;
+	size_t	i;
+	size_t	len;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
+	len = ft_strlen(var);
+	i = 0;
+	while (env[i])
 	{
-		if (data->fmt[1] == 'n')
+		if (!ft_strncmp(env[i], var, len))
 		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
+			ret = ft_strnew(ft_strlen(env[i]) - len);
+			ft_strcpy(ret, ft_strchr(env[i], '=') + 1);
+			return (ret);
 		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
+		i++;
 	}
+	return (NULL);
 }

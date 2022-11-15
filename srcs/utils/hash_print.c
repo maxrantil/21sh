@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   hash_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/15 14:10:49 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/15 14:10:58 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_21sh.h"
 
-void	write_colors(t_ftprintf *data)
+void	hash_print(t_builtin **ht)
 {
-	int		i;
-	char	colorcode[8];
+	t_builtin	*tmp;
+	int i;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
+	i = 0;
+	while (i < HASH_SIZE)
 	{
-		if (data->fmt[1] == 'n')
+		if (!ht[i])
+			ft_printf("ht[%d] = NULL", i);
+		else
 		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
+			ft_printf("ht[%d] = ", i);
+			tmp = ht[i];
+			while (tmp)
+			{
+				ft_printf(" - %s", tmp->program);
+				tmp = tmp->next;
+			}
 		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
+		ft_printf("\n");
+		i++;
 	}
 }

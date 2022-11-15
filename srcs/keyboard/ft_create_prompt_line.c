@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   ft_create_prompt_line.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/08 12:40:40 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "keyboard.h"
 
-void	write_colors(t_ftprintf *data)
+void	ft_create_prompt_line(t_term *t, ssize_t loc)
 {
-	int		i;
-	char	colorcode[8];
+	int	row;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
-	{
-		if (data->fmt[1] == 'n')
-		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
-		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
-	}
+	row = ft_get_linenbr();
+	t->c_row++;
+	t->total_row++;
+	if (t->start_row + t->total_row >= t->ws_row)
+		ft_run_capability("sf");
+	else
+		row++;
+	t->c_col = t->m_prompt_len;
+	ft_setcursor(0, row);
+	write(1, MINI_PROMPT, (size_t)t->m_prompt_len);
+	ft_add_nl_last_row(t, loc);
 }

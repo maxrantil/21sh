@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:06:19 by mrantil           #+#    #+#             */
-/*   Updated: 2022/05/04 18:54:50 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 11:38:29 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define SPECIF "cspdiouxXfb%"
 # define FLAGS "+-#0 "
-# define COLORS "nrgybmcw"
+# define PF_COLORS "nrgybmcw"
 # define LENGTH "hhllL"
 # define NOR  "\x1B[0;0m"
 # define RED  "\x1B[0;31m"

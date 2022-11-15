@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   ft_shift_nl_addr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/07 14:17:02 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "keyboard.h"
 
-void	write_colors(t_ftprintf *data)
+void	ft_shift_nl_addr(t_term *t, int num)
 {
-	int		i;
-	char	colorcode[8];
+	ssize_t	row;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
-	{
-		if (data->fmt[1] == 'n')
-		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
-		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
-	}
+	row = t->c_row + 1;
+	while (t->nl_addr[row] && !ft_is_prompt_line(t, row))
+		row++;
+	while (t->nl_addr[row++])
+		t->nl_addr[row - 1] = &t->nl_addr[row - 1][num];
 }

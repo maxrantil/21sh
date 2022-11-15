@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   ft_add_nl_mid_row.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/10/27 13:42:45 by mbarutel          #+#    #+#             */
+/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "keyboard.h"
 
-void	write_colors(t_ftprintf *data)
+void	ft_add_nl_mid_row(t_term *t, ssize_t row, ssize_t pos)
 {
-	int		i;
-	char	colorcode[8];
+	ssize_t	i;
+	ssize_t	j;
+	char	**new_arr;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
+	j = 0;
+	i = -1;
+	new_arr = (char **)ft_memalloc(sizeof(char *) * (size_t)(t->total_row + 2));
+	while (++i <= t->total_row)
 	{
-		if (data->fmt[1] == 'n')
-		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
-		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
+		if (i == row)
+			new_arr[i] = &t->inp[pos];
+		else
+			new_arr[i] = t->nl_addr[j++];
 	}
+	new_arr[i] = NULL;
+	ft_memdel((void **)&t->nl_addr);
+	t->nl_addr = new_arr;
 }

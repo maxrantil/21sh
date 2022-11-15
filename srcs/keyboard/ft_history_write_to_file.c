@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   ft_history_write_to_file.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/10/21 14:59:21 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "keyboard.h"
 
-void	write_colors(t_ftprintf *data)
+void	ft_history_write_to_file(t_term *t)
 {
-	int		i;
-	char	colorcode[8];
+	char	*file;
+	size_t	cpy;
+	int		fd;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
+	file = ft_strjoin(getenv("HOME"), "/.42sh_history");
+	fd = open(file, O_WRONLY);
+	if (fd)
 	{
-		if (data->fmt[1] == 'n')
+		cpy = 0;
+		if (t->v_history.len > 1024)
+			cpy = t->v_history.len % 1024;
+		while (cpy < t->v_history.len)
 		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
+			ft_putendl_fd((char *)vec_get(&t->v_history, cpy), fd);
+			cpy++;
 		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
+		close(fd);
 	}
+	ft_strdel(&file);
 }

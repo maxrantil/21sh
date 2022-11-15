@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   parse_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:15:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 11:38:18 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/15 14:02:09 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/15 14:05:26 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_21sh.h"
 
-void	write_colors(t_ftprintf *data)
+t_node	*parse_pipe(char **ptr_to_str)
 {
-	int		i;
-	char	colorcode[8];
+	char 	*token;
+	char 	*end_q;
+	int		type;
+	t_node	*node;
 
-	i = 1;
-	ft_strcpy(colorcode, "\x1B[0;3im");
-	if (data->fmt[4] == '}')
+	node = parse_exec(ptr_to_str);
+	if (peek(ptr_to_str, "|"))
 	{
-		if (data->fmt[1] == 'n')
+		type = token_get(ptr_to_str, &token, &end_q);
+		if (!peek(ptr_to_str, "|&;"))
+			node = node_create(PIPE, NULL, node, parse_pipe(ptr_to_str));
+		else
 		{
-			(void)(write(1, "\x1B[0;0m", 6) + 1);
-			data->fmt += 5;
-			return ;
+			printf("syntax error near unexpected token `%c'\n", type);
+			exit(1);
 		}
-		while (data->fmt[1] != PF_COLORS[i])
-			i++;
-		colorcode[5] = i + '0';
-		(void)(write(1, colorcode, 7) + 1);
-		data->fmt += 5;
 	}
+	return (node);
 }

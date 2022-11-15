@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/09 15:47:14 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/15 14:33:12 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CFLAGS		+=	-Wpedantic -Wconversion
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-#LEAK_CHECK	+=	-fsanitize=address
+# LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -54,14 +54,18 @@ TERMCAP		=	-ltermcap
 CFLAGS		+= 	-Werror
 endif
 ifeq ($(UNAME), Linux)
-LIBS		=	-lncurses
+TERMCAP		=	-lncurses
 endif
 
 SOURCES 	= 	srcs
-PARSER		= 	parser/
-HASH_TABLE	=	hash_table/
 BUILTIN		= 	builtin/
+ERROR		= 	error/
+EXEC		= 	exec/
+HASH_TABLE	=	hash_table/
+KEYBOARD	= 	keyboard/
+LEXER		= 	lexer/
 MAIN		= 	main/
+PARSER		= 	parser/
 UTILS		= 	utils/
 OBJECTS 	= 	objs
 INCLUDES	= 	includes
@@ -69,36 +73,80 @@ LIBRARIES 	= 	libft
 
 SOURCE_COUNT = $(words $(FILES))
 
-H_FILES 	= 	msh
+H_FILES 	= 	ft_21sh
 
-FILES 		= 	$(BUILTIN)builtin_cd \
-				$(BUILTIN)builtin_echo \
-				$(BUILTIN)builtin_env \
-				$(BUILTIN)builtin_exit \
-				$(BUILTIN)builtin_unsetenv \
-				$(BUILTIN)builtin_setenv \
-				$(BUILTIN)extract_key \
-				$(BUILTIN)loop_setenv \
-				$(BUILTIN)set_env_var \
-				$(BUILTIN)unset_env_var \
-				$(BUILTIN)update_pwd \
+FILES 		=	$(BUILTIN)env_getvalue \
+				$(BUILTIN)env_underscore \
+				$(BUILTIN)msh_cd \
+				$(BUILTIN)msh_echo \
+				$(BUILTIN)msh_env \
+				$(BUILTIN)msh_exit \
+				$(BUILTIN)msh_unsetenv \
+				$(BUILTIN)msh_setenv \
+				$(BUILTIN)pwd_update \
+				$(BUILTIN)env_key_extract \
+				$(BUILTIN)setenv_loop \
+				$(BUILTIN)setenv_var \
+				$(BUILTIN)unsetenv_var \
+				$(ERROR)error_print \
+				$(EXEC)dup2_check \
+				$(EXEC)exec_21sh \
+				$(EXEC)exec_pipe_node \
+				$(EXEC)exec_tree \
+				$(EXEC)fork_check \
+				$(EXEC)input_file_read \
+				$(EXEC)redirection_file \
+				$(HASH_TABLE)hash_function \
+				$(HASH_TABLE)hash_init \
+				$(KEYBOARD)ft_add_nl_last_row \
+				$(KEYBOARD)ft_add_nl_mid_row \
+				$(KEYBOARD)ft_arrow_input \
+				$(KEYBOARD)ft_backspace \
+				$(KEYBOARD)ft_create_prompt_line \
+				$(KEYBOARD)ft_delete \
+				$(KEYBOARD)ft_deletion_shift \
+				$(KEYBOARD)ft_display_row \
+				$(KEYBOARD)ft_esc_parse \
+				$(KEYBOARD)ft_get_input \
+				$(KEYBOARD)ft_get_prompt_len \
+				$(KEYBOARD)ft_history_get \
+				$(KEYBOARD)ft_history_trigger \
+				$(KEYBOARD)ft_history_write_to_file \
+				$(KEYBOARD)ft_history \
+				$(KEYBOARD)ft_init_signals \
+				$(KEYBOARD)ft_init \
+				$(KEYBOARD)ft_input_cycle \
+				$(KEYBOARD)ft_insertion \
+				$(KEYBOARD)ft_is_prompt_line \
+				$(KEYBOARD)ft_line_mv \
+				$(KEYBOARD)ft_opt_mv \
+				$(KEYBOARD)ft_print_trail \
+				$(KEYBOARD)ft_getline_nbr \
+				$(KEYBOARD)ft_putc \
+				$(KEYBOARD)ft_quote_decrement \
+				$(KEYBOARD)ft_quote_handling \
+				$(KEYBOARD)ft_remove_nl_addr \
+				$(KEYBOARD)ft_reset_nl_addr \
+				$(KEYBOARD)ft_restart_cycle \
+				$(KEYBOARD)ft_row_lowest_line \
+				$(KEYBOARD)ft_run_capability \
+				$(KEYBOARD)ft_setcursor \
+				$(KEYBOARD)ft_shift_nl_addr \
+				$(KEYBOARD)ft_window_size \
+				$(KEYBOARD)ft_word_mv \
+				$(LEXER)lexer \
 				$(MAIN)free_mem \
 				$(MAIN)init \
 				$(MAIN)main \
-				$(HASH_TABLE)hash_function \
-				$(HASH_TABLE)initialize_ht \
-				$(PARSER)get_dollar \
-				$(PARSER)tilde \
-				$(PARSER)expansions \
-				$(PARSER)count_arguments \
-				$(PARSER)get_arguments \
-				$(PARSER)strip_quotes \
-				$(PARSER)parser \
-				$(PARSER)find_matching_quote \
-				$(UTILS)msh_launch \
-				$(UTILS)get_env_value \
-				$(UTILS)print_error \
-				$(UTILS)update_env_underscore \
+				$(MAIN)tree_free \
+				$(PARSER)node_create \
+				$(PARSER)parse_exec \
+				$(PARSER)parse_line \
+				$(PARSER)parse_pipe \
+				$(PARSER)parse_redirection \
+				$(PARSER)peek \
+				$(PARSER)token_get \
+				$(UTILS)tree_print \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
@@ -108,19 +156,23 @@ HEADERS		=	-I$(INCLUDES)/ -Ilibft/includes/
 
 ASSERT_OBJECT = && printf "$(ERASE_LINE)" && printf "$@ $(GREEN)$(BOLD) ✓$(RESET)" || (printf "$@ $(RED)$(BOLD)✘$(RESET)\n\n" | printf "$(C_VISIBLE)" && exit 1)
 
-all: libft $(NAME) 	
+all: libft $(NAME)
 
 $(NAME): libft/libft.a $(OBJECTS) $(O_PATHS)
-	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(LEAK_CHECK)
+	@$(CC) $(CFLAGS) $(HEADERS) -o $@ $(O_PATHS) $(LIBS) $(TERMCAP) $(LEAK_CHECK)
 	@printf "Compiled $(BOLD)$(GREEN)$(NAME)$(RESET)!\n\n"
 	@printf "$(C_VISIBLE)"
 
 $(OBJECTS):
 	@make -C $(LIBRARIES)
-	@mkdir -p $(OBJECTS)/$(PARSER)
 	@mkdir -p $(OBJECTS)/$(BUILTIN)
+	@mkdir -p $(OBJECTS)/$(ERROR)
+	@mkdir -p $(OBJECTS)/$(EXEC)
 	@mkdir -p $(OBJECTS)/$(HASH_TABLE)
+	@mkdir -p $(OBJECTS)/$(KEYBOARD)
+	@mkdir -p $(OBJECTS)/$(LEXER)
 	@mkdir -p $(OBJECTS)/$(MAIN)
+	@mkdir -p $(OBJECTS)/$(PARSER)
 	@mkdir -p $(OBJECTS)/$(UTILS)
 	@printf "$(GREEN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(GREEN)$(OBJECTS) directory was created.$(RESET)\n\n\n"

@@ -24,7 +24,7 @@ typedef struct s_tree
 t_tree *create_treenode(int	type, int value, t_tree *left, t_tree *right)
 {
 	t_tree *node = (t_tree *)malloc(sizeof(t_tree));
-	if (node != NULL) 
+	if (node != NULL)
 	{
 		node->type = type;
 		node->value = value;
@@ -44,7 +44,7 @@ int	eval_tree(t_tree *tree)
 		return (eval_tree(tree->left) / eval_tree(tree->right));
 	else if (tree->type == ADD)
 		return (eval_tree(tree->left) + eval_tree(tree->right));
-	else if (tree->type == SUB)	
+	else if (tree->type == SUB)
 		return (eval_tree(tree->left) - eval_tree(tree->right));
 	return (0);
 }
@@ -88,7 +88,7 @@ t_tree *parse_t(int token, char **next_token);
 t_tree *parse_f(int token, char **next_token);
 
 // GRAMMAR E -> T{+|- T}
-t_tree *parse_e(int token, char **next_token) 
+t_tree *parse_e(int token, char **next_token)
 {
 	t_tree *a;
 	t_tree *b;
@@ -112,13 +112,13 @@ t_tree *parse_e(int token, char **next_token)
 			a = create_treenode(SUB, 0, a, b);
 		}
 		else
-			return (a);	
+			return (a);
 	}
 	return (a);
 }
 
-// GRAMMAR T -> F{*|/ F}	
-t_tree *parse_t(int token, char **next_token) 
+// GRAMMAR T -> F{*|/ F}
+t_tree *parse_t(int token, char **next_token)
 {
 	t_tree *a;
 	t_tree *b;
@@ -142,7 +142,7 @@ t_tree *parse_t(int token, char **next_token)
 			a = create_treenode(DIV, 0, a, b);
 		}
 		else
-			return (a);	
+			return (a);
 	}
 	return (a);
 }
@@ -159,7 +159,7 @@ t_tree *parse_f(int token, char **next_token)
 		token = scan_token(&next_token[1]);
 		return (create_treenode(INT, token, NULL, NULL));
 	}
-	else  
+	else
 		return (NULL);
 }
 
@@ -175,25 +175,25 @@ void print_tree2(t_tree *tree)
 	{
 		print_tree2(tree->left);
 		printf(" * ");
-		print_tree2(tree->right);	
+		print_tree2(tree->right);
 	}
 	else if (tree->type == DIV)
 	{
 		print_tree2(tree->left);
 		printf(" / ");
-		print_tree2(tree->right);	
+		print_tree2(tree->right);
 	}
 	else if (tree->type == ADD)
 	{
 		print_tree2(tree->left);
 		printf(" + ");
-		print_tree2(tree->right);	
+		print_tree2(tree->right);
 	}
 	else if (tree->type == SUB)
 	{
 		print_tree2(tree->left);
 		printf(" - ");
-		print_tree2(tree->right);	
+		print_tree2(tree->right);
 	}
 	printf(")");
 }
@@ -222,7 +222,7 @@ void	printtree_rec(t_tree *root, int lvl)
 	printtree_rec(root->left, lvl);
 }
 
-void print_tree(t_tree *root) 
+void tree_print(t_tree *root)
 {
 	printtree_rec(root, 0);
 }
@@ -239,7 +239,7 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	result_tree = parse_e(token, argv);
-	print_tree(result_tree);
+	tree_print(result_tree);
 	write(1, "\n", 1);
 	print_tree2(result_tree);
 	printf(" = %d\n", eval_tree(result_tree));
