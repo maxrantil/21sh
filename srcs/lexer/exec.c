@@ -110,15 +110,10 @@ int	open_check(char *filename, int mode)
 void	redirection_file(t_node *node)
 {
 	int file_fd;
-	int	dup2_fd;
 
-		// check if (!node->right), SEGFAULT?
 	file_fd = open_check(node->arg[0], node->type);	//	1 == > , 2 == >>
-	dup2_fd = dup2_check(file_fd);
 	if (fork_check() == 0)
-	{
 		exec_tree(node->left, NULL, NULL);
-	}
 	wait(0);
 	close(file_fd);
 }

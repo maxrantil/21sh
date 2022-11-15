@@ -64,11 +64,11 @@ void	free_mem(t_msh *msh, t_builtin **ht, ssize_t code)
 	{
 		if (msh->temp_env)
 			temp_handler(msh);
-		if (msh->args)
-			ft_arrfree((void ***)&msh->args, ft_arrlen((void **)msh->args));
+		// if (msh->args)
+			// ft_arrfree((void ***)&msh->args, ft_arrlen((void **)msh->args));
 		if (msh->paths)
 			ft_arrfree((void ***)&msh->paths, ft_arrlen((void **)msh->paths));
-		ft_strdel(&msh->cl);
+		// ft_strdel(&msh->cl);
 	}
 	if (code == 2)
 	{

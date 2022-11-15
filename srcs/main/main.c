@@ -105,9 +105,9 @@ int	main(void)
 		write(1, "\n", 1);
 		ft_printf("{yel}${gre}>{nor} ");
 		ft_restart_cycle(&t);
-		/* free_mem(&msh, ht, 1); */
+		free_mem(&msh, ht, 1);
 	}
-	/* free_mem(&msh, ht, 2); */
+	free_mem(&msh, ht, 2);
 	ft_history_write_to_file(&t);
 	ft_disable_raw_mode(orig_termios);
 	exit(0);

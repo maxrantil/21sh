@@ -53,7 +53,7 @@ static int	check_paths(t_msh *msh)
 	return (0);
 }
 
-static char	*verify_arg(t_msh *msh)
+static char	*verify_arg(t_node *node, t_msh *msh)
 {
 	struct stat	statbuf;
 	char		*verify;
@@ -61,23 +61,23 @@ static char	*verify_arg(t_msh *msh)
 
 	i = 0;
 	while (msh->paths[i] \
-	&& !ft_strequ(msh->args[0], ".") \
-	&& !ft_strequ(msh->args[0], "..") \
-	&& msh->args[0][0] != '\0' \
-	&& msh->args[0][0] != '/')
+		&& !ft_strequ(node->arg[0], ".") \
+		&& !ft_strequ(node->arg[0], "..") \
+		&& node->arg[0][0] != '\0' \
+		&& node->arg[0][0] != '/')
 	{
 		verify = ft_strjoin(msh->paths[i], "/");
-		verify = ft_strupdate(verify, msh->args[0]);
+		verify = ft_strupdate(verify, node->arg[0]);
 		if (!lstat(verify, &statbuf))
 		{
-			ft_strdel(&msh->args[0]);
-			msh->args[0] = verify;
-			return (msh->args[0]);
+			ft_strdel(&node->arg[0]);
+			node->arg[0] = verify;
+			return (node->arg[0]);
 		}
 		ft_strdel(&verify);
 		i++;
 	}
-	return (msh->args[0]);
+	return (node->arg[0]);
 }
 
 int	msh_launch(t_node *node, t_msh *msh)
@@ -94,12 +94,12 @@ int	msh_launch(t_node *node, t_msh *msh)
 		if (check_paths(msh))
 		{
 			ptr = node->arg[0];
-			node->arg[0] = verify_arg(msh);
+			node->arg[0] = verify_arg(node, msh);
 			if (ft_strcmp(node->arg[0], ptr))
 				execve(node->arg[0], node->arg, msh->env);
 		}
 		print_error(node->arg[0], 4);
-		/* free_mem(msh, NULL, 1); */
+		free_mem(msh, NULL, 1);
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)

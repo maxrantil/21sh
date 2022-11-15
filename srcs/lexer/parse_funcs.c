@@ -54,7 +54,7 @@ t_node *parse_exec(char **ptr_to_str)
 	{
 		type = get_token(ptr_to_str, &token, &end_q);
 		if (type == 'a')
-			node->arg[argc++] = ft_strsub(token, 0, (size_t)(end_q - token));
+			node->arg[argc++] = ft_strsub(token, 0, (size_t)(end_q - token)); //make args a douple pointer instead?
 		else if (type == 0)
 			break ;
 		else
