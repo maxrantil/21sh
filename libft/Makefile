@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 20:09:11 by mrantil           #+#    #+#              #
-#    Updated: 2022/10/31 10:25:42 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/15 14:18:24 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ _SRC_PRINTF = 	ft_printf.c print_int_address.c print_c_str.c print_uint_binary.c
 				print_null_float_oct.c print_hex_astrix_procent.c float_work.c flags_plus_minus_hash_null.c \
 				flags_proc_zero_space.c width_and_precision.c tools_write_flags.c tools_itoa_b_getit_nullprint.c \
 				colors.c
-				
+
 _SRC_VEC	=	vec_new.c vec_free.c vec_from.c vec_resize.c vec_get.c vec_push.c vec_sort.c vec_iter.c
 
 DIR_LIBFT	=	libft/
@@ -107,13 +107,13 @@ $(DIR_OBJS)%.o: $(DIR_LIBFT)%.c
 	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< $(ASSERT_OBJECT)
 	@make pbar_libft
-	
+
 $(DIR_OBJS)%.o: $(DIR_PRINTF)%.c
 	@printf "$(C_INVISIBLE)"
 	@printf "$(MOVE)2$(UP)"
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< $(ASSERT_OBJECT)
 	@make pbar_libft
-	
+
 $(DIR_OBJS)%.o: $(DIR_VEC)%.c
 	@printf "$(C_INVISIBLE)"
 	@printf "$(MOVE)2$(UP)"
@@ -121,7 +121,7 @@ $(DIR_OBJS)%.o: $(DIR_VEC)%.c
 	@make pbar_libft
 
 clean:
-	@if [ -d $(DIR_OBJS) ]; then rm -rf $(DIR_OBJS); printf "libft:		$(RED)$(DIR_OBJS) was deleted$(RESET)\n"; fi
+	@if [ -d $(DIR_OBJS) ]; then rm -rf $(DIR_OBJS); printf "libft: 	        $(RED)$(DIR_OBJS) was deleted$(RESET)\n"; fi
 
 fclean:
 	@if [ -f $(NAME) ]; then rm -f $(NAME); printf "$(NAME):	$(RED)library was deleted$(RESET)\n"; fi

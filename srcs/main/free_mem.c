@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:26:42 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 13:00:45 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void temp_handler(t_msh *msh)
 		while (i < msh->v_temp.len)
 		{
 			char *tmp = (char *)vec_get(&msh->v_temp, i);
-			char *key = extract_key(tmp);
-			msh->env = set_env_var(msh->env, key, \
+			char *key = env_key_extract(tmp);
+			msh->env = setenv_var(msh->env, key, \
 			ft_strchr(tmp, '=') + 1);
 			i++;
 			ft_strdel(&key);

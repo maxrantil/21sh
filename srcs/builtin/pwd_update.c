@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:28:00 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 12:59:45 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static char	**change_pwd(char **env, char *cwd, char *key)
 		}
 		i++;
 	}
-	return (set_env_var(env, key, cwd));
+	return (setenv_var(env, key, cwd));
 }
 
-char	**update_pwd(t_msh *msh, char *oldcwd)
+char	**pwd_update(t_msh *msh, char *oldcwd)
 {
 	char	cwd[MAX_PATHLEN];
 

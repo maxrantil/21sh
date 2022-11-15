@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   msh_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -23,7 +23,7 @@ static void	exec_dash(char **env)
 	char	cwd[MAX_PATHLEN];
 	char	*oldpwd;
 
-	oldpwd = get_env_value(env, "OLDPWD=");
+	oldpwd = env_getvalue(env, "OLDPWD=");
 	if (chdir(oldpwd) != 0)
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", STDERR_FILENO);
 	else
@@ -38,7 +38,7 @@ static void	exec_home(char **env)
 {
 	char	*home;
 
-	home = get_env_value(env, "HOME=");
+	home = env_getvalue(env, "HOME=");
 	if (chdir(home) != 0)
 		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 	ft_strdel(&home);
@@ -65,7 +65,7 @@ int	msh_cd(t_node *node, t_msh *msh)
 				return (1);
 			}
 		}
-		msh->env = update_pwd(msh, cwd);
+		msh->env = pwd_update(msh, cwd);
 	}
 	else
 		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);

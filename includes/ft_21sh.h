@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:48:53 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:14:53 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,63 +69,64 @@ typedef struct s_builtin {
 	struct s_builtin	*next;
 }
 						t_builtin;
-/* Function Declarations for builtin */
+
+/* Builtin */
+char	*env_getvalue(char **env, char *var);
+char	*env_key_extract(char *key_value);
+char	**env_underscore(t_msh *msh);
 int		msh_cd(t_node *node, t_msh *msh);
 int		msh_echo(t_node *node, t_msh *msh);
 int		msh_env(t_node *node, t_msh *msh);
 int		msh_setenv(t_node *node, t_msh *msh);
 int		msh_unsetenv(t_node *node, t_msh *msh);
 int		msh_exit(t_node *node, t_msh *msh);
-char	*extract_key(char *key_value);
+char	**pwd_update(t_msh *msh, char *oldcwd);
+void	setenv_loop(t_msh *msh, char *arg, int flag_temp);
+char	**setenv_var(char **env, char *key, char *value);
+char	**unsetenv_var(char **env, char *key);
 
 /* Hash table */
 size_t	hash_function(char *program);
-void	initialize_ht(t_builtin **ht);
+void	hash_init(t_builtin **ht);
 
 /* Parser */
-int		parser(t_msh *msh);
-size_t	count_arguments(char *str);
-char	**get_arguments(char *str, size_t argc);
-void	strip_quotes(char **args);
-void	expansions(t_msh *msh);
-ssize_t	find_matching_quote(char *str, char quote);
-
-/* Main */
-void	init(t_msh *msh);
-void	free_mem(t_msh *msh, t_builtin **ht,ssize_t code);
-
-/* Change envirionment variables */
-char	*get_env_value(char **env, char *var);
-char	**update_env_underscore(t_msh *msh);
-char	**update_pwd(t_msh *msh, char *oldcwd);
-char	**set_env_var(char **env, char *key, char *value);
-char	**unset_env_var(char **env, char *key);
-void	get_dollar(t_msh *msh, char *dollar, size_t i);
-void	tilde(t_msh *msh, size_t i);
-void	loop_setenv(t_msh *msh, char *arg, int flag_temp);
-
-/* Utils */
-int		msh_launch(t_node *node, t_msh *msh);
-void	print_error(char *arg, int i);
-
-/* From lexer */
-void	free_tree(t_node *node);
+// size_t	count_arguments(char *str);
+// void	expansions(t_msh *msh);
+// ssize_t	find_matching_quote(char *str, char quote);
+// char	**get_arguments(char *str, size_t argc);
+// void	get_dollar(t_msh *msh, char *dollar, size_t i);
+// int		parser(t_msh *msh);
+// void	strip_quotes(char **args);
+// void	tilde(t_msh *msh, size_t i);
 int		peek(char **ptr_to_str, char *toks);
-int		get_token(char **ptr_to_str, char **token, char **end_q);
-t_node	*create_node(int type, t_node *sub_cmd, t_node *left, t_node *right);
+int		token_get(char **ptr_to_str, char **token, char **end_q);
+t_node	*node_create(int type, t_node *sub_cmd, t_node *left, t_node *right);
 t_node	*parse_redirection(t_node *node, char **str);
 t_node	*parse_exec(char **ptr_to_str);
 t_node	*parse_pipe(char **ptr_to_str);
 t_node	*parse_line(char **ptr_to_str);
+
+/* Main */
+void	init(t_msh *msh);
+void	free_mem(t_msh *msh, t_builtin **ht,ssize_t code);
+void	tree_free(t_node *node);
+
+/* Utils */
+void	hash_print(t_builtin **ht);
+int		msh_launch(t_node *node, t_msh *msh);
+void	print_error(char *arg, int i);
+void	tree_print(t_node *root);
+
+/* Lexer */
+char	*lexer(char *str);
+
+/* Exec */
 int		exec_tree(t_node *node, t_msh *msh, t_builtin **ht);
 void	exec_pipe_node(t_node *node);
 int		fork_check(void);
 void	exec_pipe_node(t_node *node);
-int		open_check(char *filename, int mode);
 void	redirection_file(t_node *node);
 void	rec_print_tree(t_node *root, int lvl);
-void	print_tree(t_node *root);
-int		open_read_check(char *filename);
 void	input_file_read(char *filename);
 int		dup2_check(int file_fd);
 

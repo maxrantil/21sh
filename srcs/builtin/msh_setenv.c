@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_setenv.c                                      :+:      :+:    :+:   */
+/*   msh_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 16:58:26 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:57:43 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-void	loop_setenv(t_msh *msh, char *arg, int flag_temp)
+int	msh_setenv(t_node *node, t_msh *msh)
 {
-	char	*key;
 	size_t	i;
 
-	i = 0;
-	key = extract_key(arg);
-	while (msh->env[i])
+	i = 1;
+	while (node->arg[i])
 	{
-		if (!ft_strncmp(msh->env[i], key, ft_strlen(key)))
-		{
-			if (flag_temp)
-				vec_push(&msh->v_temp, msh->env[i]); //some read memory error, valgrind it later
-			msh->env = unset_env_var(msh->env, key);
-			break ;
-		}
+		if (strchr(node->arg[i], '=') \
+		&& (ft_isalpha(node->arg[i][0]) || node->arg[i][0] == '_'))
+			setenv_loop(msh, node->arg[i], 0);
+		else
+			print_error(node->arg[i], 6);
 		i++;
 	}
-	msh->env = set_env_var(msh->env, key, \
-	ft_strchr(arg, '=') + 1);
-	ft_strdel(&key);
+	return (1);
 }

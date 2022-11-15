@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_env_var.c                                      :+:      :+:    :+:   */
+/*   unsetenv_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,24 @@
 
 #include "ft_21sh.h"
 
-char	**set_env_var(char **env, char *key, char *value)
+char	**unsetenv_var(char **env, char *key)
 {
 	char	**new_env;
 	size_t	count;
-	ssize_t	j;
+	size_t	i;
+	size_t	j;
 
 	count = ft_arrlen((void **)env);
-	if (!count)
-		++count;
-	new_env = (char **)ft_memalloc(sizeof(char *) * (count + 1));
-	j = -1;
-	while (env[++j])
-		new_env[j] = ft_strdup(env[j]);
-	ft_arrfree((void ***)&env, count);
-	new_env[j++] = ft_strjoin(key, value);
+	new_env = (char **)ft_memalloc(sizeof(char *) * count);
+	i = 0;
+	j = 0;
+	while (i < count)
+	{
+		if (ft_strncmp(env[i], key, ft_strlen(key)))
+			new_env[j++] = ft_strdup(env[i]);
+		i++;
+	}
 	new_env[j] = NULL;
+	ft_arrfree((void ***)&env, count);
 	return (new_env);
 }

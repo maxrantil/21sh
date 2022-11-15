@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   msh_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -55,7 +55,7 @@ static int	env_heart(t_node *node, t_msh *msh, size_t arglen)
 
 	i = 0;
 	while (node->arg[++i] && ft_strchr(node->arg[i], '='))	//make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_' or key=NULL
-		loop_setenv(msh, node->arg[i], 1);
+		setenv_loop(msh, node->arg[i], 1);
 	msh->temp_env = set_tempenv(node, msh, i - 1);
 	if (i < arglen)
 	{

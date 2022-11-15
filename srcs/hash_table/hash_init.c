@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_ht.c                                    :+:      :+:    :+:   */
+/*   hash_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,7 +47,7 @@ static void	init_ht(t_builtin **ht)
 		ht[i++] = NULL;
 }
 
-void initialize_ht(t_builtin **ht)
+void hash_init(t_builtin **ht)
 {
 	init_ht(ht);
 	init_ht_struct(ht, "cd", &msh_cd);

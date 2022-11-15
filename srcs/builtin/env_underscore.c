@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset_env_var.c                                    :+:      :+:    :+:   */
+/*   env_underscore.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 17:37:30 by mrantil           #+#    #+#             */
+/*   Created: 2022/09/20 18:28:00 by mrantil           #+#    #+#             */
 /*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-char	**unset_env_var(char **env, char *key)
+static char	*underscore_change(t_msh *msh)
 {
-	char	**new_env;
-	size_t	count;
-	size_t	i;
-	size_t	j;
+	size_t	last_arg;
 
-	count = ft_arrlen((void **)env);
-	new_env = (char **)ft_memalloc(sizeof(char *) * count);
+	last_arg = ft_arrlen((void **)msh->args) - 1;
+	if (!ft_strncmp(msh->args[last_arg], "\0", 1) && last_arg > 0)
+		--last_arg;
+	return (ft_strjoin("_=", msh->args[last_arg]));
+}
+
+char	**env_underscore(t_msh *msh)
+{
+	size_t	i;
+
 	i = 0;
-	j = 0;
-	while (i < count)
+	while (msh->env[i])
 	{
-		if (ft_strncmp(env[i], key, ft_strlen(key)))
-			new_env[j++] = ft_strdup(env[i]);
+		if (!ft_strncmp(msh->env[i], "_=", 2))
+		{
+			ft_strdel(&msh->env[i]);
+			msh->env[i] = underscore_change(msh);
+		}
 		i++;
 	}
-	new_env[j] = NULL;
-	ft_arrfree((void ***)&env, count);
-	return (new_env);
+	return (msh->env);
 }

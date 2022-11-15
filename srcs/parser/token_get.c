@@ -1,16 +1,5 @@
 #include "ft_21sh.h"
 
-int	peek(char **ptr_to_str, char *toks)
-{
-	char *p;
-
-	p = *ptr_to_str;
-	while (*p && ft_isspace((const char *)p))
-		p++;
-	*ptr_to_str = p;
-	return (*p && ft_strchr(toks, *p));
-}
-
 static char	*skip_whitespaces(char *ptr)
 {
 	while (ft_isspace((const char *)ptr) && *ptr)
@@ -41,7 +30,7 @@ static int token_loop(char **p, int ret) //retname p to s
 	return (ret);
 }
 
-int	get_token(char **ptr_to_str, char **token, char **end_q)
+int	token_get(char **ptr_to_str, char **token, char **end_q)
 {
 	char	*p; //rename to scan
 	int		ret;

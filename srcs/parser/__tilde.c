@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 12:55:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ static int	get_tilde(t_msh *msh, char **tilde, size_t i)
 {
 	if (msh->args[i][1] == '-')
 	{
-		*tilde = get_env_value(msh->env, "OLDPWD=");
+		*tilde = env_getvalue(msh->env, "OLDPWD=");
 		if (!*tilde)
 			return (0);
 		*tilde = ft_strupdate(*tilde, msh->args[i] + 2);
 	}
 	else if (msh->args[i][1] == '+')
 	{
-		*tilde = get_env_value(msh->env, "PWD=");
+		*tilde = env_getvalue(msh->env, "PWD=");
 		if (!*tilde)
 			return (0);
 		*tilde = ft_strupdate(*tilde, msh->args[i] + 2);
 	}
 	else
 	{
-		*tilde = get_env_value(msh->env, "HOME=");
+		*tilde = env_getvalue(msh->env, "HOME=");
 		if (!*tilde)
 			return (0);
 		*tilde = ft_strupdate(*tilde, msh->args[i] + 1);

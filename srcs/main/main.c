@@ -6,12 +6,11 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:52:03 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:13:27 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
-
 
 /*
 **	If optional_actions is TCSAFLUSH, the change shall occur after all output
@@ -88,7 +87,7 @@ int	main(void)
 	orig_termios = ft_init_raw();
 	ft_init(&t);
 	init(&msh);
-	initialize_ht(ht);
+	hash_init(ht);
 	ft_printf("{yel}${gre}>{nor} ");
 	int status = 1;
 	while (status)
@@ -96,12 +95,15 @@ int	main(void)
 		t = *ft_input_cycle(&t);
 		if (!t.bytes)
 			break ;
-		/* msh.env = update_env_underscore(&msh); */
+
+		// ft_printf("Number of arguments: %d\n", count_arguments(t.inp));
+		/* msh.env = env_underscore(&msh); */
 		line = ft_strdup(t.inp);
+		line = lexer(line);
 		root = parse_line(&line);
-		print_tree(root);
+		tree_print(root);
 		status = exec_tree(root, &msh, ht);
-		free_tree(root);
+		tree_free(root);
 		write(1, "\n", 1);
 		ft_printf("{yel}${gre}>{nor} ");
 		ft_restart_cycle(&t);

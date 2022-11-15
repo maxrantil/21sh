@@ -33,7 +33,7 @@ void	rec_print_tree(t_node *root, int lvl)
 	rec_print_tree(root->left, lvl);
 }
 
-void	print_tree(t_node *root)
+void	tree_print(t_node *root)
 {
 	write(1, "\n-------------------------- TREE PRINT --------------------------\n", 66);
 	rec_print_tree(root, 0);

@@ -10,12 +10,12 @@ static void	free_args(char **args)
 }
 
 /*	recursively free tree nodes, start from root */
-void	free_tree(t_node *node)
+void	tree_free(t_node *node)
 {
 	if (node->left)
-		free_tree(node->left);
+		tree_free(node->left);
 	if (node->right)
-		free_tree(node->right);
+		tree_free(node->right);
 	node->left = NULL;
 	node->right = NULL;
 	node->type = 0;

@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/14 15:18:11 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/15 14:15:52 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ MAIN		= 	main/
 UTILS		= 	utils/
 KEYBOARD	= 	keyboard/
 LEXER		= 	lexer/
+EXEC		= 	exec/
 OBJECTS 	= 	objs
 INCLUDES	= 	includes
 LIBRARIES 	= 	libft
@@ -73,34 +74,27 @@ SOURCE_COUNT = $(words $(FILES))
 
 H_FILES 	= 	ft_21sh
 
-FILES 		= 	$(BUILTIN)builtin_cd \
-				$(BUILTIN)builtin_echo \
-				$(BUILTIN)builtin_env \
-				$(BUILTIN)builtin_exit \
-				$(BUILTIN)builtin_unsetenv \
-				$(BUILTIN)builtin_setenv \
-				$(BUILTIN)extract_key \
-				$(BUILTIN)loop_setenv \
-				$(BUILTIN)set_env_var \
-				$(BUILTIN)unset_env_var \
-				$(BUILTIN)update_pwd \
-				$(MAIN)free_mem \
-				$(MAIN)init \
-				$(MAIN)main \
+FILES 		=	$(BUILTIN)env_getvalue \
+				$(BUILTIN)env_underscore \
+				$(BUILTIN)msh_cd \
+				$(BUILTIN)msh_echo \
+				$(BUILTIN)msh_env \
+				$(BUILTIN)msh_exit \
+				$(BUILTIN)msh_unsetenv \
+				$(BUILTIN)msh_setenv \
+				$(BUILTIN)pwd_update \
+				$(BUILTIN)env_key_extract \
+				$(BUILTIN)setenv_loop \
+				$(BUILTIN)setenv_var \
+				$(BUILTIN)unsetenv_var \
+				$(EXEC)dup2_check \
+				$(EXEC)exec_pipe_node \
+				$(EXEC)exec_tree \
+				$(EXEC)fork_check \
+				$(EXEC)input_file_read \
+				$(EXEC)redirection_file \
 				$(HASH_TABLE)hash_function \
-				$(HASH_TABLE)initialize_ht \
-				$(PARSER)get_dollar \
-				$(PARSER)tilde \
-				$(PARSER)expansions \
-				$(PARSER)count_arguments \
-				$(PARSER)get_arguments \
-				$(PARSER)strip_quotes \
-				$(PARSER)parser \
-				$(PARSER)find_matching_quote \
-				$(UTILS)msh_launch \
-				$(UTILS)get_env_value \
-				$(UTILS)print_error \
-				$(UTILS)update_env_underscore \
+				$(HASH_TABLE)hash_init \
 				$(KEYBOARD)ft_add_nl_last_row \
 				$(KEYBOARD)ft_add_nl_mid_row \
 				$(KEYBOARD)ft_arrow_input \
@@ -137,12 +131,21 @@ FILES 		= 	$(BUILTIN)builtin_cd \
 				$(KEYBOARD)ft_shift_nl_addr \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
-				$(LEXER)exec \
 				$(LEXER)lexer \
-				$(LEXER)parse_funcs \
-				$(LEXER)peek_gettok \
-				$(LEXER)printtree \
-				$(LEXER)free_tree \
+				$(MAIN)free_mem \
+				$(MAIN)init \
+				$(MAIN)main \
+				$(MAIN)tree_free \
+				$(PARSER)node_create \
+				$(PARSER)parse_exec \
+				$(PARSER)parse_line \
+				$(PARSER)parse_pipe \
+				$(PARSER)parse_redirection \
+				$(PARSER)peek \
+				$(PARSER)token_get \
+				$(UTILS)tree_print \
+				$(UTILS)msh_launch \
+				$(UTILS)print_error \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))
@@ -168,6 +171,7 @@ $(OBJECTS):
 	@mkdir -p $(OBJECTS)/$(UTILS)
 	@mkdir -p $(OBJECTS)/$(KEYBOARD)
 	@mkdir -p $(OBJECTS)/$(LEXER)
+	@mkdir -p $(OBJECTS)/$(EXEC)
 	@printf "$(GREEN)_________________________________________________________________\n$(RESET)"
 	@printf "$(NAME): $(GREEN)$(OBJECTS) directory was created.$(RESET)\n\n\n"
 
