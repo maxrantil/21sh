@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 14:13:27 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:36:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,12 @@ int	main(void)
 	while (status)
 	{
 		t = *ft_input_cycle(&t);
-		if (!t.bytes)
-			break ;
-
-		// ft_printf("Number of arguments: %d\n", count_arguments(t.inp));
+		/* if (!t.bytes)
+			break ; */
 		/* msh.env = env_underscore(&msh); */
 		line = ft_strdup(t.inp);
-		line = lexer(line);
+		// line = lexer(line);
+		// ft_printf("Number of arguments: %d\n", count_arguments(t.inp));
 		root = parse_line(&line);
 		tree_print(root);
 		status = exec_tree(root, &msh, ht);
