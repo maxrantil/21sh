@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 18:08:04 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/16 12:05:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	main(void)
 			{
 				tree_print(root);
 				status = exec_tree(root, &msh, ht);
-				tree_free(root);
+				// tree_free(root);
 			}
 		}
 		ft_restart_cycle(&t);
