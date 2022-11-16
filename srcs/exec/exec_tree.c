@@ -5,9 +5,9 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 	t_builtin	*tmp;
 	size_t		index;
 
-	if (!node->arg[0])
-		return (1);
 	index = hash_function(node->arg[0]);
+	// hash_print(ht);
+	// ft_printf("index: %d\n", index);
 	tmp = ht[index];
 	while (tmp)
 	{
@@ -32,22 +32,22 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 		ret = exec_args(node, msh, ht);
 	}
 	else if (node->type == PIPE)
-		exec_pipe_node(node);
+		exec_pipe_node(node, msh, ht);
 	else if (node->type == REDIROVER || node->type == REDIRAPP)
-		redirection_file(node);
+		redirection_file(node, msh, ht);
 	else if (node->type == REDIRIN)
 		input_file_read(node->arg[0]);
 	else if (node->type == AMP)
 	{
 		if (fork_check() == 0)
-			exec_tree(node->left, NULL, NULL);
+			exec_tree(node->left, msh, ht);
 	}
 	else if (node->type == SEMI)
 	{
 		if (fork_check() == 0)
-			exec_tree(node->left, NULL, NULL);
+			exec_tree(node->left, msh, ht);
 		wait(0);
-		exec_tree(node->right, NULL, NULL);
+		exec_tree(node->right, msh, ht);
 	}
 	// exit(0);
 	return (ret);

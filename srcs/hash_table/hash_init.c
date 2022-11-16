@@ -27,7 +27,7 @@ static char	*ht_insert(t_builtin **ht, t_builtin *p)
 	return (ht[index]->program);
 }
 
-static void	init_ht_struct(t_builtin **ht, char *str, int (*f)(t_node *node, t_msh *msh))
+static void	init_ht_struct(t_builtin ***ht, char *str, int (*f)(t_node *node, t_msh *msh))
 {
 	t_builtin	*new;
 
@@ -35,19 +35,20 @@ static void	init_ht_struct(t_builtin **ht, char *str, int (*f)(t_node *node, t_m
 	new->program = str;
 	new->function = f;
 	new->next = NULL;
-	ht_insert(ht, new);
+	ht_insert(*ht, new);
 }
 
-static void	init_ht(t_builtin **ht)
+static void	init_ht(t_builtin ***ht)
 {
 	int	i;
 
+	*ht = (t_builtin **)malloc(sizeof(t_builtin *) * (HASH_SIZE + 1));
 	i =	0;
 	while (i < HASH_SIZE)
-		ht[i++] = NULL;
+		(*ht)[i++] = NULL;
 }
 
-void hash_init(t_builtin **ht)
+void hash_init(t_builtin ***ht)
 {
 	init_ht(ht);
 	init_ht_struct(ht, "cd", &msh_cd);

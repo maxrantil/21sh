@@ -80,12 +80,13 @@ int	main(void)
 	t_msh			msh;
 	t_term			t;
 	t_node			*root;
-	t_builtin		*ht[HASH_SIZE];
+	t_builtin		**ht;
 	char			*line;
 
+	ht = NULL;
 	ft_getent();
 	orig_termios = ft_init_raw();
-	init(&msh, &t, ht);
+	init(&msh, &t, &ht);
 	int status = 1;
 	while (status)
 	{
@@ -105,7 +106,7 @@ int	main(void)
 			{
 				tree_print(root);
 				status = exec_tree(root, &msh, ht);
-				// tree_free(root);
+				tree_free(root);
 			}
 		}
 		ft_restart_cycle(&t);

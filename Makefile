@@ -46,7 +46,7 @@ CFLAGS		+=	-Wpedantic -Wconversion
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-LEAK_CHECK	+=	-fsanitize=address
+# LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -149,6 +149,7 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(PARSER)peek \
 				$(PARSER)token_get \
 				$(UTILS)tree_print \
+				$(UTILS)hash_print \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))

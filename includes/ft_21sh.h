@@ -87,22 +87,22 @@ void	error_print(char *arg, int i);
 /* Exec */
 int		dup2_check(int file_fd);
 int		exec_21sh(t_node *node, t_msh *msh);
-void	exec_pipe_node(t_node *node);
+void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht);
 int		exec_tree(t_node *node, t_msh *msh, t_builtin **ht);
 int		fork_check(void);
 void	input_file_read(char *filename);
-void	redirection_file(t_node *node);
+void	redirection_file(t_node *node, t_msh *msh, t_builtin **ht);
 
 /* Hash table */
 size_t	hash_function(char *program);
-void	hash_init(t_builtin **ht);
+void	hash_init(t_builtin ***ht);
 
 /* Lexer */
 char	*lexer(char *str);
 
 /* Main */
 void	free_mem(t_msh *msh, t_builtin **ht,ssize_t code);
-void	init(t_msh *msh, t_term *t, t_builtin **ht);
+void	init(t_msh *msh, t_term *t, t_builtin ***ht);
 void	tree_free(t_node *node);
 
 /* Parser */

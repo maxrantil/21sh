@@ -33,6 +33,8 @@ static void	free_table(t_builtin **ht)
 		}
 		i++;
 	}
+	free(ht);
+	ht = NULL;
 }
 
 static void temp_handler(t_msh *msh)

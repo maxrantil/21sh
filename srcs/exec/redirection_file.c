@@ -17,13 +17,13 @@ static int	open_check(char *filename, int mode)
 	return (file_fd);
 }
 
-void	redirection_file(t_node *node)
+void	redirection_file(t_node *node, t_msh *msh, t_builtin **ht)
 {
 	int file_fd;
 
 	file_fd = open_check(node->arg[0], node->type);	//	1 == > , 2 == >>
 	if (fork_check() == 0)
-		exec_tree(node->left, NULL, NULL);
+		exec_tree(node->left, msh, ht);
 	wait(0);
 	close(file_fd);
 }
