@@ -61,13 +61,13 @@ static int	env_heart(t_node *node, t_msh *msh, size_t arglen)
 	{
 		// msh->arg = switch_args(node->arg, arglen, i);
 		int y = 0;
-		while (node->arg[y])
+		while (node->arg[y]) // all this is bollocks
 			ft_strclr(node->arg[y++]);
 		temp_args = switch_args(node->arg, arglen, i);
 		y = -1;
 		while (temp_args[++y])
 			node->arg[y] = ft_strdup(temp_args[y]);
-		exec_21sh(node, msh);
+		exec_21sh(node, msh, NULL);
 		return (1);
 	}
 	return (0);

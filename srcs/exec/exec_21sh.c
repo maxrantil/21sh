@@ -80,7 +80,7 @@ static char	*verify_arg(t_node *node, t_msh *msh)
 	return (node->arg[0]);
 }
 
-int	exec_21sh(t_node *node, t_msh *msh)
+int	exec_21sh(t_node *node, t_msh *msh, t_builtin **ht)
 {
 	pid_t	pid;
 	int		status;
@@ -95,16 +95,16 @@ int	exec_21sh(t_node *node, t_msh *msh)
 		{
 			ptr = node->arg[0];
 			node->arg[0] = verify_arg(node, msh);
-			if (ft_strcmp(node->arg[0], ptr))
+			if (!ft_strequ(node->arg[0], ptr))
 				execve(node->arg[0], node->arg, msh->env);
 		}
 		error_print(node->arg[0], 4);
-		free_mem(msh, NULL, 1);
+		free_mem(msh, ht, 1);
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
 		ft_putstr_fd("error: pid failed\n", STDERR_FILENO);
 	else
 		waitpid(pid, &status, 0);
-	return (1);
+	return (0);
 }

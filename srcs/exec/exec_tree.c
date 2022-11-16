@@ -6,8 +6,6 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 	size_t		index;
 
 	index = hash_function(node->arg[0]);
-	// hash_print(ht);
-	// ft_printf("index: %d\n", index);
 	tmp = ht[index];
 	while (tmp)
 	{
@@ -15,14 +13,14 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 			return (tmp->function(node, msh));
 		tmp = tmp->next;
 	}
-	return (exec_21sh(node, msh));
+	return (exec_21sh(node, msh, ht));
 }
 
 int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 {
 	int ret;
 
-	ret  = 1;
+	ret  = 0;
 	if (!node)
 		exit(1);
 	if (node->type == EXEC)
@@ -49,6 +47,6 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 		wait(0);
 		exec_tree(node->right, msh, ht);
 	}
-	// exit(0);
+	exit(0);
 	return (ret);
 }

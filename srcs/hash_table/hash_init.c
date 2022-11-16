@@ -42,7 +42,7 @@ static void	init_ht(t_builtin ***ht)
 {
 	int	i;
 
-	*ht = (t_builtin **)malloc(sizeof(t_builtin *) * (HASH_SIZE + 1));
+	*ht = (t_builtin **)malloc(sizeof(t_builtin *) * (HASH_SIZE + 1)); //be sure to free this, not done now
 	i =	0;
 	while (i < HASH_SIZE)
 		(*ht)[i++] = NULL;

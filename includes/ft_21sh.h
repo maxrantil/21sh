@@ -86,7 +86,7 @@ void	error_print(char *arg, int i);
 
 /* Exec */
 int		dup2_check(int file_fd);
-int		exec_21sh(t_node *node, t_msh *msh);
+int		exec_21sh(t_node *node, t_msh *msh, t_builtin **ht);
 void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht);
 int		exec_tree(t_node *node, t_msh *msh, t_builtin **ht);
 int		fork_check(void);
