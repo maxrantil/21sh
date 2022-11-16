@@ -26,4 +26,5 @@ void	redirection_file(t_node *node, t_msh *msh, t_builtin **ht)
 		exec_tree(node->left, msh, ht);
 	wait(0);
 	close(file_fd);
+	exit(0);
 }

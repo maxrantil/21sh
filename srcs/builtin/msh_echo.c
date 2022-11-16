@@ -18,6 +18,7 @@ static void	print_echo(t_node *node, t_msh *msh)
 	size_t	i;
 	size_t	j;
 
+	(void)msh;
 	arrlen = ft_arrlen((void **)node->arg);
 	i = 1;
 	while (i < arrlen)
