@@ -11,9 +11,10 @@ void	rec_print_tree(t_node *root, int lvl)
 		printf(" ");
 	if (root->type == EXEC)
 	{
-		if (root->arg[2])
+		size_t len = ft_arrlen((void **)root->arg);
+		if (len > 2)
 			printf("%s %s ...\n", root->arg[0], root->arg[1]);
-		else if (root->arg[1])
+		else if (len == 2)
 			printf("%s %s\n", root->arg[0], root->arg[1]);
 		else
 			printf("%s\n", root->arg[0]);

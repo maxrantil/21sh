@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 18:08:04 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/16 12:05:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static struct termios	ft_init_raw(void)
 		exit(1);
 	}
 	raw = orig_termios;
-	raw.c_lflag &= ~(size_t)(ICANON | ECHO | IEXTEN | ISIG);
-	raw.c_iflag &= ~(size_t)(IXON | BRKINT);
+	raw.c_lflag &= ~(ICANON | ECHO | IEXTEN | ISIG);
+	raw.c_iflag &= ~(IXON | BRKINT);
 	raw.c_cc[VMIN] = 1;
 	raw.c_cc[VTIME] = 0;
 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
@@ -80,12 +80,13 @@ int	main(void)
 	t_msh			msh;
 	t_term			t;
 	t_node			*root;
-	t_builtin		*ht[HASH_SIZE];
+	t_builtin		**ht;
 	char			*line;
 
+	ht = NULL;
 	ft_getent();
 	orig_termios = ft_init_raw();
-	init(&msh, &t, ht);
+	init(&msh, &t, &ht);
 	int status = 1;
 	while (status)
 	{
@@ -104,7 +105,7 @@ int	main(void)
 			if (root)
 			{
 				tree_print(root);
-				status = exec_tree(root, &msh, ht);
+				status = exec_tree(root, &msh, ht); //no return here fix it
 				tree_free(root);
 			}
 		}

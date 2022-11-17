@@ -14,10 +14,8 @@
 
 int	msh_exit(t_node *node, t_msh *msh)
 {
-	if (!msh->cl)
-	{
-		if (*node->arg)
-			return (0);
-	}
+	(void)msh;
+	if (*node->arg)
+		return (0);
 	return (1);
 }

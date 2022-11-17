@@ -17,6 +17,7 @@ t_node	*node_create(int type, t_node *sub_cmd, t_node *left, t_node *right)
 	t_node *node;
 
 	node = (t_node *)malloc(sizeof(t_node));
+	ft_memset(node->arg, 0, 100);
 	node->type = type;
 	node->command = sub_cmd;
 	node->left = left;

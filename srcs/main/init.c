@@ -80,7 +80,7 @@ static char	**get_env(char **env, size_t j, ssize_t i)
 	return (env);
 }
 
-void	init(t_msh *msh, t_term *t, t_builtin **ht)
+void	init(t_msh *msh, t_term *t, t_builtin ***ht)
 {
 	ssize_t		i;
 	size_t		j;

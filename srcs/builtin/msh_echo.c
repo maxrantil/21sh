@@ -18,19 +18,17 @@ static void	print_echo(t_node *node, t_msh *msh)
 	size_t	i;
 	size_t	j;
 
-	if (!msh->cl) // this needs to be fixed
+	(void)msh;
+	arrlen = ft_arrlen((void **)node->arg);
+	i = 1;
+	while (i < arrlen)
 	{
-		arrlen = ft_arrlen((void **)node->arg);
-		i = 1;
-		while (i < arrlen)
-		{
-			j = 0;
-			while (node->arg[i][j] != '\0')
-				write(1, &node->arg[i][j++], 1);
-			if (node->arg[i][0] != '\0')
-				ft_putchar(' ');
-			i++;
-		}
+		j = 0;
+		while (node->arg[i][j] != '\0')
+			write(1, &node->arg[i][j++], 1);
+		if (node->arg[i][0] != '\0')
+			ft_putchar(' ');
+		i++;
 	}
 }
 

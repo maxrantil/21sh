@@ -6,12 +6,15 @@ static void	free_args(char **args)
 
 	i = -1;
 	while (args[++i])
+		// ft_strclr(args[i]);
 		ft_strdel(&args[i]);
 }
 
 /*	recursively free tree nodes, start from root */
 void	tree_free(t_node *node)
 {
+	if (!node)
+		return ;
 	if (node->left)
 		tree_free(node->left);
 	if (node->right)
