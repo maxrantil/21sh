@@ -47,6 +47,6 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 		wait(0);
 		exec_tree(node->right, msh, ht);
 	}
-	exit(0);
+	exit(ret);
 	return (ret);
 }
