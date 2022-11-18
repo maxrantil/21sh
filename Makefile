@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/15 16:23:36 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/18 12:11:48 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ NAME		=	21sh
 CC			=	gcc
 CFLAGS 		= 	-Wall -Wextra
 CFLAGS		+=	-Wunreachable-code -Wtype-limits
-CFLAGS		+=	-Wpedantic -Wconversion
+CFLAGS		+=	-Wpedantic
+# CFLAGS		+=  -Wconversion
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g

@@ -6,45 +6,15 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/16 12:05:37 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 12:12:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-/*
-**	If optional_actions is TCSAFLUSH, the change shall occur after all output
-**	written to fildes is transmitted, and all input so far received but not
-**	read shall be discarded before the change is made.
-*/
-static struct termios	ft_init_raw(void)
+static void	ft_disable_raw_mode(t_term *t)
 {
-	struct termios	orig_termios;
-	struct termios	raw;
-
-	if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
-	{
-		write(2, "error tcgetattr\n", 16);
-		exit(1);
-	}
-	raw = orig_termios;
-	raw.c_lflag &= ~(ICANON | ECHO | IEXTEN | ISIG);
-	raw.c_iflag &= ~(IXON | BRKINT);
-	raw.c_cc[VMIN] = 1;
-	raw.c_cc[VTIME] = 0;
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
-	{
-		write(2, "error tcsetattr\n", 16);
-		exit(1);
-	}
-	ft_run_capability("ti");
-	ft_run_capability("cl");
-	return (orig_termios);
-}
-
-static void	ft_disable_raw_mode(struct termios orig_termios)
-{
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &t->orig_termios);
 	ft_run_capability("te");
 }
 
@@ -76,7 +46,6 @@ static int ft_getent(void)
 
 int	main(void)
 {
-	struct termios	orig_termios;
 	t_msh			msh;
 	t_term			t;
 	t_node			*root;
@@ -85,7 +54,6 @@ int	main(void)
 
 	ht = NULL;
 	ft_getent();
-	orig_termios = ft_init_raw();
 	init(&msh, &t, &ht);
 	int status = 1;
 	while (status)
@@ -114,6 +82,6 @@ int	main(void)
 	}
 	free_mem(&msh, ht, 2);
 	ft_history_write_to_file(&t);
-	ft_disable_raw_mode(orig_termios);
+	ft_disable_raw_mode(&t);
 	exit(0);
 }
