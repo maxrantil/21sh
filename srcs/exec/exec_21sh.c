@@ -90,13 +90,19 @@ int	exec_21sh(t_node *node, t_msh *msh, t_builtin **ht)
 	if (pid == 0)
 	{
 		if (node->arg[0][0] == '.')
+		{
+			msh->env = env_underscore(node, msh);
 			execve(node->arg[0], node->arg, msh->env);
+		}
 		if (check_paths(msh))
 		{
 			ptr = node->arg[0];
 			node->arg[0] = verify_arg(node, msh);
 			if (!ft_strequ(node->arg[0], ptr))
+			{
+				msh->env = env_underscore(node, msh);
 				execve(node->arg[0], node->arg, msh->env);
+			}
 		}
 		error_print(node->arg[0], 4);
 		free_mem(msh, ht, 1);

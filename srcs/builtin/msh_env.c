@@ -33,17 +33,15 @@ static char	**set_tempenv(t_node *node, t_msh *msh, size_t len)
 	size_t	i;
 
 	temp_env = NULL;
+	(void)msh;
 	i = 1;
-	if (!msh->cl)
+	if (len)
 	{
-		if (len)
-		{
-			temp_env = (char **)ft_memalloc(sizeof(char *) * (len + 1));
-			i = 0;
-			while (i++ < len)
-				temp_env[i - 1] = ft_strdup(node->arg[i]);
-			temp_env[i - 1] = NULL;
-		}
+		temp_env = (char **)ft_memalloc(sizeof(char *) * (len + 1));
+		i = 0;
+		while (i++ < len)
+			temp_env[i - 1] = ft_strdup(node->arg[i]);
+		temp_env[i - 1] = NULL;
 	}
 	return (temp_env);
 }

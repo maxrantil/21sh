@@ -26,9 +26,9 @@ static void	print_echo(t_node *node, t_msh *msh)
 		j = 0;
 		while (node->arg[i][j] != '\0')
 			write(1, &node->arg[i][j++], 1);
-		if (node->arg[i][0] != '\0')
-			ft_putchar(' ');
 		i++;
+		if (node->arg[i])
+			ft_putchar(' ');
 	}
 }
 

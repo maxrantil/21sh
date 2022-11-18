@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -1; touch newfile ; ls -1

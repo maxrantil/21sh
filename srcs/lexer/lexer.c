@@ -14,6 +14,6 @@ char *lexer(char *str)
 			i++;
 		new[j++] = str[i++];
 	}
-	new[j - 1] = '\0';
+	new[j] = '\0';
 	return (new);
 }

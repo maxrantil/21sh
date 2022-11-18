@@ -5,12 +5,16 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 	t_builtin	*tmp;
 	size_t		index;
 
+
 	index = hash_function(node->arg[0]);
 	tmp = ht[index];
 	while (tmp)
 	{
 		if (ft_strcmp(node->arg[0], tmp->program) == 0)
+		{
+			msh->env = env_underscore(node, msh);
 			return (tmp->function(node, msh));
+		}
 		tmp = tmp->next;
 	}
 	return (exec_21sh(node, msh, ht));

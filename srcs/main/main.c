@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 13:05:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:32:08 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,38 +44,45 @@ static int ft_getent(void)
 	return (status);
 }
 
-int	main(void)
+int last_step(t_msh *msh, t_builtin **ht, char *line)
+{
+	t_node	*root;
+	int		status;
+
+	status = 1;
+	root = parse_line(&line);
+	if (root)
+	{
+		// tree_print(root);
+		status = exec_tree(root, msh, ht);
+		tree_free(root);
+	}
+	return (status);
+}
+
+
+int	main(int argc, char **argv)
 {
 	t_msh			msh;
 	t_term			t;
-	t_node			*root;
 	t_builtin		**ht;
 	char			*line;
 
 	ht = NULL;
 	ft_getent();
-	init(&msh, &t, &ht);
+	init(&msh, &t, &ht, argc, argv);
 	int status = 1;
 	while (status)
 	{
 		if (!ft_input_cycle(&t))
 			break ;
-		/* msh.env = env_underscore(&msh); */
 		if (t.bytes)
-			line = ft_strdup(t.inp);
-		// line = lexer(line);
-		// ft_printf("Number of arguments: %d\n", count_arguments(t.inp));
-
-		// ft_printf("line: %s\n", line);
+			line = lexer(t.inp);
+		write(1, "\n", 1);
 		if (line)
 		{
-			root = parse_line(&line);
-			if (root)
-			{
-				tree_print(root);
-				status = exec_tree(root, &msh, ht); //no return here fix it
-				tree_free(root);
-			}
+			strip_quotes(&line);				//wrote place but this is only for testing
+			status = last_step(&msh, ht, line);
 		}
 		ft_restart_cycle(&t);
 		free_mem(&msh, ht, 1);

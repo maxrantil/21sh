@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 15:17:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 15:01:39 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_restart_cycle(t_term *t)
 {
-	ft_putchar('\n');
+	// ft_putchar('\n');
 	ft_printf("{yel}${gre}>{nor} ");
 	// ft_memset(t->inp, '\0', BUFFSIZE);
 	ft_strclr(t->inp);
