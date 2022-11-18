@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/18 17:07:00 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/18 17:59:23 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SOURCES 	= 	srcs
 BUILTIN		= 	builtin/
 ERROR		= 	error/
 EXEC		= 	exec/
+EXPANSIONS	= 	expansions/
 HASH_TABLE	=	hash_table/
 KEYBOARD	= 	keyboard/
 LEXER		= 	lexer/
@@ -100,6 +101,9 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(EXEC)redirection_file \
 				$(EXEC)strip_quotes \
 				$(EXEC)find_matching_quote \
+				$(EXPANSIONS)expansions_dollar \
+				$(EXPANSIONS)expansions_tilde \
+				$(EXPANSIONS)expansions \
 				$(HASH_TABLE)hash_function \
 				$(HASH_TABLE)hash_init \
 				$(KEYBOARD)ft_add_nl_last_row \
@@ -174,6 +178,7 @@ $(OBJECTS):
 	@mkdir -p $(OBJECTS)/$(BUILTIN)
 	@mkdir -p $(OBJECTS)/$(ERROR)
 	@mkdir -p $(OBJECTS)/$(EXEC)
+	@mkdir -p $(OBJECTS)/$(EXPANSIONS)
 	@mkdir -p $(OBJECTS)/$(HASH_TABLE)
 	@mkdir -p $(OBJECTS)/$(KEYBOARD)
 	@mkdir -p $(OBJECTS)/$(LEXER)

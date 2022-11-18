@@ -6,46 +6,46 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:22:52 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static size_t	find_variables(t_msh *msh, size_t i, size_t j)
+static size_t	find_variables(t_node *node, t_msh *msh, size_t i, size_t j)
 {
-	if (msh->args[i][j] == '~' && j == 0)
+	if (node->arg[i][j] == '~' && j == 0)
 	{
-		tilde(msh, i);
+		expansions_tilde(node, msh, i);
 	}
-	if (msh->args[i][j] == '$' \
-	&& (msh->args[i][j + 1] == '_' \
-	|| ft_isalnum(msh->args[i][j + 1])))
+	if (node->arg[i][j] == '$' \
+		&& (node->arg[i][j + 1] == '_' \
+		|| ft_isalnum(node->arg[i][j + 1])))
 	{
-		get_dollar(msh, ft_strchr(msh->args[i], '$'), i);
+		expansions_dollar(node, msh, ft_strchr(node->arg[i], '$'), i);
 		return (1);
 	}
-	else if (msh->args[i][j] == '$' \
-	&& msh->args[i][j + 1] == '$')
+	else if (node->arg[i][j] == '$' \
+		&& node->arg[i][j + 1] == '$')
 	{
-		ft_strdel(&msh->args[i]);
-		msh->args[i] = ft_itoa(getpid());
+		ft_strdel(&node->arg[i]);
+		node->arg[i] = ft_itoa(getpid());
 	}
 	return (0);
 }
 
-void	expansions(t_msh *msh)
+void	expansions(t_node *node, t_msh *msh)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	while (msh->args[i])
+	while (node->arg[i])
 	{
 		j = 0;
-		while (msh->args[i][j])
+		while (node->arg[i][j])
 		{
-			if (find_variables(msh, i, j))
+			if (find_variables(node, msh, i, j))
 				break ;
 			j++;
 		}

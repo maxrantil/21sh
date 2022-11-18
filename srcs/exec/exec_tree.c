@@ -6,6 +6,7 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 	size_t		index;
 
 
+	expansions(node, msh);
 	index = hash_function(node->arg[0]);
 	tmp = ht[index];
 	while (tmp)
