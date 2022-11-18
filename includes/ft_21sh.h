@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 13:21:48 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:42:55 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@
 typedef struct s_msh
 {
 	t_vec	v_temp;
-	char	**args; //take away
 	char	**env;
 	char	**temp_env;
 	char	**paths;
-	char	*cl; // take away
 }			t_msh;
 
 typedef struct s_node
@@ -68,7 +66,7 @@ typedef struct s_builtin {
 /* Builtin */
 char	*env_getvalue(char **env, char *var);
 char	*env_key_extract(char *key_value);
-char	**env_underscore(t_msh *msh);
+char	**env_underscore(t_node *node, t_msh *msh);
 int		msh_cd(t_node *node, t_msh *msh);
 int		msh_echo(t_node *node, t_msh *msh);
 int		msh_env(t_node *node, t_msh *msh);
@@ -91,6 +89,8 @@ int		exec_tree(t_node *node, t_msh *msh, t_builtin **ht);
 int		fork_check(void);
 void	input_file_read(char *filename);
 void	redirection_file(t_node *node, t_msh *msh, t_builtin **ht);
+void	strip_quotes(char **args);
+ssize_t	find_matching_quote(char *str, char quote);
 
 /* Hash table */
 size_t	hash_function(char *program);
@@ -98,10 +98,10 @@ void	hash_init(t_builtin ***ht);
 
 /* Lexer */
 char	*lexer(char *str);
-
 /* Main */
 void	free_mem(t_msh *msh, t_builtin **ht,ssize_t code);
-void	init(t_msh *msh, t_term *t, t_builtin ***ht);
+// void	init(t_msh *msh, t_term *t, t_builtin ***ht);
+void	init(t_msh *msh, t_term *t, t_builtin ***ht, int argc, char **argv);
 void	tree_free(t_node *node);
 
 /* Parser */

@@ -1,0 +1,13 @@
+foo
+ls
+ls -laF
+ls -l -a -F
+ 	 	ls			-l 	 	 	 	 	 -A
+echo "It works"
+echo It works
+pwd
+env
+ls | cat -e
+ls | sort | cat -e
+# base64 /dev/urandom | head -c 2000 | grep 42 | wc -l | sed -e 's/1/YES/g' -e 's/0/NO/g'
+ls -1; touch newfile ; ls -1

@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/18 12:11:48 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/18 17:07:00 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,8 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(EXEC)fork_check \
 				$(EXEC)input_file_read \
 				$(EXEC)redirection_file \
+				$(EXEC)strip_quotes \
+				$(EXEC)find_matching_quote \
 				$(HASH_TABLE)hash_function \
 				$(HASH_TABLE)hash_init \
 				$(KEYBOARD)ft_add_nl_last_row \
