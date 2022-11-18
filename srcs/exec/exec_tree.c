@@ -22,13 +22,9 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 
 	ret = 1;
 	if (!node)
-		exit(1);
+		return (0);
 	if (node->type == EXEC)
-	{
-		if (!node->arg[0])
-			exit(1);
 		ret = exec_args(node, msh, ht);
-	}
 	else if (node->type == PIPE)
 		exec_pipe_node(node, msh, ht);
 	else if (node->type == REDIROVER || node->type == REDIRAPP)
@@ -39,17 +35,14 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 	{
 		if (fork_check() == 0)
 		{
-			exec_tree(node->left, msh, ht);
+			// exec_tree(node->left, msh, ht);
+			execve(node->arg[0], node->arg, msh->env); //this is 42sh shit, make better error handling etc
+			exit(EXIT_SUCCESS);
 		}
 	}
 	else if (node->type == SEMI)
 	{
-		// if (fork_check() == 0)
-		// {
-			exec_tree(node->left, msh, ht);
-			// exit(0);
-		// }
-		// wait(0);
+		exec_tree(node->left, msh, ht);
 		exec_tree(node->right, msh, ht);
 	}
 	return (ret);
