@@ -23,6 +23,7 @@ void	ft_history_get(t_term *t)
 	fd = open(file, O_RDONLY | O_CREAT, 0644);
 	if (fd)
 	{
+		buf = NULL;
 		while (get_next_line(fd, &buf) > 0)
 		{
 			vec_push(&t->v_history, buf);

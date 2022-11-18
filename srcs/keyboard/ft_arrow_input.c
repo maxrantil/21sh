@@ -49,7 +49,7 @@ static void	ft_left(t_term *t)
 			t->c_col = t->prompt_len;
 		else if (ft_is_prompt_line(t, t->c_row - 1))
 			t->c_col = t->m_prompt_len;
-		t->c_col += (t->nl_addr[t->c_row] - t->nl_addr[--t->c_row]);
+		t->c_col += (t->nl_addr[t->c_row] - t->nl_addr[t->c_row - 1]);
 		row--;
 	}
 	t->index--;

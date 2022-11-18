@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/15 15:53:27 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 12:07:59 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,25 @@
 
 typedef struct s_term
 {
-	int		ch;
-	char	inp[BUFFSIZE];
-	char	quote;
-	t_vec	v_history;
-	ssize_t	q_qty;
-	ssize_t	ws_col;
-	ssize_t	ws_row;
-	ssize_t	index;
-	ssize_t	bytes;
-	ssize_t	c_col;
-	ssize_t	c_row;
-	ssize_t	start_row;
-	ssize_t	total_row;
-	ssize_t	prompt_len;
-	ssize_t	m_prompt_len;
-	char	**nl_addr;
-	char	*input_cpy;
-	ssize_t	total_row_cpy;
+	char			inp[BUFFSIZE];
+	struct termios	orig_termios;
+	t_vec			v_history;
+	char			**nl_addr;
+	char			*input_cpy;
+	int				ch;
+	ssize_t			ws_col;
+	ssize_t			ws_row;
+	ssize_t			index;
+	ssize_t			bytes;
+	ssize_t			c_col;
+	ssize_t			c_row;
+	ssize_t			start_row;
+	ssize_t			total_row;
+	ssize_t			total_row_cpy;
+	ssize_t			prompt_len;
+	ssize_t			m_prompt_len;
+	ssize_t			q_qty;
+	char			quote;
 }			t_term;
 
 void	ft_init_term(t_term *t);

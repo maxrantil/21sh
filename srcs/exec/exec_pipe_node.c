@@ -16,6 +16,7 @@ void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht)
 		close(p[0]);
 		close(p[1]);
 		exec_tree(node->left, msh, ht);
+		exit(EXIT_SUCCESS);
 	}
 	if (fork_check() == 0)
 	{
@@ -24,6 +25,7 @@ void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht)
 		close(p[0]);
 		close(p[1]);
 		exec_tree(node->right, msh, ht);
+		exit(EXIT_SUCCESS);
 	}
 	close(p[0]);
 	close(p[1]);

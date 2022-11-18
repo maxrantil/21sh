@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 15:40:56 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 13:21:48 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_node
 {
 	int				type;
 	char			*arg[100];
-	struct s_node	*command;
 	struct s_node	*left;
 	struct s_node	*right;
 }					t_node;
@@ -114,13 +113,13 @@ void	tree_free(t_node *node);
 // int		parser(t_msh *msh);
 // void	strip_quotes(char **args);
 // void	tilde(t_msh *msh, size_t i);
-t_node	*node_create(int type, t_node *sub_cmd, t_node *left, t_node *right);
-t_node	*parse_exec(char **ptr_to_str);
-t_node	*parse_line(char **ptr_to_str);
-t_node	*parse_pipe(char **ptr_to_str);
+t_node	*node_create(int type, t_node *left, t_node *right);
+t_node	*parse_exec(char **ptr_to_line);
+t_node	*parse_line(char **ptr_to_line);
+t_node	*parse_pipe(char **ptr_to_line);
 t_node	*parse_redirection(t_node *node, char **str);
-int		peek(char **ptr_to_str, char *toks);
-int		token_get(char **ptr_to_str, char **token, char **end_q);
+int		peek(char **ptr_to_line, char *toks);
+int		token_get(char **ptr_to_line, char **token, char **end_q);
 
 /* Utils */
 void	hash_print(t_builtin **ht);

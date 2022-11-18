@@ -30,12 +30,12 @@ static int token_loop(char **scan, int ret) //retname scan to s
 	return (ret);
 }
 
-int	token_get(char **ptr_to_str, char **token, char **end_q)
+int	token_get(char **ptr_to_line, char **token, char **end_q)
 {
 	char	*scan; //rename to scan
 	int		ret;
 
-	scan = *ptr_to_str; //rename to inputptr
+	scan = *ptr_to_line; //rename to inputptr
 	scan = skip_whitespaces(scan);
 	if (*scan == '\0')
 		return (0);
@@ -46,6 +46,6 @@ int	token_get(char **ptr_to_str, char **token, char **end_q)
 	if (end_q)
 		*end_q = scan;
 	scan = skip_whitespaces(scan);
-	*ptr_to_str = scan;
+	*ptr_to_line = scan;
 	return (ret);
 }
