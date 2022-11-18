@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 17:42:55 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:09:31 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ void	input_file_read(char *filename);
 void	redirection_file(t_node *node, t_msh *msh, t_builtin **ht);
 void	strip_quotes(char **args);
 ssize_t	find_matching_quote(char *str, char quote);
+
+/* Expansions */
+void	expansions_dollar(t_node *node, t_msh *msh, char *dollar, size_t i);
+void	expansions_tilde(t_node *node, t_msh *msh, size_t i);
+void	expansions(t_node *node, t_msh *msh);
 
 /* Hash table */
 size_t	hash_function(char *program);

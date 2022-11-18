@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_dollar.c                                       :+:      :+:    :+:   */
+/*   expansions_dollar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:47:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:23:05 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static char	*save_begin(t_msh *msh, size_t i)
+static char	*save_begin(t_node *node, size_t i)
 {
 	char	*begin_arg;
 	size_t	len;
 
-	len = ft_strclen(msh->args[i], '$');
+	len = ft_strclen(node->arg[i], '$');
 	if (len)
 	{
-		begin_arg = ft_strsub(msh->args[i], 0, len);
+		begin_arg = ft_strsub(node->arg[i], 0, len);
 		return (begin_arg);
 	}
 	return (NULL);
@@ -83,20 +83,20 @@ static char	*get_new_arg(t_msh *msh, char **dollars)
 	return (new_arg);
 }
 
-void	get_dollar(t_msh *msh, char *dollar, size_t i)
+void	expansions_dollar(t_node *node, t_msh *msh, char *dollar, size_t i)
 {
 	char	**dollars;
 	char	*new_arg;
 	char	*begin_arg;
-
-	begin_arg = save_begin(msh, i);
+										//make $_ expand in $HOME$_$SHELL
+	begin_arg = save_begin(node, i);
 	dollars = ft_strsplit(dollar, '$');
 	new_arg = get_new_arg(msh, dollars);
 	ft_arrfree((void ***)&dollars, ft_arrlen((void **)dollars));
-	ft_strdel(&msh->args[i]);
+	ft_strdel(&node->arg[i]);
 	if (begin_arg && new_arg)
-		msh->args[i] = ft_strupdate(begin_arg, new_arg);
+		node->arg[i] = ft_strupdate(begin_arg, new_arg);
 	else
-		msh->args[i] = ft_strdup(new_arg);
+		node->arg[i] = ft_strdup(new_arg);
 	ft_strdel(&new_arg);
 }
