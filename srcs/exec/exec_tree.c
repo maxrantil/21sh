@@ -20,7 +20,7 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 {
 	int ret;
 
-	ret  = 0;
+	ret = 1;
 	if (!node)
 		exit(1);
 	if (node->type == EXEC)
@@ -38,15 +38,19 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 	else if (node->type == AMP)
 	{
 		if (fork_check() == 0)
+		{
 			exec_tree(node->left, msh, ht);
+		}
 	}
 	else if (node->type == SEMI)
 	{
-		if (fork_check() == 0)
+		// if (fork_check() == 0)
+		// {
 			exec_tree(node->left, msh, ht);
-		wait(0);
+			// exit(0);
+		// }
+		// wait(0);
 		exec_tree(node->right, msh, ht);
 	}
-	exit(ret);
 	return (ret);
 }

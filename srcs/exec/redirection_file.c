@@ -22,10 +22,12 @@ void	redirection_file(t_node *node, t_msh *msh, t_builtin **ht)
 	int file_fd;
 
 	file_fd = open_check(node->arg[0], node->type);	//	1 == > , 2 == >>
-	dup2_check(file_fd);
 	if (fork_check() == 0)
+	{
+		dup2_check(file_fd);
 		exec_tree(node->left, msh, ht);
+		exit(11);
+	}
 	wait(0);
 	close(file_fd);
-	// exit(0);
 }

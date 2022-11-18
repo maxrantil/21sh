@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 12:12:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/18 13:05:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ int	main(void)
 	free_mem(&msh, ht, 2);
 	ft_history_write_to_file(&t);
 	ft_disable_raw_mode(&t);
-	exit(0);
+	exit(20);
 }
