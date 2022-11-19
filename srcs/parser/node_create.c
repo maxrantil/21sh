@@ -17,7 +17,8 @@ t_node	*node_create(int type, t_node *left, t_node *right)
 	t_node *node;
 
 	node = (t_node *)malloc(sizeof(t_node));
-	ft_memset(node->arg, 0, 100);
+	// ft_memset(node->arg, 0, 100);
+	node->arg = NULL;
 	node->type = type;
 	node->left = left;
 	node->right = right;

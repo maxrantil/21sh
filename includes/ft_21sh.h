@@ -51,7 +51,7 @@ typedef struct s_msh
 typedef struct s_node
 {
 	int				type;
-	char			*arg[100];
+	char			**arg;
 	struct s_node	*left;
 	struct s_node	*right;
 }					t_node;
