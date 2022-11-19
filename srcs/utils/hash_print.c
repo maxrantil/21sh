@@ -12,9 +12,9 @@
 
 #include "ft_21sh.h"
 
-void	hash_print(t_builtin **ht)
+void	hash_print(t_hash **ht)
 {
-	t_builtin	*tmp;
+	t_hash	*tmp;
 	int i;
 
 	i = 0;

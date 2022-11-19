@@ -44,7 +44,7 @@ static int ft_getent(void)
 	return (status);
 }
 
-int last_step(t_msh *msh, t_builtin **ht, char *line)
+int last_step(t_msh *msh, t_hash **ht, char *line)
 {
 	t_node	*root;
 	int		status;
@@ -60,13 +60,12 @@ int last_step(t_msh *msh, t_builtin **ht, char *line)
 	return (status);
 }
 
-
 int	main(int argc, char **argv)
 {
-	t_msh			msh;
-	t_term			t;
-	t_builtin		**ht;
-	char			*line;
+	t_msh	msh;
+	t_term	t;
+	t_hash	**ht;
+	char	*line;
 
 	ht = NULL;
 	ft_getent();
@@ -81,11 +80,12 @@ int	main(int argc, char **argv)
 		write(1, "\n", 1);
 		if (line)
 		{
-			strip_quotes(&line);				//wrote place but this is only for testing
+			//strip_quotes(&line);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
 			status = last_step(&msh, ht, line);
 		}
 		ft_restart_cycle(&t);
 		free_mem(&msh, ht, 1);
+		ft_strdel(&line);
 	}
 	free_mem(&msh, ht, 2);
 	ft_history_write_to_file(&t);

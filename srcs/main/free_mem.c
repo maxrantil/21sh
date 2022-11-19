@@ -12,9 +12,9 @@
 
 #include "ft_21sh.h"
 
-static void	free_table(t_builtin **ht)
+static void	free_table(t_hash **ht)
 {
-	t_builtin	*tmp;
+	t_hash	*tmp;
 	int			i;
 
 	i = 0;
@@ -60,7 +60,7 @@ static void temp_handler(t_msh *msh)
 	}
 }
 
-void	free_mem(t_msh *msh, t_builtin **ht, ssize_t code)
+void	free_mem(t_msh *msh, t_hash **ht, ssize_t code)
 {
 	if (code == 1)
 	{

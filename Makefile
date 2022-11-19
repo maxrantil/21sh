@@ -96,11 +96,10 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(EXEC)exec_21sh \
 				$(EXEC)exec_pipe_node \
 				$(EXEC)exec_tree \
-				$(EXEC)fork_check \
+				$(EXEC)fork_wrap \
 				$(EXEC)input_file_read \
 				$(EXEC)redirection_file \
 				$(EXEC)strip_quotes \
-				$(EXEC)find_matching_quote \
 				$(EXPANSIONS)expansions_dollar \
 				$(EXPANSIONS)expansions_tilde \
 				$(EXPANSIONS)expansions \

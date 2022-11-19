@@ -12,18 +12,8 @@
 
 #include "ft_21sh.h"
 
-int last_step(t_msh *msh, t_builtin **ht, char *line);
-static void	opener(t_msh *msh, char *path, t_builtin **ht);
-
-int	fork_wrap(void)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == -1)
-		exit(1);
-	return (pid);
-}
+int last_step(t_msh *msh, t_hash **ht, char *line);
+static void	opener(t_msh *msh, char *path, t_hash **ht);
 
 static void	create_bash_script(char *line, const char *path_to_script)
 {
@@ -109,7 +99,7 @@ static void	second_fork(int *bash_fd, char *line, const char *path_to_script)
 
 /* Replace the get_input with your function which
 	will take the environ and the line from gnl */
-void	get_outputs(t_msh *msh, char *line, t_builtin **ht)
+void	get_outputs(t_msh *msh, char *line, t_hash **ht)
 {
 	const char	*path_to_script = "autotest/line_script.sh";
 	int			fd[2];
@@ -149,7 +139,7 @@ int	is_autotest(int argc, char **argv)
 	return (0);
 }
 
-static void	read_test_lines(t_msh *msh, int fd, t_builtin **ht)
+static void	read_test_lines(t_msh *msh, int fd, t_hash **ht)
 {
 	char	*line;
 
@@ -166,7 +156,7 @@ static void	read_test_lines(t_msh *msh, int fd, t_builtin **ht)
 	}
 }
 
-static void	opener(t_msh *msh, char *path, t_builtin **ht)
+static void	opener(t_msh *msh, char *path, t_hash **ht)
 {
 	int	fd;
 
@@ -185,7 +175,7 @@ static void	opener(t_msh *msh, char *path, t_builtin **ht)
 /* Usage ./21sh autotest <testfilepath> */
 /* arguments are copy of environment,
 	argc and argv are the arguments given to main */
-void	autotest(t_msh *msh, int argc, char **argv, t_builtin **ht)
+void	autotest(t_msh *msh, int argc, char **argv, t_hash **ht)
 {
 	if (is_autotest(argc, argv))
 	{
@@ -292,7 +282,7 @@ static struct termios	ft_init_raw(void)
 	return (orig_termios);
 }
 
-void	init(t_msh *msh, t_term *t, t_builtin ***ht, int argc, char **argv)
+void	init(t_msh *msh, t_term *t, t_hash ***ht, int argc, char **argv)
 {
 	ssize_t		i;
 	size_t		j;

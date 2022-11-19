@@ -12,17 +12,28 @@
 
 #include "ft_21sh.h"
 
+static ssize_t	find_matching_quote(char *str, char quote)
+{
+	ssize_t	i;
+
+	i = 1;
+	while (str[i] && str[i] != quote)
+		i++;
+	return (i);
+}
+
 void	strip_quotes(char **args)
 {
 	ssize_t	i;
+	size_t	len;
 	ssize_t	quote1;
 	ssize_t	quote2;
-	ssize_t	len;
 
+	len = 0;
 	while (*args)
 	{
 		i = -1;
-		len = (ssize_t)ft_strlen(*args);
+		len = ft_strlen(*args);
 		while ((*args)[++i])
 		{
 			if ((*args)[i] == '\'' || (*args)[i] == '"')
@@ -31,12 +42,13 @@ void	strip_quotes(char **args)
 				quote2 = find_matching_quote(&(*args)[i], (*args)[i]);
 				quote2 += quote1;
 				ft_memmove((void *)&(*args)[i], \
-				(void *)&(*args)[i + 1], (size_t)len - (size_t)quote1);
+				(void *)&(*args)[i + 1], len - (size_t)quote1);
 				ft_memmove((void *)&(*args)[quote2 - 1], \
-				(void *)&(*args)[quote2], (size_t)len - (size_t)quote2);
+				(void *)&(*args)[quote2], len - (size_t)quote2);
 				i = quote2 - 2;
 			}
 		}
-		args++;
+		if (*args)
+			args++;
 	}
 }

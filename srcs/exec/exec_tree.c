@@ -1,8 +1,8 @@
 #include "ft_21sh.h"
 
-static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
+static int	exec_args(t_node *node, t_msh *msh, t_hash **ht)
 {
-	t_builtin	*tmp;
+	t_hash	*tmp;
 	size_t		index;
 
 
@@ -21,7 +21,7 @@ static int	exec_args(t_node *node, t_msh *msh, t_builtin **ht)
 	return (exec_21sh(node, msh, ht));
 }
 
-int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
+int	exec_tree(t_node *node, t_msh *msh, t_hash **ht)
 {
 	int ret;
 
@@ -38,7 +38,7 @@ int	exec_tree(t_node *node, t_msh *msh, t_builtin **ht)
 		input_file_read(node->arg[0]);
 	else if (node->type == AMP)
 	{
-		if (fork_check() == 0)
+		if (fork_wrap() == 0)
 		{
 			// exec_tree(node->left, msh, ht);
 			execve(node->arg[0], node->arg, msh->env); //this is 42sh shit, make better error handling etc

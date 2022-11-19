@@ -7,13 +7,12 @@ char *lexer(char *str)
 	int j = 0;
 	char *new;
 
-	new = malloc(sizeof(char) * ft_strlen(str));
+	new = ft_strnew(ft_strlen(str));
 	while (str[i])
 	{
-		if (str[i] == '\\')
+		if (str[i] && str[i] == '\\')
 			i++;
 		new[j++] = str[i++];
 	}
-	new[j] = '\0';
 	return (new);
 }

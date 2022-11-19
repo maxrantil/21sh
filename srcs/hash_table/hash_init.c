@@ -15,7 +15,7 @@
 /*
  * It takes a hash table and a pointer to a builtin, and inserts the builtin into the hash table
  */
-static char	*ht_insert(t_builtin **ht, t_builtin *p)
+static char	*ht_insert(t_hash **ht, t_hash *p)
 {
 	size_t index;
 
@@ -27,28 +27,28 @@ static char	*ht_insert(t_builtin **ht, t_builtin *p)
 	return (ht[index]->program);
 }
 
-static void	init_ht_struct(t_builtin ***ht, char *str, int (*f)(t_node *node, t_msh *msh))
+static void	init_ht_struct(t_hash ***ht, char *str, int (*f)(t_node *node, t_msh *msh))
 {
-	t_builtin	*new;
+	t_hash	*new;
 
-	new = (t_builtin *)ft_memalloc(sizeof(t_builtin));
+	new = (t_hash *)ft_memalloc(sizeof(t_hash));
 	new->program = str;
 	new->function = f;
 	new->next = NULL;
 	ht_insert(*ht, new);
 }
 
-static void	init_ht(t_builtin ***ht)
+static void	init_ht(t_hash ***ht)
 {
 	int	i;
 
-	*ht = (t_builtin **)malloc(sizeof(t_builtin *) * (HASH_SIZE + 1)); //be sure to free this, not done now
+	*ht = (t_hash **)malloc(sizeof(t_hash *) * (HASH_SIZE + 1)); //be sure to free this, not done now
 	i =	0;
 	while (i < HASH_SIZE)
 		(*ht)[i++] = NULL;
 }
 
-void hash_init(t_builtin ***ht)
+void hash_init(t_hash ***ht)
 {
 	init_ht(ht);
 	init_ht_struct(ht, "cd", &msh_cd);

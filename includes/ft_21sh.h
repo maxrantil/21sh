@@ -61,7 +61,7 @@ typedef struct s_builtin {
 	int					(*function)(t_node *node, t_msh *msh);
 	struct s_builtin	*next;
 }
-						t_builtin;
+						t_hash;
 
 /* Builtin */
 char	*env_getvalue(char **env, char *var);
@@ -83,14 +83,13 @@ void	error_print(char *arg, int i);
 
 /* Exec */
 int		dup2_check(int file_fd);
-int		exec_21sh(t_node *node, t_msh *msh, t_builtin **ht);
-void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht);
-int		exec_tree(t_node *node, t_msh *msh, t_builtin **ht);
-int		fork_check(void);
+int		exec_21sh(t_node *node, t_msh *msh, t_hash **ht);
+void	exec_pipe_node(t_node *node, t_msh *msh, t_hash **ht);
+int		exec_tree(t_node *node, t_msh *msh, t_hash **ht);
+int		fork_wrap(void);
 void	input_file_read(char *filename);
-void	redirection_file(t_node *node, t_msh *msh, t_builtin **ht);
+void	redirection_file(t_node *node, t_msh *msh, t_hash **ht);
 void	strip_quotes(char **args);
-ssize_t	find_matching_quote(char *str, char quote);
 
 /* Expansions */
 void	expansions_dollar(t_node *node, t_msh *msh, char *dollar, size_t i);
@@ -99,14 +98,14 @@ void	expansions(t_node *node, t_msh *msh);
 
 /* Hash table */
 size_t	hash_function(char *program);
-void	hash_init(t_builtin ***ht);
+void	hash_init(t_hash ***ht);
 
 /* Lexer */
 char	*lexer(char *str);
 /* Main */
-void	free_mem(t_msh *msh, t_builtin **ht,ssize_t code);
-// void	init(t_msh *msh, t_term *t, t_builtin ***ht);
-void	init(t_msh *msh, t_term *t, t_builtin ***ht, int argc, char **argv);
+void	free_mem(t_msh *msh, t_hash **ht,ssize_t code);
+// void	init(t_msh *msh, t_term *t, t_hash ***ht);
+void	init(t_msh *msh, t_term *t, t_hash ***ht, int argc, char **argv);
 void	tree_free(t_node *node);
 
 /* Parser */
@@ -127,7 +126,7 @@ int		peek(char **ptr_to_line, char *toks);
 int		token_get(char **ptr_to_line, char **token, char **end_q);
 
 /* Utils */
-void	hash_print(t_builtin **ht);
+void	hash_print(t_hash **ht);
 void	tree_print(t_node *root);
 
 #endif

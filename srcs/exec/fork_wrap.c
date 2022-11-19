@@ -1,13 +1,13 @@
 #include "ft_21sh.h"
 
-int	fork_check(void)
+pid_t	fork_wrap(void)
 {
-	int	pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
 	{
-		write(2, "error on fork\n", 14);
+		ft_putendl_fd("error on fork", 2);
 		exit(1);
 	}
 	return (pid);

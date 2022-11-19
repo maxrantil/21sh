@@ -1,6 +1,6 @@
 #include "ft_21sh.h"
 
-void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht)
+void	exec_pipe_node(t_node *node, t_msh *msh, t_hash **ht)
 {
 	int	p[2];
 
@@ -9,7 +9,7 @@ void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht)
 		write(2, "error on pipe\n", 14);
 		exit(1);
 	}
-	if (fork_check() == 0)
+	if (fork_wrap() == 0)
 	{
 		close(1);
 		dup(p[1]);
@@ -18,7 +18,7 @@ void	exec_pipe_node(t_node *node, t_msh *msh, t_builtin **ht)
 		exec_tree(node->left, msh, ht);
 		exit(EXIT_SUCCESS);
 	}
-	if (fork_check() == 0)
+	if (fork_wrap() == 0)
 	{
 		close(0);
 		dup(p[0]);

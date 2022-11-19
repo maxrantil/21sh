@@ -80,13 +80,13 @@ static char	*verify_arg(t_node *node, t_msh *msh)
 	return (node->arg[0]);
 }
 
-int	exec_21sh(t_node *node, t_msh *msh, t_builtin **ht)
+int	exec_21sh(t_node *node, t_msh *msh, t_hash **ht)
 {
 	pid_t	pid;
 	int		status;
 	char	*ptr;
 
-	pid = fork();
+	pid = fork_wrap();
 	if (pid == 0)
 	{
 		if (node->arg[0][0] == '.')
@@ -108,8 +108,6 @@ int	exec_21sh(t_node *node, t_msh *msh, t_builtin **ht)
 		free_mem(msh, ht, 1);
 		exit(EXIT_FAILURE);
 	}
-	else if (pid < 0)
-		ft_putstr_fd("error: pid failed\n", STDERR_FILENO);
 	else
 		waitpid(pid, &status, 0);
 	return (1);
