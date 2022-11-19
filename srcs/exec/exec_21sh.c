@@ -61,10 +61,8 @@ static char	*verify_arg(t_node *node, t_msh *msh)
 
 	i = 0;
 	while (msh->paths[i] \
-		&& !ft_strequ(node->arg[0], ".") \
-		&& !ft_strequ(node->arg[0], "..") \
-		&& node->arg[0][0] != '\0' \
-		&& node->arg[0][0] != '/')
+		&& node->arg[0] && node->arg[0][0] != '\0' && node->arg[0][0] != '/' \
+		&& !ft_strequ(node->arg[0], ".") && !ft_strequ(node->arg[0], ".."))
 	{
 		verify = ft_strjoin(msh->paths[i], "/");
 		verify = ft_strupdate(verify, node->arg[0]);
@@ -83,7 +81,6 @@ static char	*verify_arg(t_node *node, t_msh *msh)
 int	exec_21sh(t_node *node, t_msh *msh, t_hash **ht)
 {
 	pid_t	pid;
-	int		status;
 	char	*ptr;
 
 	pid = fork_wrap();
@@ -108,7 +105,6 @@ int	exec_21sh(t_node *node, t_msh *msh, t_hash **ht)
 		free_mem(msh, ht, 1);
 		exit(EXIT_FAILURE);
 	}
-	else
-		waitpid(pid, &status, 0);
+	wait(0);
 	return (1);
 }
