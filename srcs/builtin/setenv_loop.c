@@ -24,7 +24,7 @@ void	setenv_loop(t_msh *msh, char *arg, int flag_temp)
 		if (!ft_strncmp(msh->env[i], key, ft_strlen(key)))
 		{
 			if (flag_temp)
-				vec_push(&msh->v_temp, msh->env[i]); //some read memory error, valgrind it later
+				vec_push(&msh->v_tmp_env, msh->env[i]); //some read memory error, valgrind it later
 			msh->env = unsetenv_var(msh->env, key);
 			break ;
 		}

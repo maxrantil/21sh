@@ -42,9 +42,9 @@
 
 typedef struct s_msh
 {
-	t_vec	v_temp;
-	char	**env;
+	t_vec	v_tmp_env;
 	char	**temp_env;
+	char	**env;
 	char	**paths;
 }			t_msh;
 
@@ -56,12 +56,12 @@ typedef struct s_node
 	struct s_node	*right;
 }					t_node;
 
-typedef struct s_builtin {
-	char				*program;
-	int					(*function)(t_node *node, t_msh *msh);
-	struct s_builtin	*next;
-}
-						t_hash;
+typedef struct	s_hash
+{
+	char			*program;
+	int				(*function)(t_node *node, t_msh *msh);
+	struct s_hash	*next;
+}					t_hash;
 
 /* Builtin */
 char	*env_getvalue(char **env, char *var);

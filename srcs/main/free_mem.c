@@ -44,19 +44,19 @@ static void temp_handler(t_msh *msh)
 	msh_unsetenv(NULL, msh); //put node in here later
 	ft_arrfree((void ***)&msh->temp_env, \
 	ft_arrlen((void **)msh->temp_env));
-	if (msh->v_temp.len)
+	if (msh->v_tmp_env.len)
 	{
 		i = 0;
-		while (i < msh->v_temp.len)
+		while (i < msh->v_tmp_env.len)
 		{
-			char *tmp = (char *)vec_get(&msh->v_temp, i);
+			char *tmp = (char *)vec_get(&msh->v_tmp_env, i);
 			char *key = env_key_extract(tmp);
 			msh->env = setenv_var(msh->env, key, \
 			ft_strchr(tmp, '=') + 1);
 			i++;
 			ft_strdel(&key);
 		}
-		msh->v_temp.len = 0;
+		msh->v_tmp_env.len = 0;
 	}
 }
 
@@ -77,6 +77,6 @@ void	free_mem(t_msh *msh, t_hash **ht, ssize_t code)
 		if (msh->env)
 			ft_arrfree((void ***)&msh->env, ft_arrlen((void **)msh->env));
 		free_table(ht);
-		vec_free(&msh->v_temp);
+		vec_free(&msh->v_tmp_env);
 	}
 }

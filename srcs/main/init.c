@@ -302,7 +302,7 @@ void	init(t_msh *msh, t_term *t, t_hash ***ht, int argc, char **argv)
 	i = -1;
 	msh->env = get_env(msh->env, j, i);
 	msh->temp_env = NULL;
-	vec_new(&msh->v_temp, 0, MAX_NAME);
+	vec_new(&msh->v_tmp_env, 0, MAX_NAME);
 	autotest(msh, argc, argv, *ht);
 	ft_printf("{yel}${gre}>{nor} ");
 }
