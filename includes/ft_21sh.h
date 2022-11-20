@@ -26,19 +26,26 @@
 # include <sys/wait.h>
 # endif
 
-# define MAX_PATHLEN 1024
-# define MAX_NAME 256
-# define HASH_SIZE 25
-
-/* from lexer */
-# define COUNT 10
+/* Exec Node */
 # define EXEC 1
+/* | */
 # define PIPE 2
-# define REDIROVER 3 // >
-# define REDIRAPP 4 // >>
-# define REDIRIN 5 // <
+/* > */
+# define REDIROVER 3
+/* >> */
+# define REDIRAPP 4
+/* < */
+# define REDIRIN 5
+/* & */
 # define AMP 6
+/* ; */
 # define SEMI 7
+/* Tree Print */
+# define COUNT 10
+/* Hash Table */
+# define HASH_SIZE 25
+/* Unix */
+# define MAX_PATHLEN 1024
 
 typedef struct s_msh
 {
@@ -46,7 +53,7 @@ typedef struct s_msh
 	char	**temp_env;
 	char	**env;
 	char	**paths;
-}			t_msh;
+}			t_shell;
 
 typedef struct s_node
 {
@@ -59,22 +66,22 @@ typedef struct s_node
 typedef struct	s_hash
 {
 	char			*program;
-	int				(*function)(t_node *node, t_msh *msh);
+	int				(*function)(t_node *n, t_shell *sh);
 	struct s_hash	*next;
 }					t_hash;
 
 /* Builtin */
 char	*env_getvalue(char **env, char *var);
 char	*env_key_extract(char *key_value);
-char	**env_underscore(t_node *node, t_msh *msh);
-int		msh_cd(t_node *node, t_msh *msh);
-int		msh_echo(t_node *node, t_msh *msh);
-int		msh_env(t_node *node, t_msh *msh);
-int		msh_setenv(t_node *node, t_msh *msh);
-int		msh_unsetenv(t_node *node, t_msh *msh);
-int		msh_exit(t_node *node, t_msh *msh);
-char	**pwd_update(t_msh *msh, char *oldcwd);
-void	setenv_loop(t_msh *msh, char *arg, int flag_temp);
+char	**env_underscore(t_node *n, t_shell *sh);
+int		msh_cd(t_node *n, t_shell *sh);
+int		msh_echo(t_node *n, t_shell *sh);
+int		msh_env(t_node *n, t_shell *sh);
+int		msh_setenv(t_node *n, t_shell *sh);
+int		msh_unsetenv(t_node *n, t_shell *sh);
+int		msh_exit(t_node *n, t_shell *sh);
+char	**pwd_update(t_shell *sh, char *oldcwd);
+void	setenv_loop(t_shell *sh, char *arg, int flag_temp);
 char	**setenv_var(char **env, char *key, char *value);
 char	**unsetenv_var(char **env, char *key);
 
@@ -83,18 +90,18 @@ void	error_print(char *arg, int i);
 
 /* Exec */
 int		dup2_check(int file_fd);
-int		exec_21sh(t_node *node, t_msh *msh, t_hash **ht);
-void	exec_pipe_node(t_node *node, t_msh *msh, t_hash **ht);
-int		exec_tree(t_node *node, t_msh *msh, t_hash **ht);
+int		exec_21sh(t_node *n, t_shell *sh, t_hash **ht);
+void	exec_pipe_node(t_node *n, t_shell *sh, t_hash **ht);
+int		exec_tree(t_node *n, t_shell *sh, t_hash **ht);
 int		fork_wrap(void);
 void	input_file_read(char *filename);
-void	redirection_file(t_node *node, t_msh *msh, t_hash **ht);
+void	redirection_file(t_node *n, t_shell *sh, t_hash **ht);
 void	strip_quotes(char **args);
 
 /* Expansions */
-void	expansions_dollar(t_node *node, t_msh *msh, char *dollar, size_t i);
-void	expansions_tilde(t_node *node, t_msh *msh, size_t i);
-void	expansions(t_node *node, t_msh *msh);
+void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
+void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
+void	expansions(t_node *n, t_shell *sh);
 
 /* Hash table */
 size_t	hash_function(char *program);
@@ -102,26 +109,22 @@ void	hash_init(t_hash ***ht);
 
 /* Lexer */
 char	*lexer(char *str);
+
 /* Main */
-void	free_mem(t_msh *msh, t_hash **ht,ssize_t code);
-// void	init(t_msh *msh, t_term *t, t_hash ***ht);
-void	init(t_msh *msh, t_term *t, t_hash ***ht, int argc, char **argv);
-void	tree_free(t_node *node);
+void	free_mem(t_shell *sh, t_hash **ht,ssize_t code);
+// void	init(t_shell *sh, t_term *t, t_hash ***ht);
+void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv);
+void	tree_free(t_node *n);
 
 /* Parser */
 // size_t	count_arguments(char *str);
-// void	expansions(t_msh *msh);
-// ssize_t	find_matching_quote(char *str, char quote);
 // char	**get_arguments(char *str, size_t argc);
-// void	get_dollar(t_msh *msh, char *dollar, size_t i);
-// int		parser(t_msh *msh);
-// void	strip_quotes(char **args);
-// void	tilde(t_msh *msh, size_t i);
+// int		parser(t_shell *sh);
 t_node	*node_create(int type, t_node *left, t_node *right);
 t_node	*parse_exec(char **ptr_to_line);
 t_node	*parse_line(char **ptr_to_line);
 t_node	*parse_pipe(char **ptr_to_line);
-t_node	*parse_redirection(t_node *node, char **str);
+t_node	*parse_redirection(t_node *n, char **str);
 int		peek(char **ptr_to_line, char *toks);
 int		token_get(char **ptr_to_line, char **token, char **end_q);
 

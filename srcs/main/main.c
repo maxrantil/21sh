@@ -44,7 +44,7 @@ static int ft_getent(void)
 	return (status);
 }
 
-int last_step(t_msh *msh, t_hash **ht, char *line)
+int last_step(t_shell *sh, t_hash **ht, char *line)
 {
 	t_node	*root;
 	int		status;
@@ -54,7 +54,7 @@ int last_step(t_msh *msh, t_hash **ht, char *line)
 	if (root)
 	{
 		// tree_print(root);
-		status = exec_tree(root, msh, ht);
+		status = exec_tree(root, sh, ht);
 		tree_free(root);
 	}
 	return (status);
@@ -62,14 +62,14 @@ int last_step(t_msh *msh, t_hash **ht, char *line)
 
 int	main(int argc, char **argv)
 {
-	t_msh	msh;
+	t_shell	sh;
 	t_term	t;
 	t_hash	**ht;
 	char	*line;
 
 	ht = NULL;
 	ft_getent();
-	init(&msh, &t, &ht, argc, argv);
+	init(&sh, &t, &ht, argc, argv);
 	int status = 1;
 	while (status)
 	{
@@ -81,13 +81,13 @@ int	main(int argc, char **argv)
 		if (line)
 		{
 			//strip_quotes(&line);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
-			status = last_step(&msh, ht, line);
+			status = last_step(&sh, ht, line);
 		}
 		ft_restart_cycle(&t);
-		free_mem(&msh, ht, 1);
+		free_mem(&sh, ht, 1);
 		ft_strdel(&line);
 	}
-	free_mem(&msh, ht, 2);
+	free_mem(&sh, ht, 2);
 	ft_history_write_to_file(&t);
 	ft_disable_raw_mode(&t);
 	exit(20);

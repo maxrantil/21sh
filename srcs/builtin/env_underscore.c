@@ -12,29 +12,29 @@
 
 #include "ft_21sh.h"
 
-static char	*underscore_change(t_node *node)
+static char	*underscore_change(t_node *n)
 {
 	size_t	last_arg;
 
-	last_arg = ft_arrlen((void **)node->arg) - 1;
-	if (!ft_strncmp(node->arg[last_arg], "\0", 1) && last_arg > 0)
+	last_arg = ft_arrlen((void **)n->arg) - 1;
+	if (!ft_strncmp(n->arg[last_arg], "\0", 1) && last_arg > 0)
 		--last_arg;
-	return (ft_strjoin("_=", node->arg[last_arg]));
+	return (ft_strjoin("_=", n->arg[last_arg]));
 }
 
-char	**env_underscore(t_node *node, t_msh *msh)
+char	**env_underscore(t_node *n, t_shell *sh)
 {
 	size_t	i;
 
 	i = 0;
-	while (msh->env[i])
+	while (sh->env[i])
 	{
-		if (!ft_strncmp(msh->env[i], "_=", 2))
+		if (!ft_strncmp(sh->env[i], "_=", 2))
 		{
-			ft_strdel(&msh->env[i]);
-			msh->env[i] = underscore_change(node);
+			ft_strdel(&sh->env[i]);
+			sh->env[i] = underscore_change(n);
 		}
 		i++;
 	}
-	return (msh->env);
+	return (sh->env);
 }

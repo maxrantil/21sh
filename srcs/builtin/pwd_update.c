@@ -30,12 +30,12 @@ static char	**change_pwd(char **env, char *cwd, char *key)
 	return (setenv_var(env, key, cwd));
 }
 
-char	**pwd_update(t_msh *msh, char *oldcwd)
+char	**pwd_update(t_shell *sh, char *oldcwd)
 {
 	char	cwd[MAX_PATHLEN];
 
-	msh->env = change_pwd(msh->env, oldcwd, "OLDPWD=");
+	sh->env = change_pwd(sh->env, oldcwd, "OLDPWD=");
 	getcwd(cwd, sizeof(cwd));
-	msh->env = change_pwd(msh->env, cwd, "PWD=");
-	return (msh->env);
+	sh->env = change_pwd(sh->env, cwd, "PWD=");
+	return (sh->env);
 }

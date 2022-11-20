@@ -27,7 +27,7 @@ static char	*ht_insert(t_hash **ht, t_hash *p)
 	return (ht[index]->program);
 }
 
-static void	init_ht_struct(t_hash ***ht, char *str, int (*f)(t_node *node, t_msh *msh))
+static void	init_ht_struct(t_hash ***ht, char *str, int (*f)(t_node *n, t_shell *sh))
 {
 	t_hash	*new;
 

@@ -12,14 +12,14 @@ typedef struct treenode {
 
 treenode *createnode(int value)
 {
-	treenode *node = malloc(sizeof(treenode));
-	if (node != NULL) 
+	treenode *n = malloc(sizeof(treenode));
+	if (n != NULL)
 	{
-		node->value = value;
-		node->left = NULL;
-		node->right = NULL;
+		n->value = value;
+		n->left = NULL;
+		n->right = NULL;
 	}
-	return node;
+	return n;
 }
 
 void printtabs(int n)
@@ -48,29 +48,29 @@ void printtree(treenode *root) {
 
 bool insert_tree(treenode **root, int value)
 {
-	treenode *node = *root;
-	if (node == NULL)
+	treenode *n = *root;
+	if (n == NULL)
 	{
 		*root = createnode(value);
 		return true;
 	}
-	if (value < node->value)
+	if (value < n->value)
 	{
-		if (node->left == NULL)
+		if (n->left == NULL)
 		{
-			node->left = createnode(value);
+			n->left = createnode(value);
 			return true;
 		}
-		return insert_tree(&node->left, value);
+		return insert_tree(&n->left, value);
 	}
-	if (value > node->value)
+	if (value > n->value)
 	{
-		if (node->right == NULL)
+		if (n->right == NULL)
 		{
-			node->right = createnode(value);
+			n->right = createnode(value);
 			return true;
 		}
-		return insert_tree(&node->right, value);
+		return insert_tree(&n->right, value);
 	}
 	return false;
 }

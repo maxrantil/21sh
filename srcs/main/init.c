@@ -12,8 +12,8 @@
 
 #include "ft_21sh.h"
 
-int last_step(t_msh *msh, t_hash **ht, char *line);
-static void	opener(t_msh *msh, char *path, t_hash **ht);
+int last_step(t_shell *sh, t_hash **ht, char *line);
+static void	opener(t_shell *sh, char *path, t_hash **ht);
 
 static void	create_bash_script(char *line, const char *path_to_script)
 {
@@ -99,7 +99,7 @@ static void	second_fork(int *bash_fd, char *line, const char *path_to_script)
 
 /* Replace the get_input with your function which
 	will take the environ and the line from gnl */
-void	get_outputs(t_msh *msh, char *line, t_hash **ht)
+void	get_outputs(t_shell *sh, char *line, t_hash **ht)
 {
 	const char	*path_to_script = "autotest/line_script.sh";
 	int			fd[2];
@@ -115,7 +115,7 @@ void	get_outputs(t_msh *msh, char *line, t_hash **ht)
 		dup(fd[1]);
 		close(fd[0]);
 		close(fd[1]);
-		last_step(msh, ht, line);
+		last_step(sh, ht, line);
 		exit (1);
 	}
 	wait(0);
@@ -139,7 +139,7 @@ int	is_autotest(int argc, char **argv)
 	return (0);
 }
 
-static void	read_test_lines(t_msh *msh, int fd, t_hash **ht)
+static void	read_test_lines(t_shell *sh, int fd, t_hash **ht)
 {
 	char	*line;
 
@@ -149,14 +149,14 @@ static void	read_test_lines(t_msh *msh, int fd, t_hash **ht)
 		if (*line != '#')
 		{
 			if (ft_strchr(line, '/'))
-				opener(msh, line, ht);
+				opener(sh, line, ht);
 			else
-				get_outputs(msh, line, ht);
+				get_outputs(sh, line, ht);
 		}
 	}
 }
 
-static void	opener(t_msh *msh, char *path, t_hash **ht)
+static void	opener(t_shell *sh, char *path, t_hash **ht)
 {
 	int	fd;
 
@@ -168,18 +168,18 @@ static void	opener(t_msh *msh, char *path, t_hash **ht)
 		ft_printf("21sh: autotest: open failed\n");
 		exit (fd);
 	}
-	read_test_lines(msh, fd, ht);
+	read_test_lines(sh, fd, ht);
 }
 
 /* You need to modify the read_test_lines() */
 /* Usage ./21sh autotest <testfilepath> */
 /* arguments are copy of environment,
 	argc and argv are the arguments given to main */
-void	autotest(t_msh *msh, int argc, char **argv, t_hash **ht)
+void	autotest(t_shell *sh, int argc, char **argv, t_hash **ht)
 {
 	if (is_autotest(argc, argv))
 	{
-		opener(msh, argv[2], ht);
+		opener(sh, argv[2], ht);
 		exit (1);
 	}
 }
@@ -282,7 +282,7 @@ static struct termios	ft_init_raw(void)
 	return (orig_termios);
 }
 
-void	init(t_msh *msh, t_term *t, t_hash ***ht, int argc, char **argv)
+void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv)
 {
 	ssize_t		i;
 	size_t		j;
@@ -296,13 +296,13 @@ void	init(t_msh *msh, t_term *t, t_hash ***ht, int argc, char **argv)
 	ft_printf("            {blu}- {yel}2{gre}1{red}s{blu}h {yel}-\n");
 	ft_printf("   {yel}made {blu}by {gre}rvourenl {red}and {yel}mrantil{blu}.");
 	ft_printf("\n{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{nor}\n\n");
-	msh->paths = NULL;
-	msh->env = NULL;
+	sh->paths = NULL;
+	sh->env = NULL;
 	j = 0;
 	i = -1;
-	msh->env = get_env(msh->env, j, i);
-	msh->temp_env = NULL;
-	vec_new(&msh->v_tmp_env, 0, MAX_NAME);
-	autotest(msh, argc, argv, *ht);
+	sh->env = get_env(sh->env, j, i);
+	sh->temp_env = NULL;
+	vec_new(&sh->v_tmp_env, 0, MAX_PATHLEN);
+	autotest(sh, argc, argv, *ht);
 	ft_printf("{yel}${gre}>{nor} ");
 }

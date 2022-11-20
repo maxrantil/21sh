@@ -14,13 +14,13 @@
 
 t_node	*node_create(int type, t_node *left, t_node *right)
 {
-	t_node *node;
+	t_node *n;
 
-	node = (t_node *)malloc(sizeof(t_node));
-	// ft_memset(node->arg, 0, 100);
-	node->arg = NULL;
-	node->type = type;
-	node->left = left;
-	node->right = right;
-	return (node);
+	n = (t_node *)malloc(sizeof(t_node));
+	// ft_memset(n->arg, 0, 100);
+	n->arg = NULL;
+	n->type = type;
+	n->left = left;
+	n->right = right;
+	return (n);
 }
