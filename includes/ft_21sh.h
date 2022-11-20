@@ -53,6 +53,7 @@ typedef struct s_msh
 	char	**temp_env;
 	char	**env;
 	char	**paths;
+	char	*cl;
 }			t_shell;
 
 typedef struct s_node
@@ -111,7 +112,7 @@ void	hash_init(t_hash ***ht);
 char	*lexer(char *str);
 
 /* Main */
-void	free_mem(t_shell *sh, t_hash **ht,ssize_t code);
+void	free_mem(t_node *n, t_shell *sh, t_hash **ht,ssize_t code);
 void	init(t_shell *sh, t_term *t, t_hash ***ht);
 // void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv);
 void	tree_free(t_node *n);

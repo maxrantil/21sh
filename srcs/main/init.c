@@ -298,6 +298,7 @@ void	init(t_shell *sh, t_term *t, t_hash ***ht)
 	ft_printf("\n{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{nor}\n\n");
 	sh->paths = NULL;
 	sh->env = NULL;
+	sh->cl = NULL;
 	j = 0;
 	i = -1;
 	sh->env = get_env(sh->env, j, i);

@@ -78,9 +78,9 @@ int	msh_env(t_node *n, t_shell *sh)
 	{
 		i = 0;
 		while (sh->env[i])
-			ft_printf("%s\n", sh->env[i++]);
+			ft_putendl(sh->env[i++]);
 	}
 	else
-		ft_printf("minishell: env: environment is empty\n");
+		ft_putendl_fd("21sh: env: environment is empty", 2);
 	return (1);
 }

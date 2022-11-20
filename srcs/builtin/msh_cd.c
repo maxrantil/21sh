@@ -15,7 +15,7 @@
 static void	exec_tilde(char *arg)
 {
 	if (chdir(arg) != 0)
-		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+		ft_putstr_fd("21sh: cd: HOME not set\n", STDERR_FILENO);
 }
 
 static void	exec_dash(char **env)
@@ -25,7 +25,7 @@ static void	exec_dash(char **env)
 
 	oldpwd = env_getvalue(env, "OLDPWD=");
 	if (chdir(oldpwd) != 0)
-		ft_putstr_fd("minishell: cd: OLDPWD not set\n", STDERR_FILENO);
+		ft_putstr_fd("21sh: cd: OLDPWD not set\n", STDERR_FILENO);
 	else
 	{
 		getcwd(cwd, sizeof(cwd));
@@ -40,7 +40,7 @@ static void	exec_home(char **env)
 
 	home = env_getvalue(env, "HOME=");
 	if (chdir(home) != 0)
-		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+		ft_putstr_fd("21sh: cd: HOME not set\n", STDERR_FILENO);
 	ft_strdel(&home);
 }
 
@@ -68,6 +68,6 @@ int	msh_cd(t_node *n, t_shell *sh)
 		sh->env = pwd_update(sh, cwd);
 	}
 	else
-		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd("21sh: cd: too many arguments\n", STDERR_FILENO);
 	return (1);
 }

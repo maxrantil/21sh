@@ -43,12 +43,12 @@ static void	print_usage(char *arg, int status)
 {
 	if (ft_strequ(arg, "."))
 	{
-		ft_putstr_fd("minishell: .: filename argument required\n", \
+		ft_putstr_fd("21sh: .: filename argument required\n", \
 		STDERR_FILENO);
 		ft_putstr_fd(".: usage: . filename [arguments]\n", STDERR_FILENO);
 		return ;
 	}
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd("21sh: ", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	if (!ft_strchr(arg, '/'))
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
@@ -58,7 +58,7 @@ static void	print_usage(char *arg, int status)
 
 static void	print_setenv_error(char *arg)
 {
-	ft_putstr_fd("minishell: setenv: `", STDERR_FILENO);
+	ft_putstr_fd("21sh: setenv: `", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 }
@@ -81,7 +81,7 @@ void	error_print(char *arg, int i)
 		print_usage(arg, status);
 	else if (i == 5)
 	{
-		ft_printf("minishell: cd: %s", arg);
+		ft_printf("21sh: cd: %s", arg);
 		print_status(status, arg);
 	}
 	else if (i == 6)

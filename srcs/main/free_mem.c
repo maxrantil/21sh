@@ -37,11 +37,11 @@ static void	free_table(t_hash **ht)
 	// ht = NULL;
 }
 
-static void temp_handler(t_shell *sh)
+static void temp_handler(t_node *n, t_shell *sh)
 {
 	size_t	i;
 
-	msh_unsetenv(NULL, sh); //put n in here later
+	msh_unsetenv(n, sh); //put n in here later
 	ft_arrfree((void ***)&sh->temp_env, \
 	ft_arrlen((void **)sh->temp_env));
 	if (sh->v_tmp_env.len)
@@ -60,17 +60,18 @@ static void temp_handler(t_shell *sh)
 	}
 }
 
-void	free_mem(t_shell *sh, t_hash **ht, ssize_t code)
+void	free_mem(t_node *root, t_shell *sh, t_hash **ht, ssize_t code)
 {
 	if (code == 1)
 	{
 		if (sh->temp_env)
-			temp_handler(sh);
-		// if (sh->args)
-			// ft_arrfree((void ***)&sh->args, ft_arrlen((void **)sh->args));
+			temp_handler(root, sh);
 		if (sh->paths)
 			ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
-		// ft_strdel(&sh->cl);
+		if (*sh->cl)
+			ft_strdel(&sh->cl);
+		// tree_print(root);
+		tree_free(root);
 	}
 	if (code == 2)
 	{
