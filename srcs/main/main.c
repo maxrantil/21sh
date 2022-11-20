@@ -66,11 +66,11 @@ int	main(int argc, char **argv)
 	t_term	t;
 	t_hash	**ht;
 	char	*line;
+	int status = 1;
 
 	ht = NULL;
 	ft_getent();
 	init(&sh, &t, &ht, argc, argv);
-	int status = 1;
 	while (status)
 	{
 		if (!ft_input_cycle(&t))

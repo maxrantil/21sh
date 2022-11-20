@@ -49,7 +49,6 @@ static char	**set_tempenv(t_node *n, t_shell *sh, size_t len)
 static int	env_heart(t_node *n, t_shell *sh, size_t arglen)
 {
 	size_t	i;
-	char	**temp_args;
 
 	i = 0;
 	while (n->arg[++i] && ft_strchr(n->arg[i], '='))	//make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_' or key=NULL
@@ -57,14 +56,7 @@ static int	env_heart(t_node *n, t_shell *sh, size_t arglen)
 	sh->temp_env = set_tempenv(n, sh, i - 1);
 	if (i < arglen)
 	{
-		// sh->arg = switch_args(n->arg, arglen, i);
-		int y = 0;
-		while (n->arg[y]) // all this is bollocks
-			ft_strclr(n->arg[y++]);
-		temp_args = switch_args(n->arg, arglen, i);
-		y = -1;
-		while (temp_args[++y])
-			n->arg[y] = ft_strdup(temp_args[y]);
+		n->arg = switch_args(n->arg, arglen, i);
 		exec_21sh(n, sh, NULL);
 		return (1);
 	}
