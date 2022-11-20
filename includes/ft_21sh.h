@@ -112,8 +112,8 @@ char	*lexer(char *str);
 
 /* Main */
 void	free_mem(t_shell *sh, t_hash **ht,ssize_t code);
-// void	init(t_shell *sh, t_term *t, t_hash ***ht);
-void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv);
+void	init(t_shell *sh, t_term *t, t_hash ***ht);
+// void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv);
 void	tree_free(t_node *n);
 
 /* Parser */

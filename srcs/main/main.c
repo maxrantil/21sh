@@ -44,24 +44,20 @@ static int ft_getent(void)
 	return (status);
 }
 
-int last_step(t_shell *sh, t_hash **ht, char *line)
+/* int last_step(t_shell *sh, t_hash **ht, char *line)
 {
-	t_node	*root;
 	int		status;
 
 	status = 1;
-	root = parse_line(&line);
 	if (root)
 	{
-		// tree_print(root);
-		status = exec_tree(root, sh, ht);
-		tree_free(root);
 	}
 	return (status);
-}
+} */
 
-int	main(int argc, char **argv)
+int	main()
 {
+	t_node	*root;
 	t_shell	sh;
 	t_term	t;
 	t_hash	**ht;
@@ -70,7 +66,7 @@ int	main(int argc, char **argv)
 
 	ht = NULL;
 	ft_getent();
-	init(&sh, &t, &ht, argc, argv);
+	init(&sh, &t, &ht);
 	while (status)
 	{
 		if (!ft_input_cycle(&t))
@@ -81,10 +77,13 @@ int	main(int argc, char **argv)
 		if (line)
 		{
 			//strip_quotes(&line);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
-			status = last_step(&sh, ht, line);
+			root = parse_line(&line);
+			// tree_print(root);
+			status = exec_tree(root, &sh, ht);
+			tree_free(root);
 		}
 		ft_restart_cycle(&t);
-		free_mem(&sh, ht, 1);
+		free_mem(&sh, ht, 1); // OBS! add node here to then pass it to unsetenv
 		ft_strdel(&line);
 	}
 	free_mem(&sh, ht, 2);

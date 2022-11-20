@@ -12,7 +12,7 @@
 
 #include "ft_21sh.h"
 
-int last_step(t_shell *sh, t_hash **ht, char *line);
+/* int last_step(t_shell *sh, t_hash **ht, char *line);
 static void	opener(t_shell *sh, char *path, t_hash **ht);
 
 static void	create_bash_script(char *line, const char *path_to_script)
@@ -97,8 +97,8 @@ static void	second_fork(int *bash_fd, char *line, const char *path_to_script)
 	}
 }
 
-/* Replace the get_input with your function which
-	will take the environ and the line from gnl */
+Replace the get_input with your function which
+	will take the environ and the line from gnl
 void	get_outputs(t_shell *sh, char *line, t_hash **ht)
 {
 	const char	*path_to_script = "autotest/line_script.sh";
@@ -169,20 +169,20 @@ static void	opener(t_shell *sh, char *path, t_hash **ht)
 		exit (fd);
 	}
 	read_test_lines(sh, fd, ht);
-}
+} */
 
 /* You need to modify the read_test_lines() */
 /* Usage ./21sh autotest <testfilepath> */
 /* arguments are copy of environment,
 	argc and argv are the arguments given to main */
-void	autotest(t_shell *sh, int argc, char **argv, t_hash **ht)
+/* void	autotest(t_shell *sh, int argc, char **argv, t_hash **ht)
 {
 	if (is_autotest(argc, argv))
 	{
 		opener(sh, argv[2], ht);
 		exit (1);
 	}
-}
+} */
 
 static char	*change_shlvl(char *shlvl)
 {
@@ -282,7 +282,7 @@ static struct termios	ft_init_raw(void)
 	return (orig_termios);
 }
 
-void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv)
+void	init(t_shell *sh, t_term *t, t_hash ***ht)
 {
 	ssize_t		i;
 	size_t		j;
@@ -303,6 +303,6 @@ void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv)
 	sh->env = get_env(sh->env, j, i);
 	sh->temp_env = NULL;
 	vec_new(&sh->v_tmp_env, 0, MAX_PATHLEN);
-	autotest(sh, argc, argv, *ht);
+	// autotest(sh, argc, argv, *ht);
 	ft_printf("{yel}${gre}>{nor} ");
 }
