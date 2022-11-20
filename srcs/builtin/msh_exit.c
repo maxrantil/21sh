@@ -12,10 +12,10 @@
 
 #include "ft_21sh.h"
 
-int	msh_exit(t_node *node, t_msh *msh)
+int	msh_exit(t_node *n, t_shell *sh)
 {
-	(void)msh;
-	if (*node->arg)
+	(void)sh;
+	if (*n->arg)
 		return (0);
 	return (1);
 }

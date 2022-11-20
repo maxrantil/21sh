@@ -12,7 +12,7 @@
 
 #include "ft_21sh.h"
 
-t_node	*parse_redirection(t_node *node, char **str)
+t_node	*parse_redirection(t_node *n, char **str)
 {
 	char	*token;
 	char	*end_q;
@@ -30,11 +30,11 @@ t_node	*parse_redirection(t_node *node, char **str)
 		if (type == '>' || type == '<')
 		{
 			if (type == '>')
-				node = node_create(REDIROVER, node, NULL);
+				n = node_create(REDIROVER, n, NULL);
 			else
-				node = node_create(REDIRIN, node, NULL);
-			node->arg[0] = ft_strsub(token, 0, (size_t)(end_q - token));
+				n = node_create(REDIRIN, n, NULL);
+			n->arg[0] = ft_strsub(token, 0, (size_t)(end_q - token));
 		}
 	}
-	return (node);
+	return (n);
 }

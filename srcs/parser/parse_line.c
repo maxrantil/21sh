@@ -16,23 +16,23 @@ t_node	*parse_line(char **ptr_to_line)
 {
 	char 	*token;
 	char 	*end_q;
-	t_node	*node;
+	t_node	*n;
 
-	node = parse_pipe(ptr_to_line);
+	n = parse_pipe(ptr_to_line);
 	if (peek(ptr_to_line, "&"))
 	{
 		token_get(ptr_to_line, &token, &end_q);
-		node = node_create(AMP, node, NULL);
+		n = node_create(AMP, n, NULL);
 	}
 	else if (peek(ptr_to_line, ";"))
 	{
 		token_get(ptr_to_line, &token, &end_q);
-		node = node_create(SEMI, node, parse_line(ptr_to_line));
+		n = node_create(SEMI, n, parse_line(ptr_to_line));
 	}
 	if (peek(ptr_to_line, ""))
 	{
 		ft_printf("syntax error near unexpected token `newline'\n");
 		exit(1);
 	}
-	return (node);
+	return (n);
 }

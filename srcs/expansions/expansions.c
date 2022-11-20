@@ -12,40 +12,40 @@
 
 #include "ft_21sh.h"
 
-static size_t	find_variables(t_node *node, t_msh *msh, size_t i, size_t j)
+static size_t	find_variables(t_node *n, t_shell *sh, size_t i, size_t j)
 {
-	if (node->arg[i][j] == '~' && j == 0)
+	if (n->arg[i][j] == '~' && j == 0)
 	{
-		expansions_tilde(node, msh, i);
+		expansions_tilde(n, sh, i);
 	}
-	if (node->arg[i][j] == '$' \
-		&& (node->arg[i][j + 1] == '_' \
-		|| ft_isalnum(node->arg[i][j + 1])))
+	if (n->arg[i][j] == '$' \
+		&& (n->arg[i][j + 1] == '_' \
+		|| ft_isalnum(n->arg[i][j + 1])))
 	{
-		expansions_dollar(node, msh, ft_strchr(node->arg[i], '$'), i);
+		expansions_dollar(n, sh, ft_strchr(n->arg[i], '$'), i);
 		return (1);
 	}
-	else if (node->arg[i][j] == '$' \
-		&& node->arg[i][j + 1] == '$')
+	else if (n->arg[i][j] == '$' \
+		&& n->arg[i][j + 1] == '$')
 	{
-		ft_strdel(&node->arg[i]);
-		node->arg[i] = ft_itoa(getpid());
+		ft_strdel(&n->arg[i]);
+		n->arg[i] = ft_itoa(getpid());
 	}
 	return (0);
 }
 
-void	expansions(t_node *node, t_msh *msh)
+void	expansions(t_node *n, t_shell *sh)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	while (node->arg[i])
+	while (n->arg[i])
 	{
 		j = 0;
-		while (node->arg[i][j])
+		while (n->arg[i][j])
 		{
-			if (find_variables(node, msh, i, j))
+			if (find_variables(n, sh, i, j))
 				break ;
 			j++;
 		}

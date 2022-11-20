@@ -27,67 +27,62 @@ static int ft_getent(void)
 	termtype = getenv("TERM");
 	if (termtype == NULL)
 	{
-		ft_printf("could not get the TERM env\n");
+		ft_putendl_fd("could not get the TERM env", 2);
 		exit(1);
 	}
 	status = tgetent(term_buffer, termtype);
 	if (status < 0)
 	{
-		ft_printf("could not access the termcap data base\n");
+		ft_putendl_fd("could not access the termcap data base", 2);
 		exit(1);
 	}
 	else if (status == 0)
 	{
-		ft_printf("could not find the termtype\n");
+		ft_putendl_fd("could not find the termtype", 2);
 		exit(1);
 	}
 	return (status);
 }
 
-int last_step(t_msh *msh, t_hash **ht, char *line)
+/* int last_step(t_shell *sh, t_hash **ht, char *sh.cl)
 {
-	t_node	*root;
 	int		status;
 
 	status = 1;
-	root = parse_line(&line);
 	if (root)
 	{
-		// tree_print(root);
-		status = exec_tree(root, msh, ht);
-		tree_free(root);
 	}
 	return (status);
-}
+} */
 
-int	main(int argc, char **argv)
+int	main()
 {
-	t_msh	msh;
+	t_node	*root;
+	t_shell	sh;
 	t_term	t;
 	t_hash	**ht;
-	char	*line;
+	int status = 1;
 
 	ht = NULL;
 	ft_getent();
-	init(&msh, &t, &ht, argc, argv);
-	int status = 1;
+	init(&sh, &t, &ht);
 	while (status)
 	{
 		if (!ft_input_cycle(&t))
 			break ;
 		if (t.bytes)
-			line = lexer(t.inp);
+			sh.cl = lexer(t.inp);
 		write(1, "\n", 1);
-		if (line)
+		if (sh.cl)
 		{
-			//strip_quotes(&line);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
-			status = last_step(&msh, ht, line);
+			//strip_quotes(&sh.cl);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
+			root = parse_line(&sh.cl);
+			status = exec_tree(root, &sh, ht);
 		}
 		ft_restart_cycle(&t);
-		free_mem(&msh, ht, 1);
-		ft_strdel(&line);
+		free_mem(root, &sh, ht, 1); // OBS! add node here to then pass it to unsetenv
 	}
-	free_mem(&msh, ht, 2);
+	free_mem(root, &sh, ht, 2);
 	ft_history_write_to_file(&t);
 	ft_disable_raw_mode(&t);
 	exit(20);

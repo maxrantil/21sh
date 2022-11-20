@@ -1,54 +1,54 @@
 #include "ft_21sh.h"
 
-static int	exec_args(t_node *node, t_msh *msh, t_hash **ht)
+static int	exec_args(t_node *n, t_shell *sh, t_hash **ht)
 {
 	t_hash	*tmp;
 	size_t		index;
 
 
-	expansions(node, msh);
-	index = hash_function(node->arg[0]);
+	expansions(n, sh);
+	index = hash_function(n->arg[0]);
 	tmp = ht[index];
 	while (tmp)
 	{
-		if (ft_strcmp(node->arg[0], tmp->program) == 0)
+		if (ft_strcmp(n->arg[0], tmp->program) == 0)
 		{
-			msh->env = env_underscore(node, msh);
-			return (tmp->function(node, msh));
+			sh->env = env_underscore(n, sh);
+			return (tmp->function(n, sh));
 		}
 		tmp = tmp->next;
 	}
-	return (exec_21sh(node, msh, ht));
+	return (exec_21sh(n, sh, ht));
 }
 
-int	exec_tree(t_node *node, t_msh *msh, t_hash **ht)
+int	exec_tree(t_node *n, t_shell *sh, t_hash **ht)
 {
 	int ret;
 
 	ret = 1;
-	if (!node)
+	if (!n)
 		return (0);
-	if (node->type == EXEC)
-		ret = exec_args(node, msh, ht);
-	else if (node->type == PIPE)
-		exec_pipe_node(node, msh, ht);
-	else if (node->type == REDIROVER || node->type == REDIRAPP)
-		redirection_file(node, msh, ht);
-	else if (node->type == REDIRIN)
-		input_file_read(node->arg[0]);
-	else if (node->type == AMP)
+	if (n->type == EXEC)
+		ret = exec_args(n, sh, ht);
+	else if (n->type == PIPE)
+		exec_pipe_node(n, sh, ht);
+	else if (n->type == REDIROVER || n->type == REDIRAPP)
+		redirection_file(n, sh, ht);
+	else if (n->type == REDIRIN)
+		input_file_read(n->arg[0]);
+	else if (n->type == AMP)
 	{
 		if (fork_wrap() == 0)
 		{
-			// exec_tree(node->left, msh, ht);
-			execve(node->arg[0], node->arg, msh->env); //this is 42sh shit, make better error handling etc
+			// exec_tree(n->left, sh, ht);
+			execve(n->arg[0], n->arg, sh->env); //this is 42sh shit, make better error handling etc
 			exit(EXIT_SUCCESS);
 		}
 	}
-	else if (node->type == SEMI)
+	else if (n->type == SEMI)
 	{
-		exec_tree(node->left, msh, ht);
-		exec_tree(node->right, msh, ht);
+		exec_tree(n->left, sh, ht);
+		exec_tree(n->right, sh, ht);
 	}
 	return (ret);
 }

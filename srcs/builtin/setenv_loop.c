@@ -12,25 +12,25 @@
 
 #include "ft_21sh.h"
 
-void	setenv_loop(t_msh *msh, char *arg, int flag_temp)
+void	setenv_loop(t_shell *sh, char *arg, int flag_temp)
 {
 	char	*key;
 	size_t	i;
 
 	i = 0;
 	key = env_key_extract(arg);
-	while (msh->env[i])
+	while (sh->env[i])
 	{
-		if (!ft_strncmp(msh->env[i], key, ft_strlen(key)))
+		if (!ft_strncmp(sh->env[i], key, ft_strlen(key)))
 		{
 			if (flag_temp)
-				vec_push(&msh->v_temp, msh->env[i]); //some read memory error, valgrind it later
-			msh->env = unsetenv_var(msh->env, key);
+				vec_push(&sh->v_tmp_env, sh->env[i]); //some read memory error, valgrind it later
+			sh->env = unsetenv_var(sh->env, key);
 			break ;
 		}
 		i++;
 	}
-	msh->env = setenv_var(msh->env, key, \
+	sh->env = setenv_var(sh->env, key, \
 	ft_strchr(arg, '=') + 1);
 	ft_strdel(&key);
 }

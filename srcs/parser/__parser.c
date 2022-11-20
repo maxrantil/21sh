@@ -43,19 +43,19 @@ static void	trim_cl(char **cl)
 	*cl = trimmed;
 }
 
-int	parser(t_msh *msh)
+int	parser(t_shell *sh)
 {
-	trim_cl(&msh->cl);
-	if (*msh->cl)
+	trim_cl(&sh->cl);
+	if (*sh->cl)
 	{
-		if (!count_quotes(msh->cl))
+		if (!count_quotes(sh->cl))
 		{
 			ft_putstr_fd("error, double quotes don't match.\n", STDERR_FILENO);
 			return (-1);
 		}
-		msh->args = get_arguments(msh->cl, count_arguments(msh->cl));
-		strip_quotes(msh->args);
-		expansions(msh);
+		sh->args = get_arguments(sh->cl, count_arguments(sh->cl));
+		strip_quotes(sh->args);
+		expansions(sh);
 		return (1);
 	}
 	return (-1);

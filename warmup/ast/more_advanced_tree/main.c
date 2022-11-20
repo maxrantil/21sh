@@ -23,15 +23,15 @@ typedef struct s_tree
 
 t_tree *create_treenode(int	type, int value, t_tree *left, t_tree *right)
 {
-	t_tree *node = (t_tree *)malloc(sizeof(t_tree));
-	if (node != NULL)
+	t_tree *n = (t_tree *)malloc(sizeof(t_tree));
+	if (n != NULL)
 	{
-		node->type = type;
-		node->value = value;
-		node->left = left;
-		node->right = right;
+		n->type = type;
+		n->value = value;
+		n->left = left;
+		n->right = right;
 	}
-	return node;
+	return n;
 }
 
 int	eval_tree(t_tree *tree)

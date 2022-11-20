@@ -12,7 +12,7 @@
 
 #include "ft_21sh.h"
 
-static int	loop_for_unsetenv(t_msh *msh, char *arg)
+static int	loop_for_unsetenv(t_shell *sh, char *arg)
 {
 	char	*key;
 	size_t	i;
@@ -21,11 +21,11 @@ static int	loop_for_unsetenv(t_msh *msh, char *arg)
 	i = 0;
 	key = env_key_extract(arg);
 	len = ft_strlen(key);
-	while (msh->env[i])
+	while (sh->env[i])
 	{
-		if (!ft_strncmp(msh->env[i], key, len))
+		if (!ft_strncmp(sh->env[i], key, len))
 		{
-			msh->env = unsetenv_var(msh->env, key);
+			sh->env = unsetenv_var(sh->env, key);
 			break ;
 		}
 		i++;
@@ -34,16 +34,16 @@ static int	loop_for_unsetenv(t_msh *msh, char *arg)
 	return (1);
 }
 
-int	msh_unsetenv(t_node *node, t_msh *msh)
+int	msh_unsetenv(t_node *n, t_shell *sh)
 {
 	size_t	i;
 
 	i = 1;
-	while (node->arg[i])
-		loop_for_unsetenv(msh, node->arg[i++]);
+	while (n->arg[i])
+		loop_for_unsetenv(sh, n->arg[i++]);
 	i = 0;
-	if (msh->temp_env)
-		while (msh->temp_env[i])
-			loop_for_unsetenv(msh, msh->temp_env[i++]);
+	if (sh->temp_env)
+		while (sh->temp_env[i])
+			loop_for_unsetenv(sh, sh->temp_env[i++]);
 	return (1);
 }

@@ -27,68 +27,60 @@ static char	**switch_args(char **args, size_t arglen, size_t i)
 	return (new_args);
 }
 
-static char	**set_tempenv(t_node *node, t_msh *msh, size_t len)
+static char	**set_tempenv(t_node *n, t_shell *sh, size_t len)
 {
 	char	**temp_env;
 	size_t	i;
 
 	temp_env = NULL;
-	(void)msh;
+	(void)sh;
 	i = 1;
 	if (len)
 	{
 		temp_env = (char **)ft_memalloc(sizeof(char *) * (len + 1));
 		i = 0;
 		while (i++ < len)
-			temp_env[i - 1] = ft_strdup(node->arg[i]);
+			temp_env[i - 1] = ft_strdup(n->arg[i]);
 		temp_env[i - 1] = NULL;
 	}
 	return (temp_env);
 }
 
-static int	env_heart(t_node *node, t_msh *msh, size_t arglen)
+static int	env_heart(t_node *n, t_shell *sh, size_t arglen)
 {
 	size_t	i;
-	char	**temp_args;
 
 	i = 0;
-	while (node->arg[++i] && ft_strchr(node->arg[i], '='))	//make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_' or key=NULL
-		setenv_loop(msh, node->arg[i], 1);
-	msh->temp_env = set_tempenv(node, msh, i - 1);
+	while (n->arg[++i] && ft_strchr(n->arg[i], '='))	//make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_' or key=NULL
+		setenv_loop(sh, n->arg[i], 1);
+	sh->temp_env = set_tempenv(n, sh, i - 1);
 	if (i < arglen)
 	{
-		// msh->arg = switch_args(node->arg, arglen, i);
-		int y = 0;
-		while (node->arg[y]) // all this is bollocks
-			ft_strclr(node->arg[y++]);
-		temp_args = switch_args(node->arg, arglen, i);
-		y = -1;
-		while (temp_args[++y])
-			node->arg[y] = ft_strdup(temp_args[y]);
-		exec_21sh(node, msh, NULL);
+		n->arg = switch_args(n->arg, arglen, i);
+		exec_21sh(n, sh, NULL);
 		return (1);
 	}
 	return (0);
 }
 
-int	msh_env(t_node *node, t_msh *msh)
+int	msh_env(t_node *n, t_shell *sh)
 {
 	size_t	i;
 	size_t	arglen;
 
-	arglen = ft_arrlen((void **)node->arg);
+	arglen = ft_arrlen((void **)n->arg);
 	if (arglen > 1)
 	{
-		if (env_heart(node, msh, arglen))
+		if (env_heart(n, sh, arglen))
 			return (1);
 	}
-	if (*msh->env)
+	if (*sh->env)
 	{
 		i = 0;
-		while (msh->env[i])
-			ft_printf("%s\n", msh->env[i++]);
+		while (sh->env[i])
+			ft_putendl(sh->env[i++]);
 	}
 	else
-		ft_printf("minishell: env: environment is empty\n");
+		ft_putendl_fd("21sh: env: environment is empty", 2);
 	return (1);
 }

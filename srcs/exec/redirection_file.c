@@ -17,15 +17,15 @@ static int	open_check(char *filename, int mode)
 	return (file_fd);
 }
 
-void	redirection_file(t_node *node, t_msh *msh, t_hash **ht)
+void	redirection_file(t_node *n, t_shell *sh, t_hash **ht)
 {
 	int file_fd;
 
-	file_fd = open_check(node->arg[0], node->type);	//	1 == > , 2 == >>
+	file_fd = open_check(n->arg[0], n->type);	//	1 == > , 2 == >>
 	if (fork_wrap() == 0)
 	{
 		dup2_check(file_fd);
-		exec_tree(node->left, msh, ht);
+		exec_tree(n->left, sh, ht);
 		exit(11);
 	}
 	wait(0);

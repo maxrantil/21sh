@@ -12,18 +12,18 @@
 
 #include "ft_21sh.h"
 
-int	msh_setenv(t_node *node, t_msh *msh)
+int	msh_setenv(t_node *n, t_shell *sh)
 {
 	size_t	i;
 
 	i = 1;
-	while (node->arg[i])
+	while (n->arg[i])
 	{
-		if (strchr(node->arg[i], '=') \
-		&& (ft_isalpha(node->arg[i][0]) || node->arg[i][0] == '_'))
-			setenv_loop(msh, node->arg[i], 0);
+		if (strchr(n->arg[i], '=') \
+		&& (ft_isalpha(n->arg[i][0]) || n->arg[i][0] == '_'))
+			setenv_loop(sh, n->arg[i], 0);
 		else
-			error_print(node->arg[i], 6);
+			error_print(n->arg[i], 6);
 		i++;
 	}
 	return (1);

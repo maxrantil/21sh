@@ -26,25 +26,25 @@ static size_t	count_colon(char *str)
 	return (count);
 }
 
-static int	check_paths(t_msh *msh)
+static int	check_paths(t_shell *sh)
 {
 	char	*path;
 	char	*dup_paths;
 	size_t	i;
 
 	i = 0;
-	while (msh->env[i])
+	while (sh->env[i])
 	{
-		if (!ft_strncmp(msh->env[i], "PATH=", 5))
+		if (!ft_strncmp(sh->env[i], "PATH=", 5))
 		{
-			msh->paths = (char **)ft_memalloc(sizeof(char *) * \
-			(count_colon(msh->env[i]) + 1));
-			dup_paths = ft_strdup(msh->env[i]);
+			sh->paths = (char **)ft_memalloc(sizeof(char *) * \
+			(count_colon(sh->env[i]) + 1));
+			dup_paths = ft_strdup(sh->env[i]);
 			path = ft_strchr(dup_paths, '=') + 1;
 			i = 0;
 			while (path)
-				msh->paths[i++] = ft_strdup(ft_strsep(&path, ":"));
-			msh->paths[i] = NULL;
+				sh->paths[i++] = ft_strdup(ft_strsep(&path, ":"));
+			sh->paths[i] = NULL;
 			ft_strdel(&dup_paths);
 			return (1);
 		}
@@ -53,32 +53,32 @@ static int	check_paths(t_msh *msh)
 	return (0);
 }
 
-static char	*verify_arg(t_node *node, t_msh *msh)
+static char	*verify_arg(t_node *n, t_shell *sh)
 {
 	struct stat	statbuf;
 	char		*verify;
 	size_t		i;
 
 	i = 0;
-	while (msh->paths[i] \
-		&& node->arg[0] && node->arg[0][0] != '\0' && node->arg[0][0] != '/' \
-		&& !ft_strequ(node->arg[0], ".") && !ft_strequ(node->arg[0], ".."))
+	while (sh->paths[i] \
+		&& n->arg[0] && n->arg[0][0] != '\0' && n->arg[0][0] != '/' \
+		&& !ft_strequ(n->arg[0], ".") && !ft_strequ(n->arg[0], ".."))
 	{
-		verify = ft_strjoin(msh->paths[i], "/");
-		verify = ft_strupdate(verify, node->arg[0]);
+		verify = ft_strjoin(sh->paths[i], "/");
+		verify = ft_strupdate(verify, n->arg[0]);
 		if (!lstat(verify, &statbuf))
 		{
-			ft_strdel(&node->arg[0]);
-			node->arg[0] = verify;
-			return (node->arg[0]);
+			ft_strdel(&n->arg[0]);
+			n->arg[0] = verify;
+			return (n->arg[0]);
 		}
 		ft_strdel(&verify);
 		i++;
 	}
-	return (node->arg[0]);
+	return (n->arg[0]);
 }
 
-int	exec_21sh(t_node *node, t_msh *msh, t_hash **ht)
+int	exec_21sh(t_node *n, t_shell *sh, t_hash **ht)
 {
 	pid_t	pid;
 	char	*ptr;
@@ -86,23 +86,23 @@ int	exec_21sh(t_node *node, t_msh *msh, t_hash **ht)
 	pid = fork_wrap();
 	if (pid == 0)
 	{
-		if (node->arg[0][0] == '.')
+		if (n->arg[0][0] == '.')
 		{
-			msh->env = env_underscore(node, msh);
-			execve(node->arg[0], node->arg, msh->env);
+			sh->env = env_underscore(n, sh);
+			execve(n->arg[0], n->arg, sh->env);
 		}
-		if (check_paths(msh))
+		if (check_paths(sh))
 		{
-			ptr = node->arg[0];
-			node->arg[0] = verify_arg(node, msh);
-			if (!ft_strequ(node->arg[0], ptr))
+			ptr = n->arg[0];
+			n->arg[0] = verify_arg(n, sh);
+			if (!ft_strequ(n->arg[0], ptr))
 			{
-				msh->env = env_underscore(node, msh);
-				execve(node->arg[0], node->arg, msh->env);
+				sh->env = env_underscore(n, sh);
+				execve(n->arg[0], n->arg, sh->env);
 			}
 		}
-		error_print(node->arg[0], 4);
-		free_mem(msh, ht, 1);
+		error_print(n->arg[0], 4);
+		free_mem(n, sh, ht, 1);
 		exit(EXIT_FAILURE);
 	}
 	wait(0);

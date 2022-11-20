@@ -20,15 +20,15 @@ typedef struct s_tree
 
 t_tree *create_tree(char *op, int value)
 {
-	t_tree *node = (t_tree *)malloc(sizeof(t_tree));
-	if (node != NULL)
+	t_tree *n = (t_tree *)malloc(sizeof(t_tree));
+	if (n != NULL)
 	{
-		node->op = op;
-		node->value = value;
-		node->left = NULL;
-		node->right = NULL;
+		n->op = op;
+		n->value = value;
+		n->left = NULL;
+		n->right = NULL;
 	}
-	return node;
+	return n;
 }
 
 void	printtree_rec(t_tree *root, int lvl)
