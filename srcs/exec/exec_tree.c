@@ -23,13 +23,10 @@ static int	exec_args(t_node *n, t_shell *sh, t_hash **ht)
 
 int	exec_tree(t_node *n, t_shell *sh, t_hash **ht)
 {
-	int ret;
-
-	ret = 1;
 	if (!n)
-		return (0);
+		return (1);
 	if (n->type == EXEC)
-		ret = exec_args(n, sh, ht);
+		return (exec_args(n, sh, ht));
 	else if (n->type == PIPE)
 		exec_pipe_node(n, sh, ht);
 	else if (n->type == REDIROVER || n->type == REDIRAPP)
@@ -50,5 +47,5 @@ int	exec_tree(t_node *n, t_shell *sh, t_hash **ht)
 		exec_tree(n->left, sh, ht);
 		exec_tree(n->right, sh, ht);
 	}
-	return (ret);
+	return (1);
 }

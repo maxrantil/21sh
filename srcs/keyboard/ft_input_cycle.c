@@ -14,7 +14,7 @@
 
 static void	ft_end_cycle(t_term *t)
 {
-	
+
 	vec_push(&t->v_history, t->inp);
 	if (!ft_strcmp(t->inp, "history"))
 		ft_history(t);
@@ -59,7 +59,7 @@ t_term	*ft_input_cycle(t_term *t)
 			ft_esc_parse(t);
 		if (t->ch == -1)
 		{
-			ft_putstr_fd("error, ft_get_input()\n", STDERR_FILENO);
+			ft_putendl_fd("error, ft_get_input()", STDERR_FILENO);
 			return (NULL);
 		}
 	}

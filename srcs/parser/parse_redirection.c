@@ -23,7 +23,10 @@ t_node	*parse_redirection(t_node *n, char **str)
 		type = token_get(str, &token, 0);
 		if (token_get(str, &token, &end_q) != 'a')
 		{
-			ft_printf("\nsyntax error near unexpected token `%c'\n", *token);//make better error handling for `echo hello >`
+			ft_putstr_fd("syntax error near unexpected token `", 2);	//make better error handling for `echo hello >`
+			ft_putchar_fd(*token, 2);
+			ft_putendl_fd("'", 2);
+			tree_free(n);
 			return (NULL);
 		}
 		//if here: token == file name

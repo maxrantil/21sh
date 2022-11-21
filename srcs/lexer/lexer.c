@@ -1,6 +1,6 @@
 #include "ft_21sh.h"
 
-// one backslag take it away, two backslshes keep one. last newline is always changes to \0
+// one backslag take it away, two backslshes keep one. (last newline is always changes to \0, NOT)
 char *lexer(char *str)
 {
 	int i = 0;

@@ -68,8 +68,6 @@ void	free_mem(t_node *root, t_shell *sh, t_hash **ht, ssize_t code)
 			temp_handler(root, sh);
 		if (sh->paths)
 			ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
-		if (*sh->cl)
-			ft_strdel(&sh->cl);
 		// tree_print(root);
 		tree_free(root);
 	}
