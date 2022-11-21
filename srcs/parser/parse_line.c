@@ -31,8 +31,9 @@ t_node	*parse_line(char **ptr_to_line)
 	}
 	if (peek(ptr_to_line, ""))
 	{
-		ft_printf("syntax error near unexpected token `newline'\n");
-		exit(1);
+		ft_putendl_fd("syntax error near unexpected token `newline'", 2);
+		tree_free(n);
+		return (NULL);
 	}
 	return (n);
 }

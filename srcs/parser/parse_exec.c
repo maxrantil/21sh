@@ -64,7 +64,7 @@ t_node *parse_exec(char **ptr_to_line)
 
 	n = node_create(EXEC, NULL, NULL);
 	n = parse_redirection(n, ptr_to_line);
-	while (**ptr_to_line && !peek(ptr_to_line, "|&;"))
+	while (**ptr_to_line && n && !peek(ptr_to_line, "|&;"))
 	{
 		type = token_get(ptr_to_line, &token, &end_q);
 		if (type == 'a')
@@ -73,8 +73,11 @@ t_node *parse_exec(char **ptr_to_line)
 			break ;
 		else
 		{
-			ft_printf("syntax error near unexpected token `%c'\n", type);
-			exit(1);
+			ft_putstr_fd("syntax error near unexpected token `", 2);
+			ft_putchar_fd(type, 2);
+			ft_putendl_fd("'", 2);
+			tree_free(n);
+			return (NULL);
 		}
 		n = parse_redirection(n, ptr_to_line);
 	}

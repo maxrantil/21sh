@@ -68,7 +68,7 @@ static char	*verify_arg(t_node *n, t_shell *sh)
 		verify = ft_strupdate(verify, n->arg[0]);
 		if (!lstat(verify, &statbuf))
 		{
-			ft_strdel(&n->arg[0]);
+			// ft_strdel(&n->arg[0]); //valgrind says not to free?????
 			n->arg[0] = verify;
 			return (n->arg[0]);
 		}

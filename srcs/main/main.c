@@ -64,6 +64,7 @@ int	main()
 	int status = 1;
 
 	ht = NULL;
+	root = NULL;
 	ft_getent();
 	init(&sh, &t, &ht);
 	while (status)
@@ -75,12 +76,14 @@ int	main()
 		write(1, "\n", 1);
 		if (sh.cl)
 		{
+			char *p = sh.cl;
 			//strip_quotes(&sh.cl);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
-			root = parse_line(&sh.cl);
+			root = parse_line(&p);
 			status = exec_tree(root, &sh, ht);
+			ft_memdel((void **)&sh.cl);
 		}
+		free_mem(root, &sh, ht, 1);
 		ft_restart_cycle(&t);
-		free_mem(root, &sh, ht, 1); // OBS! add node here to then pass it to unsetenv
 	}
 	free_mem(root, &sh, ht, 2);
 	ft_history_write_to_file(&t);
