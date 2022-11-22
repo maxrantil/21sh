@@ -277,7 +277,6 @@ static struct termios	ft_init_raw(void)
 		write(2, "error tcsetattr\n", 16);
 		exit(1);
 	}
-	ft_run_capability("ti");
 	ft_run_capability("cl");
 	return (orig_termios);
 }

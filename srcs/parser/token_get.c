@@ -11,7 +11,7 @@ static int token_loop(char **scan, int ret) //retname scan to s
 {
 	while (**scan)
 	{
-		if (strchr("<|&;", **scan) && (*scan)++)
+		if (strchr("<|;", **scan) && (*scan)++) //took away '&'
 			break ;
 		else if (**scan == '>' && (*scan)++)
 		{
@@ -32,10 +32,10 @@ static int token_loop(char **scan, int ret) //retname scan to s
 
 int	token_get(char **ptr_to_line, char **token, char **end_q)
 {
-	char	*scan; //rename to scan
+	char	*scan;
 	int		ret;
 
-	scan = *ptr_to_line; //rename to inputptr
+	scan = *ptr_to_line;
 	scan = skip_whitespaces(scan);
 	if (*scan == '\0')
 		return (0);
