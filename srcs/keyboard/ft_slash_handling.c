@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getline_nbr.c                                   :+:      :+:    :+:   */
+/*   ft_slash_handling.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:39:35 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/15 17:34:59 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/11/19 16:28:08 by mbarutel          #+#    #+#             */
+/*   Updated: 2022/11/21 18:33:35 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-int	ft_get_linenbr(void)
+void	ft_slash_handling(t_term *t)
 {
-	char	buf[16];
-	int		len;
-	int		i;
+	ssize_t	i;
 
-	ft_memset(buf, '\0', sizeof(buf));
-	write(0, "\033[6n", 4);
-	len = 0;
-	while (read(0, buf + len, 1) == 1)
+	i = t->index - 1;
+	if (t->ch == '\\' && t->index == t->bytes)
 	{
-		if (buf[len++] == 'R')
-			break;
+		while (i && t->inp[i] == '\\')
+			i--;
+		if ((t->index - i) % 2)
+			t->slash = 1;
+		else
+			t->slash = 0;
 	}
-	len = 0;
-	i = 0;
-	while (buf[i] && buf[i] != ';')
-	{
-		if (ft_isdigit(buf[i]))
-			buf[len++] = buf[i];
-		i++;
-	}
-	buf[len] = '\0';
-	return (ft_atoi(buf) - 1);
+	else
+		if (t->ch != D_QUO && t->ch != S_QUO)
+			t->slash = 0;
 }

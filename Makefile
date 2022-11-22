@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/18 17:59:23 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/22 12:26:32 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,10 +112,10 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(KEYBOARD)ft_create_prompt_line \
 				$(KEYBOARD)ft_delete \
 				$(KEYBOARD)ft_deletion_shift \
-				$(KEYBOARD)ft_display_row \
 				$(KEYBOARD)ft_esc_parse \
 				$(KEYBOARD)ft_get_input \
 				$(KEYBOARD)ft_get_prompt_len \
+				$(KEYBOARD)ft_history_file_get \
 				$(KEYBOARD)ft_history_get \
 				$(KEYBOARD)ft_history_trigger \
 				$(KEYBOARD)ft_history_write_to_file \
@@ -140,6 +140,7 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(KEYBOARD)ft_run_capability \
 				$(KEYBOARD)ft_setcursor \
 				$(KEYBOARD)ft_shift_nl_addr \
+				$(KEYBOARD)ft_slash_handling \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
 				$(LEXER)lexer \

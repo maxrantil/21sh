@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_trail.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:40:06 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/21 18:36:55 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-static void	ft_print_prompt(ssize_t row)
+static void	print_prompt(ssize_t row)
 {
 	if (!row)
 		ft_putstr(PROMPT);
@@ -40,7 +40,7 @@ static void	ft_print_line_trail(t_term *t)
 		else
 		{
 			if (ft_is_prompt_line(t, row))
-				ft_print_prompt(row);
+				print_prompt(row);
 			if (t->nl_addr[row + 1])
 				write(1, t->nl_addr[row], (size_t)(t->nl_addr[row + 1] - t->nl_addr[row]));
 			else

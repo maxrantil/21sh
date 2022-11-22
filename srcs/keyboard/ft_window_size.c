@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_window_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:25:07 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 13:06:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/10 11:49:47 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	ft_window_size(t_term *t)
 	struct winsize	size;
 
 	if (ioctl(0, TIOCGWINSZ, (char *)&size) < 0)
-	{
-		ft_putstr_fd("ioctl error", 2);
-		exit(1);
-	}
+		perror("TIOCGWINSZ");
 	t->ws_col = size.ws_col;
 	t->ws_row = size.ws_row;
 	if (*t->inp)
