@@ -7,7 +7,7 @@ char *lexer(char *str)
 	int j = 0;
 	char *new;
 
-	new = ft_strnew(ft_strlen(str));
+	new = ft_strtrim(str);
 	while (str[i])
 	{
 		if (str[i] && str[i] == '\\')
