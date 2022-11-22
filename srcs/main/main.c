@@ -15,7 +15,6 @@
 static void	ft_disable_raw_mode(t_term *t)
 {
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &t->orig_termios);
-	ft_run_capability("te");
 }
 
 static int ft_getent(void)

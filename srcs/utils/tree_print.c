@@ -31,6 +31,8 @@ void	rec_print_tree(t_node *root, int lvl)
 		printf("&");
 	else if (root->type == SEMI)
 		printf(";");
+	else if (root->type == FILEAGG)
+		printf("x>&x %s\n", root->arg[0]);
 	rec_print_tree(root->left, lvl);
 }
 

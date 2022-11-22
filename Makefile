@@ -148,6 +148,7 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(MAIN)init \
 				$(MAIN)main \
 				$(MAIN)tree_free \
+				$(PARSER)add_to_args \
 				$(PARSER)node_create \
 				$(PARSER)parse_exec \
 				$(PARSER)parse_line \

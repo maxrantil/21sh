@@ -40,6 +40,8 @@
 # define AMP 6
 /* ; */
 # define SEMI 7
+/* >& */
+# define FILEAGG 8
 /* Tree Print */
 # define COUNT 10
 /* Hash Table */
@@ -121,6 +123,7 @@ void	tree_free(t_node *n);
 // size_t	count_arguments(char *str);
 // char	**get_arguments(char *str, size_t argc);
 // int		parser(t_shell *sh);
+void 	add_to_args(char ***array, char *str);
 t_node	*node_create(int type, t_node *left, t_node *right);
 t_node	*parse_exec(char **ptr_to_line);
 t_node	*parse_line(char **ptr_to_line);
