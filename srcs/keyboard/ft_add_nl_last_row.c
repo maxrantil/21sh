@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:42:45 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/15 15:20:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/11 16:08:31 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_add_nl_last_row(t_term *t, ssize_t pos)
 		fresh_array = (char **)ft_memalloc(sizeof(char *) * (size_t)(t->total_row + 2));
 		while (t->nl_addr[++index])
 			fresh_array[index] = t->nl_addr[index];
-		fresh_array[++index] = &t->inp[pos];
+		fresh_array[index++] = &t->inp[pos];
 		fresh_array[index] = NULL;
 		ft_memdel((void **)&t->nl_addr);
 		t->nl_addr = fresh_array;

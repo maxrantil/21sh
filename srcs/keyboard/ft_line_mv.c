@@ -27,7 +27,6 @@ static ssize_t	ft_mv_prompt_len(t_term *t, int num)
 static void	ft_line_down(t_term *t)
 {
 	ssize_t	len;
-	// ssize_t	row;
 	ssize_t	prompt_len;
 
 	prompt_len = ft_mv_prompt_len(t, 1);
@@ -99,7 +98,7 @@ void	ft_line_mv(t_term *t)
 		if (t->ch == 51)
 		{
 			t->ch = ft_get_input();
-			if (t->ch == 65 && t->c_row)
+			if (t->ch == 65 && t->c_row && ft_get_linenbr())
 				ft_line_up(t);
 			if (t->ch == 66 && t->c_row < t->total_row)
 				ft_line_down(t);
