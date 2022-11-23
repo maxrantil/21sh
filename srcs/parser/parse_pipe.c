@@ -27,7 +27,7 @@ t_node	*parse_pipe(char **ptr_to_line)
 			n = node_create(PIPE, n, parse_pipe(ptr_to_line));
 		else
 		{
-			ft_putstr_fd("syntax error near unexpected token `", 2);
+			ft_putstr_fd("pipie syntax error near unexpected token `", 2);
 			ft_putchar_fd(type, 2);
 			ft_putendl_fd("'", 2);
 			tree_free(n);
