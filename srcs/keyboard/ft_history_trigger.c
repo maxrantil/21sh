@@ -35,6 +35,7 @@ static void	ft_history_trigger_start(t_term *t)
 	t->q_qty = 0;
 	t->c_col = 0;
 	t->c_row = 0;
+	t->index = 0;
 	t->total_row = 0;
 	ft_setcursor(t->c_col, t->c_row + t->start_row);
 	ft_run_capability("cd");

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 18:09:31 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:19:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@
 # define REDIRAPP 4
 /* < */
 # define REDIRIN 5
-/* & */
-# define AMP 6
-/* ; */
-# define SEMI 7
 /* >& */
-# define FILEAGG 8
+# define FILEAGG 6
+/* & */
+# define AMP 7
+/* ; */
+# define SEMI 8
 /* Tree Print */
 # define COUNT 10
 /* Hash Table */
@@ -126,6 +126,7 @@ void	tree_free(t_node *n);
 void 	add_to_args(char ***array, char *str);
 t_node	*node_create(int type, t_node *left, t_node *right);
 t_node	*parse_exec(char **ptr_to_line);
+t_node	*parse_fileagg(t_node *n, char **str);
 t_node	*parse_line(char **ptr_to_line);
 t_node	*parse_pipe(char **ptr_to_line);
 t_node	*parse_redirection(t_node *n, char **str);

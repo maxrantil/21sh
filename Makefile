@@ -151,6 +151,7 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(PARSER)add_to_args \
 				$(PARSER)node_create \
 				$(PARSER)parse_exec \
+				$(PARSER)parse_fileagg \
 				$(PARSER)parse_line \
 				$(PARSER)parse_pipe \
 				$(PARSER)parse_redirection \

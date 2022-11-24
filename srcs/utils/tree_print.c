@@ -13,26 +13,26 @@ void	rec_print_tree(t_node *root, int lvl)
 	{
 		size_t len = ft_arrlen((void **)root->arg);
 		if (len > 2)
-			printf("%s %s ...\n", root->arg[0], root->arg[1]);
+			printf("[%s] %s ...\n", root->arg[0], root->arg[1]);
 		else if (len == 2)
-			printf("%s %s\n", root->arg[0], root->arg[1]);
+			printf("[%s] %s\n", root->arg[0], root->arg[1]);
 		else
-			printf("%s\n", root->arg[0]);
+			printf("[%s]\n", root->arg[0]);
 	}
 	else if (root->type == PIPE)
-		printf("|");
+		printf("[|]");
 	else if (root->type == REDIROVER)
-			printf("> %s\n", root->arg[0]);
+			printf("[>] %s\n", root->arg[0]);
 	else if (root->type == REDIRAPP)
-		printf(">> %s\n", root->arg[0]);
+		printf("[>>] %s\n", root->arg[0]);
 	else if (root->type == REDIRIN)
-		printf("< %s\n", root->arg[0]);
+		printf("[<] %s\n", root->arg[0]);
 	else if (root->type == AMP)
-		printf("&");
+		printf("[&]");
 	else if (root->type == SEMI)
-		printf(";");
+		printf("[;]");
 	else if (root->type == FILEAGG)
-		printf("x>&x %s\n", root->arg[0]);
+		printf("[x>&x] %s\n", root->arg[0]);
 	rec_print_tree(root->left, lvl);
 }
 

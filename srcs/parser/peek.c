@@ -16,9 +16,12 @@ int	peek(char **ptr_to_line, char *toks)
 {
 	char *scan;
 
-	scan = *ptr_to_line;
-	while (*scan && ft_isspace((const char *)scan))
-		scan++;
-	*ptr_to_line = scan;
+	scan = NULL;
+	if (*ptr_to_line)
+	{
+		scan = *ptr_to_line;
+		scan = ft_skip_whitespaces(scan);
+		*ptr_to_line = scan;
+	}
 	return (*scan && ft_strchr(toks, *scan));
 }

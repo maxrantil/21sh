@@ -14,6 +14,8 @@
 
 int	ft_isspace(const char *str)
 {
+	if (!str)
+		return (0);
 	if ((*str >= 9 && *str <= 13) || *str == 32)
 		return (1);
 	return (0);
