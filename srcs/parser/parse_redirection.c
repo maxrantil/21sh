@@ -6,13 +6,79 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 12:35:37 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/24 14:27:17 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
 t_node *parse_redirection(t_node *n, char **ptr_to_line)
+{
+	t_node	*tmp;
+	char	*token;
+	char	*end_q;
+	int		type;
+	// static int i;
+//TEST START // TEST START AGAIN
+	while (peek(ptr_to_line, "<>1234567890"))
+	{
+		type = token_get(ptr_to_line, &token, &end_q);
+		// ft_printf("i = %d\n", i++);
+		// ft_printf("token = %s\n", token);
+		if (n && ft_isdigit(*token) && *(token + 1) == '>' && *(token + 2) == '&' && (ft_isdigit(*(token + 3)) || *(token + 3) == '-')) // this is a hack
+		{
+			if ((n->type >= REDIROVER && n->type <= REDIRIN))
+				// || (tmp->type >= REDIROVER && tmp->type <= REDIRIN))
+			{
+				tmp = n->left;
+				tmp = node_create(FILEAGG, tmp, NULL);
+				add_to_args(&tmp->arg, ft_strsub(token, 0, 4)); // 4 here hardcoded
+				*ptr_to_line += 4;	// this is a hack 4 is hardcoded
+				n->left = tmp;
+				// tmp = NULL;
+			}
+			else
+			{
+				n = node_create(FILEAGG, n, NULL);
+				add_to_args(&n->arg, ft_strsub(token, 0, 4)); // 4 here hardcoded
+				*ptr_to_line += 4;	// this is a hack 4 is hardcoded
+			}
+		}
+		else if (token_get(ptr_to_line, &token, &end_q) != 'a' && '&' != *token && !ft_isdigit(*token))
+		{
+			ft_putstr_fd("redir syntax error near unexpected token `", 2); // make better error handling for `echo hello >`
+			ft_putchar_fd(*token, 2);
+			ft_putendl_fd("'", 2);
+			tree_free(n);
+			return (NULL);
+		}
+		else if (n && (type == '>' || type == '#' || type == '<'))
+		{
+			// n->left && n->left->type == EXEC &&
+			if (n->type == FILEAGG)
+			// if ((n->type >= REDIROVER && n->type <= FILEAGG))
+			// 	|| (tmp->type >= REDIROVER && tmp->type <= FILEAGG))
+			{
+				tmp = n->left;
+				tmp = node_create(REDIROVER, tmp, NULL);
+				add_to_args(&tmp->arg, ft_strsub(token, 0, (size_t)(end_q - token)));
+				n->left = tmp;
+			}
+			else if (type == '>')
+			{
+				n = node_create(REDIROVER, n, NULL);
+			}
+			else if (type == '<')
+				n = node_create(REDIRIN, n, NULL);
+			else if (type == '#')
+				n = node_create(REDIRAPP, n, NULL);
+			add_to_args(&n->arg, ft_strsub(token, 0, (size_t)(end_q - token)));
+		}
+	}
+	return (n);
+}
+
+/* t_node *parse_redirection(t_node *n, char **ptr_to_line)
 {
 	t_node	*tmp;
 	t_node	*m;
@@ -28,7 +94,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 			if (n->type == REDIROVER || n->type == REDIRAPP || n->type == REDIRIN)
 			{
 				tmp = n->left;
-				m = node_create(REDIROVER, tmp, NULL);
+				m = node_create(FILEAGG, tmp, NULL);
 				add_to_args(&m->arg, ft_strsub(token, 0, 4)); // 4 here hardcoded
 				*ptr_to_line += 4;	// this is a hack 4 is hardcoded
 				n->left = m;
@@ -69,4 +135,4 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 		}
 	}
 	return (n);
-}
+} */

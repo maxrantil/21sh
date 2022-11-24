@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 12:33:56 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/24 11:43:01 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node *parse_exec(char **ptr_to_line)
 
 	n = node_create(EXEC, NULL, NULL);
 	n = parse_redirection(n, ptr_to_line);
-	while (**ptr_to_line && n && !peek(ptr_to_line, "|&;")) // '&' here?
+	while (**ptr_to_line && n && !peek(ptr_to_line, "|&;")) // '&' here? //maybe need to go if fd is not specified for redir
 	{
 		type = token_get(ptr_to_line, &token, &end_q);
 		if (type == 'a')

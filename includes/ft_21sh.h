@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 18:09:31 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:19:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@
 # define REDIRAPP 4
 /* < */
 # define REDIRIN 5
-/* & */
-# define AMP 6
-/* ; */
-# define SEMI 7
 /* >& */
-# define FILEAGG 8
+# define FILEAGG 6
+/* & */
+# define AMP 7
+/* ; */
+# define SEMI 8
 /* Tree Print */
 # define COUNT 10
 /* Hash Table */
