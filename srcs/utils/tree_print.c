@@ -20,7 +20,7 @@ void	rec_print_tree(t_node *root, int lvl)
 			printf("[%s]\n", root->arg[0]);
 	}
 	else if (root->type == PIPE)
-		printf("|");
+		printf("[|]");
 	else if (root->type == REDIROVER)
 			printf("[>] %s\n", root->arg[0]);
 	else if (root->type == REDIRAPP)
