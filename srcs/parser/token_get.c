@@ -10,20 +10,13 @@ static int token_loop(char **scan, int ret)
 		{
 			if (**scan == '>' && (*scan)++)
 				ret = '#';
-			else if (**scan == '&' && (*scan)++)
-				ret = 'a';
 			break ;
 		}
 		else
 		{
 			ret = 'a';
 			while (**scan && !ft_isspace(*scan) && !strchr("<|&;>", **scan))
-			// while (**scan && !ft_isspace(*scan) && !strchr("<|;", **scan))
-			{
-				/* if (**scan == '>' && (*scan)++ && **scan != '&')
-					break ; */
 				(*scan)++;
-			}
 			break ;
 		}
 	}

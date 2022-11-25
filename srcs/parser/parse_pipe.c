@@ -20,7 +20,7 @@ t_node	*parse_pipe(char **ptr_to_line)
 	t_node	*n;
 
 	n = parse_exec(ptr_to_line);
-	if (peek(ptr_to_line, "|"))
+	if (**ptr_to_line && peek(ptr_to_line, "|"))
 	{
 		type = token_get(ptr_to_line, &token, &end_q);
 		if (!peek(ptr_to_line, "|&;"))

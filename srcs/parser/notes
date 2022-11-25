@@ -1,0 +1,5 @@
+this works:
+ls dadsa asdads 2> file 2>&-
+
+but why is this overflow? :
+ls dadsa asdads 2> file 2>&- > file2
