@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:54:38 by mrantil           #+#    #+#             */
-/*   Updated: 2022/07/13 09:27:47 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:03:22 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ char	*ft_strtrim(char const *s)
 
 	if (!s)
 		return (NULL);
-	while (ft_isspace(s))
-		s++;
+	st = NULL;
+	s = ft_skip_whitespaces((char *)s);
 	sl = ft_strlen(s);
-	if (*s)
-		while (ft_isspace(&s[sl - 1]))
+	if (sl)
+	{
+		while (sl && ft_isspace(&s[sl - 1]))
 			sl--;
-	st = ft_strsub(s, 0, sl);
+		st = ft_strsub(s, 0, sl);
+	}
 	return (st);
 }
