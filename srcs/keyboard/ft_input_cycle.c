@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/22 11:52:33 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:32:28 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_term	*ft_input_cycle(t_term *t)
 			ft_insertion(t);
 		if (t->ch == ENTER)
 		{
-			if (t->inp[t->bytes - 2] != '\\' && !(t->q_qty % 2))
+			if ((t->bytes > 1 && t->inp[t->bytes - 2] != '\\' && !(t->q_qty % 2))
+				|| (t->bytes < 2 && !(t->q_qty % 2)))
 			{
 				ft_end_cycle(t);
 				return (t);

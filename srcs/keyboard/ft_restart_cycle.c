@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/22 11:49:56 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:30:27 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	ft_restart_cycle(t_term *t)
 	t->start_row = ft_get_linenbr();
 	t->total_row = 0;
 	t->c_row = t->total_row;
-	ft_add_nl_last_row(t, 0);
+	// ft_add_nl_last_row(t, 0);
 	ft_setcursor(t->c_col, t->c_row + t->start_row);
 }
