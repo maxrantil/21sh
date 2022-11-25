@@ -126,10 +126,9 @@ void	tree_free(t_node *n);
 void 	add_to_args(char ***array, char *str);
 t_node	*node_create(int type, t_node *left, t_node *right);
 t_node	*parse_exec(char **ptr_to_line);
-t_node	*parse_fileagg(t_node *n, char **str);
 t_node	*parse_line(char **ptr_to_line);
 t_node	*parse_pipe(char **ptr_to_line);
-t_node	*parse_redirection(t_node *n, char **str);
+t_node	*parse_redirection(t_node *n, char **ptr_to_line);
 int		peek(char **ptr_to_line, char *toks);
 int		token_get(char **ptr_to_line, char **token, char **end_q);
 
