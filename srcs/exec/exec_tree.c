@@ -33,6 +33,8 @@ int	exec_tree(t_node *n, t_shell *sh, t_hash **ht)
 		redirection_file(n, sh, ht);
 	else if (n->type == REDIRIN)
 		input_file_read(n->arg[0]);
+	else if (n->type == FILEAGG)
+		check_file_aggregations(n->arg[0], n->arg[1]);
 	else if (n->type == AMP)
 	{
 		if (fork_wrap() == 0)

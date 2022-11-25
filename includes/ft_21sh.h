@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/24 13:19:09 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:51:19 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char	**unsetenv_var(char **env, char *key);
 void	error_print(char *arg, int i);
 
 /* Exec */
+void	check_file_aggregations(char *full, char *filename);
 int		dup2_check(int file_fd);
 int		exec_21sh(t_node *n, t_shell *sh, t_hash **ht);
 void	exec_pipe_node(t_node *n, t_shell *sh, t_hash **ht);
