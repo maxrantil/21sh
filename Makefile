@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/25 13:21:15 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/25 16:50:40 by rvuorenl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ FILES 		=	$(BUILTIN)env_getvalue \
 				$(BUILTIN)setenv_var \
 				$(BUILTIN)unsetenv_var \
 				$(ERROR)error_print \
+				$(EXEC)aggregation \
 				$(EXEC)dup2_check \
 				$(EXEC)exec_21sh \
 				$(EXEC)exec_pipe_node \
