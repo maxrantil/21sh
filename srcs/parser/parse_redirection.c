@@ -25,7 +25,11 @@ static int	get_fd_before(char *token)
 			break ;
 	}
 	if (*token == '>')
+	{
+		if (*token == '>' && *(token + 1) == '>')
+			return (ret + 2);
 		return (ret + 1);
+	}
 	else
 		return (0);
 }
@@ -131,12 +135,11 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 		{
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
 				n = make_redir_node(n, ptr_to_line, token, len1);
-			else if (type == '>' || (type == 'a' && (**ptr_to_line == '>' && (**ptr_to_line + 1) != '>')))
+			else if (type == '>' || (**ptr_to_line && (**ptr_to_line + 1) && type == 'a' && **ptr_to_line == '>' && (**ptr_to_line + 1) != '>'))
 				n = node_create(REDIROVER, n, NULL);
 			else if (type == '<' || (type == 'a' && (**ptr_to_line == '<')))
 				n = node_create(REDIRIN, n, NULL);
-			// else if (type == '#') // wrong for now >>
-			else if (type == '#' || (type == 'a' && (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
+			else if (type == '#' || (**ptr_to_line && (**ptr_to_line + 1) && type == 'a' && **ptr_to_line == '>' && (**ptr_to_line + 1) == '>'))
 				n = node_create(REDIRAPP, n, NULL);
 			add_to_args(&n->arg, ft_strsub(token, 0, len1));
 			*ptr_to_line += 1;
