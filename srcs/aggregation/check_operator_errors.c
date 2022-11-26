@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:27:28 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/26 15:30:26 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/26 16:17:09 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ static void	check_ambiguous_redirect(int fd, char *target)
 		ft_printf("21: %s: ambiguous redirect\n", target);
 		exit(6);
 	}
+}
+
+void	syntax_error_msg(int exit_code)
+{
+	ft_printf("Syntax error!\n");
+	exit(exit_code);
 }
 
 void	check_operator_errors(int file_fd, char *filename, char *operator)
