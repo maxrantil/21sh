@@ -6,11 +6,24 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:04:55 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/26 16:12:04 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/26 16:37:13 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
+
+int	check_filename_fd(char *filename)
+{
+	int	i;
+
+	i = -1;
+	while (filename[++i])
+	{
+		if (!ft_isdigit(filename[i]))
+			return (0);
+	}
+	return (1);
+}
 
 int	get_target_fd(char *filename)
 {
