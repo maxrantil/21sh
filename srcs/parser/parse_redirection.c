@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/25 20:09:18 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/28 16:12:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	check_for_fileagg(char *token)
 		else
 			break ;
 	}
-	if ((*token == '>' && *(token + 1) == '&')
-		|| (*token == '&' && *(token + 1) == '>')) // fix here for echo hello 1&>file
+	if ((*token == '>' && *(token + 1) == '&'))
+		/* || (*token == '&' && *(token + 1) == '>')) */ // fix here for echo hello 1&>file
 		return (ret + 2);
 	else
 		return (0);
@@ -64,7 +64,20 @@ static int	get_len_of_next_tok(char *token)
 	return (ret);
 }
 
-static t_node	*make_redir_node(t_node *n, char **ptr_to_line, char *token, int len)
+static void	add_args_to_redir_node(t_node *n, char ***ptr_to_line, char **token, int len)
+{
+	add_to_args(&n->arg, ft_strsub(*token, 0, len));
+	**ptr_to_line += 1;
+	*token += len;
+	*token = ft_skip_whitespaces(*token);
+	len = get_len_of_next_tok(*token);
+	add_to_args(&n->arg, ft_strsub(*token, 0, len));
+	**ptr_to_line += 1;
+	*token += len;
+}
+
+static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
+	char *token, int len)
 {
 	t_node	*tmp;
 	t_node	*hold;
@@ -73,15 +86,16 @@ static t_node	*make_redir_node(t_node *n, char **ptr_to_line, char *token, int l
 	while (n->left->type != EXEC)
 		n = n->left;
 	tmp = n->left;
-	tmp = node_create(FILEAGG, tmp, NULL);
-	add_to_args(&tmp->arg, ft_strsub(token, 0, len));
+	tmp = node_create(n->type, tmp, NULL);
+	/* add_to_args(&tmp->arg, ft_strsub(token, 0, len));
 	*ptr_to_line += 1;
 	token += len;
 	token = ft_skip_whitespaces(token);
 	len = get_len_of_next_tok(token);
 	add_to_args(&tmp->arg, ft_strsub(token, 0, len));
 	*ptr_to_line += 1;
-	token += len;
+	token += len; */
+	add_args_to_redir_node(tmp, &ptr_to_line, &token, len);
 	n->left = tmp;
 	tmp = NULL;
 	n = hold;
@@ -108,14 +122,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 			else
 			{
 				n = node_create(FILEAGG, n, NULL);
-				add_to_args(&n->arg, ft_strsub(token, 0, len));
-				*ptr_to_line += 1;
-				token += len;
-				token = ft_skip_whitespaces(token);
-				len = get_len_of_next_tok(token);
-				add_to_args(&n->arg, ft_strsub(token, 0, len));
-				*ptr_to_line += 1; //maybe -1 here?
-				token += len;
+				add_args_to_redir_node(n, &ptr_to_line, &token, len);
 			}
 			len1 = 0;
 		}
@@ -130,24 +137,20 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 		else if (n && len1)
 		{
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
+			{
 				n = make_redir_node(n, ptr_to_line, token, len1);
-			else if (type == '>' || (type == 'a' && (**ptr_to_line == '>' && (**ptr_to_line + 1) != '>')))
+				continue ;
+			}
+			else if (type == '>' || (type == 'a' \
+				&& (**ptr_to_line == '>' && (**ptr_to_line + 1) != '>')))
 				n = node_create(REDIROVER, n, NULL);
 			else if (type == '<' || (type == 'a' && (**ptr_to_line == '<')))
 				n = node_create(REDIRIN, n, NULL);
-			// else if (type == '#') // wrong for now >>
-			else if (type == '#' || (type == 'a' && (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
+			else if (type == '#' || (type == 'a' \
+				&& (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
 				n = node_create(REDIRAPP, n, NULL);
-			add_to_args(&n->arg, ft_strsub(token, 0, len1));
-			*ptr_to_line += 1;
-			token += len1;
-			token = ft_skip_whitespaces(token);
-			len1 = get_len_of_next_tok(token);
-			add_to_args(&n->arg, ft_strsub(token, 0, len1));
-			*ptr_to_line += 1;
-			token += len1;
+			add_args_to_redir_node(n, &ptr_to_line, &token, len1);
 		}
-		len = 0;
 	}
 	return (n);
 }
