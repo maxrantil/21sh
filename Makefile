@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/25 20:09:38 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/28 16:06:48 by rvuorenl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SOURCES 	= 	srcs
 BUILTIN		= 	builtin/
 ERROR		= 	error/
 EXEC		= 	exec/
+AGG			= 	aggregation/
 EXPANSIONS	= 	expansions/
 HASH_TABLE	=	hash_table/
 KEYBOARD	= 	keyboard/
@@ -78,7 +79,11 @@ SOURCE_COUNT = $(words $(FILES))
 H_FILES 	= 	ft_21sh \
 				keyboard
 
-FILES 		=	$(BUILTIN)env_getvalue \
+FILES 		=	$(AGG)check_file_aggregations \
+				$(AGG)check_operator_errors \
+				$(AGG)dup2_check2 \
+				$(AGG)open_check \
+				$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
 				$(BUILTIN)msh_cd \
 				$(BUILTIN)msh_echo \
@@ -177,6 +182,7 @@ $(NAME): libft/libft.a $(OBJECTS) $(O_PATHS)
 
 $(OBJECTS):
 	@make -C $(LIBRARIES)
+	@mkdir -p $(OBJECTS)/$(AGG)
 	@mkdir -p $(OBJECTS)/$(BUILTIN)
 	@mkdir -p $(OBJECTS)/$(ERROR)
 	@mkdir -p $(OBJECTS)/$(EXEC)
