@@ -6,7 +6,7 @@
 #    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/28 16:06:48 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/11/28 16:27:26 by rvuorenl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(AGG)check_operator_errors \
 				$(AGG)dup2_check2 \
 				$(AGG)open_check \
+				$(AGG)parse_aggregations \
 				$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
 				$(BUILTIN)msh_cd \
