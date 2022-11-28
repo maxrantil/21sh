@@ -1,30 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection_file.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/28 16:07:22 by rvuorenl          #+#    #+#             */
+/*   Updated: 2022/11/28 16:07:56 by rvuorenl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_21sh.h"
-
-static int	open_check(char *filename, int mode)
-{
-	int	file_fd;
-
-	file_fd = -1;
-	if (mode == REDIROVER) // >
-		file_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (mode == REDIRAPP) // >>
-		file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
-	if (file_fd == -1)
-	{
-		write(2, "error on open_mode\n", 19);
-		exit(10);
-	}
-	return (file_fd);
-}
 
 void	redirection_file(t_node *n, t_shell *sh, t_hash **ht)
 {
-	int file_fd;
+	int	file_fd;
+	int	redirected_fd;
 
-	file_fd = open_check(n->arg[0], n->type);	//	1 == > , 2 == >>
+	redirected_fd = ft_atoi(n->arg[0]);
+	if (redirected_fd == 0)
+		redirected_fd = 1;
+	file_fd = open_check(n->arg[1], n->type);
 	if (fork_wrap() == 0)
 	{
-		dup2_check(file_fd);
+		dup2_check2(file_fd, redirected_fd);
 		exec_tree(n->left, sh, ht);
 		exit(11);
 	}

@@ -16,22 +16,22 @@ int	check_filename_fd(char *filename)
 	return (1);
 }
 
-int	open_check(char *filename, int mode)
-{
-	int	file_fd;
+// int	open_check(char *filename, int mode)
+// {
+// 	int	file_fd;
 
-	file_fd = -1;
-	if (mode == REDIROVER) // >
-		file_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (mode == REDIRAPP) // >>
-		file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
-	if (file_fd == -1)
-	{
-		write(2, "error on open_mode\n", 19);
-		exit(10);
-	}
-	return (file_fd);
-}
+// 	file_fd = -1;
+// 	if (mode == REDIROVER) // >
+// 		file_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 	else if (mode == REDIRAPP) // >>
+// 		file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
+// 	if (file_fd == -1)
+// 	{
+// 		write(2, "error on open_mode\n", 19);
+// 		exit(10);
+// 	}
+// 	return (file_fd);
+// }
 
 int	dup2_check2(int file_fd, int old_fd)
 {
@@ -282,4 +282,5 @@ void	check_file_aggregations(char *full, char *filename)
 // 	check_bad_fd(7, "file");
 // 	check_bad_fd(9, "file");
 // }
+
 
