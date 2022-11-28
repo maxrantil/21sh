@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
+#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/28 16:27:26 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/11/28 17:27:51 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ CFLAGS		+=	-Wpedantic
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-# LEAK_CHECK	+=	-fsanitize=address
+LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -83,7 +83,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(AGG)check_operator_errors \
 				$(AGG)dup2_check2 \
 				$(AGG)open_check \
-				$(AGG)parse_aggregations \
+				$(AGG)parse_aggregation \
 				$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
 				$(BUILTIN)msh_cd \
@@ -98,7 +98,6 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(BUILTIN)setenv_var \
 				$(BUILTIN)unsetenv_var \
 				$(ERROR)error_print \
-				$(EXEC)aggregation \
 				$(EXEC)dup2_check \
 				$(EXEC)exec_21sh \
 				$(EXEC)exec_pipe_node \

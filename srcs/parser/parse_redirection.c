@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/28 16:23:59 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/28 17:26:52 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,20 @@ static int	get_len_of_next_tok(char *token)
 static void	add_args_to_redir_node(t_node *n, char ***ptr_to_line, char **token, int len)
 {
 	add_to_args(&n->arg, ft_strsub(*token, 0, len));
-	**ptr_to_line += 1;
+	**ptr_to_line += len;
 	*token += len;
 	*token = ft_skip_whitespaces(*token);
 	len = get_len_of_next_tok(*token);
 	add_to_args(&n->arg, ft_strsub(*token, 0, len));
-	**ptr_to_line += 1;
+	if (ft_strlen(**ptr_to_line) > (size_t)len)
+		**ptr_to_line += len;
+	else
+		**ptr_to_line += 1;
 	*token += len;
 }
 
 static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
-	char *token, int len)
+	char *token, int len, int check)
 {
 	t_node	*tmp;
 	t_node	*hold;
@@ -86,7 +89,10 @@ static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
 	while (n->left->type != EXEC)
 		n = n->left;
 	tmp = n->left;
-	tmp = node_create(n->type, tmp, NULL);
+	if (check == 1)
+		tmp = node_create(FILEAGG, tmp, NULL);
+	else if (check == 2)
+		tmp = node_create(REDIROVER, tmp, NULL);
 	/* add_to_args(&tmp->arg, ft_strsub(token, 0, len));
 	*ptr_to_line += 1;
 	token += len;
@@ -118,7 +124,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 		if (n && len)
 		{
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
-				n = make_redir_node(n, ptr_to_line, token, len);
+				n = make_redir_node(n, ptr_to_line, token, len, 1);
 			else
 			{
 				n = node_create(FILEAGG, n, NULL);
@@ -138,7 +144,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 		{
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
 			{
-				n = make_redir_node(n, ptr_to_line, token, len1);
+				n = make_redir_node(n, ptr_to_line, token, len1, 2);
 				continue ;
 			}
 			else if (type == '>' || (type == 'a' \
