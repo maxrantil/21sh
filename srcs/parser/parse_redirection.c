@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/28 17:26:52 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:05:04 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,35 @@ static int	get_len_of_next_tok(char *token)
 
 static void	add_args_to_redir_node(t_node *n, char ***ptr_to_line, char **token, int len)
 {
+	size_t	rest_line;
+
 	add_to_args(&n->arg, ft_strsub(*token, 0, len));
-	**ptr_to_line += len;
-	*token += len;
+	// **ptr_to_line += len;
+	rest_line = ft_strlen(**ptr_to_line);
+	if (rest_line > (size_t)len)
+	{
+		**ptr_to_line += len;
+		*token += len;
+	}
+	else
+	{
+		**ptr_to_line += rest_line;
+		*token += rest_line;
+	}
 	*token = ft_skip_whitespaces(*token);
 	len = get_len_of_next_tok(*token);
 	add_to_args(&n->arg, ft_strsub(*token, 0, len));
-	if (ft_strlen(**ptr_to_line) > (size_t)len)
+	rest_line = ft_strlen(**ptr_to_line);
+	if (rest_line > (size_t)len)
+	{
 		**ptr_to_line += len;
+		*token += len;
+	}
 	else
-		**ptr_to_line += 1;
-	*token += len;
+	{
+		**ptr_to_line += rest_line;
+		*token += rest_line;
+	}
 }
 
 static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
