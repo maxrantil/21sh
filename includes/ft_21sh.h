@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/25 16:51:19 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:40:05 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,18 @@ typedef struct	s_hash
 	int				(*function)(t_node *n, t_shell *sh);
 	struct s_hash	*next;
 }					t_hash;
+
+/* Aggregation */
+void	check_file_aggregations(char *full, char *filename);
+int		check_filename_fd(char *filename);
+void	check_operator_errors(int file_fd, char *filename, char *operator);
+int		dup2_check2(int file_fd, int old_fd);
+int		get_redirected_fd(char *full);
+char	*get_redirect_operator(char *full);
+int		get_target_fd(char *filename);
+char	*get_target_file(char *full, char *filename, size_t oper_len);
+int		open_check(char *filename, int mode);
+void	syntax_error_msg(int exit_code);
 
 /* Builtin */
 char	*env_getvalue(char **env, char *var);

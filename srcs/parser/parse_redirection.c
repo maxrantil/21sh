@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/25 20:09:18 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:54:51 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static t_node	*make_redir_node(t_node *n, char **ptr_to_line, char *token, int l
 	while (n->left->type != EXEC)
 		n = n->left;
 	tmp = n->left;
-	tmp = node_create(FILEAGG, tmp, NULL);
+	tmp = node_create(n->type, tmp, NULL);
 	add_to_args(&tmp->arg, ft_strsub(token, 0, len));
 	*ptr_to_line += 1;
 	token += len;
