@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:10:42 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 13:16:58 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:28:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len)
 {
 	*tok += len;
+	if (*tok)
+		**ptr_to_line = *tok;
 	*tok = ft_skip_whitespaces(*tok);
-	**ptr_to_line = *tok;
+	if (*tok)
+		**ptr_to_line = *tok;
 }

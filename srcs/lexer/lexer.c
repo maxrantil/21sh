@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/25 14:59:28 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:08:57 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@ char *lexer(char *str)
 {
 	int		i;
 	char	*new;
+	size_t	len;
 
 	new = ft_strtrim(str);
 	if (new)
 	{
 		i = 0;
-		while (*str)
+		while (new[i])
 		{
-			if (*str == '\\')
-				str++;
-			new[i++] = (*str++);
+			if (new[i] == '\\')
+			{
+				len = ft_strlen(&new[i]);
+				ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
+			}
+			i++;
 		}
 	}
 	return (new);
