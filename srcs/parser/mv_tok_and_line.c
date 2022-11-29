@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   mv_tok_and_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 14:08:57 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/29 12:10:42 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/29 13:28:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-// one backslag take it away, two backslshes keep one. (last newline is always changes to \0, NOT)
-char *lexer(char *str)
+void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len)
 {
-	int		i;
-	char	*new;
-	size_t	len;
-
-	new = ft_strtrim(str);
-	if (new)
-	{
-		i = 0;
-		while (new[i])
-		{
-			if (new[i] == '\\')
-			{
-				len = ft_strlen(&new[i]);
-				ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
-			}
-			i++;
-		}
-	}
-	return (new);
+	*tok += len;
+	if (*tok)
+		**ptr_to_line = *tok;
+	*tok = ft_skip_whitespaces(*tok);
+	if (*tok)
+		**ptr_to_line = *tok;
 }

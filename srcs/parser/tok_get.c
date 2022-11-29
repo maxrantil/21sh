@@ -1,6 +1,6 @@
 #include "ft_21sh.h"
 
-static int token_loop(char **scan, int ret)
+static int tok_loop(char **scan, int ret)
 {
 	while (**scan)
 	{
@@ -23,7 +23,7 @@ static int token_loop(char **scan, int ret)
 	return (ret);
 }
 
-int	token_get(char **ptr_to_line, char **token, char **end_q)
+int	tok_get(char **ptr_to_line, char **tok, char **end_q)
 {
 	char	*scan;
 	int		ret;
@@ -32,10 +32,10 @@ int	token_get(char **ptr_to_line, char **token, char **end_q)
 	scan = ft_skip_whitespaces(scan);
 	if (*scan == '\0')
 		return (0);
-	if (token)
-		*token = scan;
+	if (tok)
+		*tok = scan;
 	ret = *scan;
-	ret = token_loop(&scan, ret);
+	ret = tok_loop(&scan, ret);
 	if (end_q)
 		*end_q = scan;
 	scan = ft_skip_whitespaces(scan);

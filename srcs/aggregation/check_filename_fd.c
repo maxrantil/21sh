@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   parse_aggregation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 14:08:57 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/26 16:04:55 by rvuorenl          #+#    #+#             */
+/*   Updated: 2022/11/29 09:46:05 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-// one backslag take it away, two backslshes keep one. (last newline is always changes to \0, NOT)
-char *lexer(char *str)
+int	check_filename_fd(char *filename)
 {
-	int		i;
-	char	*new;
-	size_t	len;
+	int	i;
 
-	new = ft_strtrim(str);
-	if (new)
+	i = -1;
+	while (filename[++i])
 	{
-		i = 0;
-		while (new[i])
-		{
-			if (new[i] == '\\')
-			{
-				len = ft_strlen(&new[i]);
-				ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
-			}
-			i++;
-		}
+		if (!ft_isdigit(filename[i]))
+			return (0);
 	}
-	return (new);
+	return (1);
 }

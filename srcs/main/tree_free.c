@@ -24,6 +24,6 @@ void	tree_free(t_node *n)
 	// n->type = 0;
 	// free_args(n->arg);
 	ft_arrfree((void ***)&n->arg, ft_arrlen((void **)n->arg));
-	free(n);
-	n = NULL;
+	/* free(n);
+	n = NULL; */
 }

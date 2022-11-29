@@ -56,39 +56,39 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
-int	scan_token(char **next_token)
+int	scan_tok(char **next_tok)
 {
-	char token;
+	char tok;
 	int  ret;
 
-	if (**next_token == '\0')
+	if (**next_tok == '\0')
 		return (0);
 	ret = 0;
-	token = **next_token;
-	if (strchr("+-*/", token))
+	tok = **next_tok;
+	if (strchr("+-*/", tok))
 	{
-		++(*next_token);
-		ret = token;
+		++(*next_tok);
+		ret = tok;
 	}
-	else if (ft_isdigit(token))
+	else if (ft_isdigit(tok))
 	{
-		++(*next_token);
-		ret = token;
+		++(*next_tok);
+		ret = tok;
 	}
 	else
 	{
-		printf("Error: scan_token() invalid token: %c\n", token);
+		printf("Error: scan_tok() invalid tok: %c\n", tok);
 		exit(1);
 	}
 	return (ret);
 }
 
-t_tree *parse_e(int token, char **next_token);
-t_tree *parse_t(int token, char **next_token);
-t_tree *parse_f(int token, char **next_token);
+t_tree *parse_e(int tok, char **next_tok);
+t_tree *parse_t(int tok, char **next_tok);
+t_tree *parse_f(int tok, char **next_tok);
 
 // GRAMMAR E -> T{+|- T}
-t_tree *parse_e(int token, char **next_token)
+t_tree *parse_e(int tok, char **next_tok)
 {
 	t_tree *a;
 	t_tree *b;
@@ -96,19 +96,19 @@ t_tree *parse_e(int token, char **next_token)
 
 	c = NULL;
 	b = NULL;
-	a = parse_t(token, next_token);
+	a = parse_t(tok, next_tok);
 	while (1)
 	{
-		if (*next_token[1] == '+')
+		if (*next_tok[1] == '+')
 		{
-			token = scan_token(&next_token[1]);
-			b = parse_t(token, next_token);
+			tok = scan_tok(&next_tok[1]);
+			b = parse_t(tok, next_tok);
 			a = create_treenode(ADD, 0, a, b);
 		}
-		else if (*next_token[1] == '-')
+		else if (*next_tok[1] == '-')
 		{
-			token = scan_token(&next_token[1]);
-			b = parse_t(token, next_token);
+			tok = scan_tok(&next_tok[1]);
+			b = parse_t(tok, next_tok);
 			a = create_treenode(SUB, 0, a, b);
 		}
 		else
@@ -118,7 +118,7 @@ t_tree *parse_e(int token, char **next_token)
 }
 
 // GRAMMAR T -> F{*|/ F}
-t_tree *parse_t(int token, char **next_token)
+t_tree *parse_t(int tok, char **next_tok)
 {
 	t_tree *a;
 	t_tree *b;
@@ -126,19 +126,19 @@ t_tree *parse_t(int token, char **next_token)
 
 	c = NULL;
 	b = NULL;
-	a = parse_f(token, next_token);
+	a = parse_f(tok, next_tok);
 	while (1)
 	{
-		if (*next_token[1] == '*')
+		if (*next_tok[1] == '*')
 		{
-			token = scan_token(&next_token[1]);
-			b = parse_f(token, next_token);
+			tok = scan_tok(&next_tok[1]);
+			b = parse_f(tok, next_tok);
 			a = create_treenode(MULT, 0, a, b);
 		}
-		else if (*next_token[1] == '/')
+		else if (*next_tok[1] == '/')
 		{
-			token = scan_token(&next_token[1]);
-			b = parse_f(token, next_token);
+			tok = scan_tok(&next_tok[1]);
+			b = parse_f(tok, next_tok);
 			a = create_treenode(DIV, 0, a, b);
 		}
 		else
@@ -148,16 +148,16 @@ t_tree *parse_t(int token, char **next_token)
 }
 
 // GRAMMAR F -> Integer //? | (E) ?
-t_tree *parse_f(int token, char **next_token)
+t_tree *parse_f(int tok, char **next_tok)
 {
-	if (ft_isdigit(token))
+	if (ft_isdigit(tok))
 	{
-		return (create_treenode(INT, token, NULL, NULL));
+		return (create_treenode(INT, tok, NULL, NULL));
 	}
-	else if (ft_isdigit(*next_token[1]))
+	else if (ft_isdigit(*next_tok[1]))
 	{
-		token = scan_token(&next_token[1]);
-		return (create_treenode(INT, token, NULL, NULL));
+		tok = scan_tok(&next_tok[1]);
+		return (create_treenode(INT, tok, NULL, NULL));
 	}
 	else
 		return (NULL);
@@ -229,16 +229,16 @@ void tree_print(t_tree *root)
 
 int main(int argc, char **argv)
 {
-	int		token;
+	int		tok;
 	t_tree	*result_tree;
 
-	token = scan_token(&argv[1]);
-	if (token == 0)
+	tok = scan_tok(&argv[1]);
+	if (tok == 0)
 	{
-		printf("Error: main() invalid token: %c\n", token);
+		printf("Error: main() invalid tok: %c\n", tok);
 		exit(1);
 	}
-	result_tree = parse_e(token, argv);
+	result_tree = parse_e(tok, argv);
 	tree_print(result_tree);
 	write(1, "\n", 1);
 	print_tree2(result_tree);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
+#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/28 17:57:04 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/11/29 13:23:09 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ CFLAGS		+=	-Wpedantic
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-# LEAK_CHECK	+=	-fsanitize=address
+LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -59,10 +59,10 @@ TERMCAP		=	-lncurses
 endif
 
 SOURCES 	= 	srcs
+AGG			= 	aggregation/
 BUILTIN		= 	builtin/
 ERROR		= 	error/
 EXEC		= 	exec/
-AGG			= 	aggregation/
 EXPANSIONS	= 	expansions/
 HASH_TABLE	=	hash_table/
 KEYBOARD	= 	keyboard/
@@ -80,10 +80,12 @@ H_FILES 	= 	ft_21sh \
 				keyboard
 
 FILES 		=	$(AGG)check_file_aggregations \
+				$(AGG)check_filename_fd \
 				$(AGG)check_operator_errors \
 				$(AGG)dup2_check2 \
 				$(AGG)open_check \
-				$(AGG)parse_aggregation \
+				$(AGG)redirect_aggregate \
+				$(AGG)syntax_error_msg \
 				$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
 				$(BUILTIN)msh_cd \
@@ -155,13 +157,14 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(MAIN)main \
 				$(MAIN)tree_free \
 				$(PARSER)add_to_args \
+				$(PARSER)mv_tok_and_line \
 				$(PARSER)node_create \
 				$(PARSER)parse_exec \
 				$(PARSER)parse_line \
 				$(PARSER)parse_pipe \
 				$(PARSER)parse_redirection \
 				$(PARSER)peek \
-				$(PARSER)token_get \
+				$(PARSER)tok_get \
 				$(UTILS)tree_print \
 				$(UTILS)hash_print \
 
