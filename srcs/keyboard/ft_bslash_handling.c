@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_slash_handling.c                                :+:      :+:    :+:   */
+/*   ft_bslash_handling.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:28:08 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/21 18:33:35 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:10:33 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-void	ft_slash_handling(t_term *t)
+/*
+ * If the character is a backslash, and the index is at the end of the input,
+ * and we're not in a
+ * heredoc, then we check to see if the number of backslashes is odd or even.
+ * If it's odd, then we set
+ * the bslash flag to 1, otherwise we set it to 0
+ *
+ * @param t the structure that holds all the information about the current
+ * state of the terminal.
+ */
+void	ft_bslash_handling(t_term *t)
 {
 	ssize_t	i;
 
 	i = t->index - 1;
-	if (t->ch == '\\' && t->index == t->bytes)
+	if (t->ch == '\\' && t->index == t->bytes && !t->heredoc)
 	{
 		while (i && t->inp[i] == '\\')
 			i--;
 		if ((t->index - i) % 2)
-			t->slash = 1;
+			t->bslash = 1;
 		else
-			t->slash = 0;
+			t->bslash = 0;
 	}
 	else
 		if (t->ch != D_QUO && t->ch != S_QUO)
-			t->slash = 0;
+			t->bslash = 0;
 }

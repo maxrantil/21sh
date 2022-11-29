@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/29 13:23:09 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/29 17:41:01 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,14 +115,21 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(HASH_TABLE)hash_init \
 				$(KEYBOARD)ft_add_nl_last_row \
 				$(KEYBOARD)ft_add_nl_mid_row \
+				$(KEYBOARD)ft_alt_mv \
 				$(KEYBOARD)ft_arrow_input \
 				$(KEYBOARD)ft_backspace \
+				$(KEYBOARD)ft_bslash_handling \
+				$(KEYBOARD)ft_copy \
 				$(KEYBOARD)ft_create_prompt_line \
+				$(KEYBOARD)ft_cut \
 				$(KEYBOARD)ft_delete \
 				$(KEYBOARD)ft_deletion_shift \
+				$(KEYBOARD)ft_end_cycle \
 				$(KEYBOARD)ft_esc_parse \
 				$(KEYBOARD)ft_get_input \
 				$(KEYBOARD)ft_get_prompt_len \
+				$(KEYBOARD)ft_getline_nbr \
+				$(KEYBOARD)ft_heredoc_handling \
 				$(KEYBOARD)ft_history_file_get \
 				$(KEYBOARD)ft_history_get \
 				$(KEYBOARD)ft_history_trigger \
@@ -134,10 +141,12 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_insertion \
 				$(KEYBOARD)ft_is_prompt_line \
 				$(KEYBOARD)ft_len_lowest_line \
+				$(KEYBOARD)ft_line_down \
 				$(KEYBOARD)ft_line_mv \
-				$(KEYBOARD)ft_opt_mv \
+				$(KEYBOARD)ft_line_up \
+				$(KEYBOARD)ft_mv_prompt_len \
+				$(KEYBOARD)ft_paste \
 				$(KEYBOARD)ft_print_trail \
-				$(KEYBOARD)ft_getline_nbr \
 				$(KEYBOARD)ft_putc \
 				$(KEYBOARD)ft_quote_decrement \
 				$(KEYBOARD)ft_quote_handling \
@@ -147,8 +156,9 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_row_lowest_line \
 				$(KEYBOARD)ft_run_capability \
 				$(KEYBOARD)ft_setcursor \
+				$(KEYBOARD)ft_shift_insert \
 				$(KEYBOARD)ft_shift_nl_addr \
-				$(KEYBOARD)ft_slash_handling \
+				$(KEYBOARD)ft_trigger_nl \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
 				$(LEXER)lexer \

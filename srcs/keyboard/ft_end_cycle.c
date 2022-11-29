@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_history_file_get.c                              :+:      :+:    :+:   */
+/*   ft_end_cycle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 14:56:28 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 16:41:36 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/29 17:29:21 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/29 17:39:03 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-/*
- * It returns the path to the history file
- *
- * @return The path to the history file.
- */
-char	*ft_history_file_get(void)
+void	ft_end_cycle(t_term *t)
 {
-	char	cwd[1024];
-	char	*home;
-	char	*file;
-
-	home = getenv("HOME");
-	if (home)
-		return (ft_strjoin(home, "/.42sh_history"));
-	file = getcwd(cwd, sizeof(cwd));
-	return (ft_strjoin(file, "/.42sh_history"));
+	vec_push(&t->v_history, t->inp);
+	if (!ft_strncmp(t->inp, "history", 7))
+		ft_history(t);
+	ft_memdel((void **)&t->nl_addr);
+	if (t->input_cpy)
+		ft_strdel(&t->input_cpy);
 }
