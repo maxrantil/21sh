@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 10:06:49 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:23:41 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,15 @@ void	init(t_shell *sh, t_term *t, t_hash ***ht);
 void	tree_free(t_node *n);
 
 /* Parser */
-// size_t	count_arguments(char *str);
-// char	**get_arguments(char *str, size_t argc);
-// int		parser(t_shell *sh);
 void 	add_to_args(char ***array, char *str);
+void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len);
 t_node	*node_create(int type, t_node *left, t_node *right);
 t_node	*parse_exec(char **ptr_to_line);
 t_node	*parse_line(char **ptr_to_line);
 t_node	*parse_pipe(char **ptr_to_line);
 t_node	*parse_redirection(t_node *n, char **ptr_to_line);
 int		peek(char **ptr_to_line, char *toks);
-int		token_get(char **ptr_to_line, char **token, char **end_q);
+int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 
 /* Utils */
 void	hash_print(t_hash **ht);

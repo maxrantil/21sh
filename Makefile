@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/29 10:07:03 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/29 13:09:55 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -157,13 +157,14 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(MAIN)main \
 				$(MAIN)tree_free \
 				$(PARSER)add_to_args \
+				$(PARSER)mv_tok_and_line \
 				$(PARSER)node_create \
 				$(PARSER)parse_exec \
 				$(PARSER)parse_line \
 				$(PARSER)parse_pipe \
 				$(PARSER)parse_redirection \
 				$(PARSER)peek \
-				$(PARSER)token_get \
+				$(PARSER)tok_get \
 				$(UTILS)tree_print \
 				$(UTILS)hash_print \
 

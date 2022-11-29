@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/16 15:18:18 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:00:44 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void temp_handler(t_node *n, t_shell *sh)
 {
 	size_t	i;
 
-	msh_unsetenv(n, sh); //put n in here later
+	msh_unsetenv(n, sh);
 	ft_arrfree((void ***)&sh->temp_env, \
 	ft_arrlen((void **)sh->temp_env));
 	if (sh->v_tmp_env.len)
