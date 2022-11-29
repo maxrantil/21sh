@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:17:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 16:43:11 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/29 17:56:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void	sig_handler(int num)
 	if (num == SIGWINCH)
 		ft_window_size(g_t);
 	if (num == SIGINT)
+	{
+		write(1, "\n", 1);
 		ft_restart_cycle(g_t);
+	}
 }
 
 /*
