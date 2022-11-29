@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getline_nbr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:39:35 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/15 17:34:59 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:41:13 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
+/*
+ * It gets the current line number of the cursor
+ *
+ * @return The line number of the cursor.
+ */
 int	ft_get_linenbr(void)
 {
 	char	buf[16];
@@ -24,7 +29,7 @@ int	ft_get_linenbr(void)
 	while (read(0, buf + len, 1) == 1)
 	{
 		if (buf[len++] == 'R')
-			break;
+			break ;
 	}
 	len = 0;
 	i = 0;

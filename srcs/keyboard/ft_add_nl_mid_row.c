@@ -6,12 +6,19 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:42:45 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/11 16:09:02 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:34:56 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
+/*
+ * It inserts a newline at the given row and position
+ *
+ * @param t pointer to the term structure
+ * @param row The row number where the newline is to be added.
+ * @param pos The position of the newline character in the input string.
+ */
 void	ft_add_nl_mid_row(t_term *t, ssize_t row, ssize_t pos)
 {
 	ssize_t	i;

@@ -12,6 +12,12 @@
 
 #include "keyboard.h"
 
+/*
+ * It creates a new line for the prompt
+ *
+ * @param t the term structure
+ * @param loc the location of the cursor in the command line
+ */
 void	ft_create_prompt_line(t_term *t, ssize_t loc)
 {
 	int	row;

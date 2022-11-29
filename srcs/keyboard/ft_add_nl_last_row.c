@@ -6,19 +6,25 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:42:45 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/11 16:08:31 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:34:38 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
+/*
+ * It adds a newline address to the array of newline addresses
+ *
+ * @param t the term structure
+ * @param pos The position of the newline character in the input string.
+ */
 void	ft_add_nl_last_row(t_term *t, ssize_t pos)
 {
 	int		index;
-	char	**fresh_array;
+	char	**n_arr;
 
 	index = -1;
-	fresh_array = NULL;
+	n_arr = NULL;
 	if (!t->nl_addr)
 	{
 		t->nl_addr = (char **)ft_memalloc(sizeof(char *) * 2);
@@ -27,12 +33,13 @@ void	ft_add_nl_last_row(t_term *t, ssize_t pos)
 	}
 	else
 	{
-		fresh_array = (char **)ft_memalloc(sizeof(char *) * (size_t)(t->total_row + 2));
+		n_arr = (char **)ft_memalloc(sizeof(char *) \
+			* (size_t)(t->total_row + 2));
 		while (t->nl_addr[++index])
-			fresh_array[index] = t->nl_addr[index];
-		fresh_array[index++] = &t->inp[pos];
-		fresh_array[index] = NULL;
+			n_arr[index] = t->nl_addr[index];
+		n_arr[index++] = &t->inp[pos];
+		n_arr[index] = NULL;
 		ft_memdel((void **)&t->nl_addr);
-		t->nl_addr = fresh_array;
+		t->nl_addr = n_arr;
 	}
 }
