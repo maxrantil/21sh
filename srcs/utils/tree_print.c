@@ -24,7 +24,6 @@ void	rec_print_tree(t_node *root, int lvl)
 	else if (root->type == REDIROVER)
 	{
 		printf("[%s] %s %s\n", root->arg[0], root->arg[1], root->arg[2]);
-		write(1, "TEST2\n", 6);
 	}
 	else if (root->type == REDIRAPP)
 		printf("[>>] %s\n", root->arg[0]);
@@ -37,7 +36,6 @@ void	rec_print_tree(t_node *root, int lvl)
 	else if (root->type == FILEAGG)
 	{
 		printf("[%s] %s %s\n", root->arg[0], root->arg[1], root->arg[2]);
-		write(1, "TEST\n", 5);
 	}
 	rec_print_tree(root->left, lvl);
 }

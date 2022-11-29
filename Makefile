@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
+#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/28 17:57:04 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/11/29 10:07:03 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,10 @@ TERMCAP		=	-lncurses
 endif
 
 SOURCES 	= 	srcs
+AGG			= 	aggregation/
 BUILTIN		= 	builtin/
 ERROR		= 	error/
 EXEC		= 	exec/
-AGG			= 	aggregation/
 EXPANSIONS	= 	expansions/
 HASH_TABLE	=	hash_table/
 KEYBOARD	= 	keyboard/
@@ -80,10 +80,12 @@ H_FILES 	= 	ft_21sh \
 				keyboard
 
 FILES 		=	$(AGG)check_file_aggregations \
+				$(AGG)check_filename_fd \
 				$(AGG)check_operator_errors \
 				$(AGG)dup2_check2 \
 				$(AGG)open_check \
-				$(AGG)parse_aggregation \
+				$(AGG)redirect_aggregate \
+				$(AGG)syntax_error_msg \
 				$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
 				$(BUILTIN)msh_cd \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/28 21:13:43 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:06:49 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,8 @@ void	check_file_aggregations(char *full, char *filename);
 int		check_filename_fd(char *filename);
 void	check_operator_errors(int old, int file_fd, char *filename, char *oper);
 int		dup2_check2(int file_fd, int old_fd);
-int		get_redirected_fd(char *full);
-char	*get_redirect_operator(char *full);
-int		get_target_fd(char *filename);
-char	*get_target_file(char *full, char *filename, size_t oper_len);
 int		open_check(char *filename, int mode);
+void	redirect_aggregate(int old_fd, char *target, char *operator);
 void	syntax_error_msg(int exit_code);
 
 /* Builtin */
