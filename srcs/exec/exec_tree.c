@@ -31,8 +31,15 @@ int	exec_tree(t_node *n, t_shell *sh, t_hash **ht)
 		exec_pipe_node(n, sh, ht);
 	else if (n->type == REDIROVER || n->type == REDIRAPP)
 		redirection_file(n, sh, ht);
-	else if (n->type == REDIRIN)
-		input_file_read(n->arg[0]);
+	else if (n->type == REDIRIN) 		//here we need to change to fork like redirection_file
+	{
+		if (fork_wrap() == 0)
+		{
+			input_file_read(n->arg[1]);
+			exit(EXIT_SUCCESS);
+		}
+		wait(0);
+	}
 	else if (n->type == FILEAGG)
 		check_file_aggregations(n, sh, ht);
 	else if (n->type == AMP)

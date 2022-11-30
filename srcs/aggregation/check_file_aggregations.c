@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_aggregations.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/30 13:24:51 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:30:19 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	check_file_aggregations(t_node *n, t_shell *sh, t_hash **ht)
 	}
 	else if (ft_strequ((const char *)operator, ">&-"))
 	{
-			close(file_fd);
+		close(file_fd);
 	}
 	else
 		syntax_error_msg(1);
