@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:07:22 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/28 16:07:56 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:15:52 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	redirection_file(t_node *n, t_shell *sh, t_hash **ht)
 	{
 		dup2_check2(file_fd, redirected_fd);
 		exec_tree(n->left, sh, ht);
-		exit(11);
+		exit(12);
 	}
 	wait(0);
 	close(file_fd);

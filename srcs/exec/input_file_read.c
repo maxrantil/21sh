@@ -30,6 +30,6 @@ void	input_file_read(char *filename)
 		ret = read(file_fd, buf, 4095);
 	}
 	close(file_fd);
-	exit(11);
+	exit(14);
 }
 
