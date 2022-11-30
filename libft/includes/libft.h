@@ -110,5 +110,6 @@ char	*ft_strsep(char **stringp, const char *delim);
 size_t	ft_arrlen(void **arr);
 void	ft_arrfree(void ***arr, size_t len);
 char	*ft_skip_whitespaces(char *ptr);
+char	*ft_strjoin_three(char *s1, char *s2, char *s3);
 
 #endif

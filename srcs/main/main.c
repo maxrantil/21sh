@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 13:45:10 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:48:56 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,16 @@ int	main()
 	{
 		if (!ft_input_cycle(&t))
 			break ;
-		if (t.bytes)
-			sh.cl = lexer(t.inp);
+		sh.cl = lexer(&t);
 		write(1, "\n", 1);
-		if (sh.cl)
+		if (sh.cl)// && (!t.heredoc && *t.nl_addr[t.c_row]))
 		{
 			char *p = sh.cl;
 			//strip_quotes(&sh.cl);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
 			root = parse_line(&p);
 			status = exec_tree(root, &sh, ht);
-			ft_memdel((void **)&sh.cl);
 		}
+		ft_memdel((void **)&sh.cl);
 		free_mem(root, &sh, ht, 1);
 		ft_restart_cycle(&t);
 	}

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 12:23:41 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/30 13:10:49 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 /* Unix */
 # define MAX_PATHLEN 1024
 
-typedef struct s_msh
+typedef struct s_shell
 {
 	t_vec	v_tmp_env;
 	char	**temp_env;
@@ -121,12 +121,12 @@ size_t	hash_function(char *program);
 void	hash_init(t_hash ***ht);
 
 /* Lexer */
-char	*lexer(char *str);
+char	*lexer(t_term *t);
 
 /* Main */
 void	free_mem(t_node *n, t_shell *sh, t_hash **ht,ssize_t code);
 void	init(t_shell *sh, t_term *t, t_hash ***ht);
-// void	init(t_shell *sh, t_term *t, t_hash ***ht, int argc, char **argv);
+void	print_banner(void);
 void	tree_free(t_node *n);
 
 /* Parser */
