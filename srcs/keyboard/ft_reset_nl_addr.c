@@ -6,15 +6,15 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:20:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 17:44:28 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/30 08:53:28 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
 /*
- * It takes the input string and creates an array of pointers to the beginning
- * of each line
+ * It takes the input string and creates an array of pointers to the
+ * beginning of each line
  *
  * @param t the term structure
  */
@@ -32,8 +32,8 @@ void	ft_reset_nl_addr(t_term *t)
 	while (t->inp[++i])
 	{
 		len++;
-		if (((len + ft_get_prompt_len(t, t->total_row)) + 1) == \
-			(t->ws_col) || t->inp[i] == '\n')
+		if (((len + ft_get_prompt_len(t, t->total_row)) + 1) == t->ws_col \
+			|| t->inp[i] == '\n')
 		{
 			ft_add_nl_last_row(t, i + 1);
 			t->total_row++;
