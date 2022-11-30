@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/30 13:10:49 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/30 13:16:10 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_shell
 	char	**env;
 	char	**paths;
 	char	*cl;
+	char	*terminal_name;
 }			t_shell;
 
 typedef struct s_node
@@ -74,7 +75,7 @@ typedef struct	s_hash
 }					t_hash;
 
 /* Aggregation */
-void	check_file_aggregations(char *full, char *filename);
+void    check_file_aggregations(t_node *n, t_shell *sh, t_hash **ht);
 int		check_filename_fd(char *filename);
 void	check_operator_errors(int old, int file_fd, char *filename, char *oper);
 int		dup2_check2(int file_fd, int old_fd);
@@ -101,11 +102,11 @@ char	**unsetenv_var(char **env, char *key);
 void	error_print(char *arg, int i);
 
 /* Exec */
-void	check_file_aggregations(char *full, char *filename);
+// void	check_file_aggregations(char *full, char *filename);
 int		dup2_check(int file_fd);
 int		exec_21sh(t_node *n, t_shell *sh, t_hash **ht);
 void	exec_pipe_node(t_node *n, t_shell *sh, t_hash **ht);
-int		exec_tree(t_node *n, t_shell *sh, t_hash **ht);
+int     exec_tree(t_node *n, t_shell *sh, t_hash **ht);
 int		fork_wrap(void);
 void	input_file_read(char *filename);
 void	redirection_file(t_node *n, t_shell *sh, t_hash **ht);
