@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:23:53 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/26 16:24:31 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:27:09 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	dup2_check2(int file_fd, int old_fd)
 	dup2_fd = dup2(file_fd, old_fd);
 	if (dup2_fd == -1)
 	{
-		write(2, "error on dup2_check\n", 20);
-		exit(11);
+		ft_putstr_fd("dup2 fail\n", 2);
+		exit(13);
 	}
 	return (dup2_fd);
 }

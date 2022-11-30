@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 13:45:10 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/30 13:53:30 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,25 @@ static int ft_getent(void)
 	return (status);
 }
 
+static void	get_terminal_name(char **terminal_name)
+{
+	*terminal_name = ttyname(1);
+}
+
+static void	reset_fds(char *terminal_name)
+{
+	int	fd0;
+	int	fd1;
+	int	fd2;
+
+	close(0);
+	fd0 = open(terminal_name, O_RDWR);
+	close(1);
+	fd1 = open(terminal_name, O_RDWR);
+	close(2);
+	fd2 = open(terminal_name, O_RDWR);
+}
+
 int	main()
 {
 	t_node	*root;
@@ -51,6 +70,7 @@ int	main()
 	t_hash	**ht;
 	int status = 1;
 
+	get_terminal_name(&(sh.terminal_name));
 	ht = NULL;
 	root = NULL;
 	ft_getent();
@@ -71,6 +91,7 @@ int	main()
 			ft_memdel((void **)&sh.cl);
 		}
 		free_mem(root, &sh, ht, 1);
+		reset_fds(sh.terminal_name);
 		ft_restart_cycle(&t);
 	}
 	free_mem(root, &sh, ht, 2);

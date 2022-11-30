@@ -20,10 +20,8 @@ void	redirect_aggregate(int old_fd, char *target, char *operator)
 	check_operator_errors(old_fd, new_fd, target, operator);
 	if (old_fd == 1 || old_fd == 2)
 	{
-		if (new_fd != 1)
-			dup2_check2(new_fd, 1);
-		if (new_fd != 2)
-			dup2_check2(1, 2);
+		dup2_check2(new_fd, 1);
+		dup2_check2(1, 2);
 	}
 	else
 		dup2_check2(new_fd, old_fd);
