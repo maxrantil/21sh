@@ -26,7 +26,7 @@ void	rec_print_tree(t_node *root, int lvl)
 	else if (root->type == REDIRAPP)
 		printf("[>>] %s\n", root->arg[0]);
 	else if (root->type == REDIRIN)
-		printf("[<] %s\n", root->arg[0]);
+		printf("[%s] %s\n", root->arg[0], root->arg[1]);
 	else if (root->type == AMP)
 		printf("[&]");
 	else if (root->type == SEMI)

@@ -8,6 +8,7 @@ static int	open_read_check(char *filename)
 	if (file_fd == -1)
 	{
 		// check reason ?
+		// ft_putstr_fd(filename, 2);
 		write(2, "open_read fail\n", 15);
 		exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 12:56:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:20:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_fd_before(char *tok)
 		else
 			break ;
 	}
-	if (*tok == '>')
+	if (*tok == '>' || *tok == '<')
 		return (ret + 1);
 	else
 		return (0);
