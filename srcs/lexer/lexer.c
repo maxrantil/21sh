@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/30 15:12:59 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:15:59 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char *lexer(t_term *t)
 
 	new = ft_strtrim(t->inp);
 	new = ft_heredoc(t, new);
-	ft_printf("RET = %s\n", new);
+	// ft_printf("RET = %s\n", new);
 	if (new)
 	{
 		i = 0;
