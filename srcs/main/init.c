@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/28 21:08:51 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/30 10:17:52 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,14 +287,9 @@ void	init(t_shell *sh, t_term *t, t_hash ***ht)
 	size_t		j;
 
 	t->orig_termios = ft_init_raw();
+	print_banner();
 	ft_init_term(t);
 	hash_init(ht);
-	ft_putstr("\033[2J");
-	ft_putstr("\033[H");
-	ft_printf("\n{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**{gre}**{red}**{yel}**{blu}**\n");
-	ft_printf("            {blu}- {yel}2{gre}1{red}s{blu}h {yel}-\n");
-	ft_printf("   {yel}made {blu}by {gre}rvuorenl {red}and {yel}mrantil{blu}.");
-	ft_printf("\n{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{red}**{gre}**{blu}**{yel}**{nor}\n\n");
 	sh->paths = NULL;
 	sh->env = NULL;
 	sh->cl = NULL;

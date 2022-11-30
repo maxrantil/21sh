@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/11/29 17:41:01 by mrantil          ###   ########.fr        #
+#    Updated: 2022/11/30 11:31:24 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -165,6 +165,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(MAIN)free_mem \
 				$(MAIN)init \
 				$(MAIN)main \
+				$(MAIN)print_banner \
 				$(MAIN)tree_free \
 				$(PARSER)add_to_args \
 				$(PARSER)mv_tok_and_line \
