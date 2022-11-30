@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:30:15 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/26 16:40:53 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:10:03 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	open_check(char *filename, int mode)
 		file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (file_fd == -1)
 	{
+		// proper error message ?
 		write(2, "Error in open_check\n", 20);
 		exit(10);
 	}
