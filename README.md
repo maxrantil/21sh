@@ -22,7 +22,6 @@ work in progress
 - ctrl+D, ctrl+C signal handling.
 - Complete management of quotes (singlequotes, doublequotes and backslash)
 - No leaks, no extra fd:s, error handling done by hand withour errno.
-- The shell can be started with option 'debug' that prints more info of how the shell handles data.
 - Allowed C-library functions in this project:
   - malloc,free
   - access
