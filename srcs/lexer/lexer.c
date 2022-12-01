@@ -20,33 +20,30 @@ static char	*change_delim_to_file(t_term *t, char *str) //cat<<EOF>file dosnt wo
 	char	*post_needle;
 	char	*ret;
 
-	if (str)
+	i = 0;
+	post_needle = NULL;
+	len_needle = ft_strlen(t->delim);
+	while (str && str[i])
 	{
-		i = 0;
-		post_needle = NULL;
-		len_needle = ft_strlen(t->delim);
-		while (str[i])
+		if (!ft_strnequ(&str[i], t->delim, len_needle))
+			i++;
+		else
+			break ;
+	}
+	if (str && str[i])
+	{
+		pre_needle = ft_strsub(str, 0, i);
+		if (ft_strlen(str) > (i + len_needle))
 		{
-			if (!ft_strnequ(&str[i], t->delim, len_needle))
-				i++;
-			else
-				break ;
+			post_needle = ft_strsub(str, i + len_needle, ft_strlen(str) - (i + len_needle));
+			ret = ft_strjoin_three(pre_needle, "/tmp/heredoc", post_needle);
+			ft_strdel(&post_needle);
 		}
-		if (str[i])
-		{
-			pre_needle = ft_strsub(str, 0, i);
-			if (ft_strlen(str) > (i + len_needle))
-			{
-				post_needle = ft_strsub(str, i + len_needle, ft_strlen(str) - (i + len_needle));
-				ret = ft_strjoin_three(pre_needle, "/tmp/heredoc", post_needle);
-				ft_strdel(&post_needle);
-			}
-			else
-				ret = ft_strjoin(pre_needle, "/tmp/heredoc");
-			ft_strdel(&pre_needle);
-			ft_strdel(&str);
-			return (ret);
-		}
+		else
+			ret = ft_strjoin(pre_needle, "/tmp/heredoc");
+		ft_strdel(&pre_needle);
+		ft_strdel(&str);
+		return (ret);
 	}
 	return (NULL);
 }
@@ -56,18 +53,15 @@ static char	*make_heredoc_input(t_term *t, char *str)
 	size_t	len;
 	int		i;
 
-	if (str)
+	i = 0;
+	while (str && str[i])
 	{
-		i = 0;
-		while (str[i])
+		if (str[i] == '<' && str[i - 1] == '<')
 		{
-			if (str[i] == '<' && str[i - 1] == '<')
-			{
-				len = ft_strlen(&str[i]);
-				ft_memmove((void *)&str[i], (void *)&str[i + 1], len);
-			}
-			i++;
+			len = ft_strlen(&str[i]);
+			ft_memmove((void *)&str[i], (void *)&str[i + 1], len);
 		}
+		i++;
 	}
 	return (change_delim_to_file(t, str));
 }
@@ -87,7 +81,6 @@ static char	*ft_heredoc(t_term *t, char *str)
 		{
 			ret = ft_strsub(str, 0, ft_strchr(str, '\n') - str);
 			cpy = ft_strchr(str, '\n') + 1;
-			ft_strdel(&str);
 			cpy = ft_strsub(cpy, 0, ft_strrchr(cpy, '\n') - cpy);
 			write(fd, cpy, ft_strlen(cpy));
 			ft_strdel(&cpy);
@@ -108,18 +101,15 @@ char *lexer(t_term *t)
 
 	new = ft_strtrim(t->inp);
 	new = ft_heredoc(t, new);
-	if (new)
+	i = 0;
+	while (new && new[i])
 	{
-		i = 0;
-		while (new[i])
+		if (new[i] == '\\')
 		{
-			if (new[i] == '\\')
-			{
-				len = ft_strlen(&new[i]);
-				ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
-			}
-			i++;
+			len = ft_strlen(&new[i]);
+			ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
 		}
+		i++;
 	}
 	return (new);
 }

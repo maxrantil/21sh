@@ -93,7 +93,10 @@ t_term	*ft_input_cycle(t_term *t)
 				return (NULL);
 		}
 		if (!ft_ctrl(t))
-			return (t);
+		{
+			ft_restart_cycle(t);
+			continue ;
+		}
 		ft_backspace_or_escape(t);
 		if (t->ch == -1)
 			ft_putstr_fd("error, ft_get_input()\n", STDERR_FILENO);

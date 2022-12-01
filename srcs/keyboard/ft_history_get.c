@@ -22,7 +22,7 @@ void	ft_history_get(t_term *t)
 	char	*buf;
 	int		fd;
 
-	vec_new(&t->v_history, 0, sizeof(char) * BUFF_SIZE);
+	vec_new(&t->v_history, 0, sizeof(char) * 2048);
 	t->history_file = ft_history_file_get();
 	fd = open(t->history_file, O_RDWR | O_CREAT, 0644);
 	if (fd)
