@@ -3,8 +3,7 @@
 static int	exec_args(t_node *n, t_shell *sh, t_hash **ht)
 {
 	t_hash	*tmp;
-	size_t		index;
-
+	size_t	index;
 
 	expansions(n, sh);
 	index = hash_function(n->arg[0]);
@@ -25,7 +24,7 @@ int	exec_tree(t_node *n, t_shell *sh, t_hash **ht)
 {
 	if (!n)
 		return (1);
-	if (n->type == EXEC)
+	if (n->type == EXEC && n->arg)
 		return (exec_args(n, sh, ht));
 	else if (n->type == PIPE)
 		exec_pipe_node(n, sh, ht);

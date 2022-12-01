@@ -62,16 +62,17 @@ static void temp_handler(t_node *n, t_shell *sh)
 
 void	free_mem(t_node *root, t_shell *sh, t_hash **ht, ssize_t code)
 {
-	if (code == 1)
+	if (code < 3)
 	{
 		if (sh->temp_env)
 			temp_handler(root, sh);
 		if (sh->paths)
 			ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
-		tree_print(root);
+		if (code == 1)
+			tree_print(root);
 		tree_free(root);
 	}
-	if (code == 2)
+	if (code == 3)
 	{
 		if (sh->env)
 			ft_arrfree((void ***)&sh->env, ft_arrlen((void **)sh->env));

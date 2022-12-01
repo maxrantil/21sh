@@ -105,7 +105,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 	int		len;
 	int		len1;
 
-	while (n && peek(ptr_to_line, "<>&1234567890"))
+	while (n && n->arg && peek(ptr_to_line, "<>&1234567890"))
 	{
 		type = tok_get(ptr_to_line, &tok, &end_q);
 		len = check_for_fileagg(tok);

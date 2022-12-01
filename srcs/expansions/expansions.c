@@ -40,7 +40,7 @@ void	expansions(t_node *n, t_shell *sh)
 	size_t	j;
 
 	i = 0;
-	while (n->arg[i])
+	while (n->arg && n->arg[i])
 	{
 		j = 0;
 		while (n->arg[i][j])
