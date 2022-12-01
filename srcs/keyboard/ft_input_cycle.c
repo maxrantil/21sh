@@ -34,7 +34,7 @@ static int	ctrl_d(t_term *t)
 	return (0);
 }
 
-static void	ft_ctrl(t_term *t)
+static int	ft_ctrl(t_term *t)
 {
 	if (t->ch == CTRL_W)
 		ft_cut(t);
@@ -45,8 +45,9 @@ static void	ft_ctrl(t_term *t)
 	else if (t->ch == CTRL_L)
 	{
 		ft_run_capability("cl");
-		write(1, PROMPT, (size_t)t->prompt_len);
+		return (0);
 	}
+	return (1);
 }
 
 static void	ft_backspace_or_escape(t_term *t)
@@ -91,7 +92,11 @@ t_term	*ft_input_cycle(t_term *t)
 			else
 				return (NULL);
 		}
-		ft_ctrl(t);
+		if (!ft_ctrl(t))
+		{
+			ft_restart_cycle(t);
+			continue ;
+		}
 		ft_backspace_or_escape(t);
 		if (t->ch == -1)
 			ft_putstr_fd("error, ft_get_input()\n", STDERR_FILENO);

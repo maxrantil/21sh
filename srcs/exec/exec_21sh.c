@@ -80,11 +80,9 @@ static char	*verify_arg(t_node *n, t_shell *sh)
 
 int	exec_21sh(t_node *n, t_shell *sh, t_hash **ht)
 {
-	pid_t	pid;
 	char	*ptr;
 
-	pid = fork_wrap();
-	if (pid == 0)
+	if (fork_wrap() == 0)
 	{
 		if (n->arg[0][0] == '.')
 		{
@@ -102,7 +100,7 @@ int	exec_21sh(t_node *n, t_shell *sh, t_hash **ht)
 			}
 		}
 		error_print(n->arg[0], 4);
-		free_mem(n, sh, ht, 1);
+		free_mem(n, sh, ht, 2);
 		exit(EXIT_FAILURE);
 	}
 	wait(0);

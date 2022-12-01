@@ -50,16 +50,16 @@ static void	get_terminal_name(char **terminal_name)
 
 static void	reset_fds(char *terminal_name)
 {
-	int	fd0;
+	/* int	fd0;
 	int	fd1;
-	int	fd2;
+	int	fd2; */
 
 	close(0);
-	fd0 = open(terminal_name, O_RDWR);
+	/* fd0 =  */open(terminal_name, O_RDWR);
 	close(1);
-	fd1 = open(terminal_name, O_RDWR);
+	/* fd1 =  */open(terminal_name, O_RDWR);
 	close(2);
-	fd2 = open(terminal_name, O_RDWR);
+	/* fd2 =  */open(terminal_name, O_RDWR);
 }
 
 int	main()
@@ -93,7 +93,7 @@ int	main()
 		reset_fds(sh.terminal_name);
 		ft_restart_cycle(&t);
 	}
-	free_mem(root, &sh, ht, 2);
+	free_mem(root, &sh, ht, 3);
 	ft_history_write_to_file(&t);
 	ft_disable_raw_mode(&t);
 	exit(20);

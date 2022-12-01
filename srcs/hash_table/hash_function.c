@@ -12,7 +12,7 @@
 
 #include "ft_21sh.h"
 
-/**
+/*
 **	It takes a string and returns an integer
 **	@return The hash value of the program name.
 */
