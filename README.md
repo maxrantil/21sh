@@ -1,2 +1,44 @@
 # 21sh
 work in progress
+
+## Features of this shell:
+- Operators: ;, |, >>, >, <<, <, >&, <&, &&, || 
+- Line edition using termcaps-library.
+  - History of commands using up and down arrows
+  - Movement in line with left and right arrows.
+  - Movement word by word with shift + left and right arrows.
+  - Movement one line up and down shift + up and down arrows.
+  - ctrl+Y to copy line, ctrl+k to cut line, ctrl+p to paste line in app.
+  - copy/paste works from outside of the app with the basic combination of keys as usual
+  - Home and end to go to the beginning and end of the command.
+  - Line editing over multiple lines.
+- ${} handling for internal variables, ~ parsing (home directory / homedirectory of the user given after ~)
+- builtins:
+  - echo no options, checks that the fd is valid.
+  - env with options:
+  - cd with absolute and relative path, options: -
+  - setenv and unsetenv to set environment variables in from 'key value'
+  - exit
+- ctrl+D, ctrl+C signal handling.
+- Complete management of quotes (singlequotes, doublequotes and backslash)
+- No leaks, no extra fd:s, error handling done by hand withour errno.
+- The shell can be started with option 'debug' that prints more info of how the shell handles data.
+- Allowed C-library functions in this project:
+  - malloc,free
+  - access
+  - open,close,read,write
+  - opendir,readdir,closedir
+  - getcwd,chdir
+  - stat,lstat,fstat
+  - fork,execve
+  - wait,waitpid,wait3,wait4
+  - signal,kill
+  - exit
+  - pipe
+  - dup,dup2
+  - isatty,ttyname,ttyslot
+  - ioctl
+  - getenv
+  - tcsetattr,tcgetattr
+  - tgetent, tgetflag, tgetnum, tgetstr
+  - tgoto, tputs
