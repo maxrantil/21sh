@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/02 12:26:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:22:48 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,13 @@ static int	get_fd_before(char *tok)
 	if (*tok == '>' || *tok == '<')
 	{
 		if (*tok == '>' && *(tok + 1) == '>')
+		{
+			if (!ft_isalnum(*(tok + 2)) && !ft_isspace(tok + 2))
+				return (-1);
 			++ret;
+		}
+		else if (!ft_isalnum(*(tok + 1)) && !ft_isspace(tok + 1))
+			return (-1);
 		return (++ret);
 	}
 	else
@@ -46,9 +52,12 @@ static int	check_for_fileagg(char *tok)
 		else
 			break ;
 	}
-	if ((*tok == '>' && *(tok + 1) == '&'))
-		/* || (*tok == '&' && *(tok + 1) == '>')) */ // fix here for echo hello &>file
+	if (*tok == '>' && *(tok + 1) == '&')
+	{
+		if (!ft_isalnum(*(tok + 2)) && !ft_isspace(tok + 2))
+				return (-1);
 		return (ret + 2);
+	}
 	else
 		return (0);
 }
@@ -115,7 +124,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 		type = tok_get(ptr_to_line, &tok, &end_q);
 		len = check_for_fileagg(tok);
 		len1 = get_fd_before(tok);
-		if (n && len)
+		if (n && len > 0)
 		{
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
 				n = make_redir_node(n, ptr_to_line, tok, len);
@@ -126,15 +135,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 			}
 			len1 = 0;
 		}
-		/* else if (tok_get(ptr_to_line, &tok, &end_q) != 'a' && '&' != *tok && !ft_isdigit(*tok))
-		{
-			ft_putstr_fd("redir syntax error near unexpected tok `", 2); // make better error handling for `echo hello >`
-			ft_putchar_fd(*tok, 2);
-			ft_putendl_fd("'", 2);
-			tree_free(n);
-			return (NULL);
-		} */
-		else if (n && len1)
+		else if (n && len1 > 0)
 		{
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
 			{
@@ -147,12 +148,25 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 			else if (type == '<' || (type == 'a' && (**ptr_to_line == '<')))
 				n = node_create(REDIRIN, n, NULL);
 			else if (type == '#' || (type == 'a' \
-				&& (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))// && (*ptr_to_line += 2)))
-				{
-					n = node_create(REDIRAPP, n, NULL);
-					len1++;
-				}
+				&& (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
+			{
+				n = node_create(REDIRAPP, n, NULL);
+				// len1++;
+			}
 			add_args_to_redir_node(n, &ptr_to_line, &tok, len1);
+		}
+		if (len < 0 || len1 < 0)
+		{
+			ft_putstr_fd("21sh: (redir) syntax error near unexpected tok `", 2);
+			/* if (*tok && *(tok + 1))
+				ft_putchar_fd(*tok, 2); */
+			if (**ptr_to_line)
+				ft_putchar_fd(**ptr_to_line, 2);
+			else
+				ft_putstr_fd("newline", 2);
+			ft_putendl_fd("'", 2);
+			tree_free(n);
+			return (NULL);
 		}
 	}
 	return (n);

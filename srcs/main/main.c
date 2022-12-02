@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/30 11:48:56 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/02 18:21:24 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,24 @@ int	main()
 	t_shell	sh;
 	t_term	t;
 	t_hash	**ht;
-	int status = 1;
+	int status;
 
 	get_terminal_name(&(sh.terminal_name));
 	ht = NULL;
 	root = NULL;
 	ft_getent();
 	init(&sh, &t, &ht);
+	status = 21;
 	while (status)
 	{
-		if (!ft_input_cycle(&t))
+		status = ft_input_cycle(&t);
+		if (!status)
 			break ;
 		sh.cl = lexer(&t);
 		write(1, "\n", 1);
-		if (sh.cl)// && (!t.heredoc && *t.nl_addr[t.c_row]))
+		if (sh.cl && status > 0)
 		{
 			char *p = sh.cl;
-			//strip_quotes(&sh.cl);				//wrote place but this is only for testing, invalid read in this function according to Valgrind
 			root = parse_line(&p);
 			status = exec_tree(root, &sh, ht);
 		}

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/30 15:48:03 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/02 18:20:59 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*make_heredoc_input(t_term *t, char *str)
 	i = 0;
 	while (str && str[i])
 	{
-		if (str[i] == '<' && str[i - 1] == '<')
+		if (i && str[i] == '<' && str[i - 1] == '<')
 		{
 			len = ft_strlen(&str[i]);
 			ft_memmove((void *)&str[i], (void *)&str[i + 1], len);
@@ -79,11 +79,18 @@ static char	*ft_heredoc(t_term *t, char *str)
 		fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (fd)
 		{
+			ft_printf("HELLO\n");
 			ret = ft_strsub(str, 0, ft_strchr(str, '\n') - str);
 			cpy = ft_strchr(str, '\n') + 1;
-			cpy = ft_strsub(cpy, 0, ft_strrchr(cpy, '\n') - cpy);
-			write(fd, cpy, ft_strlen(cpy));
-			ft_strdel(&cpy);
+			if (ft_strrchr(cpy, '\n'))
+				cpy = ft_strsub(cpy, 0, ft_strrchr(cpy, '\n') - cpy);
+			if (!ft_strequ(cpy, t->delim))
+			{
+				write(fd, cpy, ft_strlen(cpy));
+				ft_strdel(&cpy);
+			}
+			else
+				write(fd, "\0", 1);
 			ft_strdel(&str);
 			close(fd);
 			return (make_heredoc_input(t, ret));
