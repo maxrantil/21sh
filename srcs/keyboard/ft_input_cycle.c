@@ -6,16 +6,19 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/30 12:36:27 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/02 18:12:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-static int	ctrl_d(t_term *t)
+/* static int	ctrl_d(t_term *t)
 {
-	if (!t->bytes)
+	if (!t->bytes && !t->heredoc)
+	{
 		write(1 , "\n", 1);
+		return (0);
+	}
 	else if (t->index < t->bytes)
 	{
 		ft_delete(t);
@@ -23,16 +26,11 @@ static int	ctrl_d(t_term *t)
 	}
 	else if (t->heredoc && !*t->nl_addr[t->c_row])
 	{
-		ft_putstr_fd("\n21sh: warning: here-document at line ", 2);
-		ft_putnbr_fd(t->c_row, 2);
-		ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
-		ft_putstr_fd(t->delim, 2);
-		ft_putstr_fd("')", 2);
 		ft_end_cycle(t);
-		return (-1);
+		return (1);
 	}
-	return (0);
-}
+	return (-1);
+} */
 
 static int	ft_ctrl(t_term *t)
 {
@@ -74,23 +72,33 @@ static int	ft_isprint_or_enter(t_term *t)
 	}
 	return (0);
 }
-
-t_term	*ft_input_cycle(t_term *t)
+//test start here
+int	ft_input_cycle(t_term *t)
 {
 	ft_add_nl_last_row(t, 0);
 	while (t->ch != -1)
 	{
 		t->ch = ft_get_input();
 		if (ft_isprint_or_enter(t))
-			return (t);
+			return (1);
 		else if (t->ch == CTRL_D)
 		{
-			if (ctrl_d(t) == 1)
-				continue ;
-			else if (t->heredoc)
-				return (t);
-			else
-				return (NULL);
+			/* if (ctrl_d(t) > 0)
+				continue ; */
+			/* else if (t->heredoc)
+				return (t); */
+			/* else
+				return (NULL); */
+			if (!t->bytes)
+				return (0);
+			else if (t->index < t->bytes)
+				ft_delete(t);
+			else if ((t->heredoc && !*t->nl_addr[t->c_row]))
+			{
+				t->heredoc = 0;
+				ft_end_cycle(t);
+				return (-1);
+			}
 		}
 		if (!ft_ctrl(t))
 		{
@@ -128,5 +136,5 @@ t_term	*ft_input_cycle(t_term *t)
 			return (NULL);
 		} */
 	}
-	return (NULL);
+	return (0);
 }

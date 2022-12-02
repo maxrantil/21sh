@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:57:40 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 16:41:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/02 16:35:31 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@
  */
 void	ft_heredoc_handling(t_term *t)
 {
-	if (t->index > 2 && t->ch == '<' && !(t->q_qty % 2))
+	if (t->index >= 1 && t->ch == '<' && !(t->q_qty % 2))
 	{
-		if (t->inp[t->index - 1] == '<' && t->inp[t->index - 2] != '<')
-			t->heredoc = 1;
+		if (t->inp[t->index - 1] == '<')
+		{
+			if (t->index > 2 && t->inp[t->index - 2] == '<')
+				t->heredoc = 0;
+			else
+				t->heredoc = 1;
+		}
 		else
 			t->heredoc = 0;
 	}
