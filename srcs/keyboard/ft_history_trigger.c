@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:59:10 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/29 17:11:31 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:34:30 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  *
  * @param t the term structure
  */
-static void	ft_history_trigger_end(t_term *t)
+static void	ft_history_trigger_end(t_term *t, int display_row)
 {
 	t->index = t->bytes;
 	t->c_row = t->total_row;
@@ -29,7 +29,7 @@ static void	ft_history_trigger_end(t_term *t)
 			t->c_col = t->m_prompt_len;
 	}
 	t->c_col += &t->inp[t->bytes] - t->nl_addr[t->c_row];
-	ft_setcursor(t->c_col, t->total_row + t->start_row);
+	ft_setcursor(t->c_col, t->total_row + display_row);
 	ft_run_capability("ve");
 }
 
@@ -39,16 +39,16 @@ static void	ft_history_trigger_end(t_term *t)
  *
  * @param t the term structure
  */
-static void	ft_history_trigger_start(t_term *t)
+static void	ft_history_trigger_start(t_term *t, int display_row)
 {
 	ft_run_capability("vi");
 	t->quote = 0;
 	t->q_qty = 0;
 	t->c_col = 0;
+	ft_setcursor(t->c_col, display_row);
 	t->c_row = 0;
 	t->index = 0;
 	t->total_row = 0;
-	ft_setcursor(t->c_col, t->start_row);
 	ft_run_capability("cd");
 	ft_putstr(PROMPT);
 }
@@ -64,8 +64,10 @@ static void	ft_history_trigger_start(t_term *t)
 void	ft_history_trigger(t_term *t, ssize_t his)
 {
 	char	*history;
+	int		display_row;
 
-	ft_history_trigger_start(t);
+	display_row = t->start_row - t->c_row;
+	ft_history_trigger_start(t, display_row);
 	history = (char *)vec_get(&t->v_history, t->v_history.len - (size_t)his);
 	if (history)
 	{
@@ -84,5 +86,5 @@ void	ft_history_trigger(t_term *t, ssize_t his)
 	}
 	ft_reset_nl_addr(t);
 	ft_print_trail(t);
-	ft_history_trigger_end(t);
+	ft_history_trigger_end(t, display_row);
 }
