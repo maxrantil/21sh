@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/02 18:20:59 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/05 12:56:58 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static char	*ft_heredoc(t_term *t, char *str)
 		fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (fd)
 		{
-			ft_printf("HELLO\n");
 			ret = ft_strsub(str, 0, ft_strchr(str, '\n') - str);
 			cpy = ft_strchr(str, '\n') + 1;
 			if (ft_strrchr(cpy, '\n'))

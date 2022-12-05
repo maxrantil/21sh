@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 07:56:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/29 17:12:57 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/05 12:27:20 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_delim_fetch(t_term *t)
 static void	ft_insertion_char(t_term *t)
 {
 	ft_putc(t->ch);
-	ft_heredoc_handling(t);
+	ft_heredoc_handling(t, (int)t->index, t->ch);
 	ft_bslash_handling(t);
 	if ((t->ch == D_QUO || t->ch == S_QUO) && !t->heredoc)
 	{
