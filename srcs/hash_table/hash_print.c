@@ -1,30 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_setenv.c                                   :+:      :+:    :+:   */
+/*   hash_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 16:57:43 by mrantil          ###   ########.fr       */
+/*   Created: 2022/11/15 14:10:49 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/06 16:59:19 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-int	msh_setenv(t_node *n, t_shell *sh)
+void	hash_print(t_hash **ht)
 {
-	size_t	i;
+	t_hash	*tmp;
+	int		i;
 
-	i = 1;
-	while (n->arg[i])
+	i = 0;
+	while (i < HASH_SIZE)
 	{
-		if (strchr(n->arg[i], '=') \
-		&& (ft_isalpha(n->arg[i][0]) || n->arg[i][0] == '_'))
-			setenv_loop(sh, n->arg[i], 0);
-		else
-			error_print(n->arg[i], 6);
+		if (ht[i])
+		{
+			ft_printf("hits    command\n");
+			break ;
+		}
 		i++;
 	}
-	return (1);
+	i = 0;
+	while (i < HASH_SIZE)
+	{
+		/* if (!ht[i])
+			ft_printf("ht[%d] = NULL", i);
+		else */
+		if (ht[i])
+		{
+			// ft_printf("ht[%d] = ", i);
+			tmp = ht[i];
+			while (tmp)
+			{
+				ft_printf("%4d	%s\n",0, tmp->program);
+				tmp = tmp->next;
+			}
+			ft_printf("\n");
+		}
+		i++;
+	}
 }

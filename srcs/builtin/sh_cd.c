@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_cd.c                                       :+:      :+:    :+:   */
+/*   sh_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:16:41 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:01:03 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:46:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	exec_home(char **env)
 	ft_strdel(&home);
 }
 
-int	msh_cd(t_node *n, t_shell *sh)
+int	sh_cd(t_node *n, t_shell *sh)
 {
 	char	cwd[MAX_PATHLEN];
 

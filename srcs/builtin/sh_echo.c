@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_echo.c                                     :+:      :+:    :+:   */
+/*   sh_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:34:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:08:10 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:46:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	print_echo(t_node *n, t_shell *sh)
 	}
 }
 
-int	msh_echo(t_node *n, t_shell *sh)
+int	sh_echo(t_node *n, t_shell *sh)
 {
 	print_echo(n, sh);
 	ft_putchar('\n');
