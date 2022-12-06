@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:18:22 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/02 18:59:36 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 13:20:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ void	strip_quotes(t_node *n, t_shell *sh)
 	ssize_t	quote2;
 
 	len = 0;
-	j = 0;
-	ft_printf("STRIP_QUOTES: %s\n", n->arg[0]);
-	while (n->arg[j])
+	j = -1;
+	while (n->arg && n->arg[++j])
 	{
 		i = 0;
-		if (n->arg[j][i] == '\"')
+		if (n->arg[j][i] != '\'')
 			expansions(n, sh);
 		len = ft_strlen(n->arg[j]);
 		while (n->arg[j][i])
@@ -54,7 +53,7 @@ void	strip_quotes(t_node *n, t_shell *sh)
 			}
 			i++;
 		}
-		if (n->arg[j])
-			n->arg[j++];
+		/* if (n->arg[j])
+			n->arg[j++]; */
 	}
 }
