@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/02 18:21:24 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:18:57 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ int	main()
 	t_node	*root;
 	t_shell	sh;
 	t_term	t;
-	t_hash	**ht;
+	/* t_hash	**ht; */
 	int status;
 
 	get_terminal_name(&(sh.terminal_name));
-	ht = NULL;
+	/* ht = NULL; */
 	root = NULL;
 	ft_getent();
-	init(&sh, &t, &ht);
+	init(&sh, &t/* , &ht */);
 	status = 21;
 	while (status)
 	{
@@ -87,14 +87,14 @@ int	main()
 		{
 			char *p = sh.cl;
 			root = parse_line(&p);
-			status = exec_tree(root, &sh, ht);
+			status = exec_tree(root, &sh/* , ht */);
 		}
 		ft_memdel((void **)&sh.cl);
-		free_mem(root, &sh, ht, 1);
+		free_mem(root, &sh/* , ht */, 1);
 		reset_fds(sh.terminal_name);
 		ft_restart_cycle(&t);
 	}
-	free_mem(root, &sh, ht, 3);
+	free_mem(root, &sh/* , ht */, 3);
 	ft_history_write_to_file(&t);
 	ft_disable_raw_mode(&t);
 	exit(20);

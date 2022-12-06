@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/30 10:17:52 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:14:19 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ static struct termios	ft_init_raw(void)
 	return (orig_termios);
 }
 
-void	init(t_shell *sh, t_term *t, t_hash ***ht)
+void	init(t_shell *sh, t_term *t/* , t_hash ***ht */)
 {
 	ssize_t		i;
 	size_t		j;
@@ -289,7 +289,7 @@ void	init(t_shell *sh, t_term *t, t_hash ***ht)
 	t->orig_termios = ft_init_raw();
 	print_banner();
 	ft_init_term(t);
-	hash_init(ht);
+	/* hash_init(ht); */
 	sh->paths = NULL;
 	sh->env = NULL;
 	sh->cl = NULL;

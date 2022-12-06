@@ -6,13 +6,13 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:10:49 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 14:10:58 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:19:14 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-void	hash_print(t_hash **ht)
+/* void	hash_print(t_hash **ht)
 {
 	t_hash	*tmp;
 	int i;
@@ -35,4 +35,4 @@ void	hash_print(t_hash **ht)
 		ft_printf("\n");
 		i++;
 	}
-}
+} */

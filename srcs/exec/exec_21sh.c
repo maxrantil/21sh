@@ -78,7 +78,7 @@ static char	*verify_arg(t_node *n, t_shell *sh)
 	return (n->arg[0]);
 }
 
-int	exec_21sh(t_node *n, t_shell *sh, t_hash **ht)
+int	exec_21sh(t_node *n, t_shell *sh/* , t_hash **ht */)
 {
 	char	*ptr;
 
@@ -100,7 +100,7 @@ int	exec_21sh(t_node *n, t_shell *sh, t_hash **ht)
 			}
 		}
 		error_print(n->arg[0], 4);
-		free_mem(n, sh, ht, 2);
+		free_mem(n, sh/* , ht */, 2);
 		exit(EXIT_FAILURE);
 	}
 	wait(0);

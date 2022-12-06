@@ -15,7 +15,7 @@
 /*
  * It takes a hash table and a pointer to a builtin, and inserts the builtin into the hash table
  */
-static char	*ht_insert(t_hash **ht, t_hash *p)
+/* static char	*ht_insert(t_hash **ht, t_hash *p)
 {
 	size_t index;
 
@@ -57,4 +57,4 @@ void hash_init(t_hash ***ht)
 	init_ht_struct(ht, "exit", &msh_exit);
 	init_ht_struct(ht, "setenv", &msh_setenv);
 	init_ht_struct(ht, "unsetenv", &msh_unsetenv);
-}
+} */
