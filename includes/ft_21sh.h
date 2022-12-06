@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 14:17:40 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 17:11:18 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,17 @@
 /* Unix */
 # define MAX_PATHLEN 1024
 
+typedef struct	s_hash
+{
+	char			*program;
+	// int				(*function)(t_node *n, t_shell *sh);
+	struct s_hash	*next;
+}					t_hash;
+
 typedef struct s_shell
 {
 	t_vec	v_tmp_env;
+	t_hash	**ht;
 	char	**temp_env;
 	char	**env;
 	char	**paths;
@@ -67,13 +75,6 @@ typedef struct s_node
 	struct s_node	*right;
 }					t_node;
 
-/* typedef struct	s_hash
-{
-	char			*program;
-	int				(*function)(t_node *n, t_shell *sh);
-	struct s_hash	*next;
-}					t_hash; */
-
 /* Aggregation */
 void    check_file_aggregations(t_node *n, t_shell *sh/* , t_hash **ht */);
 int		check_filename_fd(char *filename);
@@ -87,12 +88,13 @@ void	syntax_error_msg(int exit_code);
 char	*env_getvalue(char **env, char *var);
 char	*env_key_extract(char *key_value);
 char	**env_underscore(t_node *n, t_shell *sh);
-int		msh_cd(t_node *n, t_shell *sh);
-int		msh_echo(t_node *n, t_shell *sh);
-int		msh_env(t_node *n, t_shell *sh);
-int		msh_setenv(t_node *n, t_shell *sh);
-int		msh_unsetenv(t_node *n, t_shell *sh);
-int		msh_exit(t_node *n, t_shell *sh);
+int		sh_cd(t_node *n, t_shell *sh);
+int		sh_echo(t_node *n, t_shell *sh);
+int		sh_env(t_node *n, t_shell *sh);
+int		sh_exit(t_node *n, t_shell *sh);
+int		sh_hash(t_node *n, t_shell *sh);
+int		sh_setenv(t_node *n, t_shell *sh);
+int		sh_unsetenv(t_node *n, t_shell *sh);
 char	**pwd_update(t_shell *sh, char *oldcwd);
 void	setenv_loop(t_shell *sh, char *arg, int flag_temp);
 char	**setenv_var(char **env, char *key, char *value);
@@ -102,6 +104,7 @@ char	**unsetenv_var(char **env, char *key);
 void	error_print(char *arg, int i);
 
 /* Exec */
+int		check_paths(t_shell *sh);
 int		dup2_check(int file_fd);
 int		exec_21sh(t_node *n, t_shell *sh/* , t_hash **ht */);
 void	exec_pipe_node(t_node *n, t_shell *sh/* , t_hash **ht */);
@@ -117,8 +120,10 @@ void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
 void	expansions(t_node *n, t_shell *sh);
 
 /* Hash table */
-/* size_t	hash_function(char *program); */
-/* void	hash_init(t_hash ***ht); */
+size_t	hash_function(char *program);
+void	hash_init(t_shell *sh);
+void	hash_print(t_hash **ht);
+void	init_ht_struct(t_shell *sh, char *str/* , int (*f)(t_node *n, t_shell *sh) */);
 
 /* Lexer */
 char	*lexer(t_term *t);
@@ -141,7 +146,6 @@ int		peek(char **ptr_to_line, char *toks);
 int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 
 /* Utils */
-/* void	hash_print(t_hash **ht); */
 void	tree_print(t_node *root);
 
 typedef int			(*t_fptr)(t_node *n, t_shell *sh);
@@ -150,18 +154,20 @@ static const char	*g_builtin_str[] = {
 	"cd",
 	"echo",
 	"env",
+	"exit",
+	"hash",
 	"setenv",
-	"unsetenv",
-	"exit"
+	"unsetenv"
 };
 
 static const t_fptr	g_builtin_func[] = {
-	&msh_cd,
-	&msh_echo,
-	&msh_env,
-	&msh_setenv,
-	&msh_unsetenv,
-	&msh_exit
+	&sh_cd,
+	&sh_echo,
+	&sh_env,
+	&sh_exit,
+	&sh_hash,
+	&sh_setenv,
+	&sh_unsetenv
 };
 
 #endif

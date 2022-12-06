@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/02 18:17:28 by mrantil          ###   ########.fr        #
+#    Updated: 2022/12/06 17:11:30 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,18 +88,20 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(AGG)syntax_error_msg \
 				$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
-				$(BUILTIN)msh_cd \
-				$(BUILTIN)msh_echo \
-				$(BUILTIN)msh_env \
-				$(BUILTIN)msh_exit \
-				$(BUILTIN)msh_unsetenv \
-				$(BUILTIN)msh_setenv \
 				$(BUILTIN)pwd_update \
 				$(BUILTIN)env_key_extract \
 				$(BUILTIN)setenv_loop \
 				$(BUILTIN)setenv_var \
+				$(BUILTIN)sh_cd \
+				$(BUILTIN)sh_echo \
+				$(BUILTIN)sh_env \
+				$(BUILTIN)sh_exit \
+				$(BUILTIN)sh_hash \
+				$(BUILTIN)sh_unsetenv \
+				$(BUILTIN)sh_setenv \
 				$(BUILTIN)unsetenv_var \
 				$(ERROR)error_print \
+				$(EXEC)check_paths \
 				$(EXEC)dup2_check \
 				$(EXEC)exec_21sh \
 				$(EXEC)exec_pipe_node \
@@ -113,6 +115,8 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(EXPANSIONS)expansions \
 				$(HASH_TABLE)hash_function \
 				$(HASH_TABLE)hash_init \
+				$(HASH_TABLE)hash_print \
+				$(HASH_TABLE)init_ht_struct \
 				$(KEYBOARD)ft_add_nl_last_row \
 				$(KEYBOARD)ft_add_nl_mid_row \
 				$(KEYBOARD)ft_alt_mv \
@@ -177,7 +181,6 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(PARSER)peek \
 				$(PARSER)tok_get \
 				$(UTILS)tree_print \
-				$(UTILS)hash_print \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))

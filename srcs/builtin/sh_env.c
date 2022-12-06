@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_env.c                                      :+:      :+:    :+:   */
+/*   sh_env.c  		                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -63,7 +63,7 @@ static int	env_heart(t_node *n, t_shell *sh, size_t arglen)
 	return (0);
 }
 
-int	msh_env(t_node *n, t_shell *sh)
+int	sh_env(t_node *n, t_shell *sh)
 {
 	size_t	i;
 	size_t	arglen;

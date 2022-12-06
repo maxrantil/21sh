@@ -32,9 +32,8 @@ static int	exec_args(t_node *n, t_shell *sh/* , t_hash **ht */)
 	size_t	i;
 
 	strip_quotes(n, sh);
-	if (!n->arg || !n->arg[0])
-		return (1);
 	i = 0;
+	
 	while (i < num_builtins())
 	{
 		if (!ft_strcmp(n->arg[0], g_builtin_str[i]))

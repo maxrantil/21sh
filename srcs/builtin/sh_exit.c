@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_exit.c                                     :+:      :+:    :+:   */
+/*   sh_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:46:16 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:45:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-int	msh_exit(t_node *n, t_shell *sh)
+int	sh_exit(t_node *n, t_shell *sh)
 {
 	(void)sh;
-	if (*n->arg)
-		return (0);
-	return (1);
+	(void)n->arg;
+	return (0);
 }

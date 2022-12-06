@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_unsetenv.c                                 :+:      :+:    :+:   */
+/*   sh_unsetenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 16:58:59 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:46:38 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	loop_for_unsetenv(t_shell *sh, char *arg)
 	return (1);
 }
 
-int	msh_unsetenv(t_node *n, t_shell *sh)
+int	sh_unsetenv(t_node *n, t_shell *sh)
 {
 	size_t	i;
 

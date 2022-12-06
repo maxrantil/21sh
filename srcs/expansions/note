@@ -4,3 +4,7 @@ echo "$SHELL"."asd"
 
 WORKING
 echo asd"$SHELL"."asd"
+
+
+NOT WORKING
+bash-5.2$ >file cd -
