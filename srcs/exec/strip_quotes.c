@@ -22,33 +22,39 @@ static ssize_t	find_matching_quote(char *str, char quote)
 	return (i);
 }
 
-void	strip_quotes(char **args)
+void	strip_quotes(t_node *n, t_shell *sh)
 {
 	ssize_t	i;
+	ssize_t	j;
 	size_t	len;
 	ssize_t	quote1;
 	ssize_t	quote2;
 
 	len = 0;
-	while (*args)
+	j = 0;
+	ft_printf("STRIP_QUOTES: %s\n", n->arg[0]);
+	while (n->arg[j])
 	{
-		i = -1;
-		len = ft_strlen(*args);
-		while ((*args)[++i])
+		i = 0;
+		if (n->arg[j][i] == '\"')
+			expansions(n, sh);
+		len = ft_strlen(n->arg[j]);
+		while (n->arg[j][i])
 		{
-			if ((*args)[i] == '\'' || (*args)[i] == '"')
+			if (n->arg[j][i] == '\'' || n->arg[j][i] == '"')
 			{
 				quote1 = i;
-				quote2 = find_matching_quote(&(*args)[i], (*args)[i]);
+				quote2 = find_matching_quote(&n->arg[j][i], n->arg[j][i]);
 				quote2 += quote1;
-				ft_memmove((void *)&(*args)[i], \
-				(void *)&(*args)[i + 1], len - (size_t)quote1);
-				ft_memmove((void *)&(*args)[quote2 - 1], \
-				(void *)&(*args)[quote2], len - (size_t)quote2);
+				ft_memmove((void *)&n->arg[j][i], \
+				(void *)&n->arg[j][i + 1], len - (size_t)quote1);
+				ft_memmove((void *)&n->arg[j][quote2 - 1], \
+				(void *)&n->arg[j][quote2], len - (size_t)quote2);
 				i = quote2 - 2;
 			}
+			i++;
 		}
-		if (*args)
-			args++;
+		if (n->arg[j])
+			n->arg[j++];
 	}
 }

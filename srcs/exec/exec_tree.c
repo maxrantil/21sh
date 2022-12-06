@@ -5,7 +5,8 @@ static int	exec_args(t_node *n, t_shell *sh, t_hash **ht)
 	t_hash	*tmp;
 	size_t	index;
 
-	expansions(n, sh);
+	// expansions(n, sh);
+	strip_quotes(n, sh);
 	index = hash_function(n->arg[0]);
 	tmp = ht[index];
 	while (tmp)

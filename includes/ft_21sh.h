@@ -110,7 +110,8 @@ int     exec_tree(t_node *n, t_shell *sh, t_hash **ht);
 int		fork_wrap(void);
 void	input_file_read(char *filename);
 void	redirection_file(t_node *n, t_shell *sh, t_hash **ht);
-void	strip_quotes(char **args);
+// void	strip_quotes(char **args);
+void	strip_quotes(t_node *n, t_shell *sh);
 
 /* Expansions */
 void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
