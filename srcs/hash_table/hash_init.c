@@ -18,7 +18,7 @@ static void	init_ht(t_hash ***ht)
 
 	*ht = (t_hash **)malloc(sizeof(t_hash *) * (HASH_SIZE + 1)); //be sure to free this, not done now
 	i =	0;
-	while (i <= HASH_SIZE) // take away '=' ?
+	while (i < HASH_SIZE) //do i need one more null here?
 		(*ht)[i++] = NULL;
 }
 

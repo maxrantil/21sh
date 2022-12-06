@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:35:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 17:12:30 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 17:55:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,24 @@
  */
 static char	*ht_insert(t_hash **ht, t_hash *new)
 {
-	size_t index;
+	// t_hash	*tmp;
+	size_t	index;
 
 	if (!new)
 		return (NULL);
 	index = hash_function(new->program);
+	/* if (ht[index] == NULL)
+	{
+		ht[index] = new;
+	}
+	else
+	{
+		tmp = ht[index];
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	new->next = NULL; */
 	new->next = ht[index];
 	ht[index] = new;
 	return (ht[index]->program);
