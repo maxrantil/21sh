@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/02 18:59:49 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:17:40 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ typedef struct s_node
 	struct s_node	*right;
 }					t_node;
 
-typedef struct	s_hash
+/* typedef struct	s_hash
 {
 	char			*program;
 	int				(*function)(t_node *n, t_shell *sh);
 	struct s_hash	*next;
-}					t_hash;
+}					t_hash; */
 
 /* Aggregation */
-void    check_file_aggregations(t_node *n, t_shell *sh, t_hash **ht);
+void    check_file_aggregations(t_node *n, t_shell *sh/* , t_hash **ht */);
 int		check_filename_fd(char *filename);
 void	check_operator_errors(int old, int file_fd, char *filename, char *oper);
 int		dup2_check2(int file_fd, int old_fd);
@@ -102,15 +102,13 @@ char	**unsetenv_var(char **env, char *key);
 void	error_print(char *arg, int i);
 
 /* Exec */
-// void	check_file_aggregations(char *full, char *filename);
 int		dup2_check(int file_fd);
-int		exec_21sh(t_node *n, t_shell *sh, t_hash **ht);
-void	exec_pipe_node(t_node *n, t_shell *sh, t_hash **ht);
-int     exec_tree(t_node *n, t_shell *sh, t_hash **ht);
+int		exec_21sh(t_node *n, t_shell *sh/* , t_hash **ht */);
+void	exec_pipe_node(t_node *n, t_shell *sh/* , t_hash **ht */);
+int     exec_tree(t_node *n, t_shell *sh/* , t_hash **ht */);
 int		fork_wrap(void);
 void	input_file_read(char *filename);
-void	redirection_file(t_node *n, t_shell *sh, t_hash **ht);
-// void	strip_quotes(char **args);
+void	redirection_file(t_node *n, t_shell *sh/* , t_hash **ht */);
 void	strip_quotes(t_node *n, t_shell *sh);
 
 /* Expansions */
@@ -119,15 +117,15 @@ void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
 void	expansions(t_node *n, t_shell *sh);
 
 /* Hash table */
-size_t	hash_function(char *program);
-void	hash_init(t_hash ***ht);
+/* size_t	hash_function(char *program); */
+/* void	hash_init(t_hash ***ht); */
 
 /* Lexer */
 char	*lexer(t_term *t);
 
 /* Main */
-void	free_mem(t_node *n, t_shell *sh, t_hash **ht,ssize_t code);
-void	init(t_shell *sh, t_term *t, t_hash ***ht);
+void	free_mem(t_node *n, t_shell *sh/* , t_hash **ht */, ssize_t code);
+void	init(t_shell *sh, t_term *t/* , t_hash ***ht */);
 void	print_banner(void);
 void	tree_free(t_node *n);
 
@@ -143,7 +141,27 @@ int		peek(char **ptr_to_line, char *toks);
 int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 
 /* Utils */
-void	hash_print(t_hash **ht);
+/* void	hash_print(t_hash **ht); */
 void	tree_print(t_node *root);
+
+typedef int			(*t_fptr)(t_node *n, t_shell *sh);
+
+static const char	*g_builtin_str[] = {
+	"cd",
+	"echo",
+	"env",
+	"setenv",
+	"unsetenv",
+	"exit"
+};
+
+static const t_fptr	g_builtin_func[] = {
+	&msh_cd,
+	&msh_echo,
+	&msh_env,
+	&msh_setenv,
+	&msh_unsetenv,
+	&msh_exit
+};
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/02 18:24:28 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:18:29 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static void	free_table(t_hash **ht)
+/* static void	free_table(t_hash **ht)
 {
 	t_hash	*tmp;
 	int		i;
@@ -33,9 +33,7 @@ static void	free_table(t_hash **ht)
 		}
 		i++;
 	}
-	// // free(ht);
-	// ht = NULL;
-}
+} */
 
 static void temp_handler(t_node *n, t_shell *sh)
 {
@@ -60,7 +58,7 @@ static void temp_handler(t_node *n, t_shell *sh)
 	}
 }
 
-void	free_mem(t_node *root, t_shell *sh, t_hash **ht, ssize_t code)
+void	free_mem(t_node *root, t_shell *sh/* , t_hash **ht */, ssize_t code)
 {
 	if (code < 3)
 	{
@@ -76,7 +74,7 @@ void	free_mem(t_node *root, t_shell *sh, t_hash **ht, ssize_t code)
 	{
 		if (sh->env)
 			ft_arrfree((void ***)&sh->env, ft_arrlen((void **)sh->env));
-		free_table(ht);
+		/* free_table(ht); */
 		vec_free(&sh->v_tmp_env);
 	}
 }

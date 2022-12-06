@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/30 15:30:19 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:12:39 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	get_redirected_fd(char *full)
 
 // void	check_file_aggregations(char *full, char *filename)
 // check_file_aggregations(n->arg[0], n->arg[1]);
-void	check_file_aggregations(t_node *n, t_shell *sh, t_hash **ht)
+void	check_file_aggregations(t_node *n, t_shell *sh/* , t_hash **ht */)
 {
 	int		file_fd;
 	char	*operator;
@@ -94,5 +94,5 @@ void	check_file_aggregations(t_node *n, t_shell *sh, t_hash **ht)
 		syntax_error_msg(1);
 	ft_strdel(&operator);
 	ft_strdel(&target_file);
-	exec_tree(n->left, sh, ht);
+	exec_tree(n->left, sh/* , ht */);
 }

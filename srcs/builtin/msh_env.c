@@ -57,7 +57,7 @@ static int	env_heart(t_node *n, t_shell *sh, size_t arglen)
 	if (i < arglen)
 	{
 		n->arg = switch_args(n->arg, arglen, i);
-		exec_21sh(n, sh, NULL);
+		exec_21sh(n, sh/* , NULL */);
 		return (1);
 	}
 	return (0);
