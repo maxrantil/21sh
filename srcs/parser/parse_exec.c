@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/07 15:31:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:36:43 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ static void	exec_create_redir(t_node *n, char *tok, char *end_q)
 	n = hold;
 }
 
+static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
+{
+	int len = add_quote_tok(tok, *tok);
+	if (*tok == '"' || *tok == '\'')
+	{
+		add_to_args(&n->arg, ft_strsub(tok, 0, len));
+		mv_tok_and_line(&tok, &ptr_to_line, len);
+	}
+	else
+		add_to_args(&n->arg, ft_strsub(tok, 0, (size_t)(end_q - tok)));
+}
+
 t_node *parse_exec(char **ptr_to_line)
 {
 	t_node	*n;
@@ -63,16 +75,7 @@ t_node *parse_exec(char **ptr_to_line)
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
 				exec_create_redir(n, tok, end_q);
 			else
-			{
-				int len = add_quote_tok(tok, *tok);
-				if (*tok == '"' || *tok == '\'')
-				{
-					add_to_args(&n->arg, ft_strsub(tok, 0, len));
-					mv_tok_and_line(&tok, &ptr_to_line, len);
-				}
-				else
-					add_to_args(&n->arg, ft_strsub(tok, 0, (size_t)(end_q - tok)));
-			}
+				exec_create(n, ptr_to_line, tok, end_q);
 		}
 		else if (type == 0)
 			break ;
