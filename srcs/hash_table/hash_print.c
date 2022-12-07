@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:10:49 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 17:58:30 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:15:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	hash_print(t_hash **ht)
 {
 	t_hash	*tmp;
 	int		i;
+	// int		j;
 
 	i = 0;
 	while (i < HASH_SIZE)
@@ -27,18 +28,22 @@ void	hash_print(t_hash **ht)
 		}
 		i++;
 	}
+	if (i == HASH_SIZE)
+	{
+		ft_putstr_fd("21sh: hash table empty", 2);
+		return ;
+	}
 	i = 0;
 	while (i < HASH_SIZE)
 	{
-		if (ht[i])
+		if (ht[i] != NULL)
 		{
 			tmp = ht[i];
-			while (tmp)
+			while (tmp != NULL)
 			{
-				ft_printf("%d	%s\n", 0, tmp->program);
+				ft_printf("%d	%s\n", tmp->hits, tmp->program);
 				tmp = tmp->next;
 			}
-			// ft_printf("\n");
 		}
 		i++;
 	}

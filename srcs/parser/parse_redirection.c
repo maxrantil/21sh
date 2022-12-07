@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 17:24:38 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:20:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	check_for_fileagg(char *tok)
 	if (*tok == '>' && *(tok + 1) == '&')
 	{
 		if (!ft_isalnum(*(tok + 2)) && (*(tok + 2)) != '-' && !ft_isspace(tok + 2))
-				return (-1);
+			return (-1);
 		return (ret + 2);
 	}
 	else
