@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 12:56:10 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:20:55 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ t_node *parse_exec(char **ptr_to_line)
 			}
 			else
 			{
+				int len = add_quote_tok(tok, *tok);
 				if (*tok == '"' || *tok == '\'')
 				{
-					int len = add_quote_tok(tok, *tok);
 					add_to_args(&n->arg, ft_strsub(tok, 0, len));
 					mv_tok_and_line(&tok, &ptr_to_line, len);
 				}
@@ -72,7 +72,8 @@ t_node *parse_exec(char **ptr_to_line)
 			tree_free(n);
 			return (NULL);
 		}
-		n = parse_redirection(n, ptr_to_line);
+		if (ft_strcspn(tok, "<>"))
+			n = parse_redirection(n, ptr_to_line);
 	}
 	return (n);
 }

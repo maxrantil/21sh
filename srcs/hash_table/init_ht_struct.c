@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:35:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 17:55:00 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:10:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,43 @@
 /*
  * It takes a hash table and a pointer to a builtin, and inserts the builtin into the hash table
  */
-static char	*ht_insert(t_hash **ht, t_hash *new)
+static void ht_insert(t_shell *sh, t_hash *new)
 {
 	// t_hash	*tmp;
 	size_t	index;
 
-	if (!new)
-		return (NULL);
 	index = hash_function(new->program);
-	/* if (ht[index] == NULL)
+	/* if (sh->ht[index] == NULL)
 	{
-		ht[index] = new;
+		sh->ht[index] = new;
 	}
 	else
 	{
-		tmp = ht[index];
+		tmp = sh->ht[index];
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp->next = new;
-	}
-	new->next = NULL; */
-	new->next = ht[index];
-	ht[index] = new;
-	return (ht[index]->program);
+	} */
+	// ft_printf("NEW PROGRAM -> %s\n", tmp->program);
+	// ft_printf("NEW -> %s\n", new->program);
+	// new->next = NULL;
+	new->next = sh->ht[index];
+	sh->ht[index] = new;
+	// return (ht[index]->program);
 }
 
-void	init_ht_struct(t_shell *sh, char *str/* , int (*f)(t_node *n, t_shell *sh) */)
+void	init_ht_struct(t_shell *sh, char *str)
 {
 	t_hash	*new;
 
-	new = (t_hash *)ft_memalloc(sizeof(t_hash));
-	new->program = str;
-	// new->function = f;
+	new = (t_hash *)malloc(sizeof(t_hash)); //is memalloc the problem?
+	if (!new)
+	{
+		ft_putstr_fd("malloc fail on init_ht_struct\n", 2);
+		return ;
+	}
+	new->program = ft_strdup(str);
+	new->hits = 0;
 	new->next = NULL;
-	ht_insert(sh->ht, new);
+	ht_insert(sh, new);
 }

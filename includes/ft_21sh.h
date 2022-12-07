@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 17:11:18 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:10:41 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 typedef struct	s_hash
 {
 	char			*program;
+	int				hits;
 	// int				(*function)(t_node *n, t_shell *sh);
 	struct s_hash	*next;
 }					t_hash;
