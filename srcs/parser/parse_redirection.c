@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/07 15:20:42 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:55:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,9 @@ static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
 	while (n->left->type != EXEC)
 		n = n->left;
 	tmp = n->left;
-	if (hold->type == REDIROVER)
-		tmp = node_create(REDIROVER, tmp, NULL);
-	else if (hold->type == REDIRAPP && ++len)
-		tmp = node_create(REDIRAPP, tmp, NULL);
-	else if (hold->type == REDIRIN)
-		tmp = node_create(REDIRIN, tmp, NULL);
-	else if (hold->type == FILEAGG)
-		tmp = node_create(FILEAGG, tmp, NULL);
+	if (hold->type == REDIRAPP)
+		++len;
+	tmp = node_create(hold->type, tmp, NULL);
 	add_args_to_redir_node(tmp, &ptr_to_line, &tok, len);
 	n->left = tmp;
 	tmp = NULL;
@@ -149,10 +144,7 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 				n = node_create(REDIRIN, n, NULL);
 			else if (type == '#' || (type == 'a' \
 				&& (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
-			{
 				n = node_create(REDIRAPP, n, NULL);
-				// len1++;
-			}
 			add_args_to_redir_node(n, &ptr_to_line, &tok, len1);
 		}
 		if (len < 0 || len1 < 0)
