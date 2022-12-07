@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 17:00:53 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:43:55 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*verify_arg(t_node *n, t_shell *sh, int i)
 		verify = ft_strupdate(verify, n->arg[i]);
 		if (!lstat(verify, &statbuf))
 		{
-			// ft_strdel(&n->arg[0]); //valgrind says not to free?????
+			ft_strdel(&n->arg[i]); //valgrind says not to free?????
 			n->arg[i] = verify;
 			return (n->arg[i]);
 		}
@@ -38,7 +38,9 @@ static char	*verify_arg(t_node *n, t_shell *sh, int i)
 int	sh_hash(t_node *n, t_shell *sh) //ad -r to clear the hash table
 {
 	int		i;
+	int		index;
 	char	*ptr;
+	t_hash	*tmp;
 
 	if (!check_paths(sh)) // will this leak when i unset PATH and set it many times?
 	{
@@ -53,7 +55,16 @@ int	sh_hash(t_node *n, t_shell *sh) //ad -r to clear the hash table
 		ptr = n->arg[i];
 		n->arg[i] = verify_arg(n, sh, i);
 		if (!ft_strequ(n->arg[i], ptr))
-			init_ht_struct(sh, n->arg[i]);
+		{
+			index = hash_function(n->arg[i]);
+			tmp = sh->ht[index];
+			{
+				while (tmp && !ft_strequ(n->arg[i], tmp->program))
+					tmp = tmp->next;
+				if (tmp == NULL)
+					init_ht_struct(sh, n->arg[i]);
+			}
+		}
 		else
 		{
 			ft_putstr_fd("21sh: hash: ", 2);
