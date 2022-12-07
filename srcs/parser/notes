@@ -9,3 +9,4 @@ ls dadsa asdads 2> file 2>&- > file2
 ls dassda author 2>errfile > f1 > f2 1>&2 f3 >f4
 
 ls author dasdasd  > file >file2 2>&1
+
