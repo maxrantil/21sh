@@ -12,6 +12,7 @@ void	rec_print_tree(t_node *root, int lvl)
 	if (root->type == EXEC && root->arg)
 	{
 		size_t len = ft_arrlen((void **)root->arg);
+		printf("exec ");
 		if (len > 2)
 			printf("[%s] [1]%s [2]%s [3]%s\n", root->arg[0], root->arg[1], root->arg[2], root->arg[3]);
 		else if (len == 2)
@@ -22,17 +23,17 @@ void	rec_print_tree(t_node *root, int lvl)
 	else if (root->type == PIPE)							// |
 		printf("[|]");
 	else if (root->type == REDIROVER && root->arg)			// >
-		printf("[%s] %s\n", root->arg[0], root->arg[1]);
+		printf("> [%s] [%s]\n", root->arg[0], root->arg[1]);
 	else if (root->type == REDIRAPP && root->arg) 			// >>
-		printf("[%s] %s\n", root->arg[0], root->arg[1]);
+		printf(">> [%s] [%s]\n", root->arg[0], root->arg[1]);
 	else if (root->type == REDIRIN && root->arg)			// <
-		printf("[%s] %s\n", root->arg[0], root->arg[1]);
+		printf("< [%s] [%s]\n", root->arg[0], root->arg[1]);
 	else if (root->type == AMP)								// &
 		printf("[&]");
 	else if (root->type == SEMI)							// ;
 		printf("[;]");
 	else if (root->type == FILEAGG && root->arg)			// >&
-		printf("[%s] %s\n", root->arg[0], root->arg[1]);
+		printf(">& [%s] [%s]\n", root->arg[0], root->arg[1]);
 	rec_print_tree(root->left, lvl);
 }
 

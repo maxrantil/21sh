@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/07 14:34:01 by mrantil          ###   ########.fr        #
+#    Updated: 2022/12/08 13:32:23 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -172,6 +172,9 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(MAIN)print_banner \
 				$(MAIN)tree_free \
 				$(PARSER)add_to_args \
+				$(PARSER)check_for_fileagg \
+				$(PARSER)error_redir \
+				$(PARSER)get_fd_before \
 				$(PARSER)mv_tok_and_line \
 				$(PARSER)node_create \
 				$(PARSER)parse_exec \
@@ -179,6 +182,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(PARSER)parse_pipe \
 				$(PARSER)parse_redirection \
 				$(PARSER)peek \
+				$(PARSER)redir_node_add_args \
 				$(PARSER)tok_get \
 				$(UTILS)tree_print \
 

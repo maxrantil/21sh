@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/07 13:10:41 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:32:08 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,9 @@ void	tree_free(t_node *n);
 
 /* Parser */
 void 	add_to_args(char ***array, char *str);
+int		check_for_fileagg(char *tok);
+t_node	*error_redir(t_node *n, char **ptr_to_line);
+int		get_fd_before(char *tok);
 void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len);
 t_node	*node_create(int type, t_node *left, t_node *right);
 t_node	*parse_exec(char **ptr_to_line);
@@ -144,6 +147,7 @@ t_node	*parse_line(char **ptr_to_line);
 t_node	*parse_pipe(char **ptr_to_line);
 t_node	*parse_redirection(t_node *n, char **ptr_to_line);
 int		peek(char **ptr_to_line, char *toks);
+void	redir_node_add_args(t_node *n, char ***ptr_to_line, char **tok, int len);
 int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 
 /* Utils */

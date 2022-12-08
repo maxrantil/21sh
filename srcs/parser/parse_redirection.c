@@ -6,84 +6,28 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/07 16:55:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:32:31 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static int	get_fd_before(char *tok)
+static int	get_node_type(char *tok)
 {
-	int		ret;
-
-	ret = 0;
 	while (*tok && !ft_isspace(tok))
 	{
-		if (ft_isdigit(*tok) && ++ret)
+		if (ft_isdigit(*tok))
 			tok++;
 		else
 			break ;
 	}
-	if (*tok == '>' || *tok == '<')
-	{
-		if (*tok == '>' && *(tok + 1) == '>')
-		{
-			if (!ft_isalnum(*(tok + 2)) && !ft_isspace(tok + 2))
-				return (-1);
-			++ret;
-		}
-		else if (!ft_isalnum(*(tok + 1)) && !ft_isspace(tok + 1))
-			return (-1);
-		return (++ret);
-	}
-	else
-		return (0);
-}
-
-static int	check_for_fileagg(char *tok)
-{
-	int		ret;
-
-	ret = 0;
-	while (*tok && !ft_isspace(tok))
-	{
-		if (ft_isdigit(*tok) && ++ret)
-			tok++;
-		else
-			break ;
-	}
-	if (*tok == '>' && *(tok + 1) == '&')
-	{
-		if (!ft_isalnum(*(tok + 2)) && (*(tok + 2)) != '-' && !ft_isspace(tok + 2))
-			return (-1);
-		return (ret + 2);
-	}
-	else
-		return (0);
-}
-
-static int	get_len_of_next_tok(char *tok)
-{
-	int	ret;
-
-	ret = 0;
-	while (*tok && !ft_isspace(tok))
-	{
-		if (ft_isascii(*tok) && ++ret)
-			tok++;
-		else
-			break ;
-	}
-	return (ret);
-}
-
-static void	add_args_to_redir_node(t_node *n, char ***ptr_to_line, char **tok, int len)
-{
-	add_to_args(&n->arg, ft_strsub(*tok, 0, len));
-	mv_tok_and_line(tok, ptr_to_line, len);
-	len = get_len_of_next_tok(*tok);
-	add_to_args(&n->arg, ft_strsub(*tok, 0, len));
-	mv_tok_and_line(tok, ptr_to_line, len);
+	if (*tok == '>' && *(tok + 1) == '>')
+		return (4);
+	else if (*tok == '>' && *(tok + 1) != '&')
+		return (3);
+	else if (*tok == '<')
+		return (5);
+	return (6);
 }
 
 static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
@@ -91,19 +35,50 @@ static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
 {
 	t_node	*tmp;
 	t_node	*hold;
+	int		node_type;
 
 	hold = n;
 	while (n->left->type != EXEC)
 		n = n->left;
 	tmp = n->left;
-	if (hold->type == REDIRAPP)
+	node_type = get_node_type(tok);
+	if (node_type == 4)
 		++len;
-	tmp = node_create(hold->type, tmp, NULL);
-	add_args_to_redir_node(tmp, &ptr_to_line, &tok, len);
+	tmp = node_create(node_type, tmp, NULL);
+	redir_node_add_args(tmp, &ptr_to_line, &tok, len);
 	n->left = tmp;
 	tmp = NULL;
 	n = hold;
 	return (n);
+}
+
+static void	make_fileagg_node(t_node **n, char **ptr_to_line, char *tok, int fileagg_len)
+{
+	if ((*n)->type >= REDIROVER && (*n)->type <= FILEAGG)
+		*n = make_redir_node(*n, ptr_to_line, tok, fileagg_len);
+	else
+	{
+		*n = node_create(FILEAGG, *n, NULL);
+		redir_node_add_args(*n, &ptr_to_line, &tok, fileagg_len);
+	}
+}
+
+static void	make_fd_node(t_node **n, char **ptr_to_line, char *tok, int fd_len, int type)
+{
+	if ((*n)->type >= REDIROVER && (*n)->type <= FILEAGG)
+	{
+		*n = make_redir_node(*n, ptr_to_line, tok, fd_len);
+		return ;
+	}
+	else if (type == '>' || (type == 'a' \
+		&& (**ptr_to_line == '>' && (**ptr_to_line + 1) != '>')))
+		*n = node_create(REDIROVER, *n, NULL);
+	else if (type == '<' || (type == 'a' && (**ptr_to_line == '<')))
+		*n = node_create(REDIRIN, *n, NULL);
+	else if (type == '#' || (type == 'a' \
+		&& (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
+		*n = node_create(REDIRAPP, *n, NULL);
+	redir_node_add_args(*n, &ptr_to_line, &tok, fd_len);
 }
 
 t_node *parse_redirection(t_node *n, char **ptr_to_line)
@@ -111,55 +86,23 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 	char	*tok;
 	char	*end_q;
 	int		type;
-	int		len;
-	int		len1;
+	int		fileagg_len;
+	int		fd_len;
 
 	while (n && n->arg && peek(ptr_to_line, "<>&1234567890"))
 	{
 		type = tok_get(ptr_to_line, &tok, &end_q);
-		len = check_for_fileagg(tok);
-		len1 = get_fd_before(tok);
-		if (n && len > 0)
+		fileagg_len = check_for_fileagg(tok);
+		fd_len = get_fd_before(tok);
+		if (n && fileagg_len > 0)
 		{
-			if (n->type >= REDIROVER && n->type <= FILEAGG)
-				n = make_redir_node(n, ptr_to_line, tok, len);
-			else
-			{
-				n = node_create(FILEAGG, n, NULL);
-				add_args_to_redir_node(n, &ptr_to_line, &tok, len);
-			}
-			len1 = 0;
+			make_fileagg_node(&n, ptr_to_line, tok, fileagg_len);
+			fd_len = 0;
 		}
-		else if (n && len1 > 0)
-		{
-			if (n->type >= REDIROVER && n->type <= FILEAGG)
-			{
-				n = make_redir_node(n, ptr_to_line, tok, len1);
-				continue ;
-			}
-			else if (type == '>' || (type == 'a' \
-				&& (**ptr_to_line == '>' && (**ptr_to_line + 1) != '>')))
-				n = node_create(REDIROVER, n, NULL);
-			else if (type == '<' || (type == 'a' && (**ptr_to_line == '<')))
-				n = node_create(REDIRIN, n, NULL);
-			else if (type == '#' || (type == 'a' \
-				&& (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
-				n = node_create(REDIRAPP, n, NULL);
-			add_args_to_redir_node(n, &ptr_to_line, &tok, len1);
-		}
-		if (len < 0 || len1 < 0)
-		{
-			ft_putstr_fd("21sh: (redir) syntax error near unexpected tok `", 2);
-			/* if (*tok && *(tok + 1))
-				ft_putchar_fd(*tok, 2); */
-			if (**ptr_to_line)
-				ft_putchar_fd(**ptr_to_line, 2);
-			else
-				ft_putstr_fd("newline", 2);
-			ft_putendl_fd("'", 2);
-			tree_free(n);
-			return (NULL);
-		}
+		else if (n && fd_len > 0)
+			make_fd_node(&n, ptr_to_line, tok, fd_len, type);
+		if (fileagg_len < 0 || fd_len < 0)
+			return (error_redir(n, ptr_to_line));
 	}
 	return (n);
 }
