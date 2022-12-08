@@ -32,7 +32,7 @@ int	exec_tree(t_node *n, t_shell *sh/* , t_hash **ht */)
 		exec_pipe_node(n, sh/* , ht */);
 	else if (n->type == REDIROVER || n->type == REDIRAPP)
 		redirection_file(n, sh/* , ht */);
-	else if (n->type == REDIRIN) 		//here we need to change to fork like redirection_file
+	else if (n->type == REDIRIN)
 		input_file_read(n->arg[1]);
 	else if (n->type == FILEAGG)
 		check_file_aggregations(n, sh/* , ht */);
@@ -47,6 +47,7 @@ int	exec_tree(t_node *n, t_shell *sh/* , t_hash **ht */)
 	}
 	else if (n->type == SEMI)
 	{
+		reset_fds(sh->terminal_name);
 		exec_tree(n->left, sh/* , ht */);
 		exec_tree(n->right, sh/* , ht */);
 	}

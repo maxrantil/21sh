@@ -51,7 +51,7 @@ static int	env_heart(t_node *n, t_shell *sh, size_t arglen)
 	size_t	i;
 
 	i = 0;
-	while (n->arg[++i] && ft_strchr(n->arg[i], '='))	//make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_' or key=NULL
+	while (n->arg[++i] && ft_strchr(n->arg[i], '='))	// seems like temp variable doesnt have these rules. //make more checks for invalid input, like =, =a, a=, a=,staring with only char or '_' or key=NULL
 		setenv_loop(sh, n->arg[i], 1);
 	sh->temp_env = set_tempenv(n, sh, i - 1);
 	if (i < arglen)
