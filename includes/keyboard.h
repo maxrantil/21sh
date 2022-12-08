@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/05 13:08:11 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:38:12 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 # define PROMPT "$> "
 # define MINI_PROMPT "> "
 
-# define BUFFSIZE   2048
+# define BUFFSIZE   2048 //control the buffsize so that works fine
 # define MAX_LINE   1024
 
 typedef struct clipboard
@@ -75,7 +75,7 @@ typedef struct clipboard
 typedef struct s_term
 {
 	char			inp[BUFFSIZE];
-	struct termios	orig_termios;
+	
 	t_vec			v_history;
 	t_clipboard		clipboard;
 	char			**nl_addr;

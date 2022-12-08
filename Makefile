@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/08 13:32:23 by mrantil          ###   ########.fr        #
+#    Updated: 2022/12/08 17:00:31 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,11 +166,10 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
 				$(LEXER)lexer \
-				$(MAIN)free_mem \
+				$(MAIN)get_env \
 				$(MAIN)init \
 				$(MAIN)main \
 				$(MAIN)print_banner \
-				$(MAIN)tree_free \
 				$(PARSER)add_to_args \
 				$(PARSER)check_for_fileagg \
 				$(PARSER)error_redir \
@@ -184,6 +183,11 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(PARSER)peek \
 				$(PARSER)redir_node_add_args \
 				$(PARSER)tok_get \
+				$(UTILS)free_mem \
+				$(UTILS)ft_disable_raw_mode \
+				$(UTILS)ft_init_raw \
+				$(UTILS)reset_fds \
+				$(UTILS)tree_free \
 				$(UTILS)tree_print \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))

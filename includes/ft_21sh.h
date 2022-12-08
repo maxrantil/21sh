@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 13:32:08 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:54:32 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,15 @@ typedef struct	s_hash
 
 typedef struct s_shell
 {
-	t_vec	v_tmp_env;
-	t_hash	**ht;
-	char	**temp_env;
-	char	**env;
-	char	**paths;
-	char	*cl;
-	char	*terminal_name;
-}			t_shell;
+	struct termios	orig_termios;
+	t_vec			v_tmp_env;
+	t_hash			**ht;
+	char			**temp_env;
+	char			**env;
+	char			**paths;
+	char			*cl;
+	char			*terminal_name;
+}					t_shell;
 
 typedef struct s_node
 {
@@ -130,7 +131,7 @@ void	init_ht_struct(t_shell *sh, char *str/* , int (*f)(t_node *n, t_shell *sh) 
 char	*lexer(t_term *t);
 
 /* Main */
-void	free_mem(t_node *n, t_shell *sh/* , t_hash **ht */, ssize_t code);
+char	**get_env(char **env);
 void	init(t_shell *sh, t_term *t/* , t_hash ***ht */);
 void	print_banner(void);
 void	tree_free(t_node *n);
@@ -151,6 +152,10 @@ void	redir_node_add_args(t_node *n, char ***ptr_to_line, char **tok, int len);
 int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 
 /* Utils */
+void	free_mem(t_node *n, t_shell *sh/* , t_hash **ht */, ssize_t code);
+void	ft_disable_raw_mode(t_shell *sh);
+void	ft_init_raw(t_shell *sh);
+void	reset_fds(char *terminal_name);
 void	tree_print(t_node *root);
 
 typedef int			(*t_fptr)(t_node *n, t_shell *sh);

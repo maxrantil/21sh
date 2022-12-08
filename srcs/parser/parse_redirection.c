@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 13:32:31 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/08 17:20:36 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static void	make_fd_node(t_node **n, char **ptr_to_line, char *tok, int fd_len, 
 		return ;
 	}
 	else if (type == '>' || (type == 'a' \
-		&& (**ptr_to_line == '>' && (**ptr_to_line + 1) != '>')))
+		&& (**ptr_to_line == '>' && *(*ptr_to_line + 1) != '>')))
 		*n = node_create(REDIROVER, *n, NULL);
-	else if (type == '<' || (type == 'a' && (**ptr_to_line == '<')))
+	else if (type == '<' || (type == 'a' && **ptr_to_line == '<'))
 		*n = node_create(REDIRIN, *n, NULL);
 	else if (type == '#' || (type == 'a' \
-		&& (**ptr_to_line == '>' && (**ptr_to_line + 1) == '>')))
+		&& (**ptr_to_line == '>' && *(*ptr_to_line + 1) == '>')))
 		*n = node_create(REDIRAPP, *n, NULL);
 	redir_node_add_args(*n, &ptr_to_line, &tok, fd_len);
 }

@@ -4,11 +4,3 @@ echo "$SHELL"."asd"
 
 WORKING
 echo asd"$SHELL"."asd"
-
-
-NOT WORKING
-bash-5.2$ >file cd -
-
-
-$> echo hello 1>&2 2>&1 > file
-21sh: Syntax error!
