@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 15:01:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 16:18:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	main()
 		{
 			char *p = sh.cl;
 			root = parse_line(&p);
-			status = exec_tree(root, &sh);
+			ft_printf("toor = %s\n", root);
+			if (root)
+				status = exec_tree(root, &sh);
 		}
 		ft_memdel((void **)&sh.cl);
 		free_mem(root, &sh, 1);

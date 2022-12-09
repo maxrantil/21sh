@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 14:04:31 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 16:11:31 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_node *parse_exec(char **ptr_to_line)
 
 	n = node_create(EXEC, NULL, NULL);
 	n = parse_redirection(n, ptr_to_line);
-	while (/* n &&  */!peek(ptr_to_line, "|&;"))
+	while (n && !peek(ptr_to_line, "|&;"))
 	{
 		type = tok_get(ptr_to_line, &tok, &end_q);
 		if (type == 'a')
