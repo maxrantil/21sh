@@ -32,7 +32,7 @@ int	get_fd_before(char *tok)
 				return (-1);
 			++ret;
 		}
-		else if (!ft_isalnum(*(tok + 1)) && !ft_isspace(tok + 1))
+		else if (!ft_isalnum(*(tok + 1)) && !ft_isspace(tok + 1)) //trim here for the '<' on '<file cd -'
 			return (-1);
 		return (++ret);
 	}

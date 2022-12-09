@@ -37,10 +37,11 @@ static char	*verify_arg(t_node *n, t_shell *sh)
 	return (n->arg[0]);
 }
 
-int	exec_21sh(t_node *n, t_shell *sh/* , t_hash **ht */)
+int	exec_21sh(t_node *n, t_shell *sh)
 {
 	char	*ptr;
 
+	ft_disable_raw_mode(sh);
 	if (fork_wrap() == 0)
 	{
 		if (n->arg[0][0] == '.')
@@ -51,7 +52,7 @@ int	exec_21sh(t_node *n, t_shell *sh/* , t_hash **ht */)
 		if (check_paths(sh))
 		{
 			ptr = n->arg[0];
-			n->arg[0] = verify_arg(n, sh);
+			n->arg[0] = verify_arg(n, sh); //make a return int on this function and use that instead of *ptr
 			if (!ft_strequ(n->arg[0], ptr))
 			{
 				sh->env = env_underscore(n, sh);
@@ -59,9 +60,10 @@ int	exec_21sh(t_node *n, t_shell *sh/* , t_hash **ht */)
 			}
 		}
 		error_print(n->arg[0], 4);
-		free_mem(n, sh/* , ht */, 2);
+		free_mem(n, sh, 2);
 		exit(EXIT_FAILURE);
 	}
 	wait(0);
+	ft_enable_raw_mode(sh);
 	return (1);
 }

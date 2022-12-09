@@ -154,7 +154,7 @@ int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 /* Utils */
 void	free_mem(t_node *n, t_shell *sh/* , t_hash **ht */, ssize_t code);
 void	ft_disable_raw_mode(t_shell *sh);
-void	ft_init_raw(t_shell *sh);
+void	ft_enable_raw_mode(t_shell *sh);
 void	reset_fds(char *terminal_name);
 void	tree_print(t_node *root);
 
