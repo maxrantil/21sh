@@ -6,24 +6,11 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 13:28:17 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 14:04:31 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
-
-static int	add_quote_tok(char *tok, int quote)
-{
-	int len;
-
-	len = 0;
-	tok++;
-	while (*tok && *tok != quote && ++len)
-		tok++;
-	while (*tok && !ft_isspace((const char *)tok) && ++len)
-		tok++;
-	return (++len);
-}
 
 static void	exec_create_redir(t_node *n, char *tok, char *end_q)
 {
@@ -39,15 +26,61 @@ static void	exec_create_redir(t_node *n, char *tok, char *end_q)
 	n = hold;
 }
 
-static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
+static int	add_quote_tok(char *tok, int quote)
 {
 	int len;
 
-	len = add_quote_tok(tok, *tok);
-	if (*tok == '"' || *tok == '\'')
+	len = 1;
+	tok++;
+	while (*tok && *tok != quote && ++len)
+		tok++;
+	while (*tok && !ft_isspace((const char *)tok) && ++len)
+		tok++;
+	return (len);
+}
+
+static int	is_quote_somewhere(char *tok)
+{
+	int	quote;
+	int	len;
+
+	len = 0;
+	while (*tok && !ft_isspace((const char *)tok) && ++len)
 	{
+		if (*tok == '\'' || *tok == '"') // && *tok - 1 != '\'
+		{
+			quote = *tok;
+			++tok;
+			while (*tok != quote && ++len)
+				tok++;
+			while (*tok && !ft_isspace((const char *)tok) && ++len)
+				tok++;
+			if (*tok == '\'' || *tok == '"') // && *tok - 1 != '\'
+				continue ;
+			return (len);
+
+		}
+		tok++;
+	}
+	return (0);
+}
+
+static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
+{
+	int len;
+	int	has_quote;
+
+	has_quote = is_quote_somewhere(tok);
+	if ((*tok == '"' || *tok == '\'') && !has_quote)
+	{
+		len = add_quote_tok(tok, *tok);
 		add_to_args(&n->arg, ft_strsub(tok, 0, len));
 		mv_tok_and_line(&tok, &ptr_to_line, len);
+	}
+	else if (has_quote)
+	{
+		add_to_args(&n->arg, ft_strsub(tok, 0, has_quote));
+		mv_tok_and_line(&tok, &ptr_to_line, has_quote);
 	}
 	else
 		add_to_args(&n->arg, ft_strsub(tok, 0, (size_t)(end_q - tok)));
