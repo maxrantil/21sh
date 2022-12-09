@@ -31,7 +31,8 @@ static int	exec_args(t_node *n, t_shell *sh/* , t_hash **ht */)
 {
 	size_t	i;
 
-	strip_quotes(n, sh);
+	// strip_quotes(n, sh);
+	loop_conversions_quotes(n, sh);
 	if (!n->arg || !n->arg[0])
 		return (1);
 	i = 0;
@@ -43,7 +44,6 @@ static int	exec_args(t_node *n, t_shell *sh/* , t_hash **ht */)
 	}
 	return (exec_21sh(n, sh/* , ht */));
 }
-
 
 int	exec_tree(t_node *n, t_shell *sh/* , t_hash **ht */)
 {
