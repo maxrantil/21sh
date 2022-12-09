@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 16:54:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 11:58:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ char	**setenv_var(char **env, char *key, char *value);
 char	**unsetenv_var(char **env, char *key);
 
 /* Error */
-void	error_print(char *arg, int i);
+t_node	*exec_error(t_node *n, int type);
+void	sh_error_print(char *arg, int i);
 
 /* Exec */
 int		check_paths(t_shell *sh);

@@ -59,7 +59,7 @@ int	exec_21sh(t_node *n, t_shell *sh)
 				execve(n->arg[0], n->arg, sh->env);
 			}
 		}
-		error_print(n->arg[0], 4);
+		sh_error_print(n->arg[0], 4);
 		free_mem(n, sh, 2);
 		exit(EXIT_FAILURE);
 	}

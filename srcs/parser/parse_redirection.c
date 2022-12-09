@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 17:20:36 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 13:24:34 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 	int		fileagg_len;
 	int		fd_len;
 
-	while (n && n->arg && peek(ptr_to_line, "<>&1234567890"))
+	while (n && n->arg && peek(ptr_to_line, "<>1234567890")) //problem if argumant start with digit and is not a redir arg
 	{
+		/* if (!n->arg) */
 		type = tok_get(ptr_to_line, &tok, &end_q);
 		fileagg_len = check_for_fileagg(tok);
 		fd_len = get_fd_before(tok);

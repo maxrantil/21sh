@@ -4,7 +4,7 @@ static int tok_loop(char **scan, int ret)
 {
 	while (**scan)
 	{
-		if (strchr("<|&;", **scan) && (*scan)++) //took away '&'
+		if (strchr("<|&;", **scan) && (*scan)++)
 			break ;
 		else if (**scan == '>' && (*scan)++)
 		{
