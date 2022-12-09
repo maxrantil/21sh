@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 13:41:18 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 15:33:36 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,11 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 	int		fileagg_len;
 	int		fd_len;
 
-	while (/* n && n->arg && */ peek(ptr_to_line, "<>1234567890")) //problem if argumant start with digit and is not a redir arg or 'echo 123'
+	fileagg_len = check_for_fileagg(*ptr_to_line);
+	fd_len = get_fd_before(*ptr_to_line);
+	while (fileagg_len || fd_len)
 	{
-		/* if (!n->arg) */
 		type = tok_get(ptr_to_line, &tok, &end_q);
-		fileagg_len = check_for_fileagg(tok);
-		fd_len = get_fd_before(tok);
 		if (n && fileagg_len > 0)
 		{
 			make_fileagg_node(&n, ptr_to_line, tok, fileagg_len);
@@ -104,6 +103,8 @@ t_node *parse_redirection(t_node *n, char **ptr_to_line)
 			make_fd_node(&n, ptr_to_line, tok, fd_len, type);
 		if (fileagg_len < 0 || fd_len < 0)
 			return (error_redir(n, ptr_to_line));
+		fileagg_len = check_for_fileagg(*ptr_to_line);
+		fd_len = get_fd_before(*ptr_to_line);
 	}
 	return (n);
 }

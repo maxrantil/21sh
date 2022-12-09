@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 11:34:11 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 15:01:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	main()
 		{
 			char *p = sh.cl;
 			root = parse_line(&p);
-			status = exec_tree(root, &sh/* , ht */);
+			status = exec_tree(root, &sh);
 		}
 		ft_memdel((void **)&sh.cl);
-		free_mem(root, &sh/* , ht */, 1);
+		free_mem(root, &sh, 1);
 		ft_restart_cycle(&t);
 	}
-	free_mem(root, &sh/* , ht */, 3);
+	free_mem(root, &sh, 3);
 	ft_history_write_to_file(&t);
 	exit(20);
 }
