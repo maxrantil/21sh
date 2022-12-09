@@ -1,21 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_exit.c                                     :+:      :+:    :+:   */
+/*   sh_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:46:16 by mrantil          ###   ########.fr       */
+/*   Created: 2022/09/27 14:34:59 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/06 14:46:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-int	msh_exit(t_node *n, t_shell *sh)
+static void	print_echo(t_node *n, t_shell *sh)
 {
+	size_t	arrlen;
+	size_t	i;
+	size_t	j;
+
 	(void)sh;
-	if (*n->arg)
-		return (0);
+	arrlen = ft_arrlen((void **)n->arg);
+	i = 1;
+	while (i < arrlen)
+	{
+		j = 0;
+		while (n->arg[i][j] != '\0')
+			write(1, &n->arg[i][j++], 1);
+		i++;
+		if (n->arg[i])
+			ft_putchar(' ');
+	}
+}
+
+int	sh_echo(t_node *n, t_shell *sh)
+{
+	print_echo(n, sh);
+	ft_putchar('\n');
 	return (1);
 }

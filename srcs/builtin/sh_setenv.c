@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_print.c                                       :+:      :+:    :+:   */
+/*   sh_setenv.c  	                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 14:10:49 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 14:19:14 by mrantil          ###   ########.fr       */
+/*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
+/*   Updated: 2022/11/14 16:57:43 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-/* void	hash_print(t_hash **ht)
+int	sh_setenv(t_node *n, t_shell *sh)
 {
-	t_hash	*tmp;
-	int i;
+	size_t	i;
 
-	i = 0;
-	while (i < HASH_SIZE)
+	i = 1;
+	while (n->arg[i])
 	{
-		if (!ht[i])
-			ft_printf("ht[%d] = NULL", i);
+		if (strchr(n->arg[i], '=') \
+		&& (ft_isalpha(n->arg[i][0]) || n->arg[i][0] == '_'))
+			setenv_loop(sh, n->arg[i], 0);
 		else
-		{
-			ft_printf("ht[%d] = ", i);
-			tmp = ht[i];
-			while (tmp)
-			{
-				ft_printf(" - %s", tmp->program);
-				tmp = tmp->next;
-			}
-		}
-		ft_printf("\n");
+			sh_error_print(n->arg[i], 6);
 		i++;
 	}
-} */
+	return (1);
+}

@@ -6,7 +6,7 @@
 #    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/08 16:42:45 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/12/09 11:58:37 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,18 +88,21 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(AGG)syntax_error_msg \
 				$(BUILTIN)env_getvalue \
 				$(BUILTIN)env_underscore \
-				$(BUILTIN)msh_cd \
-				$(BUILTIN)msh_echo \
-				$(BUILTIN)msh_env \
-				$(BUILTIN)msh_exit \
-				$(BUILTIN)msh_unsetenv \
-				$(BUILTIN)msh_setenv \
 				$(BUILTIN)pwd_update \
 				$(BUILTIN)env_key_extract \
 				$(BUILTIN)setenv_loop \
 				$(BUILTIN)setenv_var \
+				$(BUILTIN)sh_cd \
+				$(BUILTIN)sh_echo \
+				$(BUILTIN)sh_env \
+				$(BUILTIN)sh_exit \
+				$(BUILTIN)sh_hash \
+				$(BUILTIN)sh_unsetenv \
+				$(BUILTIN)sh_setenv \
 				$(BUILTIN)unsetenv_var \
-				$(ERROR)error_print \
+				$(ERROR)exec_error \
+				$(ERROR)sh_error_print \
+				$(EXEC)check_paths \
 				$(EXEC)dup2_check \
 				$(EXEC)exec_21sh \
 				$(EXEC)exec_pipe_node \
@@ -114,6 +117,8 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(EXPANSIONS)expansions \
 				$(HASH_TABLE)hash_function \
 				$(HASH_TABLE)hash_init \
+				$(HASH_TABLE)hash_print \
+				$(HASH_TABLE)init_ht_struct \
 				$(KEYBOARD)ft_add_nl_last_row \
 				$(KEYBOARD)ft_add_nl_mid_row \
 				$(KEYBOARD)ft_alt_mv \
@@ -163,12 +168,14 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
 				$(LEXER)lexer \
-				$(MAIN)free_mem \
+				$(MAIN)get_env \
 				$(MAIN)init \
 				$(MAIN)main \
 				$(MAIN)print_banner \
-				$(MAIN)tree_free \
 				$(PARSER)add_to_args \
+				$(PARSER)check_for_fileagg \
+				$(PARSER)error_redir \
+				$(PARSER)get_fd_before \
 				$(PARSER)mv_tok_and_line \
 				$(PARSER)node_create \
 				$(PARSER)parse_exec \
@@ -176,9 +183,14 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(PARSER)parse_pipe \
 				$(PARSER)parse_redirection \
 				$(PARSER)peek \
+				$(PARSER)redir_node_add_args \
 				$(PARSER)tok_get \
+				$(UTILS)free_mem \
+				$(UTILS)ft_disable_raw_mode \
+				$(UTILS)ft_enable_raw_mode \
+				$(UTILS)reset_fds \
+				$(UTILS)tree_free \
 				$(UTILS)tree_print \
-				$(UTILS)hash_print \
 
 H_PATHS 	= 	$(addsuffix .h, $(addprefix $(INCLUDES)/, $(H_FILES)))
 O_PATHS		=	$(addsuffix .o, $(addprefix $(OBJECTS)/,$(FILES)))

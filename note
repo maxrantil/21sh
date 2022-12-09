@@ -1,0 +1,7 @@
+enter
+enter
+random bla bla
+enter
+READ ERROR
+
+fix so quotes doest split arguments, add if not space after

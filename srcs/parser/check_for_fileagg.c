@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_echo.c                                     :+:      :+:    :+:   */
+/*   check_for_fileagg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 14:34:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 17:08:10 by mrantil          ###   ########.fr       */
+/*   Created: 2022/12/08 13:23:13 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/08 13:24:43 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static void	print_echo(t_node *n, t_shell *sh)
+int	check_for_fileagg(char *tok)
 {
-	size_t	arrlen;
-	size_t	i;
-	size_t	j;
+	int		ret;
 
-	(void)sh;
-	arrlen = ft_arrlen((void **)n->arg);
-	i = 1;
-	while (i < arrlen)
+	ret = 0;
+	while (*tok && !ft_isspace(tok))
 	{
-		j = 0;
-		while (n->arg[i][j] != '\0')
-			write(1, &n->arg[i][j++], 1);
-		i++;
-		if (n->arg[i])
-			ft_putchar(' ');
+		if (ft_isdigit(*tok) && ++ret)
+			tok++;
+		else
+			break ;
 	}
-}
-
-int	msh_echo(t_node *n, t_shell *sh)
-{
-	print_echo(n, sh);
-	ft_putchar('\n');
-	return (1);
+	if (*tok == '>' && *(tok + 1) == '&')
+	{
+		if (!ft_isalnum(*(tok + 2)) && (*(tok + 2)) != '-' && !ft_isspace(tok + 2))
+			return (-1);
+		return (ret + 2);
+	}
+	else
+		return (0);
 }

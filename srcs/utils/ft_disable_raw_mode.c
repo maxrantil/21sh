@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_function.c                                    :+:      :+:    :+:   */
+/*   ft_disable_raw_mode.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 10:19:48 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 16:09:15 by mrantil          ###   ########.fr       */
+/*   Created: 2022/12/08 15:59:29 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/08 16:43:50 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-/*
-**	It takes a string and returns an integer
-**	@return The hash value of the program name.
-*/
-size_t hash_function(char *program)
+void	ft_disable_raw_mode(t_shell *sh)
 {
-	size_t	hash;
-	size_t 	c;
-
-	hash = 0;
-	while ((c = (size_t)*program++))
-		hash = c + (hash << 6) + (hash << 16) - hash;
-	return (hash % HASH_SIZE);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->orig_termios);
 }

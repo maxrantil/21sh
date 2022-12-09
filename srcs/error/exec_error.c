@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_function.c                                    :+:      :+:    :+:   */
+/*   exec_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 10:19:48 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 16:09:15 by mrantil          ###   ########.fr       */
+/*   Created: 2022/12/09 11:57:42 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/09 11:59:54 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-/*
-**	It takes a string and returns an integer
-**	@return The hash value of the program name.
-*/
-size_t hash_function(char *program)
+t_node	*exec_error(t_node *n, int type)
 {
-	size_t	hash;
-	size_t 	c;
-
-	hash = 0;
-	while ((c = (size_t)*program++))
-		hash = c + (hash << 6) + (hash << 16) - hash;
-	return (hash % HASH_SIZE);
+	ft_putstr_fd("exec syntax error near unexpected tok `", 2);
+	if (type == '#')
+		ft_putstr_fd(">>", 2);
+	else
+		ft_putchar_fd(type, 2);
+	ft_putendl_fd("'", 2);
+	tree_free(n);
+	return (NULL);
 }
