@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
 /*   Updated: 2022/12/09 11:58:21 by mrantil          ###   ########.fr       */
@@ -121,6 +121,7 @@ void	strip_quotes(t_node *n, t_shell *sh);
 void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
 void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
 void	expansions(t_node *n, t_shell *sh);
+void	loop_conversions_quotes(t_node *n, t_shell *sh);
 
 /* Hash table */
 size_t	hash_function(char *program);

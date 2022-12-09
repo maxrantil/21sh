@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
 #    Updated: 2022/12/09 11:58:37 by mrantil          ###   ########.fr        #
@@ -111,6 +111,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(EXEC)input_file_read \
 				$(EXEC)redirection_file \
 				$(EXEC)strip_quotes \
+				$(EXPANSIONS)expansions_convert_rm_quotes \
 				$(EXPANSIONS)expansions_dollar \
 				$(EXPANSIONS)expansions_tilde \
 				$(EXPANSIONS)expansions \
