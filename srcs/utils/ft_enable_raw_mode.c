@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_raw.c                                      :+:      :+:    :+:   */
+/*   ft_enable_raw_mode.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,7 +17,7 @@
 **	written to fildes is transmitted, and all input so far received but not
 **	read shall be discarded before the change is made.
 */
-void	ft_init_raw(t_shell *sh)
+void	ft_enable_raw_mode(t_shell *sh)
 {
 	struct termios	orig_termios;
 	struct termios	raw;
@@ -37,6 +37,5 @@ void	ft_init_raw(t_shell *sh)
 		write(2, "error tcsetattr\n", 16);
 		exit(1);
 	}
-	ft_run_capability("cl");
 	sh->orig_termios = orig_termios;
 }

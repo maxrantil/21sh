@@ -22,6 +22,7 @@
 
 void print_banner(void)
 {
+	ft_run_capability("cl");
 	/* banner_padding(); */
 	ft_putstr("\033[2J");
 	ft_putstr("\033[H");

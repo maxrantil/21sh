@@ -185,7 +185,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(PARSER)tok_get \
 				$(UTILS)free_mem \
 				$(UTILS)ft_disable_raw_mode \
-				$(UTILS)ft_init_raw \
+				$(UTILS)ft_enable_raw_mode \
 				$(UTILS)reset_fds \
 				$(UTILS)tree_free \
 				$(UTILS)tree_print \

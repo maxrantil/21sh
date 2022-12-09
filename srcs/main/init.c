@@ -46,7 +46,7 @@ static void	get_terminal_name(char **terminal_name)
 void	init(t_shell *sh, t_term *t)
 {
 	ft_getent();
-	ft_init_raw(sh);
+	ft_enable_raw_mode(sh);
 	get_terminal_name(&(sh->terminal_name));
 	print_banner();
 	ft_init_term(t);
