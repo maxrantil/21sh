@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 11:34:23 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 15:18:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void temp_handler(t_node *n, t_shell *sh)
 	}
 }
 
-void	free_mem(t_node *root, t_shell *sh/* , t_hash **ht */, ssize_t code)
+void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 {
 	if (code < 3)
 	{
