@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:16:41 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 14:46:00 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 11:55:18 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	sh_cd(t_node *n, t_shell *sh)
 		{
 			if (chdir(n->arg[1]) != 0)
 			{
-				error_print(n->arg[1], 5);
+				sh_error_print(n->arg[1], 5);
 				return (1);
 			}
 		}

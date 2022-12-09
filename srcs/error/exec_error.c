@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_setenv.c  	                                    :+:      :+:    :+:   */
+/*   exec_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/14 16:57:43 by mrantil          ###   ########.fr       */
+/*   Created: 2022/12/09 11:57:42 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/09 11:59:54 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-int	sh_setenv(t_node *n, t_shell *sh)
+t_node	*exec_error(t_node *n, int type)
 {
-	size_t	i;
-
-	i = 1;
-	while (n->arg[i])
-	{
-		if (strchr(n->arg[i], '=') \
-		&& (ft_isalpha(n->arg[i][0]) || n->arg[i][0] == '_'))
-			setenv_loop(sh, n->arg[i], 0);
-		else
-			sh_error_print(n->arg[i], 6);
-		i++;
-	}
-	return (1);
+	ft_putstr_fd("exec syntax error near unexpected tok `", 2);
+	if (type == '#')
+		ft_putstr_fd(">>", 2);
+	else
+		ft_putchar_fd(type, 2);
+	ft_putendl_fd("'", 2);
+	tree_free(n);
+	return (NULL);
 }

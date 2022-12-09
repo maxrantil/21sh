@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/07 15:36:43 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/09 13:28:17 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,13 @@ static int	add_quote_tok(char *tok, int quote)
 {
 	int len;
 
-	len = 1;
+	len = 0;
 	tok++;
 	while (*tok && *tok != quote && ++len)
 		tok++;
+	while (*tok && !ft_isspace((const char *)tok) && ++len)
+		tok++;
 	return (++len);
-}
-
-static t_node	*exec_error(t_node *n, int type)
-{
-	ft_putstr_fd("exec syntax error near unexpected tok `", 2);
-	ft_putchar_fd(type, 2);
-	ft_putendl_fd("'", 2);
-	tree_free(n);
-	return (NULL);
 }
 
 static void	exec_create_redir(t_node *n, char *tok, char *end_q)
@@ -48,7 +41,9 @@ static void	exec_create_redir(t_node *n, char *tok, char *end_q)
 
 static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
 {
-	int len = add_quote_tok(tok, *tok);
+	int len;
+
+	len = add_quote_tok(tok, *tok);
 	if (*tok == '"' || *tok == '\'')
 	{
 		add_to_args(&n->arg, ft_strsub(tok, 0, len));
@@ -57,6 +52,20 @@ static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
 	else
 		add_to_args(&n->arg, ft_strsub(tok, 0, (size_t)(end_q - tok)));
 }
+
+// static int	check_tok_for_redir(char *tok, char *end_q)
+// {
+// 	char	*check;
+// 	int		ret;
+
+// 	check = ft_strsub(tok, 0, end_q - tok);
+// 	if (ft_strcspn(check, "<>"))
+// 		ret = 1;
+// 	else
+// 		ret = 0;
+// 	ft_strdel(&check);
+// 	return (ret);
+// }
 
 t_node *parse_exec(char **ptr_to_line)
 {
@@ -67,7 +76,7 @@ t_node *parse_exec(char **ptr_to_line)
 
 	n = node_create(EXEC, NULL, NULL);
 	n = parse_redirection(n, ptr_to_line);
-	while (n && !peek(ptr_to_line, "|&;"))
+	while (/* n &&  */!peek(ptr_to_line, "|&;"))
 	{
 		type = tok_get(ptr_to_line, &tok, &end_q);
 		if (type == 'a')
@@ -79,10 +88,10 @@ t_node *parse_exec(char **ptr_to_line)
 		}
 		else if (type == 0)
 			break ;
-		else
+		else /* if (type != '#' || type != '<' || type != '>') */
 			return (exec_error(n, type));
-		if (ft_strcspn(tok, "<>"))
-			n = parse_redirection(n, ptr_to_line);
+		// if (check_tok_for_redir(tok, end_q)) //this needs to fixed so it just check one work and not
+		n = parse_redirection(n, ptr_to_line);
 	}
 	return (n);
 }

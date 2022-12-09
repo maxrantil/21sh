@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/08 17:00:31 by mrantil          ###   ########.fr        #
+#    Updated: 2022/12/09 11:58:37 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,8 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(BUILTIN)sh_unsetenv \
 				$(BUILTIN)sh_setenv \
 				$(BUILTIN)unsetenv_var \
-				$(ERROR)error_print \
+				$(ERROR)exec_error \
+				$(ERROR)sh_error_print \
 				$(EXEC)check_paths \
 				$(EXEC)dup2_check \
 				$(EXEC)exec_21sh \
