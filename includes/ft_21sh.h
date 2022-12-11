@@ -161,8 +161,8 @@ void	reset_fds(char *terminal_name);
 void	tree_print(t_node *root);
 
 typedef int			(*t_fptr)(t_node *n, t_shell *sh);
-
-static const char	*g_builtin_str[] = {
+// static const char	*g_builtin_str[] = {
+static const char	*g_builtin_str[] __attribute__((unused)) = {
 	"cd",
 	"echo",
 	"env",
