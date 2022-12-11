@@ -12,7 +12,7 @@
 
 #include "ft_21sh.h"
 
-static char	*verify_arg(t_node *n, t_shell *sh)
+static int	verify_arg(t_node *n, t_shell *sh)
 {
 	struct stat	statbuf;
 	char		*verify;
@@ -29,18 +29,16 @@ static char	*verify_arg(t_node *n, t_shell *sh)
 		{
 			ft_strdel(&n->arg[0]); //valgrind says not to free?????
 			n->arg[0] = verify;
-			return (n->arg[0]);
+			return (1);
 		}
 		ft_strdel(&verify);
 		i++;
 	}
-	return (n->arg[0]);
+	return (0);
 }
 
 int	exec_21sh(t_node *n, t_shell *sh)
 {
-	char	*ptr;
-
 	ft_disable_raw_mode(sh);
 	if (fork_wrap() == 0)
 	{
@@ -51,9 +49,7 @@ int	exec_21sh(t_node *n, t_shell *sh)
 		}
 		if (check_paths(sh))
 		{
-			ptr = n->arg[0];
-			n->arg[0] = verify_arg(n, sh); //make a return int on this function and use that instead of *ptr
-			if (!ft_strequ(n->arg[0], ptr))
+			if (verify_arg(n, sh))
 			{
 				sh->env = env_underscore(n, sh);
 				execve(n->arg[0], n->arg, sh->env);

@@ -22,12 +22,12 @@ static int	get_node_type(char *tok)
 			break ;
 	}
 	if (*tok == '>' && *(tok + 1) == '>')
-		return (4);
+		return (REDIRAPP);
 	else if (*tok == '>' && *(tok + 1) != '&')
-		return (3);
+		return (REDIROVER);
 	else if (*tok == '<')
-		return (5);
-	return (6);
+		return (REDIRIN);
+	return (FILEAGG);
 }
 
 static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \

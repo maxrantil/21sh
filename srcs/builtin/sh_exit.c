@@ -16,5 +16,6 @@ int	sh_exit(t_node *n, t_shell *sh)
 {
 	(void)sh;
 	(void)n->arg;
+	exit(1);
 	return (0);
 }

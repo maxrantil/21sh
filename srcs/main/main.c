@@ -12,30 +12,25 @@
 
 #include "ft_21sh.h"
 
-int	main()
+int	main(void)
 {
 	t_node	*root;
 	t_shell	sh;
 	t_term	t;
-	int		status;
+	char	*line;
 
 	root = NULL;
 	init(&sh, &t);
-	status = 21;
-	while (status)
+	while (ft_input_cycle(&t))
 	{
-		status = ft_input_cycle(&t);
-		if (!status)
-			break ;
 		sh.cl = lexer(&t);
 		write(1, "\n", 1);
-		if (sh.cl && status > 0)
+		if (sh.cl)
 		{
-			char *p = sh.cl;
-			root = parse_line(&p);
-			ft_printf("toor = %s\n", root);
+			line = sh.cl;
+			root = parse_line(&line);
 			if (root)
-				status = exec_tree(root, &sh);
+				exec_tree(root, &sh);
 		}
 		ft_memdel((void **)&sh.cl);
 		free_mem(root, &sh, 1);
@@ -43,5 +38,5 @@ int	main()
 	}
 	free_mem(root, &sh, 3);
 	ft_history_write_to_file(&t);
-	exit(20);
+	exit(1);
 }

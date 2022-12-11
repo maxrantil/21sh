@@ -19,12 +19,12 @@ t_node	*parse_line(char **ptr_to_line)
 	t_node	*n;
 
 	n = parse_pipe(ptr_to_line);
-	if (peek(ptr_to_line, "&"))
+	if (n && peek(ptr_to_line, "&"))
 	{
 		tok_get(ptr_to_line, &tok, &end_q);
 		n = node_create(AMP, n, NULL);
 	}
-	else if (peek(ptr_to_line, ";"))
+	else if (n && peek(ptr_to_line, ";"))
 	{
 		tok_get(ptr_to_line, &tok, &end_q);
 		n = node_create(SEMI, n, parse_line(ptr_to_line));
