@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 13:12:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 20:33:36 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		exec_21sh(t_node *n, t_shell *sh);
 void	exec_pipe_node(t_node *n, t_shell *sh);
 int     exec_tree(t_node *n, t_shell *sh);
 int		fork_wrap(void);
-void	input_file_read(char *filename);
+void	input_file_read(t_node *n, t_shell *sh);
 void	redirection_file(t_node *n, t_shell *sh);
 void	strip_quotes(t_node *n, t_shell *sh);
 

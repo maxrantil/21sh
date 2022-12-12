@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 10:50:00 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 15:27:01 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,20 @@ char *lexer(t_term *t)
 {
 	int		i;
 	char	*new;
-	size_t	len;
+	// size_t	len;
 
 	new = ft_strtrim(t->inp);
 	new = ft_heredoc(t, new);
 	i = 0;
-	while (new && new[i])
-	{
-		if (new[i] == '\\')
-		{
-			len = ft_strlen(&new[i]);
-			ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
-		}
-		i++;
-	}
+	// while (new && new[i])
+	// {
+	// 	if (new[i] == '\\')
+	// 	{
+	// 		len = ft_strlen(&new[i]);
+	// 		ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
+	// 	}
+	// 	i++;
+	// }
 	write(1, "\n", 1);
 	return (new);
 }

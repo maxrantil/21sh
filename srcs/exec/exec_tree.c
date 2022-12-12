@@ -51,7 +51,7 @@ int	exec_tree(t_node *n, t_shell *sh)
 	else if (n->type == REDIROVER || n->type == REDIRAPP)
 		redirection_file(n, sh);
 	else if (n->type == REDIRIN)
-		input_file_read(n->arg[1]);
+		input_file_read(n, sh);
 	else if (n->type == FILEAGG)
 		check_file_aggregations(n, sh);
 	else if (n->type == AMP)
