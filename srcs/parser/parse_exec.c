@@ -47,16 +47,21 @@ static int	is_quote_somewhere(char *tok)
 	len = 0;
 	while (*tok && !ft_isspace((const char *)tok) && ++len)
 	{
-		if (*tok == '\'' || *tok == '"') // && *tok - 1 != '\'
+		if (*tok == '\'' || *tok == '"')
 		{
+			if (tok[1] && *(tok - 1) == '\\')
+				if (tok[2] && *(tok - 2) != '\\' && tok++)
+					continue ;
 			quote = *tok;
 			++tok;
-			while (*tok != quote && ++len)
+			while (*tok && *tok != quote && ++len)
 				tok++;
 			while (*tok && !ft_isspace((const char *)tok) && ++len)
 				tok++;
-			if (*tok == '\'' || *tok == '"') // && *tok - 1 != '\'
-				continue ;
+			if (*tok == '\'' || *tok == '"')
+				if (tok[1] && *(tok - 1) == '\\')
+					if (tok[2] && *(tok - 2) != '\\')
+						continue ;
 			return (len);
 
 		}
