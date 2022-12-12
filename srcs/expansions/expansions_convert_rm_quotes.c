@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:22:38 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/08 20:19:51 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:37:03 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ static ssize_t	find_matching_quote(char *str, char quote)
 	i = 1;
 	while (str[i])
 	{
-		if (str[i] == '\\' && (str[i + 1] == '\'' || str[i + 1] == '\"'))
+		if (str[i] == '\\' && (str[i + 1] == '\'' || str[i + 1] == '\"'
+			|| str[i + 1] == '\\' ))
 			i++;
 		else if (str[i] == quote)
 			break ;
@@ -144,11 +145,38 @@ size_t	strip_quotes_single(char *str, size_t quote1)
 	return (quote2 - 2);
 }
 
+void	remove_backslash(char *str)
+{
+	size_t	len;
+
+	if (str[1] == '\\' || str[1] == '\'' || str[1] == '\"')
+	{
+		len = ft_strlen(str);
+		ft_memmove(str, &str[1], len);
+	}
+	else
+	{
+		printf("\tRM ELSE\n");
+	}
+}
+
+void	remove_backslash_update_quote(char *str, size_t *len, size_t *q2)
+{
+	if (str[1] == '\\' || str[1] == '\'' || str[1] == '\"')
+	{
+		remove_backslash(str);
+		(*len)--;
+		(*q2)--;
+	}
+}
+
 size_t	strip_quotes_double(char **str, size_t quote1)
 {
 	size_t	i;
 	size_t	quote2;
 	size_t	len;
+
+	// printf("\tDOUBLE full (%s)\n", *str);
 
 	i = quote1;
 	len = ft_strlen(*str);
@@ -158,11 +186,19 @@ size_t	strip_quotes_double(char **str, size_t quote1)
 	{
 		if ((*str)[i] == '$')
 			i += update_arg_dollar(i, str, &len, &quote2);
+		else if ((*str)[i] == '\\')
+		{
+			remove_backslash_update_quote(&(*str)[i], &len, &quote2);
+			i++;
+		}
 		else
 			i++;
 	}
 	ft_memmove(&((*str)[quote1]), &((*str)[quote1 + 1]), len - quote1);
 	ft_memmove(&((*str)[quote2 - 1]), &((*str)[quote2]), len - quote2);
+
+	// printf("\tDOUBLE full (%s)\n", *str);
+
 	return (quote2 - 2);
 }
 
@@ -174,15 +210,25 @@ void	loop_conversions_quotes(t_node *n, t_shell *sh)
 	word = -1;
 	while (n->arg[++word] != NULL)
 	{
+		// printf("\tdebug full (%s)\n", n->arg[word]);
 		if (n->arg[word][0] == '~' && (n->arg[word][1] == '/'
 			|| n->arg[word][1] == '\0'))
 			expansions_tilde(n, sh, word);
 		i = -1;
 		while (n->arg[word][++i])
 		{
-			if (n->arg[word][i] == '\\' && (n->arg[word][i + 1] == '\''
-					|| n->arg[word][i + 1] == '\"'))
-				i++;
+			// if (n->arg[word][i] == '\\' && (n->arg[word][i + 1] == '\''
+			// 		|| n->arg[word][i + 1] == '\"'))
+			// 	i++;
+
+			if (n->arg[word][i] == '\\')
+			{
+				// printf("\ti = (%zu) (%s)\n", i, &n->arg[word][i]);
+				// printf("\tfull (%s)\n", n->arg[word]);
+				remove_backslash(&n->arg[word][i]);
+				// printf("\ti = (%zu) (%s)\n", i, &n->arg[word][i]);
+				// printf("\tfull (%s)\n", n->arg[word]);
+			}
 			else if (n->arg[word][i] == '\'')
 				i = strip_quotes_single(n->arg[word], i);
 			else if (n->arg[word][i] == '\"')
