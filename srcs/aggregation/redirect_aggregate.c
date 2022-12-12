@@ -11,8 +11,7 @@ static int	get_target_fd(char *filename)
 	return (ret);
 }
 
-
-void	redirect_aggregate(int old_fd, char *target, char *operator)
+int	redirect_aggregate(int old_fd, char *target, char *operator)
 {
 	int	new_fd;
 
@@ -21,8 +20,8 @@ void	redirect_aggregate(int old_fd, char *target, char *operator)
 	if (old_fd == 1 || old_fd == 2)
 	{
 		dup2_check2(new_fd, 1);
-		dup2_check2(1, 2);
+		return (dup2_check2(1, 2));
 	}
 	else
-		dup2_check2(new_fd, old_fd);
+		return (dup2_check2(new_fd, old_fd));
 }

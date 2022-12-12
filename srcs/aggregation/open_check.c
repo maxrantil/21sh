@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:30:15 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/02 13:59:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 12:19:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	open_check(char *filename, int mode)
 	{
 		// proper error message ?
 		write(2, "Error in open_check\n", 20);
-		exit(10);
+		// exit(10);
 	}
 	return (file_fd);
 }
