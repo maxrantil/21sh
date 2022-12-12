@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 15:51:26 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:22:45 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,48 +63,48 @@ static void	make_fileagg_node(t_node **n, char **ptr_to_line, char *tok, int fil
 	}
 }
 
-static void	make_fd_node(t_node **n, char **ptr_to_line, char *tok, int fd_len, int type)
+static void	make_fd_node(t_node **n, t_line *l)
 {
 	if ((*n)->type >= REDIROVER && (*n)->type <= FILEAGG)
 	{
-		*n = make_redir_node(*n, ptr_to_line, tok, fd_len);
+		*n = make_redir_node(*n, l->ptr_to_line, l->tok, l->fd_len);
 		return ;
 	}
-	else if (type == '>' || (type == 'a' \
-		&& (**ptr_to_line == '>' && *(*ptr_to_line + 1) != '>')))
+	else if (l->type == '>' || (l->type == 'a' \
+		&& (**l->ptr_to_line == '>' && *(*l->ptr_to_line + 1) != '>')))
 		*n = node_create(REDIROVER, *n, NULL);
-	else if (type == '<' || (type == 'a' && **ptr_to_line == '<'))
+	else if (l->type == '<' || (l->type == 'a' && **l->ptr_to_line == '<'))
 		*n = node_create(REDIRIN, *n, NULL);
-	else if (type == '#' || (type == 'a' \
-		&& (**ptr_to_line == '>' && *(*ptr_to_line + 1) == '>')))
+	else if (l->type == '#' || (l->type == 'a' \
+		&& (**l->ptr_to_line == '>' && *(*l->ptr_to_line + 1) == '>')))
 		*n = node_create(REDIRAPP, *n, NULL);
-	redir_node_add_args(*n, &ptr_to_line, &tok, fd_len);
+	redir_node_add_args(*n, &l->ptr_to_line, &l->tok, l->fd_len);
 }
 
-t_node	*parse_redirection(t_node *n, char **ptr_to_line)
+t_node	*parse_redirection(t_node *n, t_line *l)
 {
-	char	*tok;
+	/* char	*tok;
 	char	*end_q;
 	int		type;
 	int		fileagg_len;
-	int		fd_len;
+	int		fd_len; */
 
-	fileagg_len = check_for_fileagg(*ptr_to_line);
-	fd_len = get_fd_before(*ptr_to_line);
-	while (fileagg_len || fd_len)
+	l->fileagg_len = check_for_fileagg(*l->ptr_to_line);
+	l->fd_len = get_fd_before(*l->ptr_to_line);
+	while (l->fileagg_len || l->fd_len)
 	{
-		type = tok_get(ptr_to_line, &tok, &end_q);
-		if (n && fileagg_len > 0)
+		l->type = tok_get(l->ptr_to_line, &l->tok, &l->end_q);
+		if (n && l->fileagg_len > 0)
 		{
-			make_fileagg_node(&n, ptr_to_line, tok, fileagg_len);
-			fd_len = 0;
+			make_fileagg_node(&n, l->ptr_to_line, l->tok, l->fileagg_len);
+			l->fd_len = 0;
 		}
-		else if (n && fd_len > 0)
-			make_fd_node(&n, ptr_to_line, tok, fd_len, type);
-		if (fileagg_len < 0 || fd_len < 0)
-			return (error_redir(n, ptr_to_line));
-		fileagg_len = check_for_fileagg(*ptr_to_line);
-		fd_len = get_fd_before(*ptr_to_line);
+		else if (n && l->fd_len > 0)
+			make_fd_node(&n, l);
+		if (l->fileagg_len < 0 || l->fd_len < 0)
+			return (error_redir(n, l->ptr_to_line));
+		l->fileagg_len = check_for_fileagg(*l->ptr_to_line);
+		l->fd_len = get_fd_before(*l->ptr_to_line);
 	}
 	return (n);
 }

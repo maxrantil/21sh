@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 13:12:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:19:32 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,17 @@ typedef struct s_node
 	struct s_node	*right;
 }					t_node;
 
+typedef struct s_line
+{
+	char	**ptr_to_line;
+	char	*line;
+	char	*tok;
+	char	*end_q;
+	int		type;
+	int		fileagg_len;
+	int		fd_len;
+}			t_line;
+
 /* Aggregation */
 void	check_file_aggregations(t_node *n, t_shell *sh);
 int		check_filename_fd(char *filename);
@@ -109,7 +120,7 @@ void	sh_error_print(char *arg, int i);
 int		check_paths(t_shell *sh);
 int		exec_21sh(t_node *n, t_shell *sh);
 void	exec_pipe_node(t_node *n, t_shell *sh);
-int     exec_tree(t_node *n, t_shell *sh);
+int		exec_tree(t_node *n, t_shell *sh);
 int		fork_wrap(void);
 void	input_file_read(char *filename);
 void	redirection_file(t_node *n, t_shell *sh);
@@ -143,10 +154,10 @@ t_node	*error_redir(t_node *n, char **ptr_to_line);
 int		get_fd_before(char *tok);
 void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len);
 t_node	*node_create(int type, t_node *left, t_node *right);
-t_node	*parse_exec(char **ptr_to_line);
-t_node	*parse_line(char **ptr_to_line);
-t_node	*parse_pipe(char **ptr_to_line);
-t_node	*parse_redirection(t_node *n, char **ptr_to_line);
+t_node	*parse_exec(t_line *l);
+t_node	*parse_line(t_line *l);
+t_node	*parse_pipe(t_line *l);
+t_node	*parse_redirection(t_node *n, t_line *l);
 int		peek(char **ptr_to_line, char *toks);
 void	redir_node_add_args(t_node *n, char ***ptr_to_line, \
 char **tok, int len);

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 13:28:24 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 15:58:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	main(void)
 	t_node	*root;
 	t_shell	sh;
 	t_term	t;
-	char	*line;
+	t_line	l;
+	// char	*line;
 
 	root = NULL;
 	init(&sh, &t);
@@ -26,8 +27,8 @@ int	main(void)
 		sh.cl = lexer(&t);
 		if (sh.cl)
 		{
-			line = sh.cl;
-			root = parse_line(&line);
+			l.line = sh.cl;
+			root = parse_line(&l);
 			if (root)
 				if (!exec_tree(root, &sh))
 					break ;
