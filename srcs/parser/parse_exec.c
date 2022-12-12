@@ -57,7 +57,7 @@ static int	is_quote_somewhere(char *tok)
 			while (*tok && *tok != quote && ++len)
 				tok++;
 			while (*tok && !ft_isspace((const char *)tok) && ++len)
-				tok++;
+				tok++; 
 			if (*tok == '\'' || *tok == '"')
 				if (tok[1] && *(tok - 1) == '\\')
 					if (tok[2] && *(tok - 2) != '\\')
