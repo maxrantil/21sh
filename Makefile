@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/12 11:21:53 by mrantil          ###   ########.fr        #
+#    Updated: 2022/12/12 13:36:17 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ CFLAGS		+=	-Wpedantic
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-LEAK_CHECK	+=	-fsanitize=address
+# LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -82,7 +82,6 @@ H_FILES 	= 	ft_21sh \
 FILES 		=	$(AGG)check_file_aggregations \
 				$(AGG)check_filename_fd \
 				$(AGG)check_operator_errors \
-				$(AGG)dup2_check2 \
 				$(AGG)open_check \
 				$(AGG)redirect_aggregate \
 				$(AGG)syntax_error_msg \
@@ -103,7 +102,6 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(ERROR)exec_error \
 				$(ERROR)sh_error_print \
 				$(EXEC)check_paths \
-				$(EXEC)dup2_check \
 				$(EXEC)exec_21sh \
 				$(EXEC)exec_pipe_node \
 				$(EXEC)exec_tree \
@@ -185,6 +183,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(PARSER)peek \
 				$(PARSER)redir_node_add_args \
 				$(PARSER)tok_get \
+				$(UTILS)dup2_wrap \
 				$(UTILS)free_mem \
 				$(UTILS)ft_disable_raw_mode \
 				$(UTILS)ft_enable_raw_mode \

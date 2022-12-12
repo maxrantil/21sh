@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:22:46 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/15 13:00:45 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:04:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	setenv_loop(t_shell *sh, char *arg, int flag_temp)
 		if (!ft_strncmp(sh->env[i], key, ft_strlen(key)))
 		{
 			if (flag_temp)
-				vec_push(&sh->v_tmp_env, sh->env[i]); //some read memory error, valgrind it later
+				vec_push(&sh->v_tmp_env, sh->env[i]);
 			sh->env = unsetenv_var(sh->env, key);
 			break ;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_operator_errors.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:27:28 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/11/29 15:33:25 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:29:50 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	check_bad_fd(int file_fd, char *filename)
 		ft_putstr_fd("21sh: ", 2);
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd(": Bad file desctiptor\n", 2);
-		exit(5);
 	}
 }
 
@@ -34,7 +33,6 @@ static void	check_ambiguous_redirect(int fd, char *target, char *oper)
 		ft_putstr_fd("21sh: ", 2);
 		ft_putstr_fd(target, 2);
 		ft_putstr_fd(": ambiguous redirect\n", 2);
-		exit(6);
 	}
 }
 

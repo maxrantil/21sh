@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/06 14:12:39 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 12:30:36 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,28 @@ static int	get_redirected_fd(char *full)
 
 // void	check_file_aggregations(char *full, char *filename)
 // check_file_aggregations(n->arg[0], n->arg[1]);
-void	check_file_aggregations(t_node *n, t_shell *sh/* , t_hash **ht */)
+void	check_file_aggregations(t_node *n, t_shell *sh)
 {
 	int		file_fd;
 	char	*operator;
 	char	*target_file;
+	int		ret;
 
 	file_fd = get_redirected_fd(n->arg[0]);
 	operator = get_redirect_operator(n->arg[0]);
 	target_file = get_target_file(n->arg[0], n->arg[1], ft_strlen(operator));
 	if ((ft_strequ("-", target_file) == 1) && (ft_strequ(">&", operator) == 1))
 		convert_operator(&operator);
+	ret = 0;
 	if ((ft_strequ((const char *)operator, "&>"))
 		|| (ft_strequ((const char *)operator, ">&")))
-	{
-		redirect_aggregate(file_fd, target_file, operator);
-	}
+		ret = redirect_aggregate(file_fd, target_file, operator);
 	else if (ft_strequ((const char *)operator, ">&-"))
-	{
 		close(file_fd);
-	}
 	else
 		syntax_error_msg(1);
 	ft_strdel(&operator);
 	ft_strdel(&target_file);
-	exec_tree(n->left, sh/* , ht */);
+	if (ret != -1)
+		exec_tree(n->left, sh);
 }

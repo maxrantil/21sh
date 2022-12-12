@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/08 16:38:12 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:00:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct clipboard
 typedef struct s_term
 {
 	char			inp[BUFFSIZE];
-	
 	t_vec			v_history;
 	t_clipboard		clipboard;
 	char			**nl_addr;

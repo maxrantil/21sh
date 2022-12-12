@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 16:11:31 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:34:40 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
 // 	return (ret);
 // }
 
-t_node *parse_exec(char **ptr_to_line)
+t_node	*parse_exec(char **ptr_to_line)
 {
 	t_node	*n;
 	char	*tok;
@@ -128,4 +128,3 @@ t_node *parse_exec(char **ptr_to_line)
 	}
 	return (n);
 }
-
