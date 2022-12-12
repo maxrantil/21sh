@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 15:33:36 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 15:51:26 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	make_fd_node(t_node **n, char **ptr_to_line, char *tok, int fd_len, 
 	redir_node_add_args(*n, &ptr_to_line, &tok, fd_len);
 }
 
-t_node *parse_redirection(t_node *n, char **ptr_to_line)
+t_node	*parse_redirection(t_node *n, char **ptr_to_line)
 {
 	char	*tok;
 	char	*end_q;

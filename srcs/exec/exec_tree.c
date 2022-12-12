@@ -8,7 +8,7 @@ static void	exec_semicolon(t_node *n, t_shell *sh)
 	exec_tree(n->right, sh);
 }
 
-static void	exec_ampersand(t_node *n, t_shell *sh)
+/* static void	exec_ampersand(t_node *n, t_shell *sh)
 {
 	if (fork_wrap() == 0)
 	{
@@ -16,7 +16,7 @@ static void	exec_ampersand(t_node *n, t_shell *sh)
 		execve(n->arg[0], n->arg, sh->env); //this is 42sh shit, make better error handling etc
 		exit(EXIT_SUCCESS);
 	}
-}
+} */
 
 static size_t	num_builtins(void)
 {
@@ -54,8 +54,8 @@ int	exec_tree(t_node *n, t_shell *sh)
 		input_file_read(n->arg[1]);
 	else if (n->type == FILEAGG)
 		check_file_aggregations(n, sh);
-	else if (n->type == AMP)
-		exec_ampersand(n, sh);
+	/* else if (n->type == AMP)
+		exec_ampersand(n, sh); */
 	else if (n->type == SEMI)
 		exec_semicolon(n, sh);
 	return (1);

@@ -6,13 +6,13 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 11:34:16 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 15:20:34 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static int ft_getent(void)
+static int	ft_getent(void)
 {
 	char	*termtype;
 	char	term_buffer[2048];
