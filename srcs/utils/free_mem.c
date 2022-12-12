@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 15:18:47 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 11:27:32 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 			temp_handler(root, sh);
 		if (sh->paths)
 			ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
-		if (code == 1)
-			tree_print(root);
-		tree_free(root);
+		/* if (code == 1)
+			tree_print(root); */
+		if (root)
+			tree_free(root);
 		reset_fds(sh->terminal_name);
 	}
 	if (code == 3)

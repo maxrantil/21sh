@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 14:45:47 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 10:48:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@ int	sh_exit(t_node *n, t_shell *sh)
 {
 	(void)sh;
 	(void)n->arg;
-	exit(1);
 	return (0);
 }
