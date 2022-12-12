@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup2_check2.c                                      :+:      :+:    :+:   */
+/*   dup2_wrap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "ft_21sh.h"
 
-int	dup2_check2(int file_fd, int old_fd)
+int	dup2_wrap(int file_fd, int old_fd)
 {
 	int	dup2_fd;
 

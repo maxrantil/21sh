@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 12:27:02 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:12:32 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@
 /* Unix */
 # define MAX_PATHLEN 1024
 
-typedef struct	s_hash
+typedef struct s_hash
 {
 	char			*program;
 	int				hits;
-	// int				(*function)(t_node *n, t_shell *sh);
 	struct s_hash	*next;
 }					t_hash;
 
@@ -78,12 +77,11 @@ typedef struct s_node
 }					t_node;
 
 /* Aggregation */
-void    check_file_aggregations(t_node *n, t_shell *sh/* , t_hash **ht */);
+void	check_file_aggregations(t_node *n, t_shell *sh);
 int		check_filename_fd(char *filename);
 void	check_operator_errors(int old, int file_fd, char *filename, char *oper);
-int		dup2_check2(int file_fd, int old_fd);
+int		dup2_wrap(int file_fd, int old_fd);
 int		open_check(char *filename, int mode);
-// void	redirect_aggregate(int old_fd, char *target, char *operator);
 int		redirect_aggregate(int old_fd, char *target, char *operator);
 void	syntax_error_msg(int exit_code);
 
@@ -109,13 +107,12 @@ void	sh_error_print(char *arg, int i);
 
 /* Exec */
 int		check_paths(t_shell *sh);
-int		dup2_check(int file_fd);
-int		exec_21sh(t_node *n, t_shell *sh/* , t_hash **ht */);
-void	exec_pipe_node(t_node *n, t_shell *sh/* , t_hash **ht */);
-int     exec_tree(t_node *n, t_shell *sh/* , t_hash **ht */);
+int		exec_21sh(t_node *n, t_shell *sh);
+void	exec_pipe_node(t_node *n, t_shell *sh);
+int     exec_tree(t_node *n, t_shell *sh);
 int		fork_wrap(void);
 void	input_file_read(char *filename);
-void	redirection_file(t_node *n, t_shell *sh/* , t_hash **ht */);
+void	redirection_file(t_node *n, t_shell *sh);
 void	strip_quotes(t_node *n, t_shell *sh);
 
 /* Expansions */
@@ -128,19 +125,19 @@ void	loop_conversions_quotes(t_node *n, t_shell *sh);
 size_t	hash_function(char *program);
 void	hash_init(t_shell *sh);
 void	hash_print(t_hash **ht);
-void	init_ht_struct(t_shell *sh, char *str/* , int (*f)(t_node *n, t_shell *sh) */);
+void	init_ht_struct(t_shell *sh, char *str);
 
 /* Lexer */
 char	*lexer(t_term *t);
 
 /* Main */
 char	**get_env(char **env);
-void	init(t_shell *sh, t_term *t/* , t_hash ***ht */);
+void	init(t_shell *sh, t_term *t);
 void	print_banner(void);
 void	tree_free(t_node *n);
 
 /* Parser */
-void 	add_to_args(char ***array, char *str);
+void	add_to_args(char ***array, char *str);
 int		check_for_fileagg(char *tok);
 t_node	*error_redir(t_node *n, char **ptr_to_line);
 int		get_fd_before(char *tok);
@@ -151,18 +148,19 @@ t_node	*parse_line(char **ptr_to_line);
 t_node	*parse_pipe(char **ptr_to_line);
 t_node	*parse_redirection(t_node *n, char **ptr_to_line);
 int		peek(char **ptr_to_line, char *toks);
-void	redir_node_add_args(t_node *n, char ***ptr_to_line, char **tok, int len);
+void	redir_node_add_args(t_node *n, char ***ptr_to_line, \
+char **tok, int len);
 int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 
 /* Utils */
-void	free_mem(t_node *n, t_shell *sh/* , t_hash **ht */, ssize_t code);
+void	free_mem(t_node *n, t_shell *sh, ssize_t code);
 void	ft_disable_raw_mode(t_shell *sh);
 void	ft_enable_raw_mode(t_shell *sh);
 void	reset_fds(char *terminal_name);
 void	tree_print(t_node *root);
 
 typedef int			(*t_fptr)(t_node *n, t_shell *sh);
-// static const char	*g_builtin_str[] = {
+
 static const char	*g_builtin_str[] __attribute__((unused)) = {
 	"cd",
 	"echo",
