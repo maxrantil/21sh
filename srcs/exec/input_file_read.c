@@ -15,20 +15,11 @@ static int	open_read_check(char *filename)
 	return (file_fd);
 }
 
-void	input_file_read(char *filename)
+void	input_file_read(t_node *n, t_shell *sh)
 {
-	char	buf[4096];
-	int		file_fd;
-	ssize_t	ret;
+	int	file_fd;
 
-	file_fd = open_read_check(filename);
-	ret = read(file_fd, buf, 4095);
-	while (ret > 0)
-	{
-		buf[ret] = '\0';
-		write(1, buf, ft_strlen(buf));
-		ft_strclr(buf);
-		ret = read(file_fd, buf, 4095);
-	}
-	close(file_fd);
+	close(0);
+	file_fd = open_read_check(n->arg[1]);
+	exec_tree(n->left, sh);
 }
