@@ -23,7 +23,7 @@ int	main(void)
 	init(&sh, &t);
 	while (ft_input_cycle(&t))
 	{
-		sh.cl = lexer(&t);
+		sh.cl = ft_heredoc(&t);
 		if (sh.cl)
 		{
 			line = sh.cl;

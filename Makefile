@@ -47,7 +47,7 @@ CFLAGS		+=	-Wpedantic
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-LEAK_CHECK	+=	-fsanitize=address
+# LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -66,7 +66,6 @@ EXEC		= 	exec/
 EXPANSIONS	= 	expansions/
 HASH_TABLE	=	hash_table/
 KEYBOARD	= 	keyboard/
-LEXER		= 	lexer/
 MAIN		= 	main/
 PARSER		= 	parser/
 UTILS		= 	utils/
@@ -165,7 +164,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_trigger_nl \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
-				$(LEXER)lexer \
+				$(MAIN)ft_heredoc \
 				$(MAIN)get_env \
 				$(MAIN)init \
 				$(MAIN)main \
@@ -215,7 +214,6 @@ $(OBJECTS):
 	@mkdir -p $(OBJECTS)/$(EXPANSIONS)
 	@mkdir -p $(OBJECTS)/$(HASH_TABLE)
 	@mkdir -p $(OBJECTS)/$(KEYBOARD)
-	@mkdir -p $(OBJECTS)/$(LEXER)
 	@mkdir -p $(OBJECTS)/$(MAIN)
 	@mkdir -p $(OBJECTS)/$(PARSER)
 	@mkdir -p $(OBJECTS)/$(UTILS)

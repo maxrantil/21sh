@@ -66,7 +66,7 @@ static char	*make_heredoc_input(t_term *t, char *str)
 	return (change_delim_to_file(t, str));
 }
 
-static char	*ft_heredoc(t_term *t, char *str)
+static char	*check_heredoc(t_term *t, char *str)
 {
 	if (t->heredoc)
 	{
@@ -98,25 +98,12 @@ static char	*ft_heredoc(t_term *t, char *str)
 	return (str);
 }
 
-// one backslag take it away, two backslshes keep one. (last newline is always changes to \0, NOT)
-char *lexer(t_term *t)
+char *ft_heredoc(t_term *t)
 {
-	int		i;
 	char	*new;
-	// size_t	len;
 
 	new = ft_strtrim(t->inp);
-	new = ft_heredoc(t, new);
-	i = 0;
-	// while (new && new[i])
-	// {
-	// 	if (new[i] == '\\')
-	// 	{
-	// 		len = ft_strlen(&new[i]);
-	// 		ft_memmove((void *)&new[i], (void *)&new[i + 1], len);
-	// 	}
-	// 	i++;
-	// }
+	new = check_heredoc(t, new);
 	write(1, "\n", 1);
 	return (new);
 }

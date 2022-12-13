@@ -127,10 +127,8 @@ void	hash_init(t_shell *sh);
 void	hash_print(t_hash **ht);
 void	init_ht_struct(t_shell *sh, char *str);
 
-/* Lexer */
-char	*lexer(t_term *t);
-
 /* Main */
+char	*ft_heredoc(t_term *t);
 char	**get_env(char **env);
 void	init(t_shell *sh, t_term *t);
 void	print_banner(void);
