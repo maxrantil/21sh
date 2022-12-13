@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/13 14:07:37 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:07:35 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,13 @@ void	strip_quotes(t_node *n, t_shell *sh);
 void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
 void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
 void	expansions(t_node *n, t_shell *sh);
+ssize_t	find_matching_quote(char *str, char quote);
+void	fill_env(char **tmp, char **cont, size_t *env_len, char *str);
 void	loop_conversions_quotes(t_node *n, t_shell *sh);
+void	remove_backslash(char *str);
+size_t	strip_quotes_double(char **str, size_t quote1);
+size_t	strip_quotes_single(char *str, size_t quote1);
+size_t	update_arg_dollar(int i, char **str, size_t *len, size_t *q2);
 
 /* Hash table */
 size_t	hash_function(char *program);
