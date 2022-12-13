@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/13 13:58:37 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:06:31 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ typedef struct s_node
 /* Aggregation */
 void	check_file_aggregations(t_node *n, t_shell *sh);
 int		check_filename_fd(char *filename);
-void	check_operator_errors(int old, int file_fd, char *filename, char *oper);
+int		check_operator_errors(int old, int file_fd, char *filename, char *oper);
 int		dup2_wrap(int file_fd, int old_fd);
 int		open_check(char *filename, int mode);
 int		redirect_aggregate(int old_fd, char *target, char *operator);
-int		syntax_error_msg(exit_code);
+int		syntax_error_msg(int exit_code);
 
 /* Builtin */
 char	*env_getvalue(char **env, char *var);
