@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/13 14:06:31 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:07:37 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	sh_error_print(char *arg, int i);
 int		check_paths(t_shell *sh);
 int		exec_21sh(t_node *n, t_shell *sh);
 void	exec_pipe_node(t_node *n, t_shell *sh);
-int     exec_tree(t_node *n, t_shell *sh);
+int		exec_tree(t_node *n, t_shell *sh);
 int		fork_wrap(void);
 void	input_file_read(t_node *n, t_shell *sh);
 void	redirection_file(t_node *n, t_shell *sh);
