@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 11:42:08 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 11:42:14 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:48:35 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	redirect_aggregate(int old_fd, char *target, char *operator)
 	int	new_fd;
 
 	new_fd = get_target_fd(target);
-	check_operator_errors(old_fd, new_fd, target, operator);
+	if (check_operator_errors(old_fd, new_fd, target, operator) == -1)
+		return (-1);
 	if (old_fd == 1 || old_fd == 2)
 	{
 		dup2_wrap(new_fd, 1);

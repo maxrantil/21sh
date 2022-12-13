@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 11:46:21 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:53:05 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	check_file_aggregations(t_node *n, t_shell *sh)
 	else if (ft_strequ((const char *)operator, ">&-"))
 		close(file_fd);
 	else
-		syntax_error_msg(1);	//	return value ?
+		ret = syntax_error_msg(-1);
 	ft_strdel(&operator);
 	ft_strdel(&target_file);
 	if (ret != -1)
