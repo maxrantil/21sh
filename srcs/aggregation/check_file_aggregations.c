@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 13:53:05 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:01:50 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*get_target_file(char *full, char *filename, size_t oper_len)
 	{
 		if (filename)
 			return (ft_strdup(filename));
-		syntax_error_msg(9);		//	return value ?
+		syntax_error_msg(-1);
 	}
 	else
 		return (ft_strsub(full, i + oper_len, target_len));
