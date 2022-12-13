@@ -6,7 +6,7 @@
 #    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/12 17:44:11 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/12/13 15:22:56 by rvuorenl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,9 +108,15 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(EXEC)input_file_read \
 				$(EXEC)redirection_file \
 				$(EXEC)strip_quotes \
-				$(EXPANSIONS)expansions_convert_rm_quotes \
-				$(EXPANSIONS)expansions_dollar \
 				$(EXPANSIONS)expansions_tilde \
+				$(EXPANSIONS)fill_env \
+				$(EXPANSIONS)find_matching_quote \
+				$(EXPANSIONS)loop_conversions_quotes \
+				$(EXPANSIONS)remove_backslash \
+				$(EXPANSIONS)strip_quotes_double \
+				$(EXPANSIONS)strip_quotes_single \
+				$(EXPANSIONS)update_arg_dollar \
+				$(EXPANSIONS)expansions_dollar \
 				$(EXPANSIONS)expansions \
 				$(HASH_TABLE)hash_function \
 				$(HASH_TABLE)hash_init \

@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 20:33:36 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:07:35 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ typedef struct s_node
 /* Aggregation */
 void	check_file_aggregations(t_node *n, t_shell *sh);
 int		check_filename_fd(char *filename);
-void	check_operator_errors(int old, int file_fd, char *filename, char *oper);
+int		check_operator_errors(int old, int file_fd, char *filename, char *oper);
 int		dup2_wrap(int file_fd, int old_fd);
 int		open_check(char *filename, int mode);
 int		redirect_aggregate(int old_fd, char *target, char *operator);
-void	syntax_error_msg(int exit_code);
+int		syntax_error_msg(int exit_code);
 
 /* Builtin */
 char	*env_getvalue(char **env, char *var);
@@ -110,7 +110,7 @@ void	sh_error_print(char *arg, int i);
 int		check_paths(t_shell *sh);
 int		exec_21sh(t_node *n, t_shell *sh);
 void	exec_pipe_node(t_node *n, t_shell *sh);
-int     exec_tree(t_node *n, t_shell *sh);
+int		exec_tree(t_node *n, t_shell *sh);
 int		fork_wrap(void);
 void	input_file_read(t_node *n, t_shell *sh);
 void	redirection_file(t_node *n, t_shell *sh);
@@ -120,7 +120,13 @@ void	strip_quotes(t_node *n, t_shell *sh);
 void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
 void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
 void	expansions(t_node *n, t_shell *sh);
+ssize_t	find_matching_quote(char *str, char quote);
+void	fill_env(char **tmp, char **cont, size_t *env_len, char *str);
 void	loop_conversions_quotes(t_node *n, t_shell *sh);
+void	remove_backslash(char *str);
+size_t	strip_quotes_double(char **str, size_t quote1);
+size_t	strip_quotes_single(char *str, size_t quote1);
+size_t	update_arg_dollar(int i, char **str, size_t *len, size_t *q2);
 
 /* Hash table */
 size_t	hash_function(char *program);

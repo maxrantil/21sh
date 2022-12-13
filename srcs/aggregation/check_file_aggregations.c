@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_aggregations.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/12 12:30:36 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/13 14:01:50 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*get_target_file(char *full, char *filename, size_t oper_len)
 	{
 		if (filename)
 			return (ft_strdup(filename));
-		syntax_error_msg(9);
+		syntax_error_msg(-1);
 	}
 	else
 		return (ft_strsub(full, i + oper_len, target_len));
@@ -68,8 +68,6 @@ static int	get_redirected_fd(char *full)
 	return (fd);
 }
 
-// void	check_file_aggregations(char *full, char *filename)
-// check_file_aggregations(n->arg[0], n->arg[1]);
 void	check_file_aggregations(t_node *n, t_shell *sh)
 {
 	int		file_fd;
@@ -89,7 +87,7 @@ void	check_file_aggregations(t_node *n, t_shell *sh)
 	else if (ft_strequ((const char *)operator, ">&-"))
 		close(file_fd);
 	else
-		syntax_error_msg(1);
+		ret = syntax_error_msg(-1);
 	ft_strdel(&operator);
 	ft_strdel(&target_file);
 	if (ret != -1)
