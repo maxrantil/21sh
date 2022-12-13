@@ -19,23 +19,19 @@
 */
 void	ft_enable_raw_mode(t_shell *sh)
 {
-	struct termios	orig_termios;
-	struct termios	raw;
-
-	if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
+	if (tcgetattr(STDIN_FILENO, &sh->orig_termios) == -1)
 	{
 		write(2, "error tcgetattr\n", 16);
 		exit(1);
 	}
-	raw = orig_termios;
-	raw.c_lflag &= ~(ICANON | ECHO | IEXTEN);
-	raw.c_iflag &= ~(IXON | BRKINT);
-	raw.c_cc[VMIN] = 1;
-	raw.c_cc[VTIME] = 0;
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
+	sh->raw = sh->orig_termios;
+	sh->raw.c_lflag &= ~(ICANON | ECHO | IEXTEN);
+	sh->raw.c_iflag &= ~(IXON | BRKINT);
+	sh->raw.c_cc[VMIN] = 1;
+	sh->raw.c_cc[VTIME] = 0;
+	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw) == -1)
 	{
 		write(2, "error tcsetattr\n", 16);
 		exit(1);
 	}
-	sh->orig_termios = orig_termios;
 }

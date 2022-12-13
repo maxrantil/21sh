@@ -59,6 +59,7 @@ typedef struct s_hash
 typedef struct s_shell
 {
 	struct termios	orig_termios;
+	struct termios	raw;
 	t_vec			v_tmp_env;
 	t_hash			**ht;
 	char			**temp_env;

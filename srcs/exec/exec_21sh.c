@@ -39,7 +39,7 @@ static int	verify_arg(t_node *n, t_shell *sh)
 
 int	exec_21sh(t_node *n, t_shell *sh)
 {
-	// ft_disable_raw_mode(sh);
+	ft_disable_raw_mode(sh);
 	if (fork_wrap() == 0)
 	{
 		if (n->arg[0][0] == '.')
@@ -60,6 +60,6 @@ int	exec_21sh(t_node *n, t_shell *sh)
 		exit(EXIT_FAILURE);
 	}
 	wait(0);
-	// ft_enable_raw_mode(sh);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw); //might need to have a discussion with Alex about this, why does it work and also why does is give back -1 (errror) when it works
 	return (1);
 }
