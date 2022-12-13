@@ -1,6 +1,0 @@
-
-NOT WORKING
-echo "$SHELL"."asd"
-
-WORKING
-echo asd"$SHELL"."asd"
