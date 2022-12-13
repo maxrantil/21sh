@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:27:28 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 13:52:12 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:03:21 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_ambiguous_redirect(int fd, char *target, char *oper)
 int	check_operator_errors(int old, int file_fd, char *filename, char *oper)
 {
 	if ((!filename) && (!ft_strequ(oper, ">&-")))
-		return(syntax_error_msg(-1));
+		return (syntax_error_msg(-1));
 	if (check_ambiguous_redirect(old, filename, oper) == -1)
 		return (-1);
 	if (check_bad_fd(file_fd, filename) == -1)
