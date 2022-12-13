@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_operator_errors.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:27:28 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/12 12:29:50 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/13 11:46:33 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	check_ambiguous_redirect(int fd, char *target, char *oper)
 void	check_operator_errors(int old, int file_fd, char *filename, char *oper)
 {
 	if ((!filename) && (!ft_strequ(oper, ">&-")))
-		syntax_error_msg(10);
+		syntax_error_msg(10);		// return value?
 	check_ambiguous_redirect(old, filename, oper);
 	check_bad_fd(file_fd, filename);
 }
