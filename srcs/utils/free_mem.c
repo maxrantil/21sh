@@ -12,6 +12,8 @@
 
 #include "ft_21sh.h"
 
+extern t_term *g_t;
+
 static void	free_ht(t_hash **ht)
 {
 	t_hash	*tmp;
@@ -74,6 +76,9 @@ void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 		}
 		ft_memdel((void **)&sh->cl);
 		reset_fds(sh->term_name);
+		ft_restart_cycle(g_t);
+			if (code == 1)
+		ft_printf("{yel}${gre}>{nor} ");
 	}
 	if (code == 3)
 	{
@@ -81,6 +86,7 @@ void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 			ft_arrfree((void ***)&sh->env, ft_arrlen((void **)sh->env));
 		free_ht(sh->ht);
 		vec_free(&sh->v_tmp_env);
+		ft_history_write_to_file(g_t);
 		ft_disable_raw_mode(sh);
 	}
 }
