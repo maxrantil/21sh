@@ -12,7 +12,7 @@
 
 #include "ft_21sh.h"
 
-static ssize_t	find_matching_quote(char *str, char quote)
+/* static ssize_t	find_matching_quote(char *str, char quote)
 {
 	ssize_t	i;
 
@@ -20,7 +20,7 @@ static ssize_t	find_matching_quote(char *str, char quote)
 	while (str[i] && str[i] != quote)
 		i++;
 	return (i);
-}
+} */
 
 void	strip_quotes(t_node *n, t_shell *sh)
 {
