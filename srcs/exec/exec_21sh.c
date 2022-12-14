@@ -42,7 +42,7 @@ int	exec_21sh(t_node *n, t_shell *sh)
 	ft_disable_raw_mode(sh);
 	if (fork_wrap() == 0)
 	{
-		if (n->arg[0][0] == '.')
+		if (n->arg[0][0] == '.' || n->arg[0][0] == '/')
 		{
 			sh->env = env_underscore(n, sh);
 			execve(n->arg[0], n->arg, sh->env);

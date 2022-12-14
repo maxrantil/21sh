@@ -56,6 +56,6 @@ void	init(t_shell *sh, t_term *t)
 	sh->cl = NULL;
 	sh->env = get_env(sh->env);
 	sh->temp_env = NULL;
-	vec_new(&sh->v_tmp_env, 0, MAX_PATHLEN);
+	vec_new(&sh->v_tmp_env, 0, BUFFSIZE);
 	ft_printf("{yel}${gre}>{nor} ");
 }
