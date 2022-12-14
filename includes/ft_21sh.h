@@ -66,7 +66,7 @@ typedef struct s_shell
 	char			**env;
 	char			**paths;
 	char			*cl;
-	char			*terminal_name;
+	char			*term_name;
 }					t_shell;
 
 typedef struct s_node
@@ -161,7 +161,7 @@ int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 void	free_mem(t_node *n, t_shell *sh, ssize_t code);
 void	ft_disable_raw_mode(t_shell *sh);
 void	ft_enable_raw_mode(t_shell *sh);
-void	reset_fds(char *terminal_name);
+void	reset_fds(char *term_name);
 void	tree_print(t_node *root);
 
 typedef int			(*t_fptr)(t_node *n, t_shell *sh);

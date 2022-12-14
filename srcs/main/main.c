@@ -28,14 +28,12 @@ int	main(void)
 		{
 			line = sh.cl;
 			root = parse_line(&line);
-			if (root)
+			if (root) //do i need this?
 				if (!exec_tree(root, &sh))
 					break ;
 		}
 		free_mem(root, &sh, 1);
-		ft_restart_cycle(&t);
 	}
 	free_mem(root, &sh, 3);
-	ft_history_write_to_file(&t);
 	exit(0);
 }

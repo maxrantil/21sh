@@ -14,7 +14,6 @@
 
 void	ft_restart_cycle(t_term *t)
 {
-	ft_printf("{yel}${gre}>{nor} ");
 	ft_strclr(t->inp);
 	t->quote = 0;
 	t->q_qty = 0;
@@ -26,6 +25,8 @@ void	ft_restart_cycle(t_term *t)
 	t->total_row = 0;
 	t->his = 0;
 	t->c_row = t->total_row;
+	if (t->delim)
+		write(1, "\n", 1);
 	ft_strdel(&t->delim);
-	ft_setcursor(t->c_col, t->c_row + t->start_row);
+	// ft_setcursor(t->c_col, t->c_row + t->start_row);
 }

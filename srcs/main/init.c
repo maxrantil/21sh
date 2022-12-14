@@ -12,6 +12,8 @@
 
 #include "ft_21sh.h"
 
+t_term	*g_t;
+
 static int ft_getent(void)
 {
 	char	*termtype;
@@ -38,16 +40,17 @@ static int ft_getent(void)
 	return (status);
 }
 
-static void	get_terminal_name(char **terminal_name)
+static void	get_term_name(char **term_name)
 {
-	*terminal_name = ttyname(1);
+	*term_name = ttyname(1);
 }
 
 void	init(t_shell *sh, t_term *t)
 {
 	ft_getent();
 	ft_enable_raw_mode(sh);
-	get_terminal_name(&(sh->terminal_name));
+	get_term_name(&(sh->term_name));
+	g_t = t;
 	print_banner();
 	ft_init_term(t);
 	hash_init(sh);
@@ -56,6 +59,6 @@ void	init(t_shell *sh, t_term *t)
 	sh->cl = NULL;
 	sh->env = get_env(sh->env);
 	sh->temp_env = NULL;
-	vec_new(&sh->v_tmp_env, 0, MAX_PATHLEN);
+	vec_new(&sh->v_tmp_env, 0, BUFFSIZE);
 	ft_printf("{yel}${gre}>{nor} ");
 }

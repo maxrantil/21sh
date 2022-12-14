@@ -14,9 +14,9 @@
 
 static void	exec_semicolon(t_node *n, t_shell *sh)
 {
-	reset_fds(sh->terminal_name);
+	reset_fds(sh->term_name);
 	exec_tree(n->left, sh);
-	reset_fds(sh->terminal_name);
+	reset_fds(sh->term_name);
 	exec_tree(n->right, sh);
 }
 
