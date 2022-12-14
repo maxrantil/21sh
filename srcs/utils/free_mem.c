@@ -73,7 +73,7 @@ void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 			tree_free(root);
 		}
 		ft_memdel((void **)&sh->cl);
-		reset_fds(sh->terminal_name);
+		reset_fds(sh->term_name);
 	}
 	if (code == 3)
 	{

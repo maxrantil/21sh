@@ -99,6 +99,7 @@ typedef struct s_term
 	ssize_t			heredoc;
 	ssize_t			his;
 	char			quote;
+	// char			*term_name;
 }			t_term;
 
 void	ft_add_nl_last_row(t_term *t, ssize_t pos);

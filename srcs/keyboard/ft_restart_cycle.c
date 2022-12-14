@@ -14,7 +14,8 @@
 
 void	ft_restart_cycle(t_term *t)
 {
-	ft_printf("{yel}${gre}>{nor} ");
+	if (*t->inp)
+		ft_printf("{yel}${gre}>{nor} ");
 	ft_strclr(t->inp);
 	t->quote = 0;
 	t->q_qty = 0;
