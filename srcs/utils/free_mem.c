@@ -77,8 +77,8 @@ void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 		ft_memdel((void **)&sh->cl);
 		reset_fds(sh->term_name);
 		ft_restart_cycle(g_t);
-			if (code == 1)
-		ft_printf("{yel}${gre}>{nor} ");
+		if (code == 1)
+			ft_printf("{yel}${gre}>{nor} ");
 	}
 	if (code == 3)
 	{
