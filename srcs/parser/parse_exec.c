@@ -57,7 +57,7 @@ static int	is_quote_somewhere(char *tok)
 			while (*tok && *tok != quote && ++len)
 				tok++;
 			while (*tok && !ft_isspace((const char *)tok) && ++len)
-				tok++; 
+				tok++;
 			if (*tok == '\'' || *tok == '"')
 				if (tok[1] && *(tok - 1) == '\\')
 					if (tok[2] && *(tok - 2) != '\\')
@@ -88,7 +88,10 @@ static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
 		mv_tok_and_line(&tok, &ptr_to_line, has_quote);
 	}
 	else
+	{
+		// ft_printf("HERE\n");
 		add_to_args(&n->arg, ft_strsub(tok, 0, (size_t)(end_q - tok)));
+	}
 }
 
 // static int	check_tok_for_redir(char *tok, char *end_q)
