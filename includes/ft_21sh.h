@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 12:42:00 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 15:36:50 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ void	hash_print(t_hash **ht);
 void	init_ht_struct(t_shell *sh, char *str);
 
 /* Main */
+void	sig_handler(int num);
+
 char	*check_heredoc(t_term *t, char *str);
 char	**get_env(char **env);
 void	init(t_shell *sh, t_term *t);
