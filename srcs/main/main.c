@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 11:09:00 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:13:20 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	main(void)
 		{
 			l.line = sh.cl;
 			root = parse_line(&l, &l.line);
-			if (root) //maybe ski this?
-				if (!exec_tree(root, &sh))
-					break ;
+			if (!exec_tree(root, &sh))
+				break ;
 		}
 		free_mem(root, &sh, 1);
 	}
