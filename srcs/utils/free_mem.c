@@ -6,13 +6,13 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 13:38:41 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:49:44 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-extern t_term *g_t;
+extern t_term	*g_t;
 
 static void	free_ht(t_hash **ht)
 {
@@ -70,10 +70,7 @@ void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 		if (sh->paths)
 			ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
 		if (sh->cl)
-		{
-			// tree_print(root);
 			tree_free(root);
-		}
 		ft_memdel((void **)&sh->cl);
 		reset_fds(sh->term_name);
 		ft_restart_cycle(g_t);

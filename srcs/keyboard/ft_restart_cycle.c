@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/02 17:49:30 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 12:44:27 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ void	ft_restart_cycle(t_term *t)
 	if (t->delim)
 		write(1, "\n", 1);
 	ft_strdel(&t->delim);
-	// ft_setcursor(t->c_col, t->c_row + t->start_row);
 }

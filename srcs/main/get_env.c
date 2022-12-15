@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:26:33 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 15:29:50 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 12:17:56 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**get_env(char **env)
 {
 	extern char	**environ;
 	size_t		len;
-	size_t 		j;
+	size_t		j;
 	ssize_t		i;
 
 	if (*environ)

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 11:10:38 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 12:42:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ char	**setenv_var(char **env, char *key, char *value);
 char	**unsetenv_var(char **env, char *key);
 
 /* Error */
+t_node	*error_redir(t_node *n, char **ptr_to_line);
 t_node	*exec_error(t_node *n, int type);
 void	sh_error_print(char *arg, int i);
 
@@ -146,7 +147,7 @@ void	hash_print(t_hash **ht);
 void	init_ht_struct(t_shell *sh, char *str);
 
 /* Main */
-char	*ft_heredoc(t_term *t);
+char	*check_heredoc(t_term *t, char *str);
 char	**get_env(char **env);
 void	init(t_shell *sh, t_term *t);
 void	print_banner(void);
@@ -155,7 +156,7 @@ void	tree_free(t_node *n);
 /* Parser */
 void	add_to_args(char ***array, char *str);
 int		check_for_fileagg(char *tok);
-t_node	*error_redir(t_node *n, char **ptr_to_line);
+int		exec_is_quote_somewhere(char *tok);
 int		get_fd_before(char *tok);
 void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len);
 t_node	*node_create(int type, t_node *left, t_node *right);

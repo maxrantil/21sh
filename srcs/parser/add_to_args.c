@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_to_args.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/15 12:12:58 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/15 12:17:29 by mrantil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_21sh.h"
 
 static char	**malloc_wrap(size_t size)
@@ -13,18 +25,23 @@ static char	**malloc_wrap(size_t size)
 	return (arr);
 }
 
-void 	add_to_args(char ***array, char *str)
+static void	first_arg(char ***array, char *str)
 {
-	int 	i;
+	*array = malloc_wrap(sizeof(char *) * 2);
+	(*array)[0] = str;
+	(*array)[1] = NULL;
+}
+
+void	add_to_args(char ***array, char *str)
+{
+	int		i;
 	char	**new_array;
 
 	if (!str)
 		return ;
 	if (*array == NULL)
 	{
-		*array = malloc_wrap(sizeof(char *) * 2);
-		(*array)[0] = str;
-		(*array)[1] = NULL;
+		first_arg(array, str);
 		return ;
 	}
 	i = 0;

@@ -6,13 +6,21 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/07 13:43:55 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:54:46 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static char	*verify_arg(t_node *n, t_shell *sh, int i)
+static int	hash_error_print(char *arg)
+{
+	ft_putstr_fd("21sh: hash: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": not found", 2);
+	return (-1);
+}
+
+static int	verify_arg(t_node *n, t_shell *sh, int i)
 {
 	struct stat	statbuf;
 	char		*verify;
@@ -25,24 +33,25 @@ static char	*verify_arg(t_node *n, t_shell *sh, int i)
 		verify = ft_strupdate(verify, n->arg[i]);
 		if (!lstat(verify, &statbuf))
 		{
-			ft_strdel(&n->arg[i]); //valgrind says not to free?????
+			ft_strdel(&n->arg[i]);
 			n->arg[i] = verify;
-			return (n->arg[i]);
+			return (1);
 		}
 		ft_strdel(&verify);
 		y++;
 	}
-	return (n->arg[i]);
+	return (0);
 }
 
-int	sh_hash(t_node *n, t_shell *sh) //ad -r to clear the hash table
+//ad -r to clear the hash table
+// will this leak when i unset PATH and set it many times?
+int	sh_hash(t_node *n, t_shell *sh)
 {
 	int		i;
 	int		index;
-	char	*ptr;
 	t_hash	*tmp;
 
-	if (!check_paths(sh)) // will this leak when i unset PATH and set it many times?
+	if (!check_paths(sh))
 	{
 		ft_putstr_fd("21sh: hash table empty", 2);
 		return (1);
@@ -52,9 +61,7 @@ int	sh_hash(t_node *n, t_shell *sh) //ad -r to clear the hash table
 		hash_print(sh->ht);
 	while (n->arg[++i])
 	{
-		ptr = n->arg[i];
-		n->arg[i] = verify_arg(n, sh, i);
-		if (!ft_strequ(n->arg[i], ptr))
+		if (verify_arg(n, sh, i))
 		{
 			index = hash_function(n->arg[i]);
 			tmp = sh->ht[index];
@@ -66,12 +73,7 @@ int	sh_hash(t_node *n, t_shell *sh) //ad -r to clear the hash table
 			}
 		}
 		else
-		{
-			ft_putstr_fd("21sh: hash: ", 2);
-			ft_putstr_fd(n->arg[i], 2);
-			ft_putstr_fd(": not found", 2);
-			return (-1);
-		}
+			return (hash_error_print(n->arg[i]));
 	}
 	return (1);
 }
