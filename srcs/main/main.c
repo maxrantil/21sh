@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 15:58:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:09:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	// char	*line;
 
 	root = NULL;
-	init(&sh, &t);
+	init(&sh, &t, &l);
 	while (ft_input_cycle(&t))
 	{
 		sh.cl = lexer(&t);

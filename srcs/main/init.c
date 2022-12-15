@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 15:20:34 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:08:54 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	get_terminal_name(char **terminal_name)
 	*terminal_name = ttyname(1);
 }
 
-void	init(t_shell *sh, t_term *t)
+void	init(t_shell *sh, t_term *t, t_line *l)
 {
 	ft_getent();
 	ft_enable_raw_mode(sh);
@@ -57,5 +57,14 @@ void	init(t_shell *sh, t_term *t)
 	sh->env = get_env(sh->env);
 	sh->temp_env = NULL;
 	vec_new(&sh->v_tmp_env, 0, MAX_PATHLEN);
+
+	l->ptr_to_line = NULL;
+	/* char	*line;
+	char	*tok;
+	char	*end_q;
+	int		type;
+	int		fileagg_len;
+	int		fd_len; */
+
 	ft_printf("{yel}${gre}>{nor} ");
 }

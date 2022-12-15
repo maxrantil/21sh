@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:03:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/25 19:51:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:10:33 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	peek(char **ptr_to_line, char *toks)
 {
-	char *scan;
+	char	*scan;
 
 	scan = NULL;
 	scan = *ptr_to_line;

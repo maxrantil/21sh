@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 16:05:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:10:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ t_node	*parse_exec(t_line *l)
 	t_node	*n;
 
 	n = node_create(EXEC, NULL, NULL);
+	// ft_printf("1LOOK %s\n", *l->ptr_to_line);
 	n = parse_redirection(n, l);
 	while (n && !peek(l->ptr_to_line, "|&;"))
 	{

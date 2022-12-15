@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 16:19:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:09:04 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ char	*lexer(t_term *t);
 
 /* Main */
 char	**get_env(char **env);
-void	init(t_shell *sh, t_term *t);
+void	init(t_shell *sh, t_term *t, t_line *l);
 void	print_banner(void);
 void	tree_free(t_node *n);
 
