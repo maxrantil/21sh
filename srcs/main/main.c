@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 13:28:24 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:09:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	t_node	*root;
 	t_shell	sh;
 	t_term	t;
-	char	*line;
+	t_line	l;
 
 	root = NULL;
 	init(&sh, &t);
@@ -26,9 +26,9 @@ int	main(void)
 		sh.cl = ft_heredoc(&t);
 		if (sh.cl)
 		{
-			line = sh.cl;
-			root = parse_line(&line);
-			if (root) //do i need this?
+			l.line = sh.cl;
+			root = parse_line(&l, &l.line);
+			if (root) //maybe ski this?
 				if (!exec_tree(root, &sh))
 					break ;
 		}

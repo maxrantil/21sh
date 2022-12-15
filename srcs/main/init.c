@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 11:34:16 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:09:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_term	*g_t;
 
-static int ft_getent(void)
+static int	ft_getent(void)
 {
 	char	*termtype;
 	char	term_buffer[2048];

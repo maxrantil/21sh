@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
+#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/13 15:22:56 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/12/15 11:09:45 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ CFLAGS		+=	-Wpedantic
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-# LEAK_CHECK	+=	-fsanitize=address
+LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
