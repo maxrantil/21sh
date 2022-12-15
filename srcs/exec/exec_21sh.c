@@ -55,7 +55,7 @@ static void	need_raw_mode(t_node *n, t_shell *sh, int mode)
 	}
 	else
 	{
-		if (does_program_need_raw(n))
+		if (does_program_need_raw(n))//try TCSANOW and see if it doest return -1
 			tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw); //might need to have a discussion with Alex about this, why does it work and also why does is give back -1 (errror) when it works
 	}
 }
