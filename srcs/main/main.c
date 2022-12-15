@@ -6,36 +6,44 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 13:28:24 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 13:52:18 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
+
+char	*ft_trim_line(t_term *t)
+{
+	char	*new;
+
+	new = ft_strtrim(t->inp);
+	new = check_heredoc(t, new);
+	write(1, "\n", 1);
+	return (new);
+}
 
 int	main(void)
 {
 	t_node	*root;
 	t_shell	sh;
 	t_term	t;
-	char	*line;
+	t_line	l;
 
 	root = NULL;
 	init(&sh, &t);
 	while (ft_input_cycle(&t))
 	{
-		sh.cl = ft_heredoc(&t);
+		sh.cl = ft_trim_line(&t);
 		if (sh.cl)
 		{
-			line = sh.cl;
-			root = parse_line(&line);
+			l.line = sh.cl;
+			root = parse_line(&l, &l.line);
 			if (root)
 				if (!exec_tree(root, &sh))
 					break ;
 		}
 		free_mem(root, &sh, 1);
-		ft_restart_cycle(&t);
 	}
 	free_mem(root, &sh, 3);
-	ft_history_write_to_file(&t);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 #    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/13 15:32:16 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/12/15 14:19:32 by rvuorenl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(BUILTIN)sh_unsetenv \
 				$(BUILTIN)sh_setenv \
 				$(BUILTIN)unsetenv_var \
+				$(ERROR)error_redir \
 				$(ERROR)exec_error \
 				$(ERROR)sh_error_print \
 				$(EXEC)check_paths \
@@ -169,14 +170,14 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_trigger_nl \
 				$(KEYBOARD)ft_window_size \
 				$(KEYBOARD)ft_word_mv \
-				$(MAIN)ft_heredoc \
+				$(MAIN)check_heredoc \
 				$(MAIN)get_env \
 				$(MAIN)init \
 				$(MAIN)main \
 				$(MAIN)print_banner \
 				$(PARSER)add_to_args \
 				$(PARSER)check_for_fileagg \
-				$(PARSER)error_redir \
+				$(PARSER)exec_is_quote_somewhere \
 				$(PARSER)get_fd_before \
 				$(PARSER)mv_tok_and_line \
 				$(PARSER)node_create \

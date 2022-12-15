@@ -27,7 +27,7 @@ static int	verify_arg(t_node *n, t_shell *sh)
 		verify = ft_strupdate(verify, n->arg[0]);
 		if (!lstat(verify, &statbuf))
 		{
-			ft_strdel(&n->arg[0]); //valgrind says not to free?????
+			ft_strdel(&n->arg[0]);
 			n->arg[0] = verify;
 			return (1);
 		}
@@ -37,12 +37,35 @@ static int	verify_arg(t_node *n, t_shell *sh)
 	return (0);
 }
 
+static int	does_program_need_raw(t_node *n)
+{
+	if (n->arg[0] && (ft_strstr(n->arg[0], "bash") \
+		|| ft_strstr(n->arg[0], "vi") \
+		|| ft_strstr(n->arg[0], "emacs")))
+		return (1);
+	return (0);
+}
+
+static void	need_raw_mode(t_node *n, t_shell *sh, int mode)
+{
+	if (mode == 1)
+	{
+		if (does_program_need_raw(n))
+			ft_disable_raw_mode(sh);
+	}
+	else
+	{
+		if (does_program_need_raw(n))
+			tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw);
+	}
+}
+
 int	exec_21sh(t_node *n, t_shell *sh)
 {
-	ft_disable_raw_mode(sh);
+	need_raw_mode(n, sh, 1);
 	if (fork_wrap() == 0)
 	{
-		if (n->arg[0][0] == '.')
+		if (n->arg[0][0] == '.' || n->arg[0][0] == '/')
 		{
 			sh->env = env_underscore(n, sh);
 			execve(n->arg[0], n->arg, sh->env);
@@ -60,6 +83,6 @@ int	exec_21sh(t_node *n, t_shell *sh)
 		exit(EXIT_FAILURE);
 	}
 	wait(0);
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw); //might need to have a discussion with Alex about this, why does it work and also why does is give back -1 (errror) when it works
+	need_raw_mode(n, sh, 0);
 	return (1);
 }

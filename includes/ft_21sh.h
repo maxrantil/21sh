@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/13 15:07:35 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:42:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_shell
 	char			**env;
 	char			**paths;
 	char			*cl;
-	char			*terminal_name;
+	char			*term_name;
 }					t_shell;
 
 typedef struct s_node
@@ -76,6 +76,17 @@ typedef struct s_node
 	struct s_node	*left;
 	struct s_node	*right;
 }					t_node;
+
+typedef struct s_line
+{
+	// char	**ptr_to_line;
+	char	*line;
+	char	*tok;
+	char	*end_q;
+	int		type;
+	int		fileagg_len;
+	int		fd_len;
+}			t_line;
 
 /* Aggregation */
 void	check_file_aggregations(t_node *n, t_shell *sh);
@@ -103,6 +114,7 @@ char	**setenv_var(char **env, char *key, char *value);
 char	**unsetenv_var(char **env, char *key);
 
 /* Error */
+t_node	*error_redir(t_node *n, char **ptr_to_line);
 t_node	*exec_error(t_node *n, int type);
 void	sh_error_print(char *arg, int i);
 
@@ -135,7 +147,7 @@ void	hash_print(t_hash **ht);
 void	init_ht_struct(t_shell *sh, char *str);
 
 /* Main */
-char	*ft_heredoc(t_term *t);
+char	*check_heredoc(t_term *t, char *str);
 char	**get_env(char **env);
 void	init(t_shell *sh, t_term *t);
 void	print_banner(void);
@@ -144,14 +156,14 @@ void	tree_free(t_node *n);
 /* Parser */
 void	add_to_args(char ***array, char *str);
 int		check_for_fileagg(char *tok);
-t_node	*error_redir(t_node *n, char **ptr_to_line);
+int		exec_is_quote_somewhere(char *tok);
 int		get_fd_before(char *tok);
 void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len);
 t_node	*node_create(int type, t_node *left, t_node *right);
-t_node	*parse_exec(char **ptr_to_line);
-t_node	*parse_line(char **ptr_to_line);
-t_node	*parse_pipe(char **ptr_to_line);
-t_node	*parse_redirection(t_node *n, char **ptr_to_line);
+t_node	*parse_exec(t_line *l, char **ptr_to_line);
+t_node	*parse_line(t_line *l, char **ptr_to_line);
+t_node	*parse_pipe(t_line *l, char **ptr_to_line);
+t_node	*parse_redirection(t_node *n, t_line *l, char **ptr_to_line);
 int		peek(char **ptr_to_line, char *toks);
 void	redir_node_add_args(t_node *n, char ***ptr_to_line, \
 char **tok, int len);
@@ -161,7 +173,7 @@ int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 void	free_mem(t_node *n, t_shell *sh, ssize_t code);
 void	ft_disable_raw_mode(t_shell *sh);
 void	ft_enable_raw_mode(t_shell *sh);
-void	reset_fds(char *terminal_name);
+void	reset_fds(char *term_name);
 void	tree_print(t_node *root);
 
 typedef int			(*t_fptr)(t_node *n, t_shell *sh);

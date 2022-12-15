@@ -1,6 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tree_free.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/15 11:40:31 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/15 11:48:45 by mrantil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_21sh.h"
 
-/*	recursively free tree nodes, start from root */
+/*
+ * tree_free - Recursively free memory allocated for a binary tree
+ *
+ * @n: Pointer to the root node of the tree
+ */
 void	tree_free(t_node *n)
 {
 	if (!n)

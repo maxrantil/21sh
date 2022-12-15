@@ -12,12 +12,12 @@
 
 #include "ft_21sh.h"
 
-void	reset_fds(char *terminal_name)
+void	reset_fds(char *term_name)
 {
 	close(0);
-	open(terminal_name, O_RDWR);
+	open(term_name, O_RDWR);
 	close(1);
-	open(terminal_name, O_RDWR);
+	open(term_name, O_RDWR);
 	close(2);
-	open(terminal_name, O_RDWR);
+	open(term_name, O_RDWR);
 }

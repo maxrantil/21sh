@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:17:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 17:56:37 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 13:54:38 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	sig_handler(int num)
 	if (num == SIGINT)
 	{
 		write(1, "\n", 1);
+		if (*g_t->inp == '\0')
+			ft_printf("{yel}${gre}>{nor} ");
 		ft_restart_cycle(g_t);
 	}
 }
