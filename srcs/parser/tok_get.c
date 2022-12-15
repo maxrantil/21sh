@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tok_get.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/15 11:50:09 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/15 11:50:42 by mrantil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_21sh.h"
 
-static int tok_loop(char **scan, int ret)
+static int	tok_loop(char **scan, int ret)
 {
 	while (**scan)
 	{
@@ -16,7 +28,8 @@ static int tok_loop(char **scan, int ret)
 		{
 			ret = 'a';
 			while ((**scan && !ft_isspace(*scan) && !strchr("<|&;>", **scan)) \
-				|| (**scan && *(*scan + 1) && *(*scan - 1) == '\\' && **scan == '\n'))
+				|| (**scan && *(*scan + 1) \
+				&& *(*scan - 1) == '\\' && **scan == '\n'))
 				(*scan)++;
 			break ;
 		}

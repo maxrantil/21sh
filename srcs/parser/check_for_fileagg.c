@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:23:13 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 13:24:43 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 12:12:43 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	check_for_fileagg(char *tok)
 	}
 	if (*tok == '>' && *(tok + 1) == '&')
 	{
-		if (!ft_isalnum(*(tok + 2)) && (*(tok + 2)) != '-' && !ft_isspace(tok + 2))
+		if (!ft_isalnum(*(tok + 2)) && (*(tok + 2)) != '-' \
+			&& !ft_isspace(tok + 2))
 			return (-1);
 		return (ret + 2);
 	}
