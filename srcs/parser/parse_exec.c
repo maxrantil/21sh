@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:01:25 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 10:10:37 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:18:36 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,29 +100,29 @@ static	void exec_create(t_node *n, char **ptr_to_line, char *tok, char *end_q)
 // 	return (ret);
 // }
 
-t_node	*parse_exec(t_line *l)
+t_node	*parse_exec(t_line *l, char **ptr_to_line)
 {
 	t_node	*n;
 
 	n = node_create(EXEC, NULL, NULL);
-	// ft_printf("1LOOK %s\n", *l->ptr_to_line);
-	n = parse_redirection(n, l);
-	while (n && !peek(l->ptr_to_line, "|&;"))
+	// ft_printf("1LOOK %s\n", *ptr_to_line);
+	n = parse_redirection(n, l, ptr_to_line);
+	while (n && !peek(ptr_to_line, "|&;"))
 	{
-		l->type = tok_get(l->ptr_to_line, &l->tok, &l->end_q);
+		l->type = tok_get(ptr_to_line, &l->tok, &l->end_q);
 		if (l->type == 'a')
 		{
 			if (n->type >= REDIROVER && n->type <= FILEAGG)
 				exec_create_redir(n, l->tok, l->end_q);
 			else
-				exec_create(n, l->ptr_to_line, l->tok, l->end_q);
+				exec_create(n, ptr_to_line, l->tok, l->end_q);
 		}
 		else if (l->type == 0)
 			break ;
 		else /* if (type != '#' || type != '<' || type != '>') */
 			return (exec_error(n, l->type));
 		// if (check_tok_for_redir(tok, end_q)) //this needs to fixed so it just check one work and not
-		n = parse_redirection(n, l);
+		n = parse_redirection(n, l, ptr_to_line);
 	}
 	return (n);
 }

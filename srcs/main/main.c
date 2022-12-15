@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 10:09:09 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:19:45 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@ int	main(void)
 	t_shell	sh;
 	t_term	t;
 	t_line	l;
-	// char	*line;
 
 	root = NULL;
-	init(&sh, &t, &l);
+	init(&sh, &t);
 	while (ft_input_cycle(&t))
 	{
 		sh.cl = lexer(&t);
 		if (sh.cl)
 		{
 			l.line = sh.cl;
-			root = parse_line(&l);
+			root = parse_line(&l, &l.line);
 			if (root)
 				if (!exec_tree(root, &sh))
 					break ;
