@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:00:35 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 16:22:45 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 09:31:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static t_node	*make_redir_node(t_node *n, char **ptr_to_line, \
 	return (n);
 }
 
-static void	make_fileagg_node(t_node **n, char **ptr_to_line, char *tok, int fileagg_len)
+static void	make_fileagg_node(t_node **n, char **ptr_to_line, \
+char *tok, int fileagg_len)
 {
 	if ((*n)->type >= REDIROVER && (*n)->type <= FILEAGG)
 		*n = make_redir_node(*n, ptr_to_line, tok, fileagg_len);
@@ -83,14 +84,8 @@ static void	make_fd_node(t_node **n, t_line *l)
 
 t_node	*parse_redirection(t_node *n, t_line *l)
 {
-	/* char	*tok;
-	char	*end_q;
-	int		type;
-	int		fileagg_len;
-	int		fd_len; */
-
-	l->fileagg_len = check_for_fileagg(*l->ptr_to_line);
-	l->fd_len = get_fd_before(*l->ptr_to_line);
+	l->fileagg_len = check_for_fileagg(*(l->ptr_to_line));
+	l->fd_len = get_fd_before(*(l->ptr_to_line));
 	while (l->fileagg_len || l->fd_len)
 	{
 		l->type = tok_get(l->ptr_to_line, &l->tok, &l->end_q);
