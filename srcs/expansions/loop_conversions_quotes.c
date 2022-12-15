@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:13:06 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 14:13:57 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:01:06 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	loop_conversions_quotes(t_node *n, t_shell *sh)
 		while (n->arg[word][++i])
 		{
 			if (n->arg[word][i] == '\\')
-				remove_backslash(&n->arg[word][i]);
+				i += remove_backslash(&n->arg[word][i]);
 			else if (n->arg[word][i] == '\'')
 				i = strip_quotes_single(n->arg[word], i);
 			else if (n->arg[word][i] == '\"')
@@ -37,3 +37,8 @@ void	loop_conversions_quotes(t_node *n, t_shell *sh)
 		}
 	}
 }
+
+// 012 3  456
+// asd \n poe
+// 012345
+// asdpoe
