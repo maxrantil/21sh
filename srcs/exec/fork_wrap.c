@@ -22,6 +22,5 @@ pid_t	fork_wrap(void)
 		ft_putendl_fd("error on fork", 2);
 		exit(1);
 	}
-	ft_printf("FORK PID = %d\n", pid);
 	return (pid);
 }

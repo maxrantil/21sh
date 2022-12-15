@@ -26,10 +26,10 @@ void	sig_handler(int num)
 		ft_window_size(g_t);
 	if (num == SIGINT)
 	{
-		pid = getpid();
 		write(1, "\n", 1);
 		ft_restart_cycle(g_t);
 		ft_printf("{yel}${gre}>{nor} ");
+		g_t->sigint = 1;
 	}
 }
 
