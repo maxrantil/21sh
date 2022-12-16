@@ -15,7 +15,7 @@
 void	loop_conversions_quotes(t_node *n, t_shell *sh)
 {
 	size_t	word;
-	size_t	i;
+	ssize_t	i;
 
 	word = -1;
 	while (n->arg && n->arg[++word] != NULL)
