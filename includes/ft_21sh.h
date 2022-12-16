@@ -158,6 +158,8 @@ void	hash_print(t_hash **ht);
 void	init_ht_struct(t_shell *sh, char *str);
 
 /* Main */
+void	sig_handler(int num);
+
 char	*check_heredoc(t_term *t, char *str);
 char	**get_env(char **env);
 void	init(t_shell *sh, t_term *t);

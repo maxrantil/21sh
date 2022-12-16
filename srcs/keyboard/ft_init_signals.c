@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:17:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 13:54:38 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 12:08:48 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ extern t_term	*g_t;
  *
  * @param num The signal number.
  */
-static void	sig_handler(int num)
+void	sig_handler(int num)
 {
 	if (num == SIGWINCH)
 		ft_window_size(g_t);
 	if (num == SIGINT)
 	{
 		write(1, "\n", 1);
-		if (*g_t->inp == '\0')
-			ft_printf("{yel}${gre}>{nor} ");
 		ft_restart_cycle(g_t);
+		ft_printf("{yel}${gre}>{nor} ");
+		g_t->sigint = 1;
 	}
 }
 

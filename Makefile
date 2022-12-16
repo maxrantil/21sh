@@ -6,7 +6,7 @@
 #    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/16 13:26:30 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/12/16 11:52:42 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ CFLAGS		+=	-Wpedantic
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-# LEAK_CHECK	+=	-fsanitize=address
+LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)

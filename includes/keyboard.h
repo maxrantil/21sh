@@ -98,6 +98,7 @@ typedef struct s_term
 	ssize_t			bslash;
 	ssize_t			heredoc;
 	ssize_t			his;
+	ssize_t			sigint;
 	char			quote;
 	// char			*term_name;
 }			t_term;
