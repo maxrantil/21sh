@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:12:01 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 16:04:26 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:38:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	get_fd_before(char *tok)
 				tok++;
 			if (!*tok || (!ft_isalnum(*tok) && !ft_isspace(tok) \
 			&& *tok != '/' && *tok != '<'\
-			&& *tok != '$' && *tok != '~'))
+			&& *tok != '$' && *tok != '~' \
+			&& *(tok + 1) && ft_isalnum(*(tok + 1))))
 				return (-1);
 		}
 		return (++ret);
