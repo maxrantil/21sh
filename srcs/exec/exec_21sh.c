@@ -37,32 +37,9 @@ static int	verify_arg(t_node *n, t_shell *sh)
 	return (0);
 }
 
-static int	does_program_need_raw(t_node *n)
-{
-	if (n->arg[0] && (ft_strstr(n->arg[0], "bash") \
-		|| ft_strstr(n->arg[0], "vi") \
-		|| ft_strstr(n->arg[0], "emacs")))
-		return (1);
-	return (0);
-}
-
-static void	need_raw_mode(t_node *n, t_shell *sh, int mode)
-{
-	if (mode == 1)
-	{
-		if (does_program_need_raw(n))
-			ft_disable_raw_mode(sh);
-	}
-	else
-	{
-		if (does_program_need_raw(n))
-			tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw);
-	}
-}
-
 int	exec_21sh(t_node *n, t_shell *sh)
 {
-	need_raw_mode(n, sh, 1);
+	ft_disable_raw_mode(sh);
 	if (fork_wrap() == 0)
 	{
 		if (n->arg[0][0] == '.' || n->arg[0][0] == '/')
@@ -83,6 +60,6 @@ int	exec_21sh(t_node *n, t_shell *sh)
 		exit(EXIT_FAILURE);
 	}
 	wait(0);
-	need_raw_mode(n, sh, 0);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw);
 	return (1);
 }

@@ -65,8 +65,8 @@ void	rec_print_tree(t_node *root, int lvl)
 
 void	tree_print(t_node *root)
 {
-	write(1, "\n------------------ TREE PRINT ------------------\n", 66);
+	write(1, "\n------------------ TREE PRINT ------------------\n", 51);
 	if (root)
 		rec_print_tree(root, 0);
-	write(1, "\n------------------ TREE PRINT ------------------\n\n", 67);
+	write(1, "\n------------------ TREE PRINT ------------------\n\n", 52);
 }

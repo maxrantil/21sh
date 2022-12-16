@@ -35,6 +35,7 @@ static void	ft_init_to_zero(t_term *t)
 	t->total_row_cpy = 0;
 	t->clipboard.type = 0;
 	t->his = 0;
+	t->sigint = 0;
 }
 
 /*
