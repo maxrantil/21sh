@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_aggregations.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 14:01:50 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:33:41 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	check_file_aggregations(t_node *n, t_shell *sh)
 	file_fd = get_redirected_fd(n->arg[0]);
 	operator = get_redirect_operator(n->arg[0]);
 	target_file = get_target_file(n->arg[0], n->arg[1], ft_strlen(operator));
+	printf("\tAGG target_file (%s)\n", target_file);
 	if ((ft_strequ("-", target_file) == 1) && (ft_strequ(">&", operator) == 1))
 		convert_operator(&operator);
 	ret = 0;

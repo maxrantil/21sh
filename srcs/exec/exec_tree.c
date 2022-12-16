@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 11:40:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 11:40:15 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:40:09 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	exec_args(t_node *n, t_shell *sh)
 {
 	size_t	i;
 
-	loop_conversions_quotes(n, sh);
 	if (!n->arg || !n->arg[0])
 		return (1);
 	i = 0;
@@ -56,6 +55,7 @@ int	exec_tree(t_node *n, t_shell *sh)
 {
 	if (!n)
 		return (1);
+	loop_conversions_quotes(n, sh);
 	if (n->type == EXEC && n->arg)
 		return (exec_args(n, sh));
 	else if (n->type == PIPE)
