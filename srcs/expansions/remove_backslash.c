@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:14:56 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/14 15:02:33 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:59:17 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	remove_newline(char *str, size_t len)
 	return (-1);
 }
 
-int	remove_backslash(char *str)
+ssize_t	remove_backslash(char *str)
 {
 	size_t	len;
 
@@ -36,11 +36,3 @@ int	remove_backslash(char *str)
 		return (-1);
 	}
 }
-
-//		memmove should be from the second \, so it applies also on \ \n
-
-// 0123 4567
-// abc\\ndef
-// abcdef
-// abc\def
-// abc\\def
