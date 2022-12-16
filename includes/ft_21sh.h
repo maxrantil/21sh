@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
 /*   Updated: 2022/12/16 14:54:27 by rvuorenl         ###   ########.fr       */
@@ -79,7 +79,6 @@ typedef struct s_node
 
 typedef struct s_line
 {
-	// char	**ptr_to_line;
 	char	*line;
 	char	*tok;
 	char	*end_q;

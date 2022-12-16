@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_quote_decrement.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:23:10 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/11/29 17:14:01 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:37:12 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
  * @param t the term structure
  * @param num the number of characters to be deleted
  */
-void	ft_quote_decrement(t_term *t, int num)
+void	ft_quote_decrement(t_term *t, ssize_t index)
 {
 	if (!(t->q_qty % 2))
 	{
-		t->quote = t->inp[t->index - num];
+		t->quote = t->inp[index];
 		t->q_qty--;
 	}
-	else if ((t->q_qty % 2) && t->quote == t->inp[t->index - num])
+	else if ((t->q_qty % 2) && t->quote == t->inp[index])
 	{
 		t->quote = 0;
 		t->q_qty--;

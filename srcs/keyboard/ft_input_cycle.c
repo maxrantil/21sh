@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 12:13:19 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 13:10:45 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	ft_isprint_or_enter(t_term *t)
 
 int	ft_input_cycle(t_term *t)
 {
-	ft_add_nl_last_row(t, 0);
+	ft_add_nl_last_row(t, t->inp, 0);
 	while (t->ch != -1)
 	{
 		t->ch = ft_get_input();

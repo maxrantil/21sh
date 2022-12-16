@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   remove_backslash.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:14:56 by rvuorenl          #+#    #+#             */
 /*   Updated: 2022/12/16 13:59:17 by rvuorenl         ###   ########.fr       */

@@ -1,0 +1,16 @@
+total 560
+-rw-r--r--   1 mrantil  2020       0 Dec 16 13:52 $
+drwxr-xr-x  15 mrantil  2020     510 Dec 16 13:52 .
+drwxr-xr-x  30 mrantil  2020    1020 Dec  9 15:42 ..
+drwxr-xr-x  14 mrantil  2020     476 Dec 16 13:46 .git
+-rw-r--r--   1 mrantil  2020     445 Oct 26 12:51 .gitignore
+-rwxr-xr-x   1 mrantil  2020  259452 Dec 16 13:48 21sh
+-rw-r--r--   1 mrantil  2020    8285 Dec 16 13:37 Makefile
+-rw-r--r--   1 mrantil  2020    1519 Dec  2 11:41 README.md
+-rw-r--r--   1 mrantil  2020      17 Oct 26 12:46 author
+drwxr-xr-x   4 mrantil  2020     136 Nov 25 17:52 autotest
+drwxr-xr-x   4 mrantil  2020     136 Dec 16 13:37 includes
+drwxr-xr-x  10 mrantil  2020     340 Dec 16 13:38 libft
+drwxr-xr-x  12 mrantil  2020     408 Dec 16 13:38 objs
+drwxr-xr-x   4 mrantil  2020     136 Nov 25 17:52 pdf
+drwxr-xr-x  12 mrantil  2020     408 Dec 16 12:42 srcs

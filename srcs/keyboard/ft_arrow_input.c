@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrow_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:27:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 16:36:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:38:45 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,21 @@
  */
 static void	ft_right(t_term *t)
 {
-	ssize_t	row;
-
 	if (&t->inp[t->index] == &t->nl_addr[t->c_row + 1][-1] \
 		&& ft_is_prompt_line(t, t->c_row + 1))
 		return ;
-	row = (ssize_t)ft_get_linenbr();
 	if (&t->inp[t->index] == &t->nl_addr[t->c_row + 1][-1])
 	{
 		t->c_col = -1;
 		t->c_row++;
-		row++;
+		ft_setcursor(++t->c_col, (ssize_t)ft_get_linenbr() + 1);
+	}
+	else
+	{
+		t->c_col++;
+		ft_run_capability("nd");
 	}
 	t->index++;
-	ft_setcursor(++t->c_col, row);
 }
 
 /*
@@ -47,12 +48,9 @@ static void	ft_right(t_term *t)
  */
 static void	ft_left(t_term *t)
 {
-	ssize_t	row;
-
 	if (&t->inp[t->index] == t->nl_addr[t->c_row] \
 		&& ft_is_prompt_line(t, t->c_row))
 		return ;
-	row = (ssize_t)ft_get_linenbr();
 	if (&t->inp[t->index] == t->nl_addr[t->c_row])
 	{
 		t->c_col = 0;
@@ -61,10 +59,15 @@ static void	ft_left(t_term *t)
 		else if (ft_is_prompt_line(t, t->c_row - 1))
 			t->c_col = t->m_prompt_len;
 		t->c_col += t->nl_addr[t->c_row] - t->nl_addr[t->c_row - 1];
-		row--;
+		t->c_row--;
+		ft_setcursor(--t->c_col, (ssize_t)ft_get_linenbr() - 1);
+	}
+	else
+	{
+		t->c_col--;
+		ft_run_capability("le");
 	}
 	t->index--;
-	ft_setcursor(--t->c_col, row);
 }
 
 /*

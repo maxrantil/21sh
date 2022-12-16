@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_prompt_len.c                                :+:      :+:    :+:   */
+/*   ft_quote_flag_check.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:59:55 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 12:20:55 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/14 17:36:03 by mbarutel          #+#    #+#             */
+/*   Updated: 2022/12/14 17:37:52 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-/*
- * It returns the prompt length of the given row
- *
- * @param t the term structure
- * @param row the row of the cursor
- *
- * @return The length of the prompt.
- */
-ssize_t	ft_get_prompt_len(t_term *t, ssize_t row)
+void	ft_quote_flag_check(t_term *t, ssize_t index)
 {
-	if (!row)
-		return (t->prompt_len);
-	if (t->nl_addr[row][-1] == '\n')
-		return (t->m_prompt_len);
-	return (0);
+	ssize_t	i;
+
+	i = index;
+	while (t->inp[i] && t->inp[i] == '\\')
+		i++;
+	if (t->inp[i] == S_QUO || t->inp[i] == D_QUO)
+		ft_quote_flag_reset(t);
 }
