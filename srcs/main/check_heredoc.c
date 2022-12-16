@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 12:44:02 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:21:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*check_heredoc(t_term *t, char *str)
 	char	*cpy;
 	char	*ret;
 
-	if (t->heredoc)
+	if (t->heredoc && t->delim)
 	{
 		fd = open("/tmp/heredoc", O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (fd)

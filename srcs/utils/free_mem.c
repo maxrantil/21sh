@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 11:51:47 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 14:19:06 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ static void	code_less_then_three(t_node *root, t_shell *sh, ssize_t code)
 	if (sh->paths)
 		ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
 	if (sh->cl)
+	{
+		tree_print(root);
 		tree_free(root);
+	}
 	ft_memdel((void **)&sh->cl);
 	reset_fds(sh->term_name);
 	if (code == 2)
