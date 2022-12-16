@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 16:06:22 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:30:05 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ char	*ft_trim_line(t_term *t)
 {
 	char	*new;
 
-	new = ft_strtrim(t->inp);
-	if (t->heredoc && t->delim)
-	new = check_heredoc(t, new);
 	write(1, "\n", 1);
+	new = ft_strtrim(t->inp);
+	if (t->heredoc && !t->delim)
+	{
+		ft_putstr_fd("21sh: (redir) syntax error near unexpected tok `newline'\n", 2);
+		return (NULL);
+	}
+	new = check_heredoc(t, new);
 	return (new);
 }
 
