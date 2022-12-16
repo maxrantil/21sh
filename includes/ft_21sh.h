@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 13:24:44 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:54:27 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ ssize_t	find_matching_quote(char *str, char quote);
 void	fill_env(char **tmp, t_dollar *dol, char *str, t_shell *sh);
 char	*get_full_env_name(char *var);
 void	loop_conversions_quotes(t_node *n, t_shell *sh);
-size_t	remove_backslash(char *str);
+ssize_t	remove_backslash(char *str);
 size_t	strip_quotes_double(char **str, size_t quote1, t_shell *sh);
 size_t	strip_quotes_single(char *str, size_t quote1);
 size_t	update_arg_dollar(int i, char **str, t_shell *sh);
