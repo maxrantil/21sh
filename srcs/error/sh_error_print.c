@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_error_print.c                                   :+:      :+:    :+:   */
+/*   sh_error_print.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 19:45:05 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/09 11:52:10 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:43:43 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,6 @@ void	sh_error_print(char *arg, int i)
 	}
 	else if (i == 6)
 		print_setenv_error(arg);
+	else if (i == 7)
+		print_status(status, arg);
 }

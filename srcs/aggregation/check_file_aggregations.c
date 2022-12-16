@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_aggregations.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/16 17:17:46 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:49:19 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

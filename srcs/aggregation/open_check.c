@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:30:15 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/12 13:01:50 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:33:50 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	open_check(char *filename, int mode)
 		file_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (file_fd == -1)
 	{
-		write(2, "Error in open_check\n", 20);
-		exit(10);
+		ft_putstr_fd("21sh: ", 2);
+		ft_putstr_fd(filename, 2);
+		sh_error_print(filename, 7);
 	}
 	return (file_fd);
 }

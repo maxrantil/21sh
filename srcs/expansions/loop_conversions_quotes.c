@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_conversions_quotes.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:13:06 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/16 17:17:15 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:39:24 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
