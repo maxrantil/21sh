@@ -6,21 +6,30 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:16:35 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/16 13:26:13 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/16 15:08:17 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-static size_t	remove_backslash_update_quote(char *st, size_t *len, size_t *q2)
+static ssize_t	remove_backslash_update_quote(char *st, size_t *len, size_t *q2)
 {
-	if (st[1] == '\\' || st[1] == '\'' || st[1] == '\"')
+	ssize_t	ret;
+
+	ret = 1;
+	if (st[1] == '\n')
 	{
-		remove_backslash(st);
+		ret += remove_backslash(st);
+		(*len) -= 2;
+		(*q2) -= 2;
+	}
+	else if (st[1] == '\\' || st[1] == '\'' || st[1] == '\"')
+	{
+		ret += remove_backslash(st);
 		(*len)--;
 		(*q2)--;
 	}
-	return (1);
+	return (ret);
 }
 
 static void	update_quotes(char *str, size_t *q2, size_t *tot_len, t_shell *sh)
