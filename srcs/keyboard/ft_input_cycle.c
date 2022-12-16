@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 13:10:45 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:01:36 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_isprint_or_enter(t_term *t)
 {
 	if (ft_isprint(t->ch) || t->ch == ENTER)
 		ft_insertion(t);
-	if (t->ch == ENTER)
+	if (t->ch == ENTER && (t->c_row == t->total_row))
 	{
 		if ((!t->bslash && !(t->q_qty % 2) && !t->delim) \
 			|| ft_strequ(t->nl_addr[t->c_row], t->delim))
