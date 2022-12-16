@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 15:36:50 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 13:12:05 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ typedef struct s_node
 
 typedef struct s_line
 {
-	// char	**ptr_to_line;
 	char	*line;
 	char	*tok;
 	char	*end_q;
