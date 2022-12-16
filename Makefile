@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
 #    Updated: 2022/12/16 11:52:42 by mrantil          ###   ########.fr        #
@@ -108,10 +108,10 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(EXEC)fork_wrap \
 				$(EXEC)input_file_read \
 				$(EXEC)redirection_file \
-				$(EXEC)strip_quotes \
 				$(EXPANSIONS)expansions_tilde \
 				$(EXPANSIONS)fill_env \
 				$(EXPANSIONS)find_matching_quote \
+				$(EXPANSIONS)get_full_env_name \
 				$(EXPANSIONS)loop_conversions_quotes \
 				$(EXPANSIONS)remove_backslash \
 				$(EXPANSIONS)strip_quotes_double \

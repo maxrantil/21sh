@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   sh_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:34:59 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/06 14:46:09 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:48:14 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
+
+static int	check_open_stdout(void)
+{
+	struct stat	buf;
+	int			ret;
+
+	ret = fstat(1, &buf);
+	if (ret == -1)
+		ft_putstr_fd("21sh: echo: write error: Bad file descriptor\n", 2);
+	return (ret);
+}
 
 static void	print_echo(t_node *n, t_shell *sh)
 {
@@ -34,7 +45,11 @@ static void	print_echo(t_node *n, t_shell *sh)
 
 int	sh_echo(t_node *n, t_shell *sh)
 {
-	print_echo(n, sh);
-	ft_putchar('\n');
-	return (1);
+	if (check_open_stdout() != -1)
+	{
+		print_echo(n, sh);
+		ft_putchar('\n');
+		return (1);
+	}
+	return (-1);
 }
