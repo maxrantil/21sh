@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
 /*   Updated: 2022/12/16 13:12:05 by mrantil          ###   ########.fr       */
@@ -87,6 +87,16 @@ typedef struct s_line
 	int		fd_len;
 }			t_line;
 
+typedef struct s_dollar
+{
+	char	*pre;
+	char	*content;
+	char	**str;
+	char	*post;
+	size_t	env_len;
+}			t_dollar;
+
+
 /* Aggregation */
 void	check_file_aggregations(t_node *n, t_shell *sh);
 int		check_filename_fd(char *filename);
@@ -132,12 +142,13 @@ void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
 void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
 void	expansions(t_node *n, t_shell *sh);
 ssize_t	find_matching_quote(char *str, char quote);
-void	fill_env(char **tmp, char **cont, size_t *env_len, char *str);
+void	fill_env(char **tmp, t_dollar *dol, char *str, t_shell *sh);
+char	*get_full_env_name(char *var);
 void	loop_conversions_quotes(t_node *n, t_shell *sh);
-void	remove_backslash(char *str);
-size_t	strip_quotes_double(char **str, size_t quote1);
+size_t	remove_backslash(char *str);
+size_t	strip_quotes_double(char **str, size_t quote1, t_shell *sh);
 size_t	strip_quotes_single(char *str, size_t quote1);
-size_t	update_arg_dollar(int i, char **str, size_t *len, size_t *q2);
+size_t	update_arg_dollar(int i, char **str, t_shell *sh);
 
 /* Hash table */
 size_t	hash_function(char *program);

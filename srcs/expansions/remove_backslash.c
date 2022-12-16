@@ -6,19 +6,41 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:14:56 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/13 14:15:08 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:02:33 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-void	remove_backslash(char *str)
+static int	remove_newline(char *str, size_t len)
+{
+	ft_memmove(str, &str[2], len - 1);
+	return (-1);
+}
+
+int	remove_backslash(char *str)
 {
 	size_t	len;
 
-	if (str[1] == '\\' || str[1] == '\'' || str[1] == '\"')
+	len = ft_strlen(str);
+	if (str[1] == '\n')
+		return (remove_newline(str, len));
+	else if (str[1] == '\\' || str[1] == '\'' || str[1] == '\"')
 	{
-		len = ft_strlen(str);
 		ft_memmove(str, &str[1], len);
+		return (0);
+	}
+	else
+	{
+		ft_memmove(str, &str[1], len);
+		return (-1);
 	}
 }
+
+//		memmove should be from the second \, so it applies also on \ \n
+
+// 0123 4567
+// abc\\ndef
+// abcdef
+// abc\def
+// abc\\def
