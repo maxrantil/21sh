@@ -12,7 +12,7 @@
 
 #include "keyboard.h"
 
-t_term	*g_t;
+extern t_term	*g_t;
 
 /*
  * It initializes all the variables in the t_term structure to zero
@@ -35,6 +35,7 @@ static void	ft_init_to_zero(t_term *t)
 	t->total_row_cpy = 0;
 	t->clipboard.type = 0;
 	t->his = 0;
+	t->history_row = -1;
 	t->sigint = 0;
 }
 
