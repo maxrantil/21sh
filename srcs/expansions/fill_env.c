@@ -6,21 +6,11 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:23:14 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/16 13:15:04 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:26:05 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
-
-static char	*get_full_env_name(char *var)
-{
-	int	i;
-
-	i = 0;
-	while (var[i] && ((ft_isalnum(var[i])) || var[i] == '_'))
-		i++;
-	return (ft_strsub((const char *)var, 0, (size_t)i));
-}
 
 static void	getenv_check(char **content, char **env_name, t_shell *sh)
 {

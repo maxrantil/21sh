@@ -6,7 +6,7 @@
 #    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/15 14:19:32 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/12/16 13:26:30 by rvuorenl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(EXPANSIONS)expansions_tilde \
 				$(EXPANSIONS)fill_env \
 				$(EXPANSIONS)find_matching_quote \
+				$(EXPANSIONS)get_full_env_name \
 				$(EXPANSIONS)loop_conversions_quotes \
 				$(EXPANSIONS)remove_backslash \
 				$(EXPANSIONS)strip_quotes_double \

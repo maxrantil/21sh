@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:16:35 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/16 13:23:16 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:26:13 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ static size_t	remove_backslash_update_quote(char *st, size_t *len, size_t *q2)
 		(*q2)--;
 	}
 	return (1);
-}
-
-static char	*get_full_env_name(char *var)
-{
-	int	i;
-
-	i = 0;
-	while (var[i] && ((ft_isalnum(var[i])) || var[i] == '_'))
-		i++;
-	return (ft_strsub((const char *)var, 0, (size_t)i));
 }
 
 static void	update_quotes(char *str, size_t *q2, size_t *tot_len, t_shell *sh)
