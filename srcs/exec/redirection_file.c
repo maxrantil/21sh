@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_file.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:07:22 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/12 13:12:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:36:16 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	redirection_file(t_node *n, t_shell *sh/* , t_hash **ht */)
 	if (redirected_fd == 0)
 		redirected_fd = 1;
 	file_fd = open_check(n->arg[1], n->type);
-	if (dup2_wrap(file_fd, redirected_fd) >= 0)
-		exec_tree(n->left, sh);
-	close(file_fd);
+	if (file_fd != -1)
+	{
+		if (dup2_wrap(file_fd, redirected_fd) >= 0)
+			exec_tree(n->left, sh);
+		close(file_fd);
+	}
 }
