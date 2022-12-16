@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 16:13:29 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 11:51:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,38 @@ static void	temp_handler(t_node *n, t_shell *sh)
 	}
 }
 
+static void	code_less_then_three(t_node *root, t_shell *sh, ssize_t code)
+{
+	if (sh->temp_env)
+		temp_handler(root, sh);
+	if (sh->paths)
+		ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
+	if (sh->cl)
+		tree_free(root);
+	ft_memdel((void **)&sh->cl);
+	reset_fds(sh->term_name);
+	if (code == 2)
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw);
+	if (code == 1 && !g_t->sigint)
+		ft_printf("{yel}${gre}>{nor} ");
+	ft_restart_cycle(g_t);
+	g_t->sigint = 0;
+}
+
+static void	code_is_three(t_shell *sh)
+{
+	if (sh->env)
+		ft_arrfree((void ***)&sh->env, ft_arrlen((void **)sh->env));
+	free_ht(sh->ht);
+	vec_free(&sh->v_tmp_env);
+	ft_history_write_to_file(g_t);
+	ft_disable_raw_mode(sh);
+}
+
 void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 {
 	if (code < 3)
-	{
-		if (sh->temp_env)
-			temp_handler(root, sh);
-		if (sh->paths)
-			ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
-		if (sh->cl)
-			tree_free(root);
-		ft_memdel((void **)&sh->cl);
-		reset_fds(sh->term_name);
-		if (code == 2)
-			tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw);
-		if (code == 1 && !g_t->sigint)
-			ft_printf("{yel}${gre}>{nor} ");
-		ft_restart_cycle(g_t);
-		g_t->sigint = 0;
-	}
+		code_less_then_three(root, sh, code);
 	if (code == 3)
-	{
-		if (sh->env)
-			ft_arrfree((void ***)&sh->env, ft_arrlen((void **)sh->env));
-		free_ht(sh->ht);
-		vec_free(&sh->v_tmp_env);
-		ft_history_write_to_file(g_t);
-		ft_disable_raw_mode(sh);
-	}
+		code_is_three(sh);
 }

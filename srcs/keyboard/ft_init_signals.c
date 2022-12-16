@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:17:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 16:14:54 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 12:04:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	ft_init_signals(void)
 {
 	signal(SIGWINCH, sig_handler);
 	signal(SIGINT, sig_handler);
+
 }
