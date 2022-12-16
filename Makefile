@@ -6,7 +6,7 @@
 #    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/16 11:52:42 by mrantil          ###   ########.fr        #
+#    Updated: 2022/12/16 13:13:31 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,24 +128,28 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_alt_mv \
 				$(KEYBOARD)ft_arrow_input \
 				$(KEYBOARD)ft_backspace \
-				$(KEYBOARD)ft_bslash_handling \
+				$(KEYBOARD)ft_bslash_escape_check \
 				$(KEYBOARD)ft_copy \
 				$(KEYBOARD)ft_create_prompt_line \
+				$(KEYBOARD)ft_ctrl \
 				$(KEYBOARD)ft_cut \
 				$(KEYBOARD)ft_delete \
 				$(KEYBOARD)ft_deletion_shift \
 				$(KEYBOARD)ft_end_cycle \
 				$(KEYBOARD)ft_esc_parse \
+				$(KEYBOARD)ft_quote_flag_reset \
 				$(KEYBOARD)ft_get_input \
 				$(KEYBOARD)ft_get_prompt_len \
 				$(KEYBOARD)ft_getline_nbr \
 				$(KEYBOARD)ft_heredoc_handling \
 				$(KEYBOARD)ft_history_file_get \
 				$(KEYBOARD)ft_history_get \
+				$(KEYBOARD)ft_history_reset_nl \
 				$(KEYBOARD)ft_history_trigger \
 				$(KEYBOARD)ft_history_write_to_file \
 				$(KEYBOARD)ft_history \
 				$(KEYBOARD)ft_init_signals \
+				$(KEYBOARD)ft_init \
 				$(KEYBOARD)ft_init_term \
 				$(KEYBOARD)ft_input_cycle \
 				$(KEYBOARD)ft_insertion \
@@ -155,10 +159,13 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_line_mv \
 				$(KEYBOARD)ft_line_up \
 				$(KEYBOARD)ft_mv_prompt_len \
+				$(KEYBOARD)ft_nl_removal \
 				$(KEYBOARD)ft_paste \
+				$(KEYBOARD)ft_print_input \
 				$(KEYBOARD)ft_print_trail \
 				$(KEYBOARD)ft_putc \
 				$(KEYBOARD)ft_quote_decrement \
+				$(KEYBOARD)ft_quote_flag_check \
 				$(KEYBOARD)ft_quote_handling \
 				$(KEYBOARD)ft_remove_nl_addr \
 				$(KEYBOARD)ft_reset_nl_addr \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reset_nl_addr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:20:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/05 12:59:03 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:54:19 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,17 @@ void	ft_reset_nl_addr(t_term *t)
 	t->total_row = 0;
 	if (t->nl_addr)
 		ft_memdel((void **)&t->nl_addr);
-	ft_add_nl_last_row(t, 0);
+	ft_add_nl_last_row(t, t->inp, 0);
 	while (t->inp[++i])
 	{
 		len++;
-		if (((len + ft_get_prompt_len(t, t->total_row)) + 1) == t->ws_col \
+		if (((len + ft_get_prompt_len(t, t->total_row))) == t->ws_col \
 			|| t->inp[i] == '\n')
 		{
-			ft_add_nl_last_row(t, i + 1);
 			t->total_row++;
-			len = -1;
+			ft_add_nl_last_row(t, t->inp, i + 1);
+			len = 0;
 		}
-		if (t->inp[i] == D_QUO || t->inp[i] == S_QUO)
-			ft_quote_handling(t, t->inp[i]);
-		ft_heredoc_handling(t, i, t->inp[i]);
 	}
+	ft_quote_flag_reset(t);
 }

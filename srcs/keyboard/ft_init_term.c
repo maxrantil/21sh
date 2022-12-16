@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:58:29 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 12:48:44 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 12:55:34 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	ft_init_to_zero(t_term *t)
 	t->total_row_cpy = 0;
 	t->clipboard.type = 0;
 	t->his = 0;
+	t->sigint = 0;
 }
 
 /*
@@ -44,6 +45,7 @@ void	ft_init_term(t_term *t)
 {
 	ft_init_signals();
 	ft_memset(t->inp, '\0', BUFFSIZE);
+	ft_memset(t->history_buff, '\0', BUFFSIZE);
 	ft_init_to_zero(t);
 	t->start_row = ft_get_linenbr();
 	ft_history_get(t);
