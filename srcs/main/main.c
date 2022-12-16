@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 14:47:15 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:06:22 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*ft_trim_line(t_term *t)
 	char	*new;
 
 	new = ft_strtrim(t->inp);
+	if (t->heredoc && t->delim)
 	new = check_heredoc(t, new);
 	write(1, "\n", 1);
 	return (new);
