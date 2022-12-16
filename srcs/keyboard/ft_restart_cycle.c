@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 12:36:38 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 12:45:13 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	ft_restart_cycle(t_term *t)
 	t->index = 0;
 	t->heredoc = 0;
 	t->c_col = t->prompt_len;
-	// t->start_row = ft_get_linenbr();
-	t->start_row = t->c_row;
+	t->start_row = ft_get_linenbr();
 	t->total_row = 0;
 	t->his = 0;
 	t->c_row = t->total_row;
