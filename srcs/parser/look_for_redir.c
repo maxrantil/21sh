@@ -63,7 +63,7 @@ int	check_for_fileagg(char *tok)
 	int		ret;
 
 	ret = 0;
-	if (*tok == '>' && *(tok + 1) == '&' && ++ret)
+	if ((*tok == '>' || *tok == '<') && *(tok + 1) == '&' && ++ret)
 	{
 		tok++;
 		loop_to_end(&tok);

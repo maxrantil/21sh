@@ -48,6 +48,7 @@ void	ft_init(t_term *t)
 {
 	ft_init_signals();
 	ft_memset(t->inp, '\0', BUFFSIZE);
+	ft_memset(t->history_buff, '\0', BUFFSIZE);
 	ft_init_to_zero(t);
 	t->start_row = ft_get_linenbr();
 	ft_history_get(t);
