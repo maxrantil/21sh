@@ -34,4 +34,5 @@ void	ft_end_cycle(t_term *t)
 	ft_memdel((void **)&t->nl_addr);
 	if (t->input_cpy)
 		ft_strdel(&t->input_cpy);
+	t->sigint = 0;
 }

@@ -20,7 +20,6 @@
  */
 static void	ft_history_push(t_term *t)
 {
-	ft_printf("history push %d\n", t->history_row);
 	if (t->history_row == -1)
 	{
 		t->input_cpy = ft_strsub(t->nl_addr[t->c_row], 0, \

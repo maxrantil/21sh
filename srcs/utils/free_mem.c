@@ -69,7 +69,7 @@ static void	code_less_then_three(t_node *root, t_shell *sh, ssize_t code)
 		ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
 	if (sh->cl)
 	{
-		tree_print(root);
+		// tree_print(root);
 		tree_free(root);
 	}
 	ft_memdel((void **)&sh->cl);
