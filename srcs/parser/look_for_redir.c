@@ -33,8 +33,7 @@ static void	loop_to_end(char **tok)
 
 static int	get_fd_after(char *tok)
 {
-	if (!*tok || (!ft_isalnum(*tok) && !ft_isspace(tok) \
-		&& *tok != '/' && *tok != '$' && *tok != '~'))
+	if (!*tok || (*tok == '<' || *tok == '>' || *tok == '|' || *tok == ';'))
 		return (0);
 	return (1);
 }
@@ -47,7 +46,8 @@ int	get_fd_before(char *tok)
 	ret = loop_tok(&tok, ret);
 	if (*tok == '>' || *tok == '<')
 	{
-		if ((*(tok + 1) == '<' || *(tok + 1) == '>') && ++ret)
+		if (((*tok == '>' && *(tok + 1) == '>') \
+			|| (*tok == '<' && *(tok + 1) == '<')) && ++ret)
 			tok++;
 		loop_to_end(&tok);
 		if (!get_fd_after(tok))
@@ -56,4 +56,27 @@ int	get_fd_before(char *tok)
 	}
 	else
 		return (0);
+}
+
+int	check_for_fileagg(char *tok)
+{
+	int		ret;
+
+	ret = 0;
+	if (*tok == '>' && *(tok + 1) == '&' && ++ret)
+	{
+		tok++;
+		loop_to_end(&tok);
+		if (!get_fd_after(tok))
+			return (-1);
+		return (++ret);
+	}
+	else
+		return (0);
+}
+
+void	look_for_redir(t_line *l, char **ptr_to_line)
+{
+	l->fileagg_len = check_for_fileagg(*ptr_to_line);
+	l->fd_len = get_fd_before(*ptr_to_line);
 }

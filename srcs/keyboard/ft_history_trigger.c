@@ -15,11 +15,12 @@
 /**
  * It copies the current input into a buffer, pushes the current input into
  * the history vector, and sets the current row to the history row
- * 
+ *
  * @param t the term structure
  */
 static void	ft_history_push(t_term *t)
 {
+	ft_printf("history push %d\n", t->history_row);
 	if (t->history_row == -1)
 	{
 		t->input_cpy = ft_strsub(t->nl_addr[t->c_row], 0, \
@@ -39,7 +40,7 @@ static void	ft_history_push(t_term *t)
 /**
  * It updates the current
  * input line with the history line
- * 
+ *
  * @param t the term structure
  * @param history the history string to be copied into the input line
  */
@@ -62,7 +63,7 @@ static void	ft_history_inp_update(t_term *t, char *history)
 
 /**
  * It clears the line from the cursor to the end of the screen
- * 
+ *
  * @param t the term structure
  * @param row the row number of the line to be cleared
  */
@@ -86,10 +87,10 @@ static void	ft_history_clear_line(t_term *t, ssize_t row)
 /**
  * It takes the current input, pushes it to the history, then replaces
  * the current input with the history entry
- * 
+ *
  * @param t The terminal structure
  * @param his The history number to be retrieved.
- * 
+ *
  * @return the address of the first element of the array.
  */
 void	ft_history_trigger(t_term *t, ssize_t his)

@@ -15,7 +15,7 @@
 extern t_term	*g_t;
 
 /*
- * It initializes all the variables in the t_term structure to zero
+ * It initializes all the variablesint		check_for_fileagg(char *tok); in the t_term structure to zero
  *
  * @param t the structure that holds all the parameters
  */

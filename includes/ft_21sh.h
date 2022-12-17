@@ -167,9 +167,8 @@ void	tree_free(t_node *n);
 
 /* Parser */
 void	add_to_args(char ***array, char *str);
-int		check_for_fileagg(char *tok);
 int		exec_is_quote_somewhere(char *tok);
-int		get_fd_before(char *tok);
+void	look_for_redir(t_line *l, char **ptr_to_line);
 void	mv_tok_and_line(char **tok, char ***ptr_to_line, int len);
 t_node	*node_create(int type, t_node *left, t_node *right);
 t_node	*parse_exec(t_line *l, char **ptr_to_line);
