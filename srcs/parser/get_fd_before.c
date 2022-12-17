@@ -47,31 +47,11 @@ int	get_fd_before(char *tok)
 	ret = loop_tok(&tok, ret);
 	if (*tok == '>' || *tok == '<')
 	{
-		if (*tok == '>' && *(tok + 1) == '>')
-		{
+		if ((*(tok + 1) == '<' || *(tok + 1) == '>') && ++ret)
 			tok++;
-			loop_to_end(&tok);
-			ft_printf("tok: %s\n", tok);
-			if (!get_fd_after(tok))
-			/* if (!ft_isalnum(*(tok + 2)) && !ft_isspace(tok + 2) \
-			&& (*(tok + 2)) != '/' \
-			&& (*(tok + 2)) != '$' && (*(tok + 2)) != '~') */
-				return (-1);
-			++ret;
-		}
-		else if (*tok == '>')
-		{
-			loop_to_end(&tok);
-			if (!get_fd_after(tok))
-				return (-1);
-		}
-		else if (*tok == '<')
-		{
-			loop_to_end(&tok);
-			if (!get_fd_after(tok) && *tok != '<' \
-				&& *(tok + 1) && ft_isalnum(*(tok + 1)))
-				return (-1);
-		}
+		loop_to_end(&tok);
+		if (!get_fd_after(tok))
+			return (-1);
 		return (++ret);
 	}
 	else
