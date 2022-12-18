@@ -24,5 +24,7 @@ void	ft_restart_cycle(t_term *t)
 	t->total_row = 0;
 	t->his = 0;
 	t->c_row = t->total_row;
+	if (t->delim)
+		write(1, "\n", 1);
 	ft_strdel(&t->delim);
 }

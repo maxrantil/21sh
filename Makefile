@@ -135,6 +135,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_cut \
 				$(KEYBOARD)ft_delete \
 				$(KEYBOARD)ft_deletion_shift \
+				$(KEYBOARD)ft_delim_fetch \
 				$(KEYBOARD)ft_end_cycle \
 				$(KEYBOARD)ft_esc_parse \
 				$(KEYBOARD)ft_quote_flag_reset \
@@ -184,9 +185,8 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(MAIN)main \
 				$(MAIN)print_banner \
 				$(PARSER)add_to_args \
-				$(PARSER)check_for_fileagg \
 				$(PARSER)exec_is_quote_somewhere \
-				$(PARSER)get_fd_before \
+				$(PARSER)look_for_redir \
 				$(PARSER)mv_tok_and_line \
 				$(PARSER)node_create \
 				$(PARSER)parse_exec \

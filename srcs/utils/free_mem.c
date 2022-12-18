@@ -76,9 +76,9 @@ static void	code_less_then_three(t_node *root, t_shell *sh, ssize_t code)
 	reset_fds(sh->term_name);
 	if (code == 2)
 		tcsetattr(STDIN_FILENO, TCSAFLUSH, &sh->raw);
+	ft_restart_cycle(g_t);
 	if (code == 1 && !g_t->sigint)
 		ft_printf("{yel}${gre}>{nor} ");
-	ft_restart_cycle(g_t);
 	g_t->sigint = 0;
 }
 

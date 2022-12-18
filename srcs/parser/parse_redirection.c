@@ -84,8 +84,7 @@ static void	make_fd_node(t_node **n, t_line *l, char **ptr_to_line)
 
 t_node	*parse_redirection(t_node *n, t_line *l, char **ptr_to_line)
 {
-	l->fileagg_len = check_for_fileagg(*ptr_to_line);
-	l->fd_len = get_fd_before(*ptr_to_line);
+	look_for_redir(l, ptr_to_line);
 	while (l->fileagg_len || l->fd_len)
 	{
 		l->type = tok_get(ptr_to_line, &l->tok, &l->end_q);
@@ -98,8 +97,7 @@ t_node	*parse_redirection(t_node *n, t_line *l, char **ptr_to_line)
 			make_fd_node(&n, l, ptr_to_line);
 		if (l->fileagg_len < 0 || l->fd_len < 0)
 			return (error_redir(n, ptr_to_line));
-		l->fileagg_len = check_for_fileagg(*ptr_to_line);
-		l->fd_len = get_fd_before(*ptr_to_line);
+		look_for_redir(l, ptr_to_line);
 	}
 	return (n);
 }

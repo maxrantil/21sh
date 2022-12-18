@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:12:01 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 16:04:26 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:38:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ static int	loop_tok(char **tok, int ret)
 	return (ret);
 }
 
+static void	loop_to_end(char **tok)
+{
+	(*tok)++;
+	while (**tok && ft_isspace(*tok))
+		(*tok)++;
+}
+
+static int	get_fd_after(char *tok)
+{
+	if (!*tok || (*tok == '<' || *tok == '>' || *tok == '|' || *tok == ';'))
+		return (0);
+	return (1);
+}
+
 int	get_fd_before(char *tok)
 {
 	int		ret;
@@ -32,36 +46,37 @@ int	get_fd_before(char *tok)
 	ret = loop_tok(&tok, ret);
 	if (*tok == '>' || *tok == '<')
 	{
-		if (*tok == '>' && *(tok + 1) == '>')
-		{
-			if (!ft_isalnum(*(tok + 2)) && !ft_isspace(tok + 2) \
-			&& (*(tok + 2)) != '/' \
-			&& (*(tok + 2)) != '$' && (*(tok + 2)) != '~')
-				return (-1);
-			++ret;
-		}
-		else if (*tok == '>')
-		{
+		if (((*tok == '>' && *(tok + 1) == '>') \
+			|| (*tok == '<' && *(tok + 1) == '<')) && ++ret)
 			tok++;
-			while (*tok && ft_isspace(tok))
-				tok++;
-			if (!ft_isalnum(*tok) && !ft_isspace(tok) \
-			&& *tok != '/' \
-			&& *tok != '$' && *tok != '~')
-				return (-1);
-		}
-		else if (*tok == '<')
-		{
-			tok++;
-			while (*tok && ft_isspace(tok))
-				tok++;
-			if (!*tok || (!ft_isalnum(*tok) && !ft_isspace(tok) \
-			&& *tok != '/' && *tok != '<'\
-			&& *tok != '$' && *tok != '~'))
-				return (-1);
-		}
+		loop_to_end(&tok);
+		if (!get_fd_after(tok))
+			return (-1);
 		return (++ret);
 	}
 	else
 		return (0);
+}
+
+int	check_for_fileagg(char *tok)
+{
+	int		ret;
+
+	ret = 0;
+	if ((*tok == '>' || *tok == '<') && *(tok + 1) == '&' && ++ret)
+	{
+		tok++;
+		loop_to_end(&tok);
+		if (!get_fd_after(tok))
+			return (-1);
+		return (++ret);
+	}
+	else
+		return (0);
+}
+
+void	look_for_redir(t_line *l, char **ptr_to_line)
+{
+	l->fileagg_len = check_for_fileagg(*ptr_to_line);
+	l->fd_len = get_fd_before(*ptr_to_line);
 }

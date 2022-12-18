@@ -12,10 +12,10 @@
 
 #include "keyboard.h"
 
-t_term	*g_t;
+extern t_term	*g_t;
 
 /*
- * It initializes all the variables in the t_term structure to zero
+ * It initializes all the variablesint		check_for_fileagg(char *tok); in the t_term structure to zero
  *
  * @param t the structure that holds all the parameters
  */
@@ -35,6 +35,7 @@ static void	ft_init_to_zero(t_term *t)
 	t->total_row_cpy = 0;
 	t->clipboard.type = 0;
 	t->his = 0;
+	t->history_row = -1;
 	t->sigint = 0;
 }
 
@@ -47,6 +48,7 @@ void	ft_init(t_term *t)
 {
 	ft_init_signals();
 	ft_memset(t->inp, '\0', BUFFSIZE);
+	ft_memset(t->history_buff, '\0', BUFFSIZE);
 	ft_init_to_zero(t);
 	t->start_row = ft_get_linenbr();
 	ft_history_get(t);

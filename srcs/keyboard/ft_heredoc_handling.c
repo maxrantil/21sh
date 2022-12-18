@@ -24,7 +24,7 @@ void	ft_heredoc_handling(t_term *t, int index)
 	ssize_t	count;
 
 	start = index;
-	while (start > 1 && t->inp[start] == '<')
+	while (start && t->inp[start] == '<')
 		start--;
 	if (start)
 		start++;
