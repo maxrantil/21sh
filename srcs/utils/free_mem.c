@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_mem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 14:19:06 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:50:04 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	code_less_then_three(t_node *root, t_shell *sh, ssize_t code)
 		ft_arrfree((void ***)&sh->paths, ft_arrlen((void **)sh->paths));
 	if (sh->cl)
 	{
-		tree_print(root);
+		// tree_print(root);
 		tree_free(root);
 	}
 	ft_memdel((void **)&sh->cl);
