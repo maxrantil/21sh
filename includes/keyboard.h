@@ -114,6 +114,7 @@ void	ft_create_prompt_line(t_term *t, ssize_t loc);
 void	ft_cut(t_term *t);
 void	ft_delete(t_term *t);
 void	ft_deletion_shift(t_term *t, ssize_t index);
+int		ft_delim_fetch(t_term *t);
 void	ft_end_cycle(t_term *t);
 void	ft_esc_parse(t_term *t);
 int		ft_get_input(void);
