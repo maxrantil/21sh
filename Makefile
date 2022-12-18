@@ -135,6 +135,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_cut \
 				$(KEYBOARD)ft_delete \
 				$(KEYBOARD)ft_deletion_shift \
+				$(KEYBOARD)ft_delim_fetch \
 				$(KEYBOARD)ft_end_cycle \
 				$(KEYBOARD)ft_esc_parse \
 				$(KEYBOARD)ft_quote_flag_reset \
