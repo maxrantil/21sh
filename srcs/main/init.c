@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.SIZE_MAX == ULONG_MAXc                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 11:09:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 10:36:41 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	init(t_shell *sh, t_term *t)
 	g_t = t;
 	print_banner();
 	ft_init_term(t);
-	hash_init(sh);
 	sh->paths = NULL;
 	sh->env = NULL;
 	sh->cl = NULL;

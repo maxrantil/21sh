@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:58:29 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 16:43:28 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 10:23:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 extern t_term	*g_t;
 
 /*
- * It initializes all the variablesint		check_for_fileagg(char *tok); in the t_term structure to zero
+ * It initializes all the variables in the t_term structure to zero
  *
  * @param t the structure that holds all the parameters
  */
