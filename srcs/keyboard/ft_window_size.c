@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_window_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:25:07 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/12 11:23:50 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:37:25 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 /**
  * It sets the cursor position
  * to the position of the character at the current index
- * 
+ *
  * @param t the term structure
  */
 static void	set_new_cur_pos(t_term *t)
 {
+	t->c_row = 0;
 	while (t->nl_addr[t->c_row] \
-	&& &t->inp[t->index] >= t->nl_addr[t->c_row])
+		&& &t->inp[t->index] >= t->nl_addr[t->c_row])
 		t->c_row++;
 	t->c_row--;
 	t->c_col = ft_get_prompt_len(t, t->c_row);
@@ -39,8 +40,8 @@ void	ft_window_size(t_term *t)
 	struct winsize	size;
 
 	ft_run_capability("vi");
-	if (ioctl(0, TIOCGWINSZ, (char *)&size) < 0)
-		perror("TIOCGWINSZ");
+	if (ioctl(0, TIOCGWINSZ, &size) < 0)
+		ft_putstr_fd("error: ioctl in ft_window_size()", 2);
 	t->ws_col = size.ws_col;
 	t->ws_row = size.ws_row;
 	if (*t->inp)
