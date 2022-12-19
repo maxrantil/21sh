@@ -6,13 +6,13 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:07:22 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/16 18:36:16 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:36:36 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-void	redirection_file(t_node *n, t_shell *sh/* , t_hash **ht */)
+void	redirection_file(t_node *n, t_shell *sh)
 {
 	int	file_fd;
 	int	redirected_fd;
