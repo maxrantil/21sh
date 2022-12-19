@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansions_dollar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:33:11 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/18 18:23:05 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:46:09 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i)
 	char	**dollars;
 	char	*new_arg;
 	char	*begin_arg;
-										//make $_ expand in $HOME$_$SHELL
+
 	begin_arg = save_begin(n, i);
 	dollars = ft_strsplit(dollar, '$');
 	new_arg = get_new_arg(sh, dollars);

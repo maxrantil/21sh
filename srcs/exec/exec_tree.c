@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 11:40:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/16 14:40:09 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:45:19 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ static void	exec_semicolon(t_node *n, t_shell *sh)
 	reset_fds(sh->term_name);
 	exec_tree(n->right, sh);
 }
-
-/* static void	exec_ampersand(t_node *n, t_shell *sh)
-{
-	if (fork_wrap() == 0)
-	{
-		// exec_tree(n->left, sh, ht);
-		execve(n->arg[0], n->arg, sh->env); //this is 42sh shit, make better error handling etc
-		exit(EXIT_SUCCESS);
-	}
-} */
 
 static size_t	num_builtins(void)
 {
@@ -66,8 +56,6 @@ int	exec_tree(t_node *n, t_shell *sh)
 		input_file_read(n, sh);
 	else if (n->type == FILEAGG)
 		check_file_aggregations(n, sh);
-	/* else if (n->type == AMP)
-		exec_ampersand(n, sh); */
 	else if (n->type == SEMI)
 		exec_semicolon(n, sh);
 	return (1);
