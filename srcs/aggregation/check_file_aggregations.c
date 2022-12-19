@@ -6,7 +6,7 @@
 /*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/18 16:05:04 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:06:18 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ void	check_file_aggregations(t_node *n, t_shell *sh)
 			|| (ft_strequ("<&", operator) == 1)))
 		convert_operator(&operator);
 	ret = 0;
-	if ((ft_strequ((const char *)operator, "&>"))
-		|| (ft_strequ((const char *)operator, ">&")))
+	if ((ft_strequ((const char *)operator, "&>") == 1)
+		|| (ft_strequ((const char *)operator, ">&") == 1)
+		|| (ft_strequ((const char *)operator, "<&") == 1))
 		ret = redirect_aggregate(file_fd, target_file, operator);
 	else if (ft_strequ((const char *)operator, ">&-"))
 		close(file_fd);
