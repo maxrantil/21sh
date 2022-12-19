@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:59:55 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 11:24:06 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 13:28:18 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ssize_t	ft_get_prompt_len(t_term *t, ssize_t row)
 {
 	if (!row)
-		return (t->m_prompt_len);
+		return (t->prompt_len);
 	if (t->nl_addr && t->nl_addr[row] && t->nl_addr[row][-1] == '\n')
 		return (t->m_prompt_len);
 	return (0);
