@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 12:33:19 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:49:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_shell
 	struct termios	orig_termios;
 	struct termios	raw;
 	t_vec			v_tmp_env;
-	t_hash			**ht;
 	char			**temp_env;
 	char			**env;
 	char			**paths;

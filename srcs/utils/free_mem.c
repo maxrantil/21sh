@@ -6,35 +6,13 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 10:08:15 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:51:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
 extern t_term	*g_t;
-
-static void	free_ht(t_hash **ht)
-{
-	t_hash	*tmp;
-	int		i;
-
-	i = 0;
-	while (i < HASH_SIZE)
-	{
-		if (ht[i])
-		{
-			tmp = ht[i];
-			while (tmp)
-			{
-				ft_strdel(&tmp->program);
-				ft_memdel((void **)tmp);
-				tmp = tmp->next;
-			}
-		}
-		i++;
-	}
-}
 
 static void	temp_handler(t_node *n, t_shell *sh)
 {
@@ -83,7 +61,6 @@ static void	code_is_three(t_shell *sh)
 {
 	if (sh->env)
 		ft_arrfree((void ***)&sh->env, ft_arrlen((void **)sh->env));
-	free_ht(sh->ht);
 	vec_free(&sh->v_tmp_env);
 	ft_history_write_to_file(g_t);
 	ft_disable_raw_mode(sh);
