@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+         #
+#    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2022/12/18 16:05:34 by rvuorenl         ###   ########.fr        #
+#    Updated: 2022/12/19 10:36:17 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,6 @@ BUILTIN		= 	builtin/
 ERROR		= 	error/
 EXEC		= 	exec/
 EXPANSIONS	= 	expansions/
-HASH_TABLE	=	hash_table/
 KEYBOARD	= 	keyboard/
 MAIN		= 	main/
 PARSER		= 	parser/
@@ -94,7 +93,6 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(BUILTIN)sh_echo \
 				$(BUILTIN)sh_env \
 				$(BUILTIN)sh_exit \
-				$(BUILTIN)sh_hash \
 				$(BUILTIN)sh_unsetenv \
 				$(BUILTIN)sh_setenv \
 				$(BUILTIN)unsetenv_var \
@@ -119,10 +117,6 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(EXPANSIONS)update_arg_dollar \
 				$(EXPANSIONS)expansions_dollar \
 				$(EXPANSIONS)expansions \
-				$(HASH_TABLE)hash_function \
-				$(HASH_TABLE)hash_init \
-				$(HASH_TABLE)hash_print \
-				$(HASH_TABLE)init_ht_struct \
 				$(KEYBOARD)ft_add_nl_last_row \
 				$(KEYBOARD)ft_add_nl_mid_row \
 				$(KEYBOARD)ft_alt_mv \
@@ -226,7 +220,6 @@ $(OBJECTS):
 	@mkdir -p $(OBJECTS)/$(ERROR)
 	@mkdir -p $(OBJECTS)/$(EXEC)
 	@mkdir -p $(OBJECTS)/$(EXPANSIONS)
-	@mkdir -p $(OBJECTS)/$(HASH_TABLE)
 	@mkdir -p $(OBJECTS)/$(KEYBOARD)
 	@mkdir -p $(OBJECTS)/$(MAIN)
 	@mkdir -p $(OBJECTS)/$(PARSER)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_fd_before.c                                    :+:      :+:    :+:   */
+/*   look_for_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:12:01 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 17:38:47 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 10:16:22 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,10 @@ static int	loop_tok(char **tok, int ret)
 	return (ret);
 }
 
-static void	loop_to_end(char **tok)
-{
-	(*tok)++;
-	while (**tok && ft_isspace(*tok))
-		(*tok)++;
-}
-
 static int	get_fd_after(char *tok)
 {
-	if (!*tok || (*tok == '<' || *tok == '>' || *tok == '|' || *tok == ';'))
+	if (!*tok || (*tok == '<' || *tok == '>' \
+		|| *tok == '|' || *tok == ';' || *tok == '&'))
 		return (0);
 	return (1);
 }
@@ -49,7 +43,9 @@ int	get_fd_before(char *tok)
 		if (((*tok == '>' && *(tok + 1) == '>') \
 			|| (*tok == '<' && *(tok + 1) == '<')) && ++ret)
 			tok++;
-		loop_to_end(&tok);
+		tok++;
+		while (*tok && ft_isspace(tok))
+			tok++;
 		if (!get_fd_after(tok))
 			return (-1);
 		return (++ret);
@@ -66,7 +62,9 @@ int	check_for_fileagg(char *tok)
 	if ((*tok == '>' || *tok == '<') && *(tok + 1) == '&' && ++ret)
 	{
 		tok++;
-		loop_to_end(&tok);
+		tok++;
+		while (*tok && ft_isspace(tok))
+			tok++;
 		if (!get_fd_after(tok))
 			return (-1);
 		return (++ret);

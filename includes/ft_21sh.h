@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/18 15:59:01 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/19 10:46:32 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <sys/stat.h>
 
 # if __linux__
-# include <sys/types.h>
-# include <sys/wait.h>
+#  include <sys/types.h>
+#  include <sys/wait.h>
 # endif
 
 /* Exec Node */
@@ -96,7 +96,6 @@ typedef struct s_dollar
 	size_t	env_len;
 }			t_dollar;
 
-
 /* Aggregation */
 void	check_file_aggregations(t_node *n, t_shell *sh);
 int		check_filename_fd(char *filename);
@@ -135,7 +134,6 @@ int		exec_tree(t_node *n, t_shell *sh);
 int		fork_wrap(void);
 void	input_file_read(t_node *n, t_shell *sh);
 void	redirection_file(t_node *n, t_shell *sh);
-void	strip_quotes(t_node *n, t_shell *sh);
 
 /* Expansions */
 void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
@@ -149,12 +147,6 @@ ssize_t	remove_backslash(char *str);
 size_t	strip_quotes_double(char **str, size_t quote1, t_shell *sh);
 size_t	strip_quotes_single(char *str, size_t quote1);
 size_t	update_arg_dollar(int i, char **str, t_shell *sh);
-
-/* Hash table */
-size_t	hash_function(char *program);
-void	hash_init(t_shell *sh);
-void	hash_print(t_hash **ht);
-void	init_ht_struct(t_shell *sh, char *str);
 
 /* Main */
 void	sig_handler(int num);
@@ -187,24 +179,22 @@ void	ft_enable_raw_mode(t_shell *sh);
 void	reset_fds(char *term_name);
 void	tree_print(t_node *root);
 
-typedef int			(*t_fptr)(t_node *n, t_shell *sh);
+typedef int				(*t_fptr)(t_node *n, t_shell *sh);
 
-static const char	*g_builtin_str[] __attribute__((unused)) = {
+static const char		*g_builtin_str[] = {
 	"cd",
 	"echo",
 	"env",
 	"exit",
-	"hash",
 	"setenv",
 	"unsetenv"
 };
 
-static const t_fptr	g_builtin_func[] = {
+static const t_fptr		g_builtin_func[] = {
 	&sh_cd,
 	&sh_echo,
 	&sh_env,
 	&sh_exit,
-	&sh_hash,
 	&sh_setenv,
 	&sh_unsetenv
 };

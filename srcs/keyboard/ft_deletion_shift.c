@@ -6,24 +6,24 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:21:37 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/16 13:48:56 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 10:33:22 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-static int    ft_inhibitor_catch(t_term *t, ssize_t index, int *bs, int *hd)
+static int	ft_inhibitor_catch(t_term *t, ssize_t index, int *bs, int *hd)
 {
-    *bs = 0;
-    *hd = 0;
-    if (t->inp[index] == '<')
-        *hd = 1;
-    else if (t->inp[index] == '\\')
-        *bs = 1;
-    else if ((t->inp[index] == D_QUO || t->inp[index] == S_QUO) \
-    && !ft_bslash_escape_check(t, index))
-        return (1);
-    return (0);
+	*bs = 0;
+	*hd = 0;
+	if (t->inp[index] == '<')
+		*hd = 1;
+	else if (t->inp[index] == '\\')
+		*bs = 1;
+	else if ((t->inp[index] == D_QUO || t->inp[index] == S_QUO) \
+	&& !ft_bslash_escape_check(t, index))
+		return (1);
+	return (0);
 }
 
 /*
@@ -33,30 +33,30 @@ static int    ft_inhibitor_catch(t_term *t, ssize_t index, int *bs, int *hd)
  * @param t the t_term struct
  * @param mode 0 for backspace, 1 for delete
  */
-void    ft_deletion_shift(t_term *t, ssize_t index)
+void	ft_deletion_shift(t_term *t, ssize_t index)
 {
-    int    blash;
-    int    quote;
-    int    heredoc;
+	int	blash;
+	int	quote;
+	int	heredoc;
 
-    quote = ft_inhibitor_catch(t, index, &blash, &heredoc);
-    t->inp[index] = '\0';
-    while (&t->inp[index] < &t->inp[t->bytes])
-    {
-        t->inp[index] = t->inp[index] ^ t->inp[index + 1];
-        t->inp[index + 1] = t->inp[index] ^ t->inp[index + 1];
-        t->inp[index] = t->inp[index] ^ t->inp[index + 1];
-        index++;
-    }
-    t->bytes--;
-    if (blash)
-        ft_quote_flag_check(t, t->index);
-    else if (heredoc)
-    {
-        ft_heredoc_handling(t, t->index - 1);
-        if (!t->heredoc && t->delim)
-            ft_strdel(&t->delim);
-    }
-    else if (quote)
-        ft_quote_flag_reset(t);
+	quote = ft_inhibitor_catch(t, index, &blash, &heredoc);
+	t->inp[index] = '\0';
+	while (&t->inp[index] < &t->inp[t->bytes])
+	{
+		t->inp[index] = t->inp[index] ^ t->inp[index + 1];
+		t->inp[index + 1] = t->inp[index] ^ t->inp[index + 1];
+		t->inp[index] = t->inp[index] ^ t->inp[index + 1];
+		index++;
+	}
+	t->bytes--;
+	if (blash)
+		ft_quote_flag_check(t, t->index);
+	else if (heredoc)
+	{
+		ft_heredoc_handling(t, t->index - 1);
+		if (!t->heredoc && t->delim)
+			ft_strdel(&t->delim);
+	}
+	else if (quote)
+		ft_quote_flag_reset(t);
 }

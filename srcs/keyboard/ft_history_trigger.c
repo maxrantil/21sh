@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history_trigger.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:59:10 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/14 17:33:06 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/12/19 10:22:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	ft_history_inp_update(t_term *t, char *history)
 		ft_memset((void *)t->nl_addr[t->c_row], '\0', \
 		ft_strlen(t->nl_addr[t->c_row]));
 		if (t->input_cpy)
-			ft_memcpy(t->nl_addr[t->c_row], history, ft_strlen(history));
+			ft_memcpy(t->nl_addr[t->c_row], \
+			t->input_cpy, ft_strlen(t->input_cpy));
 	}
 }
 
