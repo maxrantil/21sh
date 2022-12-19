@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 10:46:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:33:19 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,6 @@
 # define HASH_SIZE 25
 /* Unix */
 # define MAX_PATHLEN 1024
-
-typedef struct s_hash
-{
-	char			*program;
-	int				hits;
-	struct s_hash	*next;
-}					t_hash;
 
 typedef struct s_shell
 {
