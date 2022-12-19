@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 15:21:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 15:33:35 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*make_heredoc_input(t_term *t, char *str)
 static void	write_to_doc(t_term *t, char **cpy, int fd)
 {
 	if (ft_strrchr(*cpy, '\n'))
-		*cpy = ft_strsub(*cpy, 0, ft_strrchr(*cpy, '\n') - *cpy);
+		*cpy = ft_strsub(*cpy, 0, (ft_strrchr(*cpy, '\n') + 1) - *cpy);
 	if (!ft_strequ(*cpy, t->delim))
 	{
 		write(fd, *cpy, ft_strlen(*cpy));
