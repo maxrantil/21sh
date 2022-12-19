@@ -23,7 +23,10 @@ int	sh_setenv(t_node *n, t_shell *sh)
 		&& (ft_isalpha(n->arg[i][0]) || n->arg[i][0] == '_'))
 			setenv_loop(sh, n->arg[i], 0);
 		else
+		{
 			sh_error_print(n->arg[i], 6);
+			return (-1);
+		}
 		i++;
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   look_for_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:12:01 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 10:16:22 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 14:32:02 by rvuorenl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	loop_tok(char **tok, int ret)
 static int	get_fd_after(char *tok)
 {
 	if (!*tok || (*tok == '<' || *tok == '>' \
-		|| *tok == '|' || *tok == ';' || *tok == '&'))
+		|| *tok == '|' || *tok == ';'))
 		return (0);
 	return (1);
 }
@@ -59,6 +59,7 @@ int	check_for_fileagg(char *tok)
 	int		ret;
 
 	ret = 0;
+	ret = loop_tok(&tok, ret);
 	if ((*tok == '>' || *tok == '<') && *(tok + 1) == '&' && ++ret)
 	{
 		tok++;
