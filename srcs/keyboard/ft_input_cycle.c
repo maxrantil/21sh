@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 15:32:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/19 15:40:56 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	ft_input_cycle(t_term *t)
 				ft_delete(t);
 			else if ((t->heredoc && !*t->nl_addr[t->c_row]))
 			{
-				// ft_strcat(t->inp, "\n");
 				ft_strcat(t->inp, t->delim);
 				ft_end_cycle(t);
 				return (1);
