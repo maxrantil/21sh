@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/18 15:59:02 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:04:24 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,8 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "vec.h"
-# include <termcap.h> //control if all these are needed
-# include <term.h> //same same
-# include <curses.h> //same same
+# include <termcap.h>
 # include <termios.h>
-# include <string.h>
-# include <signal.h>
-# include <limits.h>
-# include <ctype.h>
-# include <stdlib.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
 

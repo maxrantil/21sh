@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 12:49:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/20 11:09:49 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # if __linux__
 #  include <sys/types.h>
 #  include <sys/wait.h>
+#  include <term.h>
+#  include <curses.h>
+#  include <signal.h>
+#  include <limits.h>
+#  include <ctype.h>
 # endif
 
 /* Exec Node */
@@ -92,7 +97,6 @@ typedef struct s_dollar
 void	check_file_aggregations(t_node *n, t_shell *sh);
 int		check_filename_fd(char *filename);
 int		check_operator_errors(int old, int file_fd, char *filename, char *oper);
-int		dup2_wrap(int file_fd, int old_fd);
 int		open_check(char *filename, int mode);
 int		redirect_aggregate(int old_fd, char *target, char *operator);
 int		syntax_error_msg(int exit_code);
@@ -101,6 +105,9 @@ int		syntax_error_msg(int exit_code);
 char	*env_getvalue(char **env, char *var);
 char	*env_key_extract(char *key_value);
 char	**env_underscore(t_node *n, t_shell *sh);
+char	**pwd_update(t_shell *sh, char *oldcwd);
+void	setenv_loop(t_shell *sh, char *arg, int flag_temp);
+char	**setenv_var(char **env, char *key, char *value);
 int		sh_cd(t_node *n, t_shell *sh);
 int		sh_echo(t_node *n, t_shell *sh);
 int		sh_env(t_node *n, t_shell *sh);
@@ -108,9 +115,6 @@ int		sh_exit(t_node *n, t_shell *sh);
 int		sh_hash(t_node *n, t_shell *sh);
 int		sh_setenv(t_node *n, t_shell *sh);
 int		sh_unsetenv(t_node *n, t_shell *sh);
-char	**pwd_update(t_shell *sh, char *oldcwd);
-void	setenv_loop(t_shell *sh, char *arg, int flag_temp);
-char	**setenv_var(char **env, char *key, char *value);
 char	**unsetenv_var(char **env, char *key);
 
 /* Error */
@@ -131,8 +135,8 @@ void	redirection_file(t_node *n, t_shell *sh);
 void	expansions_dollar(t_node *n, t_shell *sh, char *dollar, size_t i);
 void	expansions_tilde(t_node *n, t_shell *sh, size_t i);
 void	expansions(t_node *n, t_shell *sh);
-ssize_t	find_matching_quote(char *str, char quote);
 void	fill_env(char **tmp, t_dollar *dol, char *str, t_shell *sh);
+ssize_t	find_matching_quote(char *str, char quote);
 char	*get_full_env_name(char *var);
 void	loop_conversions_quotes(t_node *n, t_shell *sh);
 ssize_t	remove_backslash(char *str);
@@ -141,13 +145,10 @@ size_t	strip_quotes_single(char *str, size_t quote1);
 size_t	update_arg_dollar(int i, char **str, t_shell *sh);
 
 /* Main */
-void	sig_handler(int num);
-
 char	*check_heredoc(t_term *t, char *str);
 char	**get_env(char **env);
 void	init(t_shell *sh, t_term *t);
 void	print_banner(void);
-void	tree_free(t_node *n);
 
 /* Parser */
 void	add_to_args(char ***array, char *str);
@@ -165,10 +166,12 @@ char **tok, int len);
 int		tok_get(char **ptr_to_line, char **tok, char **end_q);
 
 /* Utils */
+int		dup2_wrap(int file_fd, int old_fd);
 void	free_mem(t_node *n, t_shell *sh, ssize_t code);
 void	ft_disable_raw_mode(t_shell *sh);
 void	ft_enable_raw_mode(t_shell *sh);
 void	reset_fds(char *term_name);
+void	tree_free(t_node *n);
 void	tree_print(t_node *root);
 
 typedef int				(*t_fptr)(t_node *n, t_shell *sh);

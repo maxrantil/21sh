@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_aggregations.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:24:12 by rvuorenl          #+#    #+#             */
-/*   Updated: 2022/12/19 15:37:26 by rvuorenl         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:11:25 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ static int	get_redirected_fd(char *full, char *oper, char *targ)
 	return (fd);
 }
 
+/*
+ * It checks if the current node is a file aggregation, and if so, it
+ * redirects the file descriptors
+ * accordingly
+ *
+ * @param n the node of the tree
+ * @param sh the shell structure
+ */
 void	check_file_aggregations(t_node *n, t_shell *sh)
 {
 	int		file_fd;
