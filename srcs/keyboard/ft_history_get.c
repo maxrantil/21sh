@@ -22,18 +22,20 @@ void	ft_history_get(t_term *t)
 	char	*buf;
 	int		fd;
 
-	vec_new(&t->v_history, 0, sizeof(char) * BUFF_SIZE + 1);
+	t->history = (char **)ft_memalloc(sizeof(char *) * MAX_HISTORY + 1);
 	t->history_file = ft_history_file_get();
 	fd = open(t->history_file, O_RDONLY | O_CREAT, 0644);
 	if (fd)
 	{
 		buf = NULL;
+		i = 0;
 		while (get_next_line(fd, &buf) > 0)
 		{
-			vec_push(&t->v_history, buf);
+			t->history[t->history_size++] = ft_strdup(buf);
 			ft_strdel(&buf);
 		}
 		ft_strdel(&buf);
+		t->history[t->history_size] = NULL;
 		close(fd);
 	}
 }

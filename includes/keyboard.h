@@ -56,8 +56,9 @@
 # define PROMPT "$> "
 # define MINI_PROMPT "> "
 
-# define BUFFSIZE   2048 //control the buffsize so that works fine
-# define MAX_LINE   1024
+# define BUFFSIZE   	2048
+# define MAX_LINE   	1024
+# define MAX_HISTORY	1024
 
 typedef struct clipboard
 {
@@ -69,7 +70,8 @@ typedef struct s_term
 {
 	char			inp[BUFFSIZE];
 	char			history_buff[BUFFSIZE];
-	t_vec			v_history;
+	// t_vec			v_history;
+	char			**history;
 	t_clipboard		clipboard;
 	char			**nl_addr;
 	char			*history_file;
@@ -77,6 +79,7 @@ typedef struct s_term
 	char			*delim;
 	int				ch;
 	int				history_row;
+	int				history_size;
 	ssize_t			ws_col;
 	ssize_t			ws_row;
 	ssize_t			index;
