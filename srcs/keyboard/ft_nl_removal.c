@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nl_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 15:00:30 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/15 12:47:31 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/20 10:40:50 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:40:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
 /**
- * It removes the newline character from the history buffer if it's preceded 
+ * It removes the newline character from the history buffer if it's preceded
  * by a backslash or if it's the last character in the buffer
- * 
+ *
  * @param t the term structure
  */
 int	ft_nl_removal_bslash_check(t_term *t, ssize_t pos)
@@ -39,10 +39,10 @@ int	ft_nl_removal_bslash_check(t_term *t, ssize_t pos)
 /**
  * It takes a string, and if it finds a backslash, it replaces it with a
  * semicolon and a space
- * 
+ *
  * @param t the term structure
  * @param i the current position in the history buffer
- * 
+ *
  * @return The position of the last backslash.
  */
 static int	ft_get_bslash_pos(t_term *t, int i)
