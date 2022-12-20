@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:37:43 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:37:46 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/20 12:28:43 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /*
  * It adds a newline address to the array of newline addresses
  *
- * @param t the term structure
- * @param pos The position of the newline character in the input string.
+ * @param t the terminal structure
+ * @param array the array of characters that contains the entire command line
+ * @param pos the position of the newline character in the array
  */
-
 void	ft_add_nl_last_row(t_term *t, char *array, ssize_t pos)
 {
 	int		index;
