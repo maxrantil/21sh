@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:37:29 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 14:10:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/20 14:18:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,18 @@
 /*
  * It scrolls down one line
  */
-static void	ft_scroll_down()
+static void	ft_scroll_down(t_term *t)
 {
+	ft_run_capability("vi");
+	if (t->nl_addr[t->c_row + 1])
+	{
+		ft_run_capability("sc");
+		ft_setcursor(0, t->ws_row);
+		ft_run_capability("sf");
+		ft_run_capability("rc");
+	}
 	ft_run_capability("do");
+	ft_run_capability("ve");
 }
 
 void	ft_trigger_nl(t_term *t)
@@ -33,7 +42,7 @@ void	ft_trigger_nl(t_term *t)
 		if ((t->start_row + t->total_row) >= t->ws_row)
 		{
 			t->start_row--;
-			ft_scroll_down();
+			ft_scroll_down(t);
 		}
 		if (t->nl_addr[t->c_row + 1])
 			ft_reset_nl_addr(t);
