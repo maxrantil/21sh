@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:56:28 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 16:41:36 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/20 14:51:11 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_history_file_get(void)
 
 	home = getenv("HOME");
 	if (home)
-		return (ft_strjoin(home, "/.42sh_history"));
+		return (ft_strjoin(home, "/.ft_21sh_history"));
 	file = getcwd(cwd, sizeof(cwd));
-	return (ft_strjoin(file, "/.42sh_history"));
+	return (ft_strjoin(file, "/.ft_21sh_history"));
 }

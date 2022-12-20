@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:02:09 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/15 10:20:24 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/20 14:46:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_node	*parse_pipe(t_line *l, char **ptr_to_line)
 			n = node_create(PIPE, n, parse_pipe(l, ptr_to_line));
 		else
 		{
-			ft_putstr_fd("(pipe) syntax error near unexpected tok `", 2);
+			ft_putstr_fd("21sh: syntax error near unexpected tok `", 2);
 			ft_putchar_fd(l->type, 2);
 			ft_putendl_fd("'", 2);
 			tree_free(n);
