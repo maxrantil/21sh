@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bslash_escape_check.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvuorenl <rvuorenl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 15:06:01 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/16 16:25:51 by rvuorenl         ###   ########.fr       */
+/*   Created: 2022/12/20 10:38:23 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:38:24 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

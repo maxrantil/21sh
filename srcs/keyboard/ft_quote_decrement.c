@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_quote_decrement.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 14:23:10 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/14 17:37:12 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/20 10:41:16 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:41:17 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

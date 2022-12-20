@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shift_nl_addr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:17:02 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 22:39:04 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/20 10:42:31 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:42:32 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

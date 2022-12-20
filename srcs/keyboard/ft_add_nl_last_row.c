@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_nl_last_row.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:42:45 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/08 14:50:01 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/20 10:37:43 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:37:46 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history_reset_nl.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 10:29:50 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/09 13:05:32 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/20 10:39:46 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:39:47 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * It resets the newline addresses of the history buffer
- * 
+ *
  * @param t the term struct
  * @param inp the string to be printed
  */

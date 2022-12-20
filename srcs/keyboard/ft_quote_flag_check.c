@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_quote_flag_check.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 17:36:03 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/12/14 17:37:52 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/20 10:41:22 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:41:23 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

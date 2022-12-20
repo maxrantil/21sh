@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_trail.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 14:40:06 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/14 11:56:00 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/12/20 10:41:06 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/20 10:41:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
