@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 15:18:24 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/20 11:25:59 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*ft_trim_line(t_term *t)
 	if (t->heredoc && !t->delim)
 	{
 		ft_putstr_fd("21sh: syntax error near unexpected tok `newline'\n", 2);
+		ft_strdel(&new);
 		return (NULL);
 	}
 	new = check_heredoc(t, new);
