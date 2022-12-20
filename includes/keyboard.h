@@ -22,6 +22,14 @@
 # include <fcntl.h>
 # include <sys/ioctl.h>
 
+# if __linux__
+#  include <term.h>
+#  include <curses.h>
+#  include <signal.h>
+#  include <limits.h>
+#  include <ctype.h>
+# endif
+
 # define DEL		0
 # define BCK		1
 # define ENTER      10

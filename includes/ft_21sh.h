@@ -24,11 +24,6 @@
 # if __linux__
 #  include <sys/types.h>
 #  include <sys/wait.h>
-#  include <term.h>
-#  include <curses.h>
-#  include <signal.h>
-#  include <limits.h>
-#  include <ctype.h>
 # endif
 
 /* Exec Node */
