@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:39:24 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:39:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/20 12:41:57 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 int	ft_get_linenbr(void)
 {
-	char	buf[2048];
+	char	buf[BUFFSIZE];
 	int		len;
 	int		i;
 
