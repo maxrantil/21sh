@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:31:32 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/08 13:32:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/12/21 17:25:41 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	get_len_of_next_tok(char *tok)
 	int	ret;
 
 	ret = 0;
-	while (*tok && !ft_isspace(tok))
+	while (*tok && !ft_isspace(tok) && *tok != '&' && *tok != '|' \
+		&& *tok != '<' && *tok != '>' && *tok != ';')
 	{
 		if (ft_isascii(*tok) && ++ret)
 			tok++;
