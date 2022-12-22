@@ -21,12 +21,21 @@
  */
 void	ft_end_cycle(t_term *t)
 {
+	char	*tmp;
+
 	t->start_row = ft_get_linenbr();
 	if (t->bytes)
 	{
 		ft_memcpy(t->history_buff, t->inp, t->bytes);
 		ft_nl_removal(t);
-		vec_push(&t->v_history, t->history_buff);
+		if (t->delim)
+		{
+			tmp = ft_strsub(t->inp, 0, ft_strchr(t->inp, '\n') - t->inp);
+			vec_push(&t->v_history, tmp);
+			ft_strdel(&tmp);
+		}
+		else
+			vec_push(&t->v_history, t->history_buff);
 		ft_strclr(t->history_buff);
 	}
 	if (!ft_strncmp(t->inp, "history", 7))

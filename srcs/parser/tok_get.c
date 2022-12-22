@@ -16,7 +16,7 @@ static int	tok_loop(char **scan, int ret)
 {
 	while (**scan)
 	{
-		if (strchr("<|&;", **scan) && (*scan)++)
+		if (ft_strchr("<|&;", **scan) && (*scan)++)
 			break ;
 		else if (**scan == '>' && (*scan)++)
 		{
@@ -27,7 +27,7 @@ static int	tok_loop(char **scan, int ret)
 		else
 		{
 			ret = 'a';
-			while ((**scan && !ft_isspace(*scan) && !strchr("<|&;>", **scan)) \
+			while ((**scan && !ft_isspace(*scan) && !ft_strchr("<|&;>", **scan)) \
 				|| (**scan && *(*scan + 1) \
 				&& *(*scan - 1) == '\\' && **scan == '\n'))
 				(*scan)++;
