@@ -18,17 +18,20 @@
 static void	ft_scroll_down(t_term *t)
 {
 	ft_run_capability("vi");
-	if (t->nl_addr[t->c_row + 1])
-	{
-		ft_run_capability("sc");
-		ft_setcursor(0, t->ws_row);
-		ft_run_capability("sf");
-		ft_run_capability("rc");
-	}
+	ft_run_capability("sc");
+	ft_setcursor(0, t->ws_row);
+	ft_run_capability("sf");
+	ft_run_capability("rc");
 	ft_run_capability("do");
 	ft_run_capability("ve");
 }
 
+/* to the
+ * buffer, and if the cursor is at the end of the line, it moves the cursor
+ * to the next line
+ *
+ * @param t the term structure
+ */
 void	ft_trigger_nl(t_term *t)
 {
 	ssize_t	len;

@@ -33,7 +33,8 @@ static void	ft_word_left(t_term *t)
 		t->index--;
 	}
 	t->c_col += &t->inp[t->index] - t->nl_addr[t->c_row];
-	ft_setcursor(t->c_col, ft_get_linenbr());
+	// ft_setcursor(t->c_col, ft_get_linenbr());
+	ft_setcursor(t->c_col, t->start_row + t->c_row);
 }
 
 /*
@@ -62,7 +63,8 @@ static void	ft_word_right(t_term *t)
 		t->index++;
 	}
 	t->c_col += &t->inp[t->index] - t->nl_addr[row];
-	ft_setcursor(t->c_col, ft_get_linenbr());
+	// ft_setcursor(t->c_col, ft_get_linenbr());
+	ft_setcursor(t->c_col, t->start_row + t->c_row);
 }
 
 /*
