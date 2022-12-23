@@ -27,7 +27,11 @@ void	ft_ctrl(t_term *t)
 		ft_paste(t);
 	else if (t->ch == CTRL_L)
 	{
+		t->start_row = 0;
+		ft_run_capability("vi");
 		ft_run_capability("cl");
-		ft_restart_cycle(t);
+		ft_print_input(t, 0, 0);
+		ft_run_capability("ve");
+		// ft_restart_cycle(t);
 	}
 }

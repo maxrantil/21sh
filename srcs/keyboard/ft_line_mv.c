@@ -27,7 +27,8 @@ void	ft_line_mv(t_term *t)
 		{
 			t->ch = ft_get_input();
 			{
-				if (t->ch == ARROW_UP && t->c_row && ft_get_linenbr())
+				// if (t->ch == ARROW_UP && t->c_row && ft_get_linenbr())
+				if (t->ch == ARROW_UP && t->c_row)
 					ft_line_up(t);
 			}
 			if (t->ch == ARROW_DOWN && t->c_row < t->total_row)

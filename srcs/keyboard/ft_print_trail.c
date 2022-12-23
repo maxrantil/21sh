@@ -67,7 +67,8 @@ static void	ft_print_line_trail(t_term *t)
 	ssize_t	dis_row;
 
 	row = t->c_row;
-	dis_row = ft_get_linenbr();
+	// dis_row = ft_get_linenbr();
+	dis_row = t->start_row + t->c_row;
 	while (row <= t->total_row)
 	{
 		ft_run_capability("ce");

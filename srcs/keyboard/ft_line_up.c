@@ -63,6 +63,7 @@ void	ft_line_up(t_term *t)
 		ft_move_up(t, prompt_len);
 	else
 		ft_move_up_end_line(t, len, prompt_len);
-	t->c_row--;
-	ft_setcursor(t->c_col, (ft_get_linenbr() - 1));
+	// t->c_row--;
+	// ft_setcursor(t->c_col, (ft_get_linenbr() - 1));
+	ft_setcursor(t->c_col, t->start_row + --t->c_row);
 }

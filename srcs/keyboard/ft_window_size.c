@@ -51,5 +51,7 @@ void	ft_window_size(t_term *t)
 		ft_print_input(t, 0, 0);
 		set_new_cur_pos(t);
 	}
+	else
+		t->start_row = ft_get_linenbr();
 	ft_run_capability("ve");
 }

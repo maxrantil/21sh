@@ -61,7 +61,7 @@ static void	ft_insertion_enter(t_term *t)
 			|| t->bslash)
 		{
 			t->history_row = -1;
-			ft_memcpy(t->history_buff, t->inp, t->bytes);
+			ft_memcpy(t->history_buff, t->inp, t->bytes); // here is something that needs to be fixed
 			t->inp[t->bytes++] = (char)t->ch;
 			ft_create_prompt_line(t, t->bytes);
 			t->index = t->bytes;
