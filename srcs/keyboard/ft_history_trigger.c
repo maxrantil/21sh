@@ -69,10 +69,10 @@ static void	ft_history_inp_update(t_term *t, char *history)
  */
 static void	ft_history_clear_line(t_term *t, ssize_t row)
 {
-	ft_setcursor(0, (t->start_row + t->history_row));
+	// ft_setcursor(0, (t->start_row + t->history_row));
 	if (row > t->history_row)
 	{
-		// ft_setcursor(0, ft_get_linenbr() - (row - t->history_row));
+		ft_setcursor(0, ft_get_linenbr() - (row - t->history_row));
 		while (row > t->history_row)
 		{
 			ft_remove_nl_addr(t, row);
@@ -80,8 +80,8 @@ static void	ft_history_clear_line(t_term *t, ssize_t row)
 			row--;
 		}
 	}
-	// else
-		// ft_setcursor(0, ft_get_linenbr());
+	else
+		ft_setcursor(0, ft_get_linenbr());
 	ft_run_capability("cd");
 }
 
