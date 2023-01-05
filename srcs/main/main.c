@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:09:44 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 11:25:59 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:48:46 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(void)
 				if (!exec_tree(root, &sh))
 					break ;
 		}
-		free_mem(root, &sh, 1);
+		free_mem(root, &sh, LOOP);
 	}
-	free_mem(root, &sh, 3);
+	free_mem(root, &sh, END);
 	exit(0);
 }

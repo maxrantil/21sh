@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:22:47 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/19 15:40:22 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:25:18 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	write_to_doc(t_term *t, char **cpy, int fd)
 {
 	if (ft_strrchr(*cpy, '\n'))
 		*cpy = ft_strsub(*cpy, 0, (ft_strrchr(*cpy, '\n') + 1) - *cpy);
-	if (!ft_strequ(*cpy, t->delim))
+	if (*cpy && !ft_strequ(*cpy, t->delim))
 	{
 		write(fd, *cpy, ft_strlen(*cpy));
 		ft_strdel(cpy);

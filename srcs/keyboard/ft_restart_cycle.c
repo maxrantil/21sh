@@ -6,11 +6,23 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:43:19 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:07:20 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
+
+static void	heredoc_reset(t_term *t)
+{
+	if (t->delim)
+	{
+		ft_memcpy(t->history_buff, t->inp, t->bytes);
+		ft_nl_removal(t);
+		vec_push(&t->v_history, t->history_buff);
+		ft_strdel(&t->delim);
+	}
+	t->heredoc = 0;
+}
 
 void	ft_restart_cycle(t_term *t)
 {
@@ -19,10 +31,10 @@ void	ft_restart_cycle(t_term *t)
 	t->q_qty = 0;
 	t->bytes = 0;
 	t->index = 0;
-	t->heredoc = 0;
 	t->c_col = t->prompt_len;
 	t->total_row = 0;
 	t->his = 0;
 	t->c_row = t->total_row;
-	ft_strdel(&t->delim);
+	heredoc_reset(t);
+	ft_strclr(t->history_buff);
 }

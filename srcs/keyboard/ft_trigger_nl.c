@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:37:29 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 14:18:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:21:42 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	ft_trigger_nl(t_term *t)
 	{
 		t->c_col = 0;
 		t->c_row++;
+		ft_setcursor(t->c_col, t->start_row + ++t->c_row);
 	}
 }

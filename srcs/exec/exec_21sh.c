@@ -56,7 +56,7 @@ int	exec_21sh(t_node *n, t_shell *sh)
 			}
 		}
 		sh_error_print(n->arg[0], 4);
-		free_mem(n, sh, 2);
+		free_mem(n, sh, EXEC_21SH);
 		exit(EXIT_FAILURE);
 	}
 	wait(0);

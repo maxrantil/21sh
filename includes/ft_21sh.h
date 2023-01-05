@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:44:45 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 11:09:49 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:48:58 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@
 # define HASH_SIZE 25
 /* Unix */
 # define MAX_PATHLEN 1024
+
+# define LOOP 1
+# define EXEC_21SH 2
+# define END 3
 
 typedef struct s_shell
 {

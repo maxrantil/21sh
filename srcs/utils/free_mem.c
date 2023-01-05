@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:51:16 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 11:36:34 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:59:07 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	temp_handler(t_node *n, t_shell *sh)
 	}
 }
 
-static void	code_less_then_three(t_node *root, t_shell *sh, ssize_t code)
+static void	code_less_then_end(t_node *root, t_shell *sh, ssize_t code)
 {
 	if (sh->temp_env)
 		temp_handler(root, sh);
@@ -57,7 +57,7 @@ static void	code_less_then_three(t_node *root, t_shell *sh, ssize_t code)
 	g_t->sigint = 0;
 }
 
-static void	code_is_three(t_shell *sh)
+static void	code_is_end(t_shell *sh)
 {
 	if (sh->env)
 		ft_arrfree((void ***)&sh->env, ft_arrlen((void **)sh->env));
@@ -68,8 +68,8 @@ static void	code_is_three(t_shell *sh)
 
 void	free_mem(t_node *root, t_shell *sh, ssize_t code)
 {
-	if (code < 3)
-		code_less_then_three(root, sh, code);
-	if (code == 3)
-		code_is_three(sh);
+	if (code < END)
+		code_less_then_end(root, sh, code);
+	if (code == END)
+		code_is_end(sh);
 }
