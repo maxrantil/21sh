@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:40:06 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:40:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:07:45 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	ft_insertion_enter(t_term *t)
 			|| t->bslash)
 		{
 			t->history_row = -1;
-			ft_memcpy(t->history_buff, t->inp, t->bytes); // here is something that needs to be fixed
+			ft_memcpy(t->history_buff, t->inp, t->bytes);
 			t->inp[t->bytes++] = (char)t->ch;
 			ft_create_prompt_line(t, t->bytes);
 			t->index = t->bytes;
