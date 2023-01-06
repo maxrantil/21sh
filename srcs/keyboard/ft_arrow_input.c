@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:38:02 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:38:04 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 12:49:33 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	ft_right(t_term *t)
 	if (&t->inp[t->index] == &t->nl_addr[t->c_row + 1][-1])
 	{
 		t->c_col = -1;
-		// t->c_row++;
-		// ft_setcursor(++t->c_col, (ssize_t)ft_get_linenbr() + 1);
 		ft_setcursor(++t->c_col, t->start_row + ++t->c_row);
 	}
 	else
@@ -60,8 +58,6 @@ static void	ft_left(t_term *t)
 		else if (ft_is_prompt_line(t, t->c_row - 1))
 			t->c_col = t->m_prompt_len;
 		t->c_col += t->nl_addr[t->c_row] - t->nl_addr[t->c_row - 1];
-		// t->c_row--;
-		// ft_setcursor(--t->c_col, (ssize_t)ft_get_linenbr() - 1);
 		ft_setcursor(--t->c_col, t->start_row + --t->c_row);
 	}
 	else

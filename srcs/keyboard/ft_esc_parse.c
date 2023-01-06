@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:39:08 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:39:09 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:04:00 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	ft_cursor_beginning(t_term *t)
 		t->index = 0;
 	else
 		t->index = t->nl_addr[t->c_row] - t->nl_addr[0];
-	// ft_setcursor(t->c_col, ft_get_linenbr());
 	ft_setcursor(t->c_col, t->start_row + t->c_row);
 }
 
@@ -45,7 +44,6 @@ static void	ft_cursor_end(t_term *t)
 		t->index = t->bytes;
 	len = t->index - len;
 	t->c_col += &t->inp[t->index] - t->nl_addr[t->c_row];
-	// ft_setcursor(t->c_col, ft_get_linenbr());
 	ft_setcursor(t->c_col, t->start_row + t->c_row);
 }
 

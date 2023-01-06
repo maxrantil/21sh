@@ -6,13 +6,13 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:40:50 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/05 13:22:19 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:17:22 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-/**
+/*
  * It removes the newline character from the history buffer if it's preceded
  * by a backslash or if it's the last character in the buffer
  *
@@ -78,10 +78,10 @@ void	ft_nl_removal(t_term *t)
 	{
 		i = k;
 		if (!quote && t->history_buff[i] == '\n' \
-		&& ft_nl_removal_bslash_check(t, i))
+			&& ft_nl_removal_bslash_check(t, i))
 			k = ft_get_bslash_pos(t, i++);
 		else if ((t->history_buff[i] == S_QUO || t->history_buff[i] == D_QUO) \
-		&& !ft_nl_removal_bslash_check(t, i))
+			&& !ft_nl_removal_bslash_check(t, i))
 		{
 			if (!quote)
 				quote = t->history_buff[i];
@@ -90,7 +90,7 @@ void	ft_nl_removal(t_term *t)
 		}
 		ft_memmove((void *)&t->history_buff[k], (void *)&t->history_buff[i], \
 		ft_strlen(&t->history_buff[i]) + 1);
-		if (t->delim)
-			ft_strclr(ft_strchr(t->history_buff, '\n'));
 	}
+	if (t->delim)
+		ft_strclr(ft_strchr(t->history_buff, '\n'));
 }

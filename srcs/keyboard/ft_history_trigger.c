@@ -6,33 +6,15 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:39:52 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/05 13:29:15 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:20:57 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
 /*
- * It copies the contents of the history buffer into the input buffer
- *
- * @param t the term structure
- * @param dst the destination string
- * @param src the string to be copied
- */
-static void	ft_historycpy(t_term *t, char *dst, char *src)
-{
-	int		i;
-	size_t	len;
-
-	i = -1;
-	len = ft_strlen(t->inp);
-	while (src[++i] && (len + i) < (BUFF_SIZE - 1))
-		dst[i] = src[i];
-}
-
-/*
  * It copies the current input into a buffer, pushes the current input into
- * the history vector, and sets the current row to the history row
+ * the history ft_vector, and sets the current row to the history row
  *
  * @param t the term structure
  */
@@ -52,6 +34,24 @@ static void	ft_history_push(t_term *t)
 		t->history_row = t->c_row;
 	}
 	t->c_row = t->history_row;
+}
+
+/*
+ * It copies the contents of the history buffer into the input buffer
+ *
+ * @param t the term structure
+ * @param dst the buffer that will be written to
+ * @param src the string to be copied
+ */
+static void	ft_historycpy(t_term *t, char *dst, char *src)
+{
+	int		i;
+	size_t	len;
+
+	i = -1;
+	len = ft_strlen(t->inp);
+	while (src[++i] && (len + i) < (BUFF_SIZE - 1))
+		dst[i] = src[i];
 }
 
 /*
@@ -91,7 +91,7 @@ static void	ft_history_clear_line(t_term *t, ssize_t row)
 	ft_run_capability("cd");
 }
 
-/**
+/*
  * It takes the current input, pushes it to the history, then replaces
  * the current input with the history entry
  *

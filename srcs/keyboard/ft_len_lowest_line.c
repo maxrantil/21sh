@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:40:19 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:40:20 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:45:05 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@ ssize_t	ft_len_lowest_line(t_term *t, ssize_t row)
 	ssize_t	len;
 
 	if (t->nl_addr[row + 1])
-	{
-		if (!row)
-			len = t->nl_addr[row + 1] - t->nl_addr[row];
-		else
-			len = t->nl_addr[row + 1] - t->nl_addr[row] - 1;
-	}
+		len = t->nl_addr[row + 1] - t->nl_addr[row] - 1;
 	else
 		len = &t->inp[t->bytes] - t->nl_addr[row];
 	len += ft_get_prompt_len(t, row);

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:41:28 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/05 13:31:45 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:38:46 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_quote_flag_reset(t_term *t)
 	t->q_qty = 0;
 	t->quote = 0;
 	t->heredoc = 0;
+	ft_strdel(&t->delim);
 	while (t->inp[++i])
 	{
 		if ((t->inp[i] == D_QUO || t->inp[i] == S_QUO) && !t->heredoc)

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:37:29 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/05 13:21:42 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 12:15:38 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@
 static void	ft_scroll_down(t_term *t)
 {
 	ft_run_capability("vi");
-	ft_run_capability("sc");
-	ft_setcursor(0, t->ws_row);
-	ft_run_capability("sf");
-	ft_run_capability("rc");
+	if (t->nl_addr[t->c_row + 1])
+	{
+		ft_run_capability("sc");
+		ft_setcursor(0, t->ws_row);
+		ft_run_capability("sf");
+		ft_run_capability("rc");
+	}
 	ft_run_capability("do");
 	ft_run_capability("ve");
 }
@@ -55,7 +58,6 @@ void	ft_trigger_nl(t_term *t)
 	if (t->c_col == t->ws_col)
 	{
 		t->c_col = 0;
-		t->c_row++;
 		ft_setcursor(t->c_col, t->start_row + ++t->c_row);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:41:01 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:41:02 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:32:38 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	ft_print_input(t_term *t, ssize_t row, int mode)
 		if (ft_is_prompt_line(t, row))
 		{
 			if (!row)
-				col = write(STDOUT_FILENO, PROMPT, t->prompt_len);
+				col = ft_printf("{yel}${gre}>{nor} ");
 			else
-				col = write(STDOUT_FILENO, MINI_PROMPT, t->m_prompt_len);
+				col = ft_printf("{yel}${gre}>{nor} ");
 		}
 		else
 			col = 0;

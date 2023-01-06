@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:40:31 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:40:32 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:13:49 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_line_mv(t_term *t)
 		{
 			t->ch = ft_get_input();
 			{
-				// if (t->ch == ARROW_UP && t->c_row && ft_get_linenbr())
 				if (t->ch == ARROW_UP && t->c_row)
 					ft_line_up(t);
 			}

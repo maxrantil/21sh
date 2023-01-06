@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:41:06 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:41:07 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:25:36 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 static void	print_prompt(ssize_t row)
 {
 	if (!row)
-		ft_putstr(PROMPT);
+		ft_printf("{yel}${gre}>{nor} ");
 	else
-		ft_putstr(MINI_PROMPT);
+		ft_printf("{gre}>{nor} ");
 }
 
 /*
@@ -67,7 +67,6 @@ static void	ft_print_line_trail(t_term *t)
 	ssize_t	dis_row;
 
 	row = t->c_row;
-	// dis_row = ft_get_linenbr();
 	dis_row = t->start_row + t->c_row;
 	while (row <= t->total_row)
 	{

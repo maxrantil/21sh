@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:39:24 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/05 14:55:29 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:05:28 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	ft_get_linenbr(void)
 	len = 0;
 	while (read(0, buf + len, 1) == 1)
 	{
-		if (buf[len] == 'R' || len > 6)
+		if (buf[len++] == 'R' || len > 6)
 			break ;
-		++len;
 	}
 	len = 0;
 	i = 0;
