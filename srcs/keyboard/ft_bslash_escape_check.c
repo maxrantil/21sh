@@ -6,12 +6,19 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:38:23 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:38:24 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:18:40 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
+/*
+ * It checks if the character at position `pos` is escaped by an odd number
+ * of backslashes
+ *
+ * @param t The term structure
+ * @param pos the position of the character to check
+ */
 int	ft_bslash_escape_check(t_term *t, ssize_t pos)
 {
 	ssize_t	start;

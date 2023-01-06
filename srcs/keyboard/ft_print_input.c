@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:41:01 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/06 13:32:38 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:43:41 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_print_input(t_term *t, ssize_t row, int mode)
 			if (!row)
 				col = ft_printf("{yel}${gre}>{nor} ");
 			else
-				col = ft_printf("{yel}${gre}>{nor} ");
+				col = ft_printf("{gre}>{nor} ");
 		}
 		else
 			col = 0;

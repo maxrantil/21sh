@@ -6,12 +6,25 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:38:53 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:38:54 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:19:49 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
+/*
+ * It checks if the character at the given index is a backslash, a double
+ * quote, a single quote, or a less than sign. If it's a backslash, it sets
+ * the `bs` variable to 1. If it's a less than sign, it
+ * sets the `hd` variable to 1. If it's a double quote or a single quote, it
+ * checks if the character is escaped by a backslash. If it is, it returns 1.
+ * Otherwise, it returns 0
+ *
+ * @param t the term structure
+ * @param index the index of the current character in the input string
+ * @param bs backslash
+ * @param hd is a flag that indicates if the current character is a '<'
+ */
 static int	ft_inhibitor_catch(t_term *t, ssize_t index, int *bs, int *hd)
 {
 	*bs = 0;

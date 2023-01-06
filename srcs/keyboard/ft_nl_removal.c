@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:40:50 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/06 13:17:22 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:18:11 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_nl_removal_bslash_check(t_term *t, ssize_t pos)
 	return (0);
 }
 
-/**
+/*
  * It takes a string, and if it finds a backslash, it replaces it with a
  * semicolon and a space
  *

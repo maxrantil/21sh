@@ -6,12 +6,18 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:56:28 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/21 11:18:33 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:33:39 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
+/*
+ * It takes a 2d array of strings, and pushes each string into a vector
+ *
+ * @param t the term struct
+ * @param buf_2d a 2d array of strings, each string is a line of the file
+ */
 void	push_to_history(t_term *t, char ***buf_2d)
 {
 	int	buf_size;

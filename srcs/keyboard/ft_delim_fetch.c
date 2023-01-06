@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:38:58 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 10:38:59 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:20:11 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static int	ft_isseparator(char c)
 	return (0);
 }
 
+/*
+ * It prints an error message
+ * when the user enters a syntax error
+ *
+ * @param t the term structure
+ * @param ptr the pointer to the current character in the input string
+ */
 static void	delim_fetch_error(t_term *t, char *ptr)
 	{
 	if (*ptr && ft_isseparator(*ptr))
@@ -33,6 +40,14 @@ static void	delim_fetch_error(t_term *t, char *ptr)
 	t->heredoc = 0;
 }
 
+/**
+ * It returns a pointer to the
+ * first character after the second '<' character in the input string
+ *
+ * @param t the terminal structure
+ *
+ * @return The pointer to the first character after the second delimiter.
+ */
 static char	*strdelim(t_term *t)
 {
 	char	*ptr;

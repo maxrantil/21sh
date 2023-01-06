@@ -25,9 +25,122 @@ asdsadlkjasldkjasdlkjasdlkasjdasaddsasdsadlkjasldkjasdlkjasdlkasjdasaddsasdsadlk
 jasldkjasdlkjasdlkasjdasaddsasd
 
 
-after paste to last letter a 'c' appears.
-paste in max-length in heredoc and then ctrl+c out, press arrow up and it is a heap-overflow
+dont push emtpy lines to history
 
 
 
 asdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasdasdsdsadasdasdasdasdasdasdasdasdasdsadasdasd
+
+$> cat << EOF
+> saldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsa
+dsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsad
+saldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsads
+aldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsa
+ldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsal
+dkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsald
+kjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldk
+jaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkj
+askldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkja
+skldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjas
+kldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjask
+ldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskl
+dasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskld
+asjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjasklda
+sjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldasjdjsadsaldkjaskldas
+jdjsadsaldkjaskldasjdjsad
+> as
+$> cat << EOF
+> sdadasd
+>
+> dasdsadasd
+>
+> asdasdas
+>
+>
+> asd
+>
+$> cat << EOF
+> =================================================================
+==44333==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x610000000b00 at pc 0x000109c58360 bp 0x7ffee5fae210 sp 0x7ffee5fae208
+WRITE of size 8 at 0x610000000b00 thread T0
+    #0 0x109c5835f in ft_add_nl_last_row ft_add_nl_last_row.c:40
+    #1 0x109c5e05f in ft_insertion ft_insertion.c:66
+    #2 0x109c5d7d6 in ft_input_cycle ft_input_cycle.c:44
+    #3 0x109c636c8 in main main.c:40
+    #4 0x7fff762c13d4 in start (libdyld.dylib:x86_64+0x163d4)
+
+0x610000000b00 is located 0 bytes to the right of 192-byte region [0x610000000a40,0x610000000b00)
+allocated by thread T0 here:
+    #0 0x109d07793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x109c67196 in ft_memalloc ft_memalloc.c:19
+    #2 0x109c581ed in ft_add_nl_last_row ft_add_nl_last_row.c:37
+    #3 0x109c5e05f in ft_insertion ft_insertion.c:66
+    #4 0x109c5d7d6 in ft_input_cycle ft_input_cycle.c:44
+    #5 0x109c636c8 in main main.c:40
+    #6 0x7fff762c13d4 in start (libdyld.dylib:x86_64+0x163d4)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow ft_add_nl_last_row.c:40 in ft_add_nl_last_row
+Shadow bytes around the buggy address:
+  0x1c2000000110: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x1c2000000120: fa fa fa fa fa fa fa fa fd fd fd fd fd fd fd fd
+  0x1c2000000130: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x1c2000000140: fa fa fa fa fa fa fa fa 00 00 00 00 00 00 00 00
+  0x1c2000000150: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x1c2000000160:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c2000000170: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c2000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c2000000190: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c20000001a0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c20000001b0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==44333==ABORTING
+zsh: abort      ./21sh
+~/hive/21sh master *7 !12 ❯
+
+
+
+
+$> ";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldka
+s;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salk
+d;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;
+alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa
+;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k"
+;salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dl
+ksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;al
+skdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alsk
+dl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldk
+as;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";sal
+kd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad
+;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskds
+a;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k
+";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;d
+lksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;alskdsa;ldkas;dlksad;alskdl;k";salkd;a
+lskdsa;ldkas;dlksad;alskdl;k";salkd;alsk
+=================================================================
+==50974==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x61d000097e7f at pc 0x00010ef4be81 bp 0x7ffee0cc6140 sp 0x7ffee0cc6138
+READ of size 1 at 0x61d000097e7f thread T0
+    #0 0x10ef4be80 in exec_is_quote_somewhere exec_is_quote_somewhere.c:37
+    #1 0x10ef4c86c in parse_exec parse_exec.c:47
+    #2 0x10ef4ccb8 in parse_pipe parse_pipe.c:19
+    #3 0x10ef4cbe4 in parse_line parse_line.c:19
+    #4 0x10ef4b636 in main main.c:46
+    #5 0x7fff762c13d4 in start (libdyld.dylib:x86_64+0x163d4)                                                                          ✘ ABRT 2m 51s
