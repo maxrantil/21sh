@@ -136,9 +136,8 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_get_prompt_len \
 				$(KEYBOARD)ft_getline_nbr \
 				$(KEYBOARD)ft_heredoc_handling \
-				$(KEYBOARD)ft_history_file_get \
+				$(KEYBOARD)ft_history_add_command \
 				$(KEYBOARD)ft_history_get \
-				$(KEYBOARD)ft_history_reset_nl \
 				$(KEYBOARD)ft_history_trigger \
 				$(KEYBOARD)ft_history_write_to_file \
 				$(KEYBOARD)ft_history \

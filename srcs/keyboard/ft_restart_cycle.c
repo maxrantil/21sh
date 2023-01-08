@@ -12,7 +12,7 @@
 
 #include "keyboard.h"
 
-static void	heredoc_reset(t_term *t)
+/* static void	heredoc_reset(t_term *t)
 {
 	if (t->delim)
 	{
@@ -22,11 +22,13 @@ static void	heredoc_reset(t_term *t)
 	}
 	ft_strdel(&t->delim);
 	t->heredoc = 0;
-}
+} */
 
 void	ft_restart_cycle(t_term *t)
 {
-	heredoc_reset(t);
+	t->heredoc = 0;
+	ft_strdel(&t->delim);
+	// heredoc_reset(t);
     t->ch = 0;
     t->his = 0;
     t->quote = 0;

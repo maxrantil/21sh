@@ -64,9 +64,11 @@
 # define PROMPT "$> "
 # define MINI_PROMPT "> "
 
-# define BUFFSIZE   2048
-# define MAX_LINE   1024
-# define MAX_READ   8
+# define BUFFSIZE  	 	2048
+# define MAX_LINE  	 	2048
+# define MAX_HISTORY	1024
+# define MAX_PATH		2048
+# define MAX_READ		8
 
 typedef struct s_cb
 {
@@ -78,7 +80,7 @@ typedef struct s_term
 {
 	char		inp[BUFFSIZE];
 	char		history_buff[BUFFSIZE];
-	t_vec		v_history;
+	char		**history;
 	t_cb		clipboard;
 	char		**nl_addr;
 	char		*history_file;
@@ -86,6 +88,7 @@ typedef struct s_term
 	char		*delim;
 	int			ch;
 	int			history_row;
+	int			history_size;
 	ssize_t		ws_col;
 	ssize_t		ws_row;
 	ssize_t		index;
@@ -124,9 +127,8 @@ ssize_t	ft_get_prompt_len(t_term *t, ssize_t row);
 int		ft_get_linenbr(void);
 void	ft_heredoc_handling(t_term *t, int index);
 void	ft_history(t_term *t);
-char	*ft_history_file_get(void);
+void	ft_history_add_command(t_term *t, char *command);
 void	ft_history_get(t_term *t);
-void	ft_history_reset_nl(t_term *t, char *inp);
 void	ft_history_write_to_file(t_term *t);
 void	ft_history_trigger(t_term *t, ssize_t his);
 void	ft_init(t_term *t);
