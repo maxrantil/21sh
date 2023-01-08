@@ -68,41 +68,41 @@
 # define MAX_LINE   1024
 # define MAX_READ   8
 
-typedef struct clipboard
+typedef struct s_cb
 {
 	int		type;
 	char	*buff;
-}			t_clipboard;
+}			t_cb;
 
 typedef struct s_term
 {
-	char			inp[BUFFSIZE];
-	char			history_buff[BUFFSIZE];
-	t_vec			v_history;
-	t_clipboard		clipboard;
-	char			**nl_addr;
-	char			*history_file;
-	char			*input_cpy;
-	char			*delim;
-	int				ch;
-	int				history_row;
-	ssize_t			ws_col;
-	ssize_t			ws_row;
-	ssize_t			index;
-	ssize_t			bytes;
-	ssize_t			start_row;
-	ssize_t			c_col;
-	ssize_t			c_row;
-	ssize_t			total_row;
-	ssize_t			total_row_cpy;
-	ssize_t			prompt_len;
-	ssize_t			m_prompt_len;
-	ssize_t			q_qty;
-	ssize_t			bslash;
-	ssize_t			heredoc;
-	ssize_t			his;
-	ssize_t			sigint;
-	char			quote;
+	char		inp[BUFFSIZE];
+	char		history_buff[BUFFSIZE];
+	t_vec		v_history;
+	t_cb		clipboard;
+	char		**nl_addr;
+	char		*history_file;
+	char		*input_cpy;
+	char		*delim;
+	int			ch;
+	int			history_row;
+	ssize_t		ws_col;
+	ssize_t		ws_row;
+	ssize_t		index;
+	ssize_t		bytes;
+	ssize_t		start_row;
+	ssize_t		c_col;
+	ssize_t		c_row;
+	ssize_t		total_row;
+	ssize_t		total_row_cpy;
+	ssize_t		prompt_len;
+	ssize_t		m_prompt_len;
+	ssize_t		q_qty;
+	ssize_t		bslash;
+	ssize_t		heredoc;
+	ssize_t		his;
+	ssize_t		sigint;
+	char		quote;
 }			t_term;
 
 void	ft_add_nl_last_row(t_term *t, char *array, ssize_t pos);

@@ -28,6 +28,8 @@ void	sig_handler(int num)
 	{
 		write(1, "\n", 1);
 		ft_restart_cycle(g_t);
+		ft_memdel((void **)&g_t->nl_addr);
+    	ft_add_nl_last_row(g_t, g_t->inp, 0);
 		ft_printf("{yel}${gre}>{nor} ");
 		g_t->sigint = 1;
 	}

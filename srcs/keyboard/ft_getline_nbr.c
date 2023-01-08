@@ -12,7 +12,7 @@
 
 #include "keyboard.h"
 
-t_term	*g_t;
+extern t_term	*g_t;
 
 /*
  * It gets the current line number of the cursor

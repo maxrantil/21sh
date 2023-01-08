@@ -12,7 +12,7 @@
 
 #include "keyboard.h"
 
-/**
+/*
  * It returns the length of the line at the given row
  *
  * @param t the terminal structure
@@ -31,7 +31,7 @@ static int	line_len(t_term *t, ssize_t row)
 	return (len);
 }
 
-/**
+/*
  * It transfers the changes
  * made to the cursor position to the terminal structure
  *
@@ -49,7 +49,7 @@ static void	transfer_changes(t_term *t, ssize_t row, ssize_t col, int mode)
 	}
 }
 
-/**
+/*
  * It prints the input buffer to the terminal, and then moves the cursor
  * to the correct position
  *

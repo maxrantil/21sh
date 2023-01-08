@@ -27,15 +27,17 @@ static void	heredoc_reset(t_term *t)
 void	ft_restart_cycle(t_term *t)
 {
 	heredoc_reset(t);
-	t->quote = 0;
-	t->q_qty = 0;
-	t->bytes = 0;
-	t->index = 0;
-	t->c_col = t->prompt_len;
-	t->total_row = 0;
-	t->his = 0;
-	t->c_row = 0;
-	ft_strclr(t->inp);
-	ft_strclr(t->history_buff);
-	t->start_row = ft_get_linenbr();
+    t->ch = 0;
+    t->his = 0;
+    t->quote = 0;
+    t->q_qty = 0;
+    t->bytes = 0;
+    t->index = 0;
+    t->c_col = t->prompt_len;
+    t->total_row = 0;
+    t->bslash = 0;
+    t->c_row = 0;
+    ft_strclr(t->inp);
+    ft_strclr(t->history_buff);
+    t->start_row = ft_get_linenbr();
 }
