@@ -144,3 +144,9 @@ READ of size 1 at 0x61d000097e7f thread T0
     #3 0x10ef4cbe4 in parse_line parse_line.c:19
     #4 0x10ef4b636 in main main.c:46
     #5 0x7fff762c13d4 in start (libdyld.dylib:x86_64+0x163d4)                                                                          ✘ ABRT 2m 51s
+
+
+
+
+
+    ctrl+c when heredoc has chars on the line will fuck things up.

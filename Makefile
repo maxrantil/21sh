@@ -92,6 +92,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(BUILTIN)sh_echo \
 				$(BUILTIN)sh_env \
 				$(BUILTIN)sh_exit \
+				$(BUILTIN)sh_history \
 				$(BUILTIN)sh_unsetenv \
 				$(BUILTIN)sh_setenv \
 				$(BUILTIN)unsetenv_var \

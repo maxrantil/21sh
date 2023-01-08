@@ -111,6 +111,7 @@ int		sh_cd(t_node *n, t_shell *sh);
 int		sh_echo(t_node *n, t_shell *sh);
 int		sh_env(t_node *n, t_shell *sh);
 int		sh_exit(t_node *n, t_shell *sh);
+int		sh_history(t_node *n, t_shell *sh);
 int		sh_hash(t_node *n, t_shell *sh);
 int		sh_setenv(t_node *n, t_shell *sh);
 int		sh_unsetenv(t_node *n, t_shell *sh);
@@ -180,6 +181,7 @@ static const char		*g_builtin_str[] = {
 	"echo",
 	"env",
 	"exit",
+	"history",
 	"setenv",
 	"unsetenv"
 };
@@ -189,6 +191,7 @@ static const t_fptr		g_builtin_func[] = {
 	&sh_echo,
 	&sh_env,
 	&sh_exit,
+	&sh_history,
 	&sh_setenv,
 	&sh_unsetenv
 };

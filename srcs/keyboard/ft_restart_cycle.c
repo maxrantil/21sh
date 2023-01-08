@@ -12,23 +12,21 @@
 
 #include "keyboard.h"
 
-/* static void	heredoc_reset(t_term *t)
+static void	heredoc_reset(t_term *t)
 {
 	if (t->delim)
 	{
 		ft_memcpy(t->history_buff, t->inp, t->bytes);
 		ft_nl_removal(t);
-		vec_push(&t->v_history, t->history_buff);
+		ft_history_add_command(t, t->history_buff);
 	}
 	ft_strdel(&t->delim);
 	t->heredoc = 0;
-} */
+}
 
 void	ft_restart_cycle(t_term *t)
 {
-	t->heredoc = 0;
-	ft_strdel(&t->delim);
-	// heredoc_reset(t);
+	heredoc_reset(t);
     t->ch = 0;
     t->his = 0;
     t->quote = 0;

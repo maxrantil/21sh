@@ -43,17 +43,20 @@ static void	increase_history_size(t_term *t)
 	int		i;
 
 	temp = (char **)malloc(sizeof(char *) * (t->history_size + 2));
-	if (!temp)
-		exit(1);
-	i = 0;
-	while (t->history[i])
+	if (temp)
 	{
-		temp[i] = ft_strdup(t->history[i]);
-		i++;
+		i = -1;
+		while (t->history[++i])
+			temp[i] = ft_strdup(t->history[i]);
+		temp[i] = NULL;
+		ft_arrfree((void ***)&t->history, ft_arrlen((void **)t->history));
+		t->history = temp;
 	}
-	temp[i] = NULL;
-	ft_arrfree((void ***)&t->history, ft_arrlen((void **)t->history));
-	t->history = temp;
+	else
+	{
+		ft_putendl_fd("21sh: malloc error, increase_history_size()", 2);
+		exit(1);
+	}
 }
 
 void	ft_history_add_command(t_term *t, char *command)

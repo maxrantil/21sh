@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_history.c                                       :+:      :+:    :+:   */
+/*   sh_history.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 09:38:04 by mrantil           #+#    #+#             */
-/*   Updated: 2022/11/29 16:42:41 by mrantil          ###   ########.fr       */
+/*   Created: 2022/09/19 13:33:14 by mrantil           #+#    #+#             */
+/*   Updated: 2022/12/12 10:48:37 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keyboard.h"
+#include "ft_21sh.h"
 
-/*
- * It prints the history of the shell
- *
- * @param t the terminal structure
- */
-void	ft_history(t_term *t)
+extern t_term	*g_t;
+
+int	sh_history(t_node *n, t_shell *sh)
 {
-	int		i;
- 
-	i = 0;
-	while (t->history[i])
-	{
-		ft_printf("%4d %s\n", i, t->history[i]);
-		i++;
-	}
+	(void)sh;
+	(void)n->arg;
+	ft_history(g_t);
+	return (1);
 }

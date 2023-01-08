@@ -25,7 +25,7 @@ void	ft_enable_raw_mode(t_shell *sh)
 		exit(1);
 	}
 	sh->raw = sh->orig_termios;
-	sh->raw.c_lflag &= ~(ICANON | ECHO | IEXTEN);
+	sh->raw.c_lflag &= ~(ICANON | ECHO | IEXTEN | ISIG);
 	sh->raw.c_iflag &= ~(IXON | BRKINT);
 	sh->raw.c_cc[VMIN] = 1;
 	sh->raw.c_cc[VTIME] = 0;

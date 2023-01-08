@@ -36,22 +36,31 @@ static void	ft_history_reset_nl(t_term *t, char *inp)
 	t->index = t->bytes;
 }
 
+static void	ft_historycpy(t_term *t, char *dst, char *src)
+{
+	int		i;
+	size_t	len;
+
+	i = -1;
+	len = ft_strlen(t->inp);
+	while (src && src[++i] && (len + i) < (MAX_HISTORY - 1))
+		dst[i] = src[i];
+}
+
+/*
+ * It updates the current
+ * input line with the history line
+ *
+ * @param t the term structure
+ * @param history the history string to be copied into the input line
+ */
 static void	ft_history_inp_update(t_term *t, char *history)
 {
+	ft_strclr(t->nl_addr[t->c_row]);
 	if (history)
-	{
-		ft_memset((void *)t->nl_addr[t->c_row], '\0', \
-		ft_strlen(t->nl_addr[t->c_row]));
-		ft_memcpy(t->nl_addr[t->c_row], history, ft_strlen(history));
-	}
-	else
-	{
-		ft_memset((void *)t->nl_addr[t->c_row], '\0', \
-		ft_strlen(t->nl_addr[t->c_row]));
-		if (t->input_cpy)
-			ft_memcpy(t->nl_addr[t->c_row], t->input_cpy, \
-			ft_strlen(t->input_cpy));
-	}
+		ft_historycpy(t, t->nl_addr[t->c_row], history);
+	else if (t->input_cpy)
+		ft_historycpy(t, t->nl_addr[t->c_row], t->input_cpy);
 }
 
 static void	ft_history_clear_line(t_term *t, ssize_t row)
@@ -84,6 +93,8 @@ static void	ft_history_push(t_term *t)
 		}
 		t->history_row = t->c_row;
 	}
+	else if (t->history_row > 0)
+        t->history_row--;
 	t->c_row = t->history_row;
 }
 
@@ -113,5 +124,6 @@ void	ft_history_trigger(t_term *t, ssize_t pos)
 		ft_strdel(&t->input_cpy);
 		t->history_row = -1;
 	}
+	ft_memdel((void *)&history);
 	ft_run_capability("ve");
 }

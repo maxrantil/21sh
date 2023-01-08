@@ -28,8 +28,6 @@ void	ft_end_cycle(t_term *t)
 		ft_nl_removal(t);
 		ft_history_add_command(t, t->history_buff);
 	}
-	if (!ft_strncmp(t->inp, "history", 7))
-		ft_history(t);
 	ft_memdel((void **)&t->nl_addr);
 	if (t->input_cpy)
 		ft_strdel(&t->input_cpy);

@@ -24,7 +24,7 @@ void	sig_handler(int num)
 {
 	if (num == SIGWINCH)
 		ft_window_size(g_t);
-	if (num == SIGINT)
+	/* if (num == SIGINT)
 	{
 		write(1, "\n", 1);
 		ft_restart_cycle(g_t);
@@ -32,7 +32,7 @@ void	sig_handler(int num)
     	ft_add_nl_last_row(g_t, g_t->inp, 0);
 		ft_printf("{yel}${gre}>{nor} ");
 		g_t->sigint = 1;
-	}
+	} */
 }
 
 /*
@@ -41,5 +41,5 @@ void	sig_handler(int num)
 void	ft_init_signals(void)
 {
 	signal(SIGWINCH, sig_handler);
-	signal(SIGINT, sig_handler);
+	/* signal(SIGINT, sig_handler); */
 }
