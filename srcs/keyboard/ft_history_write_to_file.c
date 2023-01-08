@@ -19,22 +19,20 @@
  */
 void	ft_history_write_to_file(t_term *t)
 {
-	size_t	cpy;
+	int		cpy;
 	int		fd;
 
 	fd = open(t->history_file, O_WRONLY | O_TRUNC);
 	if (fd)
 	{
 		cpy = 0;
-		if (t->v_history.len > 1024)
-			cpy = t->v_history.len % 1024;
-		while (cpy < t->v_history.len)
+		if (t->history_size > MAX_HISTORY)
+			cpy = t->history_size % MAX_HISTORY;
+		while (cpy < t->history_size)
 		{
-			ft_putendl_fd((char *)vec_get(&t->v_history, cpy), fd);
+			ft_putendl_fd((char *)t->history[cpy], fd);
 			cpy++;
 		}
 		close(fd);
 	}
-	ft_strdel(&t->history_file);
-	vec_free(&t->v_history);
 }

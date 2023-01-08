@@ -19,11 +19,14 @@
  */
 void	ft_history(t_term *t)
 {
-	size_t	num_incr;
+	int		i;
 
-	write(1, "\n", 1);
-	num_incr = 0;
-	while (++num_incr < t->v_history.len)
-		ft_printf("%4d  %s\n", num_incr, \
-		(char *)vec_get(&t->v_history, num_incr - 1));
+	i = 0;
+	while (t->history[i])
+	{
+		ft_printf("%4d %s", i, t->history[i]);
+		i++;
+		if (t->history[i])
+			write(1, "\n", 1);
+	}
 }

@@ -13,52 +13,67 @@
 #include "keyboard.h"
 
 /*
- * It takes a 2d array of strings, and pushes each string into a vector
- *
- * @param t the term struct
- * @param buf_2d a 2d array of strings, each string is a line of the file
- */
-void	push_to_history(t_term *t, char ***buf_2d)
+	TEST: getcwd failure
+*/
+static char	*get_file(void)
 {
-	int	buf_size;
+	char	cwd[MAX_PATH];
+	char	*home;
+	char	*file;
 
-	vec_new(&t->v_history, 0, sizeof(char) * BUFF_SIZE + 1);
-	buf_size = -1;
-	while ((*buf_2d)[++buf_size])
-		vec_push(&t->v_history, (*buf_2d)[buf_size]);
-	buf_size = -1;
-	while ((*buf_2d)[++buf_size])
-		ft_strdel(&(*buf_2d)[buf_size]);
-	free(*buf_2d);
+	home = getenv("HOME");
+	if (home)
+		return (ft_strjoin(home, "/.42sh_history"));
+	file = getcwd(cwd, sizeof(cwd));
+	return (ft_strjoin(file, "/.42sh_history"));
 }
 
-/*
- * It reads the history file and stores it in a vector
- *
- * @param t the terminal structure
- */
-void	ft_history_get(t_term *t)
+static void	count_history(t_term *t)
 {
-	char	*buf;
-	char	**buf_2d;
 	int		fd;
-	int		buf_size;
+	char	*line;
+	int		size;
 
-	buf_2d = (char **)ft_memalloc(sizeof(char *) * 1048 + 1);
-	t->history_file = ft_history_file_get();
-	fd = open(t->history_file, O_RDONLY | O_CREAT, 0644);
+	fd = open(t->history_file, O_RDONLY | O_CREAT, 420);
+	size = 0;
 	if (fd)
 	{
-		buf = NULL;
-		buf_size = 0;
-		while (get_next_line(fd, &buf) > 0)
+		line = NULL;
+		while (get_next_line(fd, &line) > 0)
 		{
-			buf_2d[buf_size++] = ft_strdup(buf);
-			ft_strdel(&buf);
+			size++;
+			ft_strdel(&line);
 		}
-		ft_strdel(&buf);
-		buf_2d[buf_size] = NULL;
-		push_to_history(t, &buf_2d);
+		ft_strdel(&line);
 		close(fd);
+	}
+	t->history_size = size;
+}
+
+void	ft_history_get(t_term *t)
+{
+	char	*line;
+	int		fd;
+	int		i;
+
+	t->history_file = get_file();
+	count_history(t);
+	t->history = (char **)malloc(sizeof(char *) * (t->history_size + 1));
+	ft_bzero(t->history, t->history_size + 1);
+	i = 0;
+	fd = open(t->history_file, O_RDONLY | O_CREAT, 420);
+	if (fd)
+	{
+		line = NULL;
+		while (get_next_line(fd, &line) > 0)
+		{
+			t->history[i] = ft_strdup(line);
+			i++;
+			ft_strdel(&line);
+		}
+		ft_strdel(&line);
+		close(fd);
+		t->history[i] = NULL;
+		t->history_size = i;
 	}
 }

@@ -51,5 +51,7 @@ int	main(void)
 		free_mem(root, &sh, LOOP);
 	}
 	free_mem(root, &sh, END);
+	if (t.history)
+		ft_arrfree((void ***)&t.history, ft_arrlen((void **)t.history));
 	exit(0);
 }

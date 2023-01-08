@@ -26,7 +26,7 @@ void	ft_end_cycle(t_term *t)
 	{
 		ft_memcpy(t->history_buff, t->inp, t->bytes);
 		ft_nl_removal(t);
-		vec_push(&t->v_history, t->history_buff);
+		ft_history_add_command(t, t->history_buff);
 	}
 	if (!ft_strncmp(t->inp, "history", 7))
 		ft_history(t);
