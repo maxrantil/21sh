@@ -66,7 +66,7 @@ void	ft_deletion_shift(t_term *t, ssize_t index)
 		ft_quote_flag_check(t, t->index);
 	else if (heredoc)
 	{
-		ft_heredoc_handling(t, t->index - 1);
+		ft_heredoc_handling(t);
 		if (!t->heredoc && t->delim)
 			ft_strdel(&t->delim);
 	}

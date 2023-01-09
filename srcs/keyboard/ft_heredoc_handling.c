@@ -18,21 +18,24 @@
  *
  * @param t the term structure
  */
-void	ft_heredoc_handling(t_term *t, int index)
-{
-	ssize_t	start;
+	void	ft_heredoc_handling(t_term *t)
+	{
 	ssize_t	count;
+	ssize_t	start;
 
-	start = index;
-	while (start && t->inp[start] == '<')
-		start--;
-	if (start)
-		start++;
-	count = start;
-	while (count < t->bytes && t->inp[count] == '<')
-		count++;
-	if ((count - start) == 2)
+	count = 0;
+	start = -1;
+	while (t->inp[++start] && count <= 2)
+	{
+		if (t->inp[start] == '<')
+			count++;
+		else if (t->inp[start] != '<' && count == 2)
+			break ;
+		else
+			count = 0;
+	}
+	if (count == 2)
 		t->heredoc = 1;
 	else
 		t->heredoc = 0;
-}
+	}

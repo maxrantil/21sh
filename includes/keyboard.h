@@ -126,7 +126,7 @@ char	*ft_get_file(char *str);
 int		ft_get_input(void);
 ssize_t	ft_get_prompt_len(t_term *t, ssize_t row);
 int		ft_get_linenbr(void);
-void	ft_heredoc_handling(t_term *t, int index);
+void	ft_heredoc_handling(t_term *t);
 void	ft_history(t_term *t);
 void	ft_history_add_command(t_term *t, char *command);
 void	ft_history_get(t_term *t);

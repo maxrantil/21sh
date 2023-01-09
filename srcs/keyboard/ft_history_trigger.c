@@ -70,7 +70,6 @@ static void	ft_history_clear_line(t_term *t, ssize_t row)
  */
 static void	ft_history_push(t_term *t)
 {
-	ft_run_capability("vi");
 	if (t->history_row == -1)
 	{
 		t->input_cpy = ft_strsub(t->nl_addr[t->c_row], 0, \
@@ -104,14 +103,14 @@ void	ft_history_trigger(t_term *t, ssize_t pos)
 	ssize_t	row;
 	char	*history;
 
+	history = NULL;
 	if (t->c_row != t->total_row)
 		return ;
+	ft_run_capability("vi");
 	row = t->c_row;
 	ft_history_push(t);
 	if (t->history[t->history_size - pos])
-		history = ft_strdup(t->history[t->history_size - (size_t)pos]);
-	else
-		history = t->input_cpy;
+		history = t->history[t->history_size - (size_t)pos];
 	ft_history_clear_line(t, row);
 	ft_history_inp_update(t, history);
 	ft_history_reset_nl(t, t->nl_addr[t->history_row]);
@@ -124,7 +123,5 @@ void	ft_history_trigger(t_term *t, ssize_t pos)
 		ft_strdel(&t->input_cpy);
 		t->history_row = -1;
 	}
-	if (history && history != t->input_cpy)
-		ft_memdel((void *)&history);
 	ft_run_capability("ve");
 }

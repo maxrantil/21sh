@@ -34,13 +34,11 @@ void	ft_quote_flag_reset(t_term *t)
 			if (!ft_bslash_escape_check(t, i))
 				ft_quote_handling(t, t->inp[i]);
 		}
-		if (t->inp[i] == '<')
+		if (t->inp[i] == '<' && !t->quote)
 		{
-			ft_heredoc_handling(t, i);
+			ft_heredoc_handling(t);
 			if (!t->heredoc && t->delim)
 				ft_strdel(&t->delim);
-			else
-				ft_delim_fetch(t);
 		}
 	}
 }

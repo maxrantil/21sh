@@ -32,9 +32,9 @@ static void	ft_insertion_char(t_term *t)
 		if (!ft_bslash_escape_check(t, t->index - 1))
 			ft_quote_flag_reset(t);
 	}
-	if (t->inp[t->index - 1] == '<' && !t->heredoc)
+	if (t->inp[t->index - 1] == '<' && !t->heredoc && !t->quote)
 	{
-		ft_heredoc_handling(t, t->index - 1);
+		ft_heredoc_handling(t);
 		if (!t->heredoc && t->delim)
 			ft_strdel(&t->delim);
 	}
