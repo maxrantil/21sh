@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2023/01/06 14:35:43 by mrantil          ###   ########.fr        #
+#    Updated: 2023/01/09 10:26:15 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,7 +143,6 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_history_write_to_file \
 				$(KEYBOARD)ft_history \
 				$(KEYBOARD)ft_init_signals \
-				$(KEYBOARD)ft_init \
 				$(KEYBOARD)ft_init_term \
 				$(KEYBOARD)ft_input_cycle \
 				$(KEYBOARD)ft_insertion \

@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:50:00 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/20 12:57:35 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/09 10:28:43 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_enable_raw_mode(t_shell *sh)
 		exit(1);
 	}
 	sh->raw = sh->orig_termios;
-	sh->raw.c_lflag &= ~(ICANON | ECHO | IEXTEN | ISIG);
+	sh->raw.c_lflag &= ~(ICANON | ECHO | IEXTEN);
 	sh->raw.c_iflag &= ~(IXON | BRKINT);
 	sh->raw.c_cc[VMIN] = 1;
 	sh->raw.c_cc[VTIME] = 0;
