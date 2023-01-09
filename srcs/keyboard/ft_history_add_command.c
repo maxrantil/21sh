@@ -61,8 +61,15 @@ static void	increase_history_size(t_term *t)
 
 void	ft_history_add_command(t_term *t, char *command)
 {
+	int    i;
+
 	if (t->history_size <= MAX_HISTORY)
 	{
+		i = 0;
+		while (command[i] && ft_isspace(&command[i]))
+			i++;
+		if (!command[i])
+			return ;
 		increase_history_size(t);
 		t->history[t->history_size] = ft_strdup(command);
 		t->history_size++;

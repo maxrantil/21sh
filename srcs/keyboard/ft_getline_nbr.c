@@ -21,7 +21,7 @@ extern t_term	*g_t;
  */
 int	ft_get_linenbr(void)
 {
-	char	buf[MAX_READ];
+	char	buf[BUFF_SIZE];
 	int		len;
 	int		i;
 
