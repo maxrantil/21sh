@@ -6,27 +6,11 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:56:28 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/06 14:33:39 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/09 12:58:46 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
-
-/*
-	TEST: getcwd failure
-*/
-static char	*get_file(void)
-{
-	char	cwd[MAX_PATH];
-	char	*home;
-	char	*file;
-
-	home = getenv("HOME");
-	if (home)
-		return (ft_strjoin(home, "/.42sh_history"));
-	file = getcwd(cwd, sizeof(cwd));
-	return (ft_strjoin(file, "/.42sh_history"));
-}
 
 static void	count_history(t_term *t)
 {
@@ -56,7 +40,7 @@ void	ft_history_get(t_term *t)
 	int		fd;
 	int		i;
 
-	t->history_file = get_file();
+	t->history_file = ft_get_file("/.42sh_history");
 	count_history(t);
 	t->history = (char **)malloc(sizeof(char *) * (t->history_size + 1));
 	ft_bzero(t->history, t->history_size + 1);

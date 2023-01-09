@@ -6,36 +6,19 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:39:52 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/06 14:42:55 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/09 12:37:58 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keyboard.h"
 
-static void	ft_history_reset_nl(t_term *t, char *inp)
-{
-	ssize_t	i;
-	ssize_t	col;
-	ssize_t	row;
-
-	i = -1;
-	col = 0;
-	row = t->c_row;
-	while (inp[++i])
-	{
-		col++;
-		if (((col + ft_get_prompt_len(t, row))) == t->ws_col || inp[i] == '\n')
-		{
-			row++;
-			col = 0;
-			t->total_row++;
-			ft_add_nl_last_row(t, inp, i + 1);
-		}
-	}
-	t->bytes = &inp[i] - t->nl_addr[0];
-	t->index = t->bytes;
-}
-
+/*
+ * It copies the contents of the current input buffer into the history buffer
+ *
+ * @param t the term structure
+ * @param dst the destination string
+ * @param src the string to copy
+ */
 static void	ft_historycpy(t_term *t, char *dst, char *src)
 {
 	int		i;
@@ -78,8 +61,16 @@ static void	ft_history_clear_line(t_term *t, ssize_t row)
 	ft_run_capability("cd");
 }
 
+/*
+ * It copies the current line
+ * into a buffer, then it adds the current line to the history, then it sets the
+ * current row to the history row
+ *
+ * @param t the term structure
+ */
 static void	ft_history_push(t_term *t)
 {
+	ft_run_capability("vi");
 	if (t->history_row == -1)
 	{
 		t->input_cpy = ft_strsub(t->nl_addr[t->c_row], 0, \
@@ -93,11 +84,21 @@ static void	ft_history_push(t_term *t)
 		}
 		t->history_row = t->c_row;
 	}
-	else if (t->history_row > 0)
-        t->history_row--;
 	t->c_row = t->history_row;
 }
 
+/*
+ * It takes the current row, pushes the current input to the history, then clears
+ * the current line,
+ * updates the input with the history, resets the newline address, resets the
+ * quote flag, prints the
+ * input, and then deletes the history if it's empty
+ *
+ * @param t the term structure
+ * @param pos The position of the history to be retrieved.
+ *
+ * @return the address of the first character of the string.
+ */
 void	ft_history_trigger(t_term *t, ssize_t pos)
 {
 	ssize_t	row;
@@ -107,7 +108,6 @@ void	ft_history_trigger(t_term *t, ssize_t pos)
 		return ;
 	row = t->c_row;
 	ft_history_push(t);
-	ft_run_capability("vi");
 	if (t->history[t->history_size - pos])
 		history = ft_strdup(t->history[t->history_size - (size_t)pos]);
 	else

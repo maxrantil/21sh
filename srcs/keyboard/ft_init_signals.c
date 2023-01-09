@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:17:16 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/09 10:27:39 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/09 13:37:41 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	sig_handler(int num)
 	{
 		write(1, "\n", 1);
 		ft_restart_cycle(g_t);
-		ft_memdel((void **)&g_t->nl_addr);
-    	ft_add_nl_last_row(g_t, g_t->inp, 0);
 		ft_printf("{yel}${gre}>{nor} ");
 		g_t->sigint = 1;
 	}

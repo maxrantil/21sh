@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2023/01/06 14:26:49 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/09 12:57:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	ft_deletion_shift(t_term *t, ssize_t index);
 int		ft_delim_fetch(t_term *t);
 void	ft_end_cycle(t_term *t);
 void	ft_esc_parse(t_term *t);
+char	*ft_get_file(char *str);
 int		ft_get_input(void);
 ssize_t	ft_get_prompt_len(t_term *t, ssize_t row);
 int		ft_get_linenbr(void);
@@ -130,6 +131,7 @@ void	ft_history(t_term *t);
 void	ft_history_add_command(t_term *t, char *command);
 void	ft_history_get(t_term *t);
 void	ft_history_write_to_file(t_term *t);
+void	ft_history_reset_nl(t_term *t, char *inp);
 void	ft_history_trigger(t_term *t, ssize_t his);
 void	ft_init(t_term *t);
 void	ft_init_term(t_term *t);

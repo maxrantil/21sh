@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2023/01/09 10:26:15 by mrantil          ###   ########.fr        #
+#    Updated: 2023/01/09 12:57:51 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CFLAGS		+=	-Wpedantic
 CFLAGS		+=	-O3
 
 LEAK_CHECK	=	-g
-#LEAK_CHECK	+=	-fsanitize=address
+LEAK_CHECK	+=	-fsanitize=address
 
 UNAME		= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -131,6 +131,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_deletion_shift \
 				$(KEYBOARD)ft_delim_fetch \
 				$(KEYBOARD)ft_end_cycle \
+				$(KEYBOARD)ft_get_file \
 				$(KEYBOARD)ft_esc_parse \
 				$(KEYBOARD)ft_quote_flag_reset \
 				$(KEYBOARD)ft_get_input \
@@ -139,6 +140,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_heredoc_handling \
 				$(KEYBOARD)ft_history_add_command \
 				$(KEYBOARD)ft_history_get \
+				$(KEYBOARD)ft_history_reset_nl \
 				$(KEYBOARD)ft_history_trigger \
 				$(KEYBOARD)ft_history_write_to_file \
 				$(KEYBOARD)ft_history \

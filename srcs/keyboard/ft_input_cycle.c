@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:46:24 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/09 10:28:01 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/09 12:40:58 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ static int	ft_ctrl(t_term *t)
 		ft_printf("{yel}${gre}>{nor} ");
 		return (0);
 	}
-	/* else if (t->ch == CTRL_C)
-	{
-		write(1, "\n", 1);
-		ft_memdel((void **)&t->nl_addr);
-    	ft_add_nl_last_row(t, t->inp, 0);
-		ft_restart_cycle(t);
-		ft_printf("{yel}${gre}>{nor} ");
-		return (0);
-	} */
 	return (1);
 }
 
