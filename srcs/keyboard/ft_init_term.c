@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:58:29 by mrantil           #+#    #+#             */
-/*   Updated: 2022/12/16 12:55:34 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/09 10:35:21 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	ft_init_to_zero(t_term *t)
 	t->total_row_cpy = 0;
 	t->clipboard.type = 0;
 	t->his = 0;
+	t->history_row = -1;
 	t->sigint = 0;
 }
 
