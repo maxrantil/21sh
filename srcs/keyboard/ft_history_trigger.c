@@ -111,7 +111,7 @@ void	ft_history_trigger(t_term *t, ssize_t pos)
 	if (t->history[t->history_size - pos])
 		history = ft_strdup(t->history[t->history_size - (size_t)pos]);
 	else
-		history = ft_strdup("");
+		history = t->input_cpy;
 	ft_history_clear_line(t, row);
 	ft_history_inp_update(t, history);
 	ft_history_reset_nl(t, t->nl_addr[t->history_row]);
@@ -124,6 +124,7 @@ void	ft_history_trigger(t_term *t, ssize_t pos)
 		ft_strdel(&t->input_cpy);
 		t->history_row = -1;
 	}
-	ft_memdel((void *)&history);
+	if (history && history != t->input_cpy)
+		ft_memdel((void *)&history);
 	ft_run_capability("ve");
 }

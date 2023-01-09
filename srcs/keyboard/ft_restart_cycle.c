@@ -38,8 +38,8 @@ void	ft_restart_cycle(t_term *t)
 	t->bslash = 0;
 	t->c_row = 0;
 	t->history_row = -1;
+	ft_strdel(&t->input_cpy);
 	ft_memdel((void **)&t->nl_addr);
-	ft_add_nl_last_row(t, t->inp, 0);
 	ft_strclr(t->inp);
 	ft_strclr(t->history_buff);
 	t->start_row = ft_get_linenbr();

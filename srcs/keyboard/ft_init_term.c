@@ -49,7 +49,6 @@ void	ft_init_term(t_term *t)
 	ft_memset(t->history_buff, '\0', BUFFSIZE);
 	ft_init_to_zero(t);
 	t->start_row = ft_get_linenbr();
-	ft_printf("START_ROW = %d\n", t->start_row);
 	ft_history_get(t);
 	t->nl_addr = NULL;
 	t->delim = NULL;
