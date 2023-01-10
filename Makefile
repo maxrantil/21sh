@@ -6,7 +6,7 @@
 #    By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/17 18:22:31 by mrantil           #+#    #+#              #
-#    Updated: 2023/01/09 12:57:51 by mrantil          ###   ########.fr        #
+#    Updated: 2023/01/10 10:32:12 by mrantil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -167,6 +167,7 @@ FILES 		=	$(AGG)check_file_aggregations \
 				$(KEYBOARD)ft_restart_cycle \
 				$(KEYBOARD)ft_row_lowest_line \
 				$(KEYBOARD)ft_run_capability \
+				$(KEYBOARD)ft_set_new_cur_pos \
 				$(KEYBOARD)ft_setcursor \
 				$(KEYBOARD)ft_shift_insert \
 				$(KEYBOARD)ft_shift_nl_addr \

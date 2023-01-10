@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2023/01/09 12:57:21 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/10 10:32:38 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void	ft_reset_nl_addr(t_term *t);
 void	ft_restart_cycle(t_term *t);
 ssize_t	ft_row_lowest_line(t_term *t);
 void	ft_run_capability(char *cap);
+void	ft_set_new_cur_pos(t_term *t);
 void	ft_setcursor(ssize_t col, ssize_t row);
 void	ft_shift_insert(t_term *t);
 void	ft_shift_nl_addr(t_term *t, int num);
