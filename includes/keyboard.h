@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:51:26 by mbarutel          #+#    #+#             */
-/*   Updated: 2023/01/10 10:32:38 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/10 14:06:14 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "vec.h"
-# include <termcap.h>
-# include <termios.h>
+# include <term.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
 
 # if __linux__
-#  include <term.h>
 #  include <curses.h>
 #  include <signal.h>
 #  include <limits.h>

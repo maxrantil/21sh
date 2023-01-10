@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:17:38 by mrantil           #+#    #+#             */
-/*   Updated: 2023/01/09 13:37:51 by mrantil          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:00:51 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ void	ft_restart_cycle(t_term *t)
 	ft_memdel((void **)&t->nl_addr);
 	ft_strclr(t->inp);
 	ft_strclr(t->history_buff);
-	t->start_row = ft_get_linenbr();
 }
